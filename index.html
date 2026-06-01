@@ -3,244 +3,458 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sartec Digital — Ecossistemas digitais completos para pequenos e médios negócios. Automações WhatsApp, landing pages, aplicativos e soluções sob medida." />
-  <title>Sartec Digital</title>
+  <meta name="description" content="Sartec Digital — Produtos digitais para pequenos e médios negócios. Ecossistemas de atendimento, automações para WhatsApp, landing pages e aplicativos pensados para a operação real." />
+  <meta property="og:title" content="Sartec Digital — Produtos Digitais para Negócios" />
+  <meta property="og:description" content="Organizamos atendimento, automatizamos processos e construímos soluções digitais que funcionam na operação real." />
+  <meta property="og:type" content="website" />
+  <title>Sartec Digital — Produtos Digitais para Negócios</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ═══ HEADER ═══ -->
   <header class="header" id="header">
-    <div class="container header__inner">
-      <a href="#" class="logo">
-        <span class="logo__s">S</span><span class="logo__text">artec Digital</span>
+    <div class="container header__wrap">
+      <a href="#" class="brand">
+        <span class="brand__mark">SD</span>
+        <span class="brand__label">Sartec <strong>Digital</strong></span>
       </a>
-      <nav class="nav" id="nav">
+      <nav class="nav" id="nav" aria-label="Navegação principal">
         <a href="#solucoes" class="nav__link">Soluções</a>
+        <a href="#processo" class="nav__link">Processo</a>
+        <a href="#projetos" class="nav__link">Projetos</a>
         <a href="#sobre" class="nav__link">Sobre</a>
-        <a href="#contato" class="nav__link nav__link--cta">Falar com especialista</a>
+        <a href="#contato" class="nav__cta">Contato</a>
       </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <i></i><i></i><i></i>
       </button>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero__bg"></div>
-    <div class="container hero__inner">
-      <div class="hero__badge">Ecossistema Digital Completo</div>
-      <h1 class="hero__title">
-        Transforme seu negócio com<br />
-        <span class="gradient-text">soluções digitais</span> sob medida
-      </h1>
-      <p class="hero__subtitle">
-        Da automação do WhatsApp ao aplicativo completo — a Sartec Digital entrega ecossistemas que trabalham por você 24h por dia.
-      </p>
-      <div class="hero__actions">
-        <a href="#contato" class="btn btn--primary">Começar agora</a>
-        <a href="#solucoes" class="btn btn--ghost">Ver soluções</a>
-      </div>
-      <div class="hero__stats">
-        <div class="stat">
-          <span class="stat__number">+200</span>
-          <span class="stat__label">Projetos entregues</span>
-        </div>
-        <div class="stat__divider"></div>
-        <div class="stat">
-          <span class="stat__number">98%</span>
-          <span class="stat__label">Clientes satisfeitos</span>
-        </div>
-        <div class="stat__divider"></div>
-        <div class="stat">
-          <span class="stat__number">24h</span>
-          <span class="stat__label">Suporte ativo</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main>
 
-  <!-- SOLUÇÕES -->
-  <section class="solutions" id="solucoes">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">O que entregamos</span>
-        <h2 class="section-title">Soluções que <span class="gradient-text">geram resultado</span></h2>
-        <p class="section-desc">Cada solução é projetada para funcionar de forma integrada, criando um ecossistema digital completo para o seu negócio.</p>
-      </div>
-      <div class="solutions__grid">
-        <div class="card" data-aos="fade-up">
-          <div class="card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <h3 class="card__title">Automação WhatsApp</h3>
-          <p class="card__desc">Agentes inteligentes que atendem, qualificam e convertem clientes automaticamente — sem perder nenhuma mensagem.</p>
-          <ul class="card__list">
-            <li>Atendimento 24/7 sem equipe</li>
-            <li>Funil de vendas automatizado</li>
-            <li>Integração com CRM</li>
-          </ul>
-        </div>
-        <div class="card card--highlight" data-aos="fade-up" data-delay="100">
-          <div class="card__badge">Mais popular</div>
-          <div class="card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <h3 class="card__title">Ecossistema Digital</h3>
-          <p class="card__desc">Landing page + automação + CRM + painel de gestão integrados em uma única solução coesa e escalável.</p>
-          <ul class="card__list">
-            <li>Tudo integrado e sincronizado</li>
-            <li>Dashboard de métricas em tempo real</li>
-            <li>Escalável conforme seu crescimento</li>
-          </ul>
-        </div>
-        <div class="card" data-aos="fade-up" data-delay="200">
-          <div class="card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3 class="card__title">Landing Pages</h3>
-          <p class="card__desc">Páginas de alta conversão desenvolvidas com foco em resultado — carregamento rápido, design premium e copy estratégico.</p>
-          <ul class="card__list">
-            <li>Design premium e responsivo</li>
-            <li>SEO otimizado</li>
-            <li>Integração com ferramentas de marketing</li>
-          </ul>
-        </div>
-        <div class="card" data-aos="fade-up" data-delay="300">
-          <div class="card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-          </div>
-          <h3 class="card__title">Aplicativos</h3>
-          <p class="card__desc">Aplicações web e mobile sob medida para automatizar processos internos e entregar valor direto ao cliente final.</p>
-          <ul class="card__list">
-            <li>Web app e mobile-first</li>
-            <li>Integrações via API</li>
-            <li>Manutenção e evolução contínua</li>
-          </ul>
-        </div>
-        <div class="card" data-aos="fade-up" data-delay="400">
-          <div class="card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
-          </div>
-          <h3 class="card__title">CRM Inteligente</h3>
-          <p class="card__desc">Gerencie leads, clientes e pipeline de vendas em uma plataforma própria, conectada a todos os seus canais.</p>
-          <ul class="card__list">
-            <li>Pipeline visual de vendas</li>
-            <li>Histórico completo de interações</li>
-            <li>Relatórios e exportação de dados</li>
-          </ul>
-        </div>
-        <div class="card" data-aos="fade-up" data-delay="500">
-          <div class="card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-          </div>
-          <h3 class="card__title">Consultoria Digital</h3>
-          <p class="card__desc">Diagnóstico completo do seu negócio e mapa estratégico para digitalizar processos e escalar resultados.</p>
-          <ul class="card__list">
-            <li>Diagnóstico de maturidade digital</li>
-            <li>Roadmap de implementação</li>
-            <li>Acompanhamento de resultados</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SOBRE -->
-  <section class="about" id="sobre">
-    <div class="container about__inner">
-      <div class="about__content">
-        <span class="section-tag">Quem somos</span>
-        <h2 class="section-title">Tecnologia que <span class="gradient-text">trabalha para você</span></h2>
-        <p class="about__text">
-          A Sartec Digital é a frente de soluções digitais da Sartec, especializada em criar ecossistemas tecnológicos completos para pequenos e médios negócios.
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" id="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="container hero__wrap">
+        <p class="eyebrow">Frente de soluções digitais da Sartec</p>
+        <h1 class="hero__title">
+          Produtos digitais para negócios<br />
+          que precisam atender melhor,<br />
+          <em>organizar processos</em><br />
+          e vender com mais clareza.
+        </h1>
+        <p class="hero__desc">
+          A Sartec Digital cria ecossistemas de atendimento, automações, landing pages,
+          aplicativos e interfaces digitais para pequenos e médios negócios —
+          soluções que funcionam na operação real, não só no papel.
         </p>
-        <p class="about__text">
-          Acreditamos que toda empresa merece ter acesso a ferramentas digitais de alto nível — sem complexidade, sem burocracia e com resultado mensurável.
-        </p>
-        <div class="about__pillars">
-          <div class="pillar">
-            <span class="pillar__icon">⚡</span>
-            <div>
-              <strong>Velocidade</strong>
-              <p>Entregamos rápido sem abrir mão da qualidade</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <span class="pillar__icon">🎯</span>
-            <div>
-              <strong>Resultado</strong>
-              <p>Cada solução é orientada a métricas reais</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <span class="pillar__icon">🔗</span>
-            <div>
-              <strong>Integração</strong>
-              <p>Sistemas que conversam entre si de ponta a ponta</p>
-            </div>
-          </div>
+        <div class="hero__actions">
+          <a href="#contato" class="btn btn--primary">Quero estruturar meu atendimento</a>
+          <a href="#solucoes" class="btn btn--ghost">Ver soluções</a>
         </div>
       </div>
-      <div class="about__visual">
-        <div class="visual-card">
-          <div class="visual-card__row">
-            <div class="visual-metric">
-              <span class="visual-metric__value">+200</span>
-              <span class="visual-metric__label">Projetos</span>
-            </div>
-            <div class="visual-metric">
-              <span class="visual-metric__value">5+</span>
-              <span class="visual-metric__label">Anos de mercado</span>
-            </div>
-          </div>
-          <div class="visual-card__row">
-            <div class="visual-metric">
-              <span class="visual-metric__value">98%</span>
-              <span class="visual-metric__label">Satisfação</span>
-            </div>
-            <div class="visual-metric">
-              <span class="visual-metric__value">24/7</span>
-              <span class="visual-metric__label">Suporte</span>
-            </div>
-          </div>
-          <div class="visual-card__tagline">Sartec Digital — Ecossistema Digital Completo</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CTA CONTATO -->
-  <section class="contact" id="contato">
-    <div class="container contact__inner">
-      <div class="contact__content">
-        <span class="section-tag">Vamos conversar</span>
-        <h2 class="section-title">Pronto para <span class="gradient-text">digitalizar seu negócio?</span></h2>
-        <p class="contact__desc">Fale com um especialista Sartec Digital e descubra qual solução se encaixa melhor para o seu momento.</p>
+    <!-- ═══ PROBLEMA ═══ -->
+    <section class="section problem" id="problema">
+      <div class="container">
+        <header class="section__head">
+          <span class="tag">O problema</span>
+          <h2>Você reconhece alguma dessas situações?</h2>
+          <p>A maioria dos problemas digitais de pequenos e médios negócios não é falta de tecnologia. É falta de clareza sobre o fluxo, o processo e o que precisa funcionar primeiro.</p>
+        </header>
+
+        <div class="problem__grid">
+          <div class="problem__item">
+            <span class="problem__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </span>
+            <p>Atendimento espalhado no WhatsApp sem controle de quem respondeu o quê</p>
+          </div>
+          <div class="problem__item">
+            <span class="problem__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+              </svg>
+            </span>
+            <p>Mensagens perdidas e clientes sem resposta por horas ou dias</p>
+          </div>
+          <div class="problem__item">
+            <span class="problem__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+            </span>
+            <p>Falta de controle sobre pedidos, status e histórico do cliente</p>
+          </div>
+          <div class="problem__item">
+            <span class="problem__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </span>
+            <p>Processos manuais repetitivos que tomam tempo da equipe todos os dias</p>
+          </div>
+          <div class="problem__item">
+            <span class="problem__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </span>
+            <p>Negócio que depende de improviso porque não existe um fluxo definido</p>
+          </div>
+          <div class="problem__item">
+            <span class="problem__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </span>
+            <p>Equipe sobrecarregada respondendo as mesmas perguntas várias vezes por dia</p>
+          </div>
+        </div>
+
+        <div class="problem__pivot">
+          <p>Antes de vender tecnologia, a Sartec Digital entende o fluxo do seu negócio e desenha uma solução que faça sentido para a rotina da sua equipe.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SOLUÇÕES ═══ -->
+    <section class="section solutions" id="solucoes">
+      <div class="container">
+        <header class="section__head">
+          <span class="tag">O que entregamos</span>
+          <h2>Soluções para organizar, automatizar e crescer</h2>
+          <p>Cada solução é construída com base no processo real do negócio — não em templates prontos.</p>
+        </header>
+
+        <div class="solutions__grid">
+
+          <article class="sol-card">
+            <div class="sol-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                <path d="M8 10h8M8 14h5"/>
+              </svg>
+            </div>
+            <h3>Ecossistemas de atendimento</h3>
+            <p>Para negócios que precisam organizar conversas, pedidos, status, responsáveis e histórico em um só fluxo — sem depender de planilhas e anotações soltas.</p>
+            <span class="sol-card__tag">Ideal para lojas, prestadores de serviço, clínicas</span>
+          </article>
+
+          <article class="sol-card">
+            <div class="sol-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <h3>Automações para WhatsApp</h3>
+            <p>Para reduzir respostas repetitivas, direcionar o cliente certo para o atendente certo e preparar o contexto antes da equipe assumir a conversa.</p>
+            <span class="sol-card__tag">Ideal para negócios com alto volume de mensagens</span>
+          </article>
+
+          <article class="sol-card">
+            <div class="sol-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+              </svg>
+            </div>
+            <h3>Landing pages e páginas comerciais</h3>
+            <p>Para apresentar serviços, captar interessados e explicar uma oferta com clareza — carregamento rápido, design limpo e copy orientado à conversão.</p>
+            <span class="sol-card__tag">Ideal para lançamentos, serviços, eventos, cursos</span>
+          </article>
+
+          <article class="sol-card">
+            <div class="sol-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18"/>
+              </svg>
+            </div>
+            <h3>Aplicativos e protótipos digitais</h3>
+            <p>Para validar uma ideia, automatizar um processo interno ou entregar uma ferramenta que a equipe realmente vai usar no dia a dia.</p>
+            <span class="sol-card__tag">Ideal para gestão interna, portais e ferramentas operacionais</span>
+          </article>
+
+          <article class="sol-card">
+            <div class="sol-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <h3>Interfaces e painéis internos</h3>
+            <p>Para substituir planilhas confusas e ferramentas genéricas por um painel que mostra exatamente o que a equipe precisa ver — sem excesso de informação.</p>
+            <span class="sol-card__tag">Ideal para dashboards, relatórios e controles operacionais</span>
+          </article>
+
+          <article class="sol-card">
+            <div class="sol-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12h4l3-9 4 18 3-9h4"/>
+              </svg>
+            </div>
+            <h3>Organização de fluxos e experiência do cliente</h3>
+            <p>Para entender onde o processo trava, onde o cliente se perde e como transformar um fluxo confuso em algo simples, claro e confiável de operar.</p>
+            <span class="sol-card__tag">Ideal para negócios em crescimento que precisam escalar</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MÉTODO ═══ -->
+    <section class="section method" id="processo">
+      <div class="container">
+        <header class="section__head">
+          <span class="tag">Como trabalhamos</span>
+          <h2>Do problema real à solução que funciona</h2>
+          <p>UX, aqui, não é só estética. É entender como as pessoas usam, onde o processo trava e como a solução pode facilitar a vida de quem atende e de quem compra.</p>
+        </header>
+
+        <div class="method__steps">
+          <div class="step">
+            <div class="step__num" aria-hidden="true">01</div>
+            <div class="step__body">
+              <h3>Entender o processo</h3>
+              <p>Mapeamos como o negócio funciona hoje — como o cliente entra em contato, como a equipe responde, onde os pedidos são anotados e onde as coisas travam.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num" aria-hidden="true">02</div>
+            <div class="step__body">
+              <h3>Mapear a experiência do cliente</h3>
+              <p>Olhamos para o fluxo do ponto de vista de quem compra — onde a jornada é confusa, onde a expectativa não é atendida e onde existe espaço para melhorar.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num" aria-hidden="true">03</div>
+            <div class="step__body">
+              <h3>Desenhar a solução</h3>
+              <p>Antes de construir qualquer coisa, desenhamos a estrutura em protótipo — telas, fluxos e lógica — para validar com quem vai usar antes de implementar.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num" aria-hidden="true">04</div>
+            <div class="step__body">
+              <h3>Construir o protótipo</h3>
+              <p>Implementamos a solução de forma funcional e iterativa, priorizando o que gera resultado mais rápido para a operação sem criar complexidade desnecessária.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num" aria-hidden="true">05</div>
+            <div class="step__body">
+              <h3>Testar com pessoas reais</h3>
+              <p>Colocamos a solução na mão de quem vai usar — equipe ou clientes — e observamos o que funciona, o que confunde e o que precisa de ajuste.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num" aria-hidden="true">06</div>
+            <div class="step__body">
+              <h3>Ajustar para a operação</h3>
+              <p>Refinamos com base no uso real e entregamos uma solução que a equipe consegue operar sem precisar de um manual — simples, clara e confiável.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ SOBRE ═══ -->
+    <section class="section about" id="sobre">
+      <div class="container about__wrap">
+        <div class="about__bio">
+          <span class="tag">Quem está por trás</span>
+          <h2>Lucas Alves Cabral</h2>
+          <p class="about__role">Product Designer · Sartec Digital</p>
+          <p class="about__text">
+            Sou o responsável pela frente Sartec Digital. Meu trabalho une visão de negócio,
+            jornada do cliente, design de interface e implementação assistida por IA para transformar
+            processos confusos em soluções digitais que funcionam na operação real.
+          </p>
+          <p class="about__text">
+            Tenho experiência prática com atendimento, gestão de loja, compras, financeiro e operação
+            dentro da Sartec — o que me permite entender o problema de dentro, não só olhar de fora.
+          </p>
+          <blockquote class="about__quote">
+            "Eu não parto da tecnologia. Eu parto do problema operacional, da experiência do cliente
+            e do que precisa funcionar no dia a dia."
+          </blockquote>
+          <ul class="about__skills">
+            <li>Experiência do usuário e design de produto</li>
+            <li>Automação de processos e atendimento</li>
+            <li>Prototipação e implementação com IA</li>
+            <li>Visão de negócio aplicada ao digital</li>
+          </ul>
+        </div>
+        <div class="about__aside">
+          <div class="profile-card">
+            <div class="profile-card__top">
+              <div class="profile-card__avatar" aria-hidden="true">LAC</div>
+              <div class="profile-card__id">
+                <strong>Lucas Alves Cabral</strong>
+                <span>Product Designer</span>
+              </div>
+            </div>
+            <div class="profile-card__facts">
+              <div class="fact">
+                <span class="fact__label">Foco</span>
+                <span class="fact__val">Experiência do usuário, automação e produto digital</span>
+              </div>
+              <div class="fact">
+                <span class="fact__label">Base</span>
+                <span class="fact__val">Processo operacional + design de interface + IA</span>
+              </div>
+              <div class="fact">
+                <span class="fact__label">Abordagem</span>
+                <span class="fact__val">Do problema real à solução funcional</span>
+              </div>
+              <div class="fact">
+                <span class="fact__label">Frente</span>
+                <span class="fact__val">Sartec Digital — parte da Sartec</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROJETO REFERÊNCIA ═══ -->
+    <section class="section projects" id="projetos">
+      <div class="container">
+        <header class="section__head">
+          <span class="tag">Projeto referência</span>
+          <h2>Um problema real, uma solução real</h2>
+          <p>A Sartec Digital nasce de dentro de uma operação — não de um laboratório de inovação.</p>
+        </header>
+
+        <div class="project-card">
+          <div class="project-card__meta">
+            <span class="project-label">Projeto interno · Sartec</span>
+          </div>
+          <h3 class="project-card__title">CRM e Agente de Atendimento Sartec</h3>
+          <p class="project-card__desc">
+            Sistema criado para organizar conversas vindas do WhatsApp, separar atendimentos
+            PF e PJ, acompanhar status, registrar histórico e reduzir perda de mensagens
+            durante a operação real do negócio.
+          </p>
+          <ul class="project-card__points">
+            <li>
+              <span aria-hidden="true">→</span>
+              Fluxo de atendimento organizado por status e responsável
+            </li>
+            <li>
+              <span aria-hidden="true">→</span>
+              Separação automática entre clientes PF e PJ
+            </li>
+            <li>
+              <span aria-hidden="true">→</span>
+              Agente de IA para qualificação e triagem de mensagens
+            </li>
+            <li>
+              <span aria-hidden="true">→</span>
+              Histórico completo de interações por cliente
+            </li>
+            <li>
+              <span aria-hidden="true">→</span>
+              Redução de mensagens perdidas no dia a dia da equipe
+            </li>
+          </ul>
+          <p class="project-card__note">
+            Este sistema foi construído para resolver um problema que existia dentro da própria Sartec —
+            e é a prova de que as soluções que a Sartec Digital oferece nascem de experiência operacional real.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PARA QUEM É ═══ -->
+    <section class="section for-who" id="para-quem">
+      <div class="container">
+        <header class="section__head">
+          <span class="tag">Para quem é</span>
+          <h2>Negócios que atendem muito e precisam de mais organização</h2>
+          <p>A Sartec Digital trabalha com quem precisa de resultado prático, não de tecnologia por tecnologia.</p>
+        </header>
+        <div class="who__grid">
+          <div class="who-item">
+            <span class="who-item__emoji" aria-hidden="true">✏️</span>
+            <span>Papelarias e gráficas</span>
+          </div>
+          <div class="who-item">
+            <span class="who-item__emoji" aria-hidden="true">🏪</span>
+            <span>Lojas locais e comércio</span>
+          </div>
+          <div class="who-item">
+            <span class="who-item__emoji" aria-hidden="true">🔧</span>
+            <span>Prestadores de serviço</span>
+          </div>
+          <div class="who-item">
+            <span class="who-item__emoji" aria-hidden="true">🏥</span>
+            <span>Clínicas e consultórios</span>
+          </div>
+          <div class="who-item">
+            <span class="who-item__emoji" aria-hidden="true">📚</span>
+            <span>Escolas, cursos e professores</span>
+          </div>
+          <div class="who-item">
+            <span class="who-item__emoji" aria-hidden="true">👨‍👩‍👧</span>
+            <span>Negócios familiares</span>
+          </div>
+          <div class="who-item">
+            <span class="who-item__emoji" aria-hidden="true">💬</span>
+            <span>Empresas com alto volume no WhatsApp</span>
+          </div>
+          <div class="who-item">
+            <span class="who-item__emoji" aria-hidden="true">📋</span>
+            <span>Negócios com processos manuais</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA FINAL ═══ -->
+    <section class="cta-final" id="contato">
+      <div class="cta-final__glow" aria-hidden="true"></div>
+      <div class="container cta-final__wrap">
+        <h2>Vamos transformar seu atendimento em um fluxo mais claro?</h2>
+        <p>
+          Me conta sobre o processo atual do seu negócio e identificamos juntos
+          qual seria o primeiro passo mais útil para você.
+        </p>
         <a
-          href="https://wa.me/5511999999999?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+gostaria+de+saber+mais+sobre+as+solu%C3%A7%C3%B5es."
-          class="btn btn--primary btn--large"
+          href="https://wa.me/5512999999999?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+gostaria+de+conversar+sobre+meu+projeto."
+          class="btn btn--primary btn--lg"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Falar pelo WhatsApp
+          Falar sobre meu projeto
         </a>
+        <p class="cta-final__note">Via WhatsApp · Resposta em até 1 dia útil</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
   <footer class="footer">
-    <div class="container footer__inner">
-      <div class="logo">
-        <span class="logo__s">S</span><span class="logo__text">artec Digital</span>
-      </div>
-      <p class="footer__copy">© 2025 Sartec Digital. Todos os direitos reservados.</p>
-      <p class="footer__sub">Uma frente de soluções da <strong>Sartec</strong></p>
+    <div class="container footer__wrap">
+      <a href="#" class="brand">
+        <span class="brand__mark">SD</span>
+        <span class="brand__label">Sartec <strong>Digital</strong></span>
+      </a>
+      <p class="footer__tagline">Frente de soluções digitais da Sartec</p>
+      <p class="footer__copy">© 2025 Sartec Digital · Todos os direitos reservados</p>
     </div>
   </footer>
 
