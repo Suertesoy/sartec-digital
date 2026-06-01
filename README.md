@@ -1,52 +1,52 @@
 # Sartec Digital
 
-Landing page institucional da **Sartec Digital** — frente de soluções digitais da Sartec.
+Página comercial da **Sartec Digital** — frente de soluções digitais da Sartec.
 
-## Objetivo da página
+## Objetivo
 
-Apresentar a Sartec Digital como uma frente de produtos e serviços digitais da Sartec, posicionando Lucas Alves Cabral como Product Designer focado em experiência do usuário, automação e construção de soluções digitais para pequenos e médios negócios.
+Apresentar a Sartec Digital como uma frente de produtos e serviços digitais para pequenos e médios negócios, com foco em ecossistemas de atendimento via WhatsApp, automações, landing pages e sistemas simples de gestão.
 
-## Seções
+## Seções da página
 
-| Seção | Descrição |
-|---|---|
-| Hero | Proposta de valor principal com CTAs |
-| Problema | Dores comuns de PMEs com atendimento digital |
-| Soluções | 6 serviços com descrição orientada a benefícios |
-| Processo | Método de trabalho em 6 etapas |
-| Sobre | Apresentação de Lucas Alves Cabral |
-| Projetos | Projeto referência: CRM e Agente de Atendimento Sartec |
-| Para quem é | Perfis de negócio atendidos |
-| Contato | CTA final com link para WhatsApp |
+| # | Seção | Descrição |
+|---|---|---|
+| 1 | Hero | Título, subtítulo, CTAs e selos de área de atuação |
+| 2 | Problema | 7 dores comuns de empresas que dependem do WhatsApp sem estrutura |
+| 3 | Apresentação SD | Quem é a Sartec Digital e de onde surgiu |
+| 4 | O que fazemos | 6 serviços com linguagem orientada a benefícios |
+| 5 | Ecossistema | Solução principal em 6 módulos |
+| 6 | Método | 4 etapas de trabalho (operação → fluxo → implementação → ajuste) |
+| 7 | Para quem é | 10 segmentos de negócio atendidos |
+| 8 | Pacotes | 4 opções de preço com valores "a partir de" |
+| 9 | Sobre Lucas | Bio do Product Designer responsável pela frente |
+| 10 | Piloto | Explicação do ciclo inicial de 3 meses |
+| 11 | FAQ | 8 perguntas frequentes em accordion |
+| 12 | CTA final | Diagnóstico gratuito via WhatsApp |
 
 ## Stack
 
 - HTML5 semântico
-- CSS3 (custom properties, grid, flexbox)
-- JavaScript vanilla (sem dependências)
+- CSS3 com custom properties, grid e flexbox
+- JavaScript vanilla — sem dependências, sem build
 - Fonte: Inter via Google Fonts
+- Botão flutuante de WhatsApp
 
-**Sem frameworks. Sem build. Sem npm.**
+**Sem framework. Sem npm. Sem build command.**
 
 ## Como rodar localmente
 
-Abra `index.html` diretamente no navegador:
+Abra `index.html` diretamente no navegador. Se precisar evitar problemas de CORS:
 
 ```bash
-# Com Python (opcional — só para evitar CORS em recursos locais)
 python -m http.server 8080
 # Acesse: http://localhost:8080
 ```
 
-Ou simplesmente abra o arquivo `index.html` no browser.
-
 ## Deploy — Vercel
 
-O deploy é **automático** a cada push para a branch `main`.
+Deploy automático a cada push para `main`.
 
-Repositório conectado: `https://github.com/Suertesoy/sartec-digital.git`
-
-Configuração da Vercel:
+Repositório: `https://github.com/Suertesoy/sartec-digital.git`
 
 | Parâmetro | Valor |
 |---|---|
@@ -59,17 +59,17 @@ Configuração da Vercel:
 
 ```
 sartec-digital/
-├── index.html   ← página principal
-├── styles.css   ← todos os estilos
-├── script.js    ← interações (header scroll, menu mobile, fade-in, smooth scroll)
+├── index.html    ← página principal (12 seções)
+├── styles.css    ← design system + todos os estilos
+├── script.js     ← header scroll, menu mobile, FAQ accordion, fade-in
 └── README.md
 ```
 
 ## Personalização rápida
 
-- **Número do WhatsApp**: buscar `wa.me/5512999999999` no `index.html` e substituir pelo número real
-- **Textos**: editar diretamente no `index.html`
-- **Cores**: variáveis CSS em `:root` no início do `styles.css`
+- **Número do WhatsApp**: substituir `5512999999999` no `index.html` pelo número real
+- **Preços**: editar diretamente nos blocos de pricing no `index.html`
+- **Cores primárias**: variável `--blue` em `:root` no `styles.css`
 
 ---
 

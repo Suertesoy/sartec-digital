@@ -15,25 +15,22 @@ burger.addEventListener('click', () => {
   document.body.style.overflow = open ? 'hidden' : '';
 });
 
-// Close on nav link click
 nav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('is-open');
-    burger.classList.remove('is-open');
-    burger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  });
+  link.addEventListener('click', closeMenu);
 });
 
-// Close on outside click
 document.addEventListener('click', e => {
   if (nav.classList.contains('is-open') && !nav.contains(e.target) && e.target !== burger) {
-    nav.classList.remove('is-open');
-    burger.classList.remove('is-open');
-    burger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
+    closeMenu();
   }
 });
+
+function closeMenu() {
+  nav.classList.remove('is-open');
+  burger.classList.remove('is-open');
+  burger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
 
 // ── Smooth scroll for anchor links ───────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -43,20 +40,51 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    const offset = 72; // header height
-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    const top = target.getBoundingClientRect().top + window.scrollY - 72;
     window.scrollTo({ top, behavior: 'smooth' });
   });
 });
 
+// ── FAQ accordion ─────────────────────────────────────────────
+document.querySelectorAll('.faq-item').forEach(item => {
+  const btn   = item.querySelector('.faq-q');
+  const panel = item.querySelector('.faq-a');
+  const inner = item.querySelector('.faq-a__inner');
+
+  btn.addEventListener('click', () => {
+    const isOpen = item.classList.contains('is-open');
+
+    // Close all open items
+    document.querySelectorAll('.faq-item.is-open').forEach(other => {
+      if (other !== item) {
+        other.classList.remove('is-open');
+        other.querySelector('.faq-a').style.height = '0';
+        other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Toggle this item
+    if (isOpen) {
+      item.classList.remove('is-open');
+      panel.style.height = '0';
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      item.classList.add('is-open');
+      panel.style.height = inner.offsetHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
 // ── Fade-in on scroll ─────────────────────────────────────────
-const fadeTargets = [
-  '.problem__item',
-  '.sol-card',
-  '.step',
+const targets = [
+  '.problem__card',
+  '.service-card',
+  '.module-card',
+  '.method-step',
   '.who-item',
-  '.project-card',
-  '.problem__pivot',
+  '.pricing-card',
+  '.pillar-card',
 ];
 
 const observer = new IntersectionObserver(
@@ -68,10 +96,10 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.1, rootMargin: '0px 0px -32px 0px' }
+  { threshold: 0.08, rootMargin: '0px 0px -28px 0px' }
 );
 
-document.querySelectorAll(fadeTargets.join(', ')).forEach(el => {
+document.querySelectorAll(targets.join(', ')).forEach(el => {
   el.classList.add('fade-up');
   observer.observe(el);
 });
