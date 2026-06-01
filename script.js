@@ -88,29 +88,3 @@ const observer = new IntersectionObserver(
     observer.observe(el);
   });
 });
-
-// ── Pricing card selection ────────────────────────────────────
-const planCards = document.querySelectorAll('[data-plan-card]');
-planCards.forEach(card => {
-  const selectCard = () => {
-    planCards.forEach(c => c.classList.remove('is-selected'));
-    card.classList.add('is-selected');
-  };
-
-  card.addEventListener('click', () => {
-    selectCard();
-  });
-
-  card.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      // If focus is currently on the link inside the card, let the link handle it
-      if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-        return;
-      }
-      if (e.key === ' ') {
-        e.preventDefault();
-      }
-      selectCard();
-    }
-  });
-});
