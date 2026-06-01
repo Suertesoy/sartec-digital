@@ -430,7 +430,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 .eco-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 28px;
   max-width: 920px;
   margin: 0 auto;
 }
@@ -635,6 +635,35 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 .price-line__val  { font-size: 13px; color: var(--text-2); text-align: right; }
 .price-line__val strong { color: var(--text); font-size: 15px; font-weight: 700; }
 .price-line__val em     { font-style: normal; font-size: 11px; color: var(--text-3); }
+
+/* Setup & Monthly price hierarchy modifiers */
+.price-line--setup .price-line__label {
+  color: var(--text-3);
+  font-size: 10px;
+}
+.price-line--setup .price-line__val {
+  font-size: 12px;
+  color: var(--text-3);
+}
+.price-line--setup .price-line__val strong {
+  font-size: 13px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.price-line--monthly .price-line__label {
+  color: var(--text-2);
+  font-size: 11px;
+}
+.price-line--monthly .price-line__val {
+  font-size: 14px;
+  color: var(--text-2);
+}
+.price-line--monthly .price-line__val strong {
+  font-size: 18px;
+  color: var(--blue-light);
+  font-weight: 800;
+}
 
 .pricing-card__includes {
   display: flex; flex-direction: column; gap: 9px;
@@ -917,7 +946,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   .ba-after  { background: var(--surface-2); border-left: 3px solid var(--green); }
 
   /* Ecossistema */
-  .eco-grid { grid-template-columns: 1fr; gap: 14px; }
+  .eco-grid { grid-template-columns: 1fr; gap: 20px; }
 
   /* About Lucas */
   .about-lucas__wrap { gap: 40px; }
