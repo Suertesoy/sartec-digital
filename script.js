@@ -1,4 +1,4 @@
-// ── Header scroll effect ──────────────────────────────────────
+// ── Header scroll ─────────────────────────────────────────────
 const header = document.getElementById('header');
 const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 20);
 window.addEventListener('scroll', onScroll, { passive: true });
@@ -15,9 +15,7 @@ burger.addEventListener('click', () => {
   document.body.style.overflow = open ? 'hidden' : '';
 });
 
-nav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', closeMenu);
-});
+nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
 document.addEventListener('click', e => {
   if (nav.classList.contains('is-open') && !nav.contains(e.target) && e.target !== burger) {
@@ -32,7 +30,7 @@ function closeMenu() {
   document.body.style.overflow = '';
 }
 
-// ── Smooth scroll for anchor links ───────────────────────────
+// ── Smooth scroll ─────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
     const id = anchor.getAttribute('href');
@@ -40,8 +38,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    const top = target.getBoundingClientRect().top + window.scrollY - 72;
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
   });
 });
 
@@ -54,7 +51,6 @@ document.querySelectorAll('.faq-item').forEach(item => {
   btn.addEventListener('click', () => {
     const isOpen = item.classList.contains('is-open');
 
-    // Close all open items
     document.querySelectorAll('.faq-item.is-open').forEach(other => {
       if (other !== item) {
         other.classList.remove('is-open');
@@ -63,7 +59,6 @@ document.querySelectorAll('.faq-item').forEach(item => {
       }
     });
 
-    // Toggle this item
     if (isOpen) {
       item.classList.remove('is-open');
       panel.style.height = '0';
@@ -77,29 +72,19 @@ document.querySelectorAll('.faq-item').forEach(item => {
 });
 
 // ── Fade-in on scroll ─────────────────────────────────────────
-const targets = [
-  '.problem__card',
-  '.service-card',
-  '.module-card',
-  '.method-step',
-  '.who-item',
-  '.pricing-card',
-  '.pillar-card',
-];
-
 const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
-      }
-    });
-  },
+  entries => entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    }
+  }),
   { threshold: 0.08, rootMargin: '0px 0px -28px 0px' }
 );
 
-document.querySelectorAll(targets.join(', ')).forEach(el => {
-  el.classList.add('fade-up');
-  observer.observe(el);
+['.ba-row', '.eco-card', '.pricing-card', '.pilot-step'].forEach(sel => {
+  document.querySelectorAll(sel).forEach(el => {
+    el.classList.add('fade-up');
+    observer.observe(el);
+  });
 });
