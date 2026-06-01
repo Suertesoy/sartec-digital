@@ -197,6 +197,12 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   font-size: 12px; font-weight: 900; color: #fff;
   letter-spacing: 0.03em; flex-shrink: 0;
 }
+.brand__logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
 .brand__label        { font-size: 16px; font-weight: 500; color: var(--text-2); }
 .brand__label strong { font-weight: 800; color: var(--text); }
 
@@ -295,6 +301,12 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   color: #fff;
   background: var(--blue);
   border-radius: var(--r-pill);
+}
+.hero__logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .hero__brand-tag {
@@ -499,12 +511,13 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 }
 
 .lucas-card__avatar {
-  width: 48px; height: 48px;
-  background: var(--blue);
+  width: 56px;
+  height: 56px;
   border-radius: var(--r-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 900; color: #fff;
+  object-fit: cover;
   flex-shrink: 0;
+  border: 1px solid var(--blue-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .lucas-card__id strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 3px; }
@@ -858,6 +871,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   .section__head { margin-bottom: 40px; }
 
   /* Header */
+  .brand__logo { height: 28px; }
   .nav {
     display: none;
     position: fixed;
@@ -879,6 +893,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   .hero__title   { font-size: 30px; }
   .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__brand-row { flex-direction: column; gap: 6px; }
+  .hero__logo { height: 38px; }
 
   /* Antes vs Depois */
   .ba-row    { grid-template-columns: 1fr; }
