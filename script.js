@@ -82,7 +82,7 @@ const observer = new IntersectionObserver(
   { threshold: 0.08, rootMargin: '0px 0px -28px 0px' }
 );
 
-['.ba-row', '.eco-card', '.pricing-card', '.pilot-step'].forEach(sel => {
+['.ba-row', '.eco-card', '.origin-card', '.pricing-card', '.pilot-step'].forEach(sel => {
   document.querySelectorAll(sel).forEach(el => {
     el.classList.add('fade-up');
     observer.observe(el);
