@@ -121,34 +121,6 @@ if (pricingGrid) {
   const pkgBodies  = document.querySelectorAll('.pkg-details__body');
   const pkgIcons   = document.querySelectorAll('.pkg-details__icon');
 
-  function equalizeDetailBlocks() {
-    const allCards = Array.from(document.querySelectorAll('[data-plan-card]'));
-    // Group cards by grid row (same offsetTop within 4px threshold)
-    const rows = [];
-    allCards.forEach(card => {
-      const top = card.getBoundingClientRect().top;
-      const row = rows.find(r => Math.abs(r.top - top) < 4);
-      if (row) { row.cards.push(card); }
-      else      { rows.push({ top, cards: [card] }); }
-    });
-    // Equalize each block position (O que resolve, O que pode incluir, Quando faz sentido)
-    [1, 2, 3].forEach(n => {
-      rows.forEach(({ cards }) => {
-        const blocks = cards
-          .map(c => c.querySelector(`.pkg-details__body .pkg-details__block:nth-child(${n})`))
-          .filter(Boolean);
-        blocks.forEach(b => { b.style.minHeight = ''; });
-        let max = 0;
-        blocks.forEach(b => { max = Math.max(max, b.getBoundingClientRect().height); });
-        blocks.forEach(b => { b.style.minHeight = max + 'px'; });
-      });
-    });
-  }
-
-  function resetDetailBlocks() {
-    document.querySelectorAll('.pkg-details__block').forEach(b => { b.style.minHeight = ''; });
-  }
-
   pkgToggles.forEach(toggle => {
     toggle.addEventListener('click', e => {
       e.stopPropagation();
@@ -159,18 +131,6 @@ if (pricingGrid) {
         if (open) b.removeAttribute('hidden');
         else b.setAttribute('hidden', '');
       });
-      if (open) { requestAnimationFrame(() => requestAnimationFrame(equalizeDetailBlocks)); }
-      else       { resetDetailBlocks(); }
     });
   });
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    if (!pricingGrid.classList.contains('is-details-open')) return;
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      resetDetailBlocks();
-      requestAnimationFrame(equalizeDetailBlocks);
-    }, 150);
-  }, { passive: true });
 }
