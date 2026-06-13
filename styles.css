@@ -820,7 +820,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 
 .pricing__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
   align-items: stretch;
 }
@@ -836,6 +836,8 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   cursor: pointer;
   position: relative;
   outline: none;
+  min-width: 0;
+  width: 100%;
   transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease), transform var(--t) var(--ease), background var(--t) var(--ease);
 }
 
@@ -992,11 +994,10 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   font-size: 13px; color: var(--text-2); line-height: 1.5;
 }
 
-/* ── PACKAGE DETAILS (native details/summary) ─── */
+/* ── PACKAGE DETAILS ──────────────────────────── */
 .pkg-details {
   border-top: 1px solid var(--border);
-  padding-top: 4px;
-  margin-top: 4px;
+  margin-top: auto;
 }
 
 .pkg-details__toggle {
@@ -1004,28 +1005,32 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 10px 0;
+  padding: 14px 0 10px;
   font-size: 12px;
   font-weight: 600;
   color: var(--blue-light);
   cursor: pointer;
-  list-style: none;
+  background: none;
+  border: none;
+  font-family: var(--font);
   transition: color var(--t);
   user-select: none;
   letter-spacing: 0.01em;
+  text-align: left;
 }
-.pkg-details__toggle::-webkit-details-marker { display: none; }
-.pkg-details__toggle::marker { display: none; }
-.pkg-details__toggle::after {
-  content: '+';
+.pkg-details__toggle:hover { color: var(--text); }
+
+.pkg-details__icon {
   font-size: 18px;
   font-weight: 300;
   line-height: 1;
   flex-shrink: 0;
   transition: transform var(--t) var(--ease);
 }
-.pkg-details[open] .pkg-details__toggle::after { transform: rotate(45deg); }
-.pkg-details__toggle:hover { color: var(--text); }
+
+.pricing__grid.is-details-open .pkg-details__icon {
+  transform: rotate(45deg);
+}
 
 .pkg-details__body {
   padding: 4px 0 8px;
@@ -1033,6 +1038,8 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   flex-direction: column;
   gap: 10px;
 }
+
+.pkg-details__body[hidden] { display: none; }
 
 .pkg-details__block strong {
   display: block;

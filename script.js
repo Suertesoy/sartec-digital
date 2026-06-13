@@ -103,7 +103,6 @@ planCards.forEach(card => {
 
   card.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') {
-      // If focus is currently on the link inside the card, let the link handle it
       if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
         return;
       }
@@ -114,3 +113,24 @@ planCards.forEach(card => {
     }
   });
 });
+
+// ── Package details — global sync toggle ────────────────
+const pricingGrid = document.querySelector('.pricing__grid');
+if (pricingGrid) {
+  const pkgToggles = document.querySelectorAll('.pkg-details__toggle');
+  const pkgBodies  = document.querySelectorAll('.pkg-details__body');
+  const pkgIcons   = document.querySelectorAll('.pkg-details__icon');
+
+  pkgToggles.forEach(toggle => {
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = pricingGrid.classList.toggle('is-details-open');
+      pkgToggles.forEach(t => t.setAttribute('aria-expanded', String(open)));
+      pkgIcons.forEach(icon => { icon.textContent = open ? '×' : '+'; });
+      pkgBodies.forEach(b => {
+        if (open) b.removeAttribute('hidden');
+        else b.setAttribute('hidden', '');
+      });
+    });
+  });
+}
