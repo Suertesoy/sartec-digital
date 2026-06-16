@@ -1652,7 +1652,10 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   transform: none;
 }
 
-/* UniEdu: vídeo gravado com espaço preto ao redor — zoom remove as bordas */
+/* UniEdu: vídeo gravado com mockup gravado + área preta ao redor.
+   object-fit: contain preserva o celular inteiro sem cortar a interface.
+   Ideal: exportar uniedu-prototipo-crop.mp4 já recortado em 9:16 vertical,
+   trocar o <source> e mudar para object-fit: cover. */
 .project-card__video-clip {
   width: var(--project-phone-w);
   aspect-ratio: 9 / 16;
@@ -1671,10 +1674,10 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: inherit;
   background: transparent;
-  transform: scale(2.35);
+  transform: none;
   transform-origin: center center;
 }
 
@@ -1987,9 +1990,6 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
     border-radius: 32px;
   }
 
-  .project-card__video {
-    transform: scale(2.35);
-  }
 
   /* Tech grid subtle on mobile */
   .hero__grid { opacity: 0.6; }
