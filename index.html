@@ -393,42 +393,12 @@
 
           <!-- Card 1: Sartec Papelaria -->
           <div class="project-card">
-            <div class="project-card__visual" aria-hidden="true">
-              <div class="browser-frame">
-                <div class="browser-bar">
-                  <div class="browser-dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <div class="browser-url">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    sartec.vercel.app
-                  </div>
-                </div>
-                <div class="browser-content">
-                  <div class="browser-sim-hero">
-                    <div class="browser-sim-logo"></div>
-                    <div class="browser-sim-h1"></div>
-                    <div class="browser-sim-h1 browser-sim-h1--sm"></div>
-                    <div class="browser-sim-cta"></div>
-                  </div>
-                  <div class="browser-sim-grid">
-                    <div class="browser-sim-card">
-                      <div class="browser-sim-icon"></div>
-                      <div class="browser-sim-line"></div>
-                      <div class="browser-sim-line browser-sim-line--sm"></div>
-                    </div>
-                    <div class="browser-sim-card">
-                      <div class="browser-sim-icon"></div>
-                      <div class="browser-sim-line"></div>
-                      <div class="browser-sim-line browser-sim-line--sm"></div>
-                    </div>
-                    <div class="browser-sim-card">
-                      <div class="browser-sim-icon"></div>
-                      <div class="browser-sim-line"></div>
-                      <div class="browser-sim-line browser-sim-line--sm"></div>
-                    </div>
-                  </div>
-                </div>
+            <div class="project-card__visual project-card__visual--phone">
+              <div class="phone-mockup" aria-hidden="true">
+                <div class="phone-mockup__island"></div>
+                <video class="phone-mockup__video" autoplay muted loop playsinline preload="metadata">
+                  <source src="sartec-site-mobile.mp4" type="video/mp4">
+                </video>
               </div>
             </div>
             <div class="project-card__info">
@@ -442,9 +412,11 @@
           <!-- Card 2: UniEdu -->
           <div class="project-card">
             <div class="project-card__visual project-card__visual--video">
-              <video class="project-card__video" autoplay muted loop playsinline preload="metadata" aria-label="Prévia do protótipo UniEdu">
-                <source src="uniedu-prototipo.mp4" type="video/mp4">
-              </video>
+              <div class="project-card__video-clip">
+                <video class="project-card__video" autoplay muted loop playsinline preload="metadata" aria-label="Prévia do protótipo UniEdu">
+                  <source src="uniedu-prototipo.mp4" type="video/mp4">
+                </video>
+              </div>
             </div>
             <div class="project-card__info">
               <span class="real-app-label real-app-label--blue">Protótipo de aplicativo</span>
