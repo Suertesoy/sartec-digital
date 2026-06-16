@@ -1542,6 +1542,87 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   line-height: 1.72;
 }
 
+/* ── PROJECTS GRID ───────────────────────────── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: linear-gradient(135deg, rgba(13,14,34,0.95) 0%, rgba(19,21,48,0.90) 100%);
+  border: 1px solid rgba(107, 112, 240, 0.18);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.3),
+    0 0 48px rgba(107, 112, 240, 0.06);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(107,112,240,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107,112,240,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 20%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.6) 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 20%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.project-card > * { position: relative; z-index: 1; }
+
+.project-card__visual--video {
+  display: flex;
+  justify-content: center;
+}
+
+/* Wrapper técnico de clipping — sem aparência visual própria */
+.project-card__video-wrap {
+  border-radius: 32px;
+  overflow: hidden;
+  line-height: 0;
+  max-width: 280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.project-card__video-wrap video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.project-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-card__info p {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.72;
+}
+
+/* Label azul para projetos que não estão em produção */
+.real-app-label--blue {
+  color: var(--blue-light);
+  background: var(--blue-dim);
+  border-color: var(--blue-border);
+}
+
 /* ── PILOT ────────────────────────────────────── */
 .pilot { background: var(--bg); }
 
@@ -1759,6 +1840,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   .real-app-card       { grid-template-columns: 1fr; gap: 36px; padding: 32px; }
   .real-app-card::after { left: 32px; right: 32px; }
   .real-app-card__visual { max-width: 560px; margin: 0 auto; width: 100%; }
+  .projects-grid       { gap: 20px; }
 }
 
 /* ══════════════════════════════════════════════
@@ -1803,10 +1885,13 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   .origin-grid,
   .origin-grid--3 { grid-template-columns: 1fr; gap: 14px; }
 
-  /* Aplicação real */
+  /* Aplicação real / Projetos */
   .real-app-card { gap: 28px; padding: 24px 20px; }
   .real-app-card::after { left: 20px; right: 20px; }
   .browser-sim-grid { grid-template-columns: repeat(3, 1fr); }
+  .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+  .project-card  { padding: 24px 20px; }
+  .project-card__video-wrap { max-width: 220px; }
 
   /* Tech grid subtle on mobile */
   .hero__grid { opacity: 0.6; }
