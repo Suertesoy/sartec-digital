@@ -1,27 +1,26 @@
 # Sartec Digital
 
-Página comercial da **Sartec Digital** — frente de soluções digitais da Sartec.
+Página comercial da **Sartec Digital** — soluções digitais sob medida para pequenos e médios negócios, com foco em presença digital, sistemas internos, automações, aplicativos, fluxos de atendimento, venda digital e gestão.
 
 ## Objetivo
 
-Apresentar a Sartec Digital como uma frente de produtos e serviços digitais para pequenos e médios negócios, com foco em ecossistemas de atendimento via WhatsApp, automações, landing pages e sistemas simples de gestão.
+Apresentar a Sartec Digital como parceira de desenvolvimento sob medida, capaz de entender problemas reais de operação, atendimento, venda e experiência do cliente, e transformá-los em soluções digitais simples, usáveis e bem implementadas.
 
 ## Seções da página
 
 | # | Seção | Descrição |
 |---|---|---|
 | 1 | Hero | Título, subtítulo, CTAs e selos de área de atuação |
-| 2 | Problema | 7 dores comuns de empresas que dependem do WhatsApp sem estrutura |
-| 3 | Apresentação SD | Quem é a Sartec Digital e de onde surgiu |
-| 4 | O que fazemos | 6 serviços com linguagem orientada a benefícios |
-| 5 | Ecossistema | Solução principal em 6 módulos |
-| 6 | Método | 4 etapas de trabalho (operação → fluxo → implementação → ajuste) |
-| 7 | Para quem é | 10 segmentos de negócio atendidos |
-| 8 | Pacotes | 4 opções de preço com valores "a partir de" |
-| 9 | Sobre Lucas | Bio do Product Designer responsável pela frente |
-| 10 | Piloto | Explicação do ciclo inicial de 3 meses |
-| 11 | FAQ | 8 perguntas frequentes em accordion |
-| 12 | CTA final | Diagnóstico gratuito via WhatsApp |
+| 2 | Antes vs Depois | Mapeamento de dores operacionais clássicas versus fluxos organizados |
+| 3 | Nossa Origem | A história real nascida na operação comercial da Sartec Papelaria |
+| 4 | O que entregamos | 6 verticais de serviço (Landing pages, Sistemas internos, Automações, Apps/MVPs, Agendamento, Venda digital) |
+| 5 | Aplicação Real | Case prático e link de produção da Sartec Papelaria |
+| 6 | Sobre Lucas | Bio do Product Designer focado em UX/UI, automações e IA aplicada à rotina real |
+| 7 | Pacotes | 4 caminhos de entrada com escopo flexível (sem preços pré-definidos) |
+| 8 | Comparativo | Tabela detalhada de recursos, opcionais e escopos de cada pacote |
+| 9 | Como começamos | 4 etapas do método (Entendimento → Desenho → Implementação → Ajuste) |
+| 10 | FAQ | 8 perguntas frequentes com respostas honestas sobre escopo, e-commerce, apps e suporte |
+| 11 | CTA final | Chamada para análise inicial gratuita e conversa sem compromisso |
 
 ## Stack
 
@@ -59,7 +58,7 @@ Repositório: `https://github.com/Suertesoy/sartec-digital.git`
 
 ```
 sartec-digital/
-├── index.html    ← página principal (12 seções)
+├── index.html    ← página principal (11 seções)
 ├── styles.css    ← design system + todos os estilos
 ├── script.js     ← header scroll, menu mobile, FAQ accordion, fade-in
 └── README.md
@@ -67,10 +66,9 @@ sartec-digital/
 
 ## Personalização rápida
 
-- **Número do WhatsApp**: substituir `5512999999999` no `index.html` pelo número real
-- **Preços**: editar diretamente nos blocos de pricing no `index.html`
+- **Número do WhatsApp**: substituir `5512997863832` no `index.html` pelo número real
 - **Cores primárias**: variável `--blue` em `:root` no `styles.css`
 
 ---
 
-© 2025 Sartec Digital · Uma frente de soluções da Sartec
+© 2025 Sartec Digital · Soluções digitais sob medida
