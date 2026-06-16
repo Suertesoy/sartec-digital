@@ -50,7 +50,7 @@
 
   --project-phone-w:        300px;
   --project-phone-w-mobile: 230px;
-  --project-phone-r:        36px;
+  --project-phone-r:        38px;
 }
 
 /* ── RESET ────────────────────────────────────── */
@@ -1599,18 +1599,21 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   box-shadow: none;
 }
 
-.project-card__visual--video,
-.project-card__visual--phone { /* sizing via tokens on children */ }
+.project-card__visual--phone {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
 
-/* Sartec Papelaria: mockup externo */
-.phone-mockup {
+/* ── Phone preview: mockup idêntico nos dois cards ── */
+.phone-preview {
   position: relative;
   width: var(--project-phone-w);
   aspect-ratio: 9 / 16;
   padding: 9px;
   border-radius: var(--project-phone-r);
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.03)) border-box,
+    linear-gradient(145deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04)) border-box,
     #050610;
   box-shadow:
     0 28px 64px rgba(0, 0, 0, 0.55),
@@ -1620,71 +1623,46 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   box-sizing: border-box;
 }
 
-.phone-mockup::before {
+.phone-preview::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  inset: 8px;
+  border-radius: 30px;
   pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 28px rgba(0, 0, 0, 0.30);
   z-index: 2;
 }
 
-.phone-mockup__island {
+.phone-preview__island {
   position: absolute;
-  top: 9px;
+  top: 18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 28%;
-  height: 24px;
-  background: #000;
-  border-radius: 20px;
+  width: 78px;
+  height: 23px;
+  border-radius: 999px;
+  background: #02030a;
   z-index: 3;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
-.phone-mockup__video {
+.phone-preview__video {
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: calc(var(--project-phone-r) - 9px);
+  border-radius: 30px;
   object-fit: cover;
   background: #050610;
   transform: none;
-}
-
-/* UniEdu: vídeo gravado com mockup gravado + área preta ao redor.
-   object-fit: contain preserva o celular inteiro sem cortar a interface.
-   Ideal: exportar uniedu-prototipo-crop.mp4 já recortado em 9:16 vertical,
-   trocar o <source> e mudar para object-fit: cover. */
-.project-card__video-clip {
-  width: var(--project-phone-w);
-  aspect-ratio: 9 / 16;
-  border-radius: var(--project-phone-r);
-  overflow: hidden;
-  background: transparent;
-  border: 0;
-  padding: 0;
-  box-shadow:
-    0 28px 64px rgba(0, 0, 0, 0.45),
-    0 0 48px rgba(107, 112, 240, 0.08);
-  line-height: 0;
-}
-
-.project-card__video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: inherit;
-  background: transparent;
-  transform: none;
-  transform-origin: center center;
 }
 
 .project-card__info {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-top: 28px;
 }
 
 .project-card__info p {
@@ -1972,22 +1950,29 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
     min-height: calc(var(--project-phone-w-mobile) * 16 / 9);
   }
 
-  .phone-mockup,
-  .project-card__video-clip {
+  .phone-preview {
     width: var(--project-phone-w-mobile);
-  }
-
-  .phone-mockup {
     padding: 8px;
-    border-radius: 32px;
+    border-radius: 34px;
   }
 
-  .phone-mockup__video {
-    border-radius: 24px;
+  .phone-preview::before {
+    inset: 7px;
+    border-radius: 27px;
   }
 
-  .project-card__video-clip {
-    border-radius: 32px;
+  .phone-preview__video {
+    border-radius: 27px;
+  }
+
+  .phone-preview__island {
+    top: 15px;
+    width: 64px;
+    height: 19px;
+  }
+
+  .project-card__info {
+    margin-top: 24px;
   }
 
 
