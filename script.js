@@ -38,7 +38,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
   });
 });
 
@@ -132,5 +132,56 @@ if (pricingGrid) {
         else b.setAttribute('hidden', '');
       });
     });
+  });
+}
+
+// ── Interactive digital grid mouse/pointer effect ─────────────
+const root = document.documentElement;
+const trailsLayer = document.querySelector('.digital-grid-trails');
+
+let pointerActive = false;
+let lastTrail = 0;
+let rafId = null;
+let mouseX = 0;
+let mouseY = 0;
+
+const canUsePointerEffect = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (canUsePointerEffect) {
+  window.addEventListener('pointermove', event => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    if (!pointerActive) {
+      pointerActive = true;
+      document.body.classList.add('is-pointer-active');
+    }
+
+    if (!rafId) {
+      rafId = requestAnimationFrame(() => {
+        root.style.setProperty('--mouse-x', `${mouseX}px`);
+        root.style.setProperty('--mouse-y', `${mouseY}px`);
+        rafId = null;
+      });
+    }
+
+    if (!reduceMotion && trailsLayer) {
+      const now = performance.now();
+      if (now - lastTrail > 90) {
+        lastTrail = now;
+        const trail = document.createElement('span');
+        trail.className = 'digital-grid-trail';
+        trail.style.left = `${mouseX}px`;
+        trail.style.top = `${mouseY}px`;
+        trailsLayer.appendChild(trail);
+        window.setTimeout(() => trail.remove(), 950);
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('pointerleave', () => {
+    pointerActive = false;
+    document.body.classList.remove('is-pointer-active');
   });
 }
