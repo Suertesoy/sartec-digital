@@ -1019,44 +1019,49 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   align-items: start;
 }
 
-.about-lucas__text .tag { margin-bottom: 20px; }
-.about-lucas__text h2   { margin-bottom: 6px; }
+.about-lucas__text .tag { margin-bottom: 18px; }
+.about-lucas__text h2   { margin-bottom: 14px; }
 .about-lucas__text p {
   font-size: 16px;
   color: var(--text-2);
-  line-height: 1.75;
-  margin-bottom: 16px;
+  line-height: 1.7;
+  margin-bottom: 12px;
 }
 
 .lucas__quote {
-  margin: 28px 0;
-  padding: 20px 24px;
+  margin: 20px 0 28px;
+  padding: 14px 20px;
   background: var(--surface);
   border-left: 3px solid var(--blue);
   border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  font-size: 16px;
+  font-size: 15px;
   font-style: italic;
   color: var(--text);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
-.lucas__attrs {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.lucas-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
 }
-.lucas__attrs li {
-  display: flex; align-items: center;
-  gap: 12px;
-  font-size: 14px; font-weight: 500;
+
+.lucas-proof-card {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.lucas-proof-card h3 {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.lucas-proof-card p {
+  font-size: 13px;
   color: var(--text-2);
-}
-.lucas__attrs li::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--blue);
-  flex-shrink: 0;
+  line-height: 1.55;
+  margin-bottom: 0;
 }
 
 .lucas-card {
@@ -2134,6 +2139,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   /* About Lucas */
   .about-lucas__wrap { gap: 40px; }
   .about-lucas__card { max-width: 100%; }
+  .lucas-proof-grid  { grid-template-columns: 1fr; gap: 12px; }
 
   /* Pricing */
   .pricing__grid { grid-template-columns: 1fr; gap: 16px; }
