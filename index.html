@@ -8,7 +8,7 @@
   <meta property="og:description" content="A Sartec Digital desenha e implementa sites, sistemas, automações, aplicativos e fluxos digitais a partir dos problemas reais da sua operação." />
   <meta property="og:type" content="website" />
   <title>Sartec Digital — Soluções digitais sob medida</title>
-  <link rel="stylesheet" href="styles.css?v=1.2" />
+  <link rel="stylesheet" href="styles.css?v=1.3" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -219,7 +219,7 @@
                   <div class="phone-screen">
                     <div class="phone-screen__island"></div>
                     
-                    <div class="phone-app">
+                    <div class="phone-app" id="js-phone-app">
                       <!-- Top bar simulated -->
                       <div class="phone-app__topbar">
                         <span class="phone-app__time">12:00</span>
@@ -229,10 +229,50 @@
                         </div>
                       </div>
 
-                      <div class="phone-app__title" id="js-phone-title">Aulas</div>
-                      
-                      <!-- Video Player Section (Expands in State 2/3) -->
-                      <div class="phone-app__player-container" id="js-phone-player-container">
+                      <!-- 1. HOME SCREEN VIEW -->
+                      <div class="phone-app__home" id="js-phone-home">
+                        <div class="phone-app__header">
+                          <span class="phone-app__title">Aulas</span>
+                          <span class="phone-app__avatar"></span>
+                        </div>
+                        <div class="phone-app__welcome">Continue seu aprendizado</div>
+                        <div class="phone-app__chips">
+                          <span class="phone-app__chip phone-app__chip--active">UX/UI</span>
+                          <span class="phone-app__chip">Automação</span>
+                        </div>
+                        <!-- Continuar Assistindo Card -->
+                        <div class="phone-app__continue-card" id="js-phone-continue-card">
+                          <div class="phone-app__continue-info">
+                            <span class="phone-app__continue-title">Design de Produto</span>
+                            <span class="phone-app__continue-progress-text">62% concluído</span>
+                          </div>
+                          <div class="phone-app__continue-play">
+                            <span class="phone-app__continue-play-icon"></span>
+                          </div>
+                        </div>
+                        <!-- List of other lessons -->
+                        <div class="phone-app__section-title">Suas aulas</div>
+                        <div class="phone-app__list">
+                          <div class="phone-app__item" id="js-phone-home-item-1">
+                            <div class="phone-app__item-thumb"></div>
+                            <div class="phone-app__item-lines">
+                              <div class="phone-app__item-line-1"></div>
+                              <div class="phone-app__item-line-2"></div>
+                            </div>
+                          </div>
+                          <div class="phone-app__item" id="js-phone-home-item-2">
+                            <div class="phone-app__item-thumb"></div>
+                            <div class="phone-app__item-lines">
+                              <div class="phone-app__item-line-1"></div>
+                              <div class="phone-app__item-line-2"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 2. PLAYER SCREEN VIEW -->
+                      <div class="phone-app__player-view" id="js-phone-player-view">
+                        <!-- Video Player Section -->
                         <div class="phone-app__player">
                           <div class="phone-app__video-frame">
                             <!-- CSS-only play button -->
@@ -251,30 +291,22 @@
                             <div class="phone-app__desc-line phone-app__desc-line--sm"></div>
                           </div>
                         </div>
-                      </div>
-
-                      <!-- Video list -->
-                      <div class="phone-app__list-header" id="js-phone-list-header">Próximas aulas</div>
-                      <div class="phone-app__list">
-                        <div class="phone-app__item phone-app__item--active" id="js-phone-item-1">
-                          <div class="phone-app__item-thumb"></div>
-                          <div class="phone-app__item-lines">
-                            <div class="phone-app__item-line-1"></div>
-                            <div class="phone-app__item-line-2"></div>
+                        <!-- Video list below player -->
+                        <div class="phone-app__list-header">Próximas aulas</div>
+                        <div class="phone-app__list">
+                          <div class="phone-app__item phone-app__item--active" id="js-phone-item-1">
+                            <div class="phone-app__item-thumb"></div>
+                            <div class="phone-app__item-lines">
+                              <div class="phone-app__item-line-1"></div>
+                              <div class="phone-app__item-line-2"></div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="phone-app__item" id="js-phone-item-2">
-                          <div class="phone-app__item-thumb"></div>
-                          <div class="phone-app__item-lines">
-                            <div class="phone-app__item-line-1"></div>
-                            <div class="phone-app__item-line-2"></div>
-                          </div>
-                        </div>
-                        <div class="phone-app__item" id="js-phone-item-3">
-                          <div class="phone-app__item-thumb"></div>
-                          <div class="phone-app__item-lines">
-                            <div class="phone-app__item-line-1"></div>
-                            <div class="phone-app__item-line-2"></div>
+                          <div class="phone-app__item" id="js-phone-item-2">
+                            <div class="phone-app__item-thumb"></div>
+                            <div class="phone-app__item-lines">
+                              <div class="phone-app__item-line-1"></div>
+                              <div class="phone-app__item-line-2"></div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1073,6 +1105,6 @@
     </svg>
   </a>
 
-  <script src="script.js?v=1.2"></script>
+  <script src="script.js?v=1.3"></script>
 </body>
 </html>

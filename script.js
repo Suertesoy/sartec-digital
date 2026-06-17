@@ -440,13 +440,13 @@ if (pricingGrid) {
   const dMetricDone = document.getElementById('js-metric-done');
 
   // Mobile phone nodes
-  const phonePlayerContainer = document.getElementById('js-phone-player-container');
+  const phoneApp = document.getElementById('js-phone-app');
+  const phoneContinueCard = document.getElementById('js-phone-continue-card');
   const playBtn = document.getElementById('js-phone-play-btn');
   const progressFill = document.getElementById('js-phone-progress-fill');
   const lessonTitle = document.getElementById('js-phone-lesson-title');
   const item1 = document.getElementById('js-phone-item-1');
   const item2 = document.getElementById('js-phone-item-2');
-  const item3 = document.getElementById('js-phone-item-3');
 
   let activeTimeouts = [];
   let isRunning = false;
@@ -489,7 +489,8 @@ if (pricingGrid) {
     if (dMetricDone) dMetricDone.textContent = '98%';
 
     // 3. Reset mobile app
-    if (phonePlayerContainer) phonePlayerContainer.classList.remove('is-expanded');
+    if (phoneApp) phoneApp.classList.remove('show-player');
+    if (phoneContinueCard) phoneContinueCard.classList.remove('is-highlighted');
     if (playBtn) playBtn.classList.remove('is-active');
     if (progressFill) {
       progressFill.style.transition = 'none';
@@ -499,7 +500,6 @@ if (pricingGrid) {
 
     if (item1) item1.classList.add('phone-app__item--active');
     if (item2) item2.classList.remove('phone-app__item--active');
-    if (item3) item3.classList.remove('phone-app__item--active');
   }
 
   function runCycle() {
@@ -554,9 +554,10 @@ if (pricingGrid) {
       if (stage) stage.classList.add('is-flipped');
     }, 3200);
 
-    // 4.2s: lista de vídeos no celular
+    // 4.2s: lista de vídeos no celular (Home view)
     addTimeout(() => {
-      if (phonePlayerContainer) phonePlayerContainer.classList.remove('is-expanded');
+      if (phoneApp) phoneApp.classList.remove('show-player');
+      if (phoneContinueCard) phoneContinueCard.classList.remove('is-highlighted');
       if (playBtn) playBtn.classList.remove('is-active');
       if (progressFill) {
         progressFill.style.transition = 'none';
@@ -565,12 +566,16 @@ if (pricingGrid) {
       if (lessonTitle) lessonTitle.textContent = 'Aula 01';
       if (item1) item1.classList.add('phone-app__item--active');
       if (item2) item2.classList.remove('phone-app__item--active');
-      if (item3) item3.classList.remove('phone-app__item--active');
     }, 4200);
 
-    // 5.5s: abre player
+    // 5.0s: Continue Card recebe destaque como se estivesse sendo aberto
     addTimeout(() => {
-      if (phonePlayerContainer) phonePlayerContainer.classList.add('is-expanded');
+      if (phoneContinueCard) phoneContinueCard.classList.add('is-highlighted');
+    }, 5000);
+
+    // 5.5s: Abre player (Home vira para tela de aula)
+    addTimeout(() => {
+      if (phoneApp) phoneApp.classList.add('show-player');
     }, 5500);
 
     // 6.5s: play/progresso
@@ -603,7 +608,8 @@ if (pricingGrid) {
       if (lessonTitle) lessonTitle.textContent = 'Aula 01';
       if (item1) item1.classList.add('phone-app__item--active');
       if (item2) item2.classList.remove('phone-app__item--active');
-      if (phonePlayerContainer) phonePlayerContainer.classList.remove('is-expanded');
+      if (phoneApp) phoneApp.classList.remove('show-player');
+      if (phoneContinueCard) phoneContinueCard.classList.remove('is-highlighted');
     }, 9200);
 
     cycleTimer = addTimeout(runCycle, 11000);
