@@ -85,89 +85,24 @@ body::before {
   -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.35));
 }
 
-.digital-grid-light {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.24) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.24) 1px, transparent 1px);
-  background-size: 72px 72px;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  mask-image: radial-gradient(
-    circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(0,0,0,0.95) 0%,
-    rgba(0,0,0,0.50) 34%,
-    rgba(0,0,0,0.14) 58%,
-    transparent 76%
-  );
-  -webkit-mask-image: radial-gradient(
-    circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(0,0,0,0.95) 0%,
-    rgba(0,0,0,0.50) 34%,
-    rgba(0,0,0,0.14) 58%,
-    transparent 76%
-  );
-}
-
-body.is-pointer-active .digital-grid-light {
-  opacity: 1;
-}
-
-.digital-grid-trails {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.digital-grid-trail {
+.hero__trails {
   position: absolute;
-  width: 90px;
-  height: 90px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  background:
-    linear-gradient(rgba(255,255,255,0.28) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.28) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.25) 42%, transparent 72%);
-  -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.25) 42%, transparent 72%);
-  animation: gridTrailFade 0.9s ease-out forwards;
-}
-
-@keyframes gridTrailFade {
-  0% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(0.74);
-  }
-  55% {
-    opacity: 0.28;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1.18);
-  }
+  mix-blend-mode: screen;
 }
 
 @media (hover: none), (pointer: coarse) {
-  .digital-grid-light,
-  .digital-grid-trails {
+  .hero__trails {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .digital-grid-trails {
+  .hero__trails {
     display: none;
-  }
-
-  .digital-grid-light {
-    transition: none;
   }
 }
 

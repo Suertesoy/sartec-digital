@@ -135,53 +135,134 @@ if (pricingGrid) {
   });
 }
 
-// ── Interactive digital grid mouse/pointer effect ─────────────
-const root = document.documentElement;
-const trailsLayer = document.querySelector('.digital-grid-trails');
+// ── Hero grid digital trail effect ─────────────────────────────
+(() => {
+  const hero = document.getElementById('hero');
+  const canvas = hero && hero.querySelector('.hero__trails');
+  if (!hero || !canvas) return;
 
-let pointerActive = false;
-let lastTrail = 0;
-let rafId = null;
-let mouseX = 0;
-let mouseY = 0;
+  const canUsePointerEffect = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!canUsePointerEffect || reduceMotion) return;
 
-const canUsePointerEffect = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ctx = canvas.getContext('2d');
+  const GRID = 72;
+  const MAX_PULSES = 70;
+  const MOVE_THROTTLE = 45; // ms
+  let pulses = [];
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let width = 0;
+  let height = 0;
+  let lastSampleTime = 0;
+  let lastCellX = null;
+  let lastCellY = null;
+  let rafId = null;
 
-if (canUsePointerEffect) {
-  window.addEventListener('pointermove', event => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+  function resize() {
+    const rect = hero.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
 
-    if (!pointerActive) {
-      pointerActive = true;
-      document.body.classList.add('is-pointer-active');
+  function spawnPulse(cellX, cellY, dirX, dirY) {
+    const base = {
+      x: cellX,
+      y: cellY,
+      born: performance.now(),
+      life: 700 + Math.random() * 500,
+      reach: 36 + Math.random() * 36,
+    };
+    pulses.push({ ...base, axis: 'h', dir: dirX || (Math.random() < 0.5 ? -1 : 1) });
+    pulses.push({ ...base, axis: 'v', dir: dirY || (Math.random() < 0.5 ? -1 : 1) });
+    if (pulses.length > MAX_PULSES) {
+      pulses.splice(0, pulses.length - MAX_PULSES);
     }
+  }
 
-    if (!rafId) {
-      rafId = requestAnimationFrame(() => {
-        root.style.setProperty('--mouse-x', `${mouseX}px`);
-        root.style.setProperty('--mouse-y', `${mouseY}px`);
-        rafId = null;
-      });
-    }
+  function handlePointerMove(event) {
+    const now = performance.now();
+    if (now - lastSampleTime < MOVE_THROTTLE) return;
 
-    if (!reduceMotion && trailsLayer) {
-      const now = performance.now();
-      if (now - lastTrail > 90) {
-        lastTrail = now;
-        const trail = document.createElement('span');
-        trail.className = 'digital-grid-trail';
-        trail.style.left = `${mouseX}px`;
-        trail.style.top = `${mouseY}px`;
-        trailsLayer.appendChild(trail);
-        window.setTimeout(() => trail.remove(), 950);
+    const rect = hero.getBoundingClientRect();
+    const localX = event.clientX - rect.left;
+    const localY = event.clientY - rect.top;
+    if (localX < 0 || localY < 0 || localX > rect.width || localY > rect.height) return;
+
+    const cellX = Math.round(localX / GRID) * GRID;
+    const cellY = Math.round(localY / GRID) * GRID;
+    if (cellX === lastCellX && cellY === lastCellY) return;
+
+    const dirX = lastCellX === null ? 0 : Math.sign(cellX - lastCellX);
+    const dirY = lastCellY === null ? 0 : Math.sign(cellY - lastCellY);
+
+    lastSampleTime = now;
+    lastCellX = cellX;
+    lastCellY = cellY;
+    spawnPulse(cellX, cellY, dirX, dirY);
+    startLoop();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    const now = performance.now();
+
+    pulses = pulses.filter(p => now - p.born < p.life);
+
+    for (const p of pulses) {
+      const t = (now - p.born) / p.life;
+      const eased = Math.sin(Math.PI * t); // fade in then out
+      const alpha = eased * 0.34;
+      if (alpha <= 0.01) continue;
+
+      const travel = t * p.reach;
+      const segLen = 22 + eased * 18;
+
+      let x1, y1, x2, y2;
+      if (p.axis === 'h') {
+        const center = p.x + p.dir * travel;
+        x1 = center - segLen / 2;
+        x2 = center + segLen / 2;
+        y1 = y2 = p.y;
+      } else {
+        const center = p.y + p.dir * travel;
+        y1 = center - segLen / 2;
+        y2 = center + segLen / 2;
+        x1 = x2 = p.x;
       }
-    }
-  }, { passive: true });
 
-  window.addEventListener('pointerleave', () => {
-    pointerActive = false;
-    document.body.classList.remove('is-pointer-active');
+      ctx.save();
+      ctx.lineWidth = 1.4;
+      ctx.shadowColor = 'rgba(150,170,255,0.55)';
+      ctx.shadowBlur = 5;
+      ctx.strokeStyle = `rgba(214,224,255,${alpha})`;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    if (pulses.length > 0) {
+      rafId = requestAnimationFrame(draw);
+    } else {
+      rafId = null;
+    }
+  }
+
+  function startLoop() {
+    if (!rafId) rafId = requestAnimationFrame(draw);
+  }
+
+  hero.addEventListener('pointermove', handlePointerMove, { passive: true });
+  hero.addEventListener('pointerleave', () => {
+    lastCellX = null;
+    lastCellY = null;
   });
-}
+})();
