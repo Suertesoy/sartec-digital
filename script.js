@@ -415,3 +415,137 @@ if (pricingGrid) {
   });
   window.addEventListener('scroll', handleScroll, { passive: true });
 })();
+
+// ── Hero Mockup Animation Loop ──────────────────────────────────
+(() => {
+  const stage = document.querySelector('.mockup-stage');
+  if (!stage) return;
+
+  const playBtn = document.getElementById('js-phone-play-btn');
+  const progressFill = document.getElementById('js-phone-progress-fill');
+  const lessonTitle = document.getElementById('js-phone-lesson-title');
+  const item1 = document.getElementById('js-phone-item-1');
+  const item2 = document.getElementById('js-phone-item-2');
+  const item3 = document.getElementById('js-phone-item-3');
+
+  let activeTimeouts = [];
+  let isRunning = false;
+  let cycleTimer = null;
+
+  function addTimeout(fn, ms) {
+    const t = setTimeout(fn, ms);
+    activeTimeouts.push(t);
+    return t;
+  }
+
+  function clearTimeouts() {
+    activeTimeouts.forEach(t => clearTimeout(t));
+    activeTimeouts = [];
+  }
+
+  function resetAll() {
+    if (stage) stage.classList.remove('is-flipped');
+    if (playBtn) playBtn.classList.remove('is-active');
+    if (progressFill) {
+      progressFill.style.transition = 'none';
+      progressFill.style.width = '0%';
+    }
+    if (lessonTitle) lessonTitle.textContent = 'Aula 01';
+
+    if (item1) item1.classList.add('phone-app__item--active');
+    if (item2) item2.classList.remove('phone-app__item--active');
+    if (item3) item3.classList.remove('phone-app__item--active');
+  }
+
+  function runCycle() {
+    clearTimeouts();
+    resetAll();
+
+    // At 4.0s: Flip to mobile
+    addTimeout(() => {
+      if (stage) stage.classList.add('is-flipped');
+    }, 4000);
+
+    // At 5.5s: Highlight play button
+    addTimeout(() => {
+      if (playBtn) playBtn.classList.add('is-active');
+    }, 5500);
+
+    // At 6.0s: Progress bar starts filling
+    addTimeout(() => {
+      if (progressFill) {
+        progressFill.style.transition = 'width 1.5s linear';
+        progressFill.style.width = '45%';
+      }
+    }, 6000);
+
+    // At 7.5s: Highlight next item
+    addTimeout(() => {
+      if (item1) item1.classList.remove('phone-app__item--active');
+      if (item2) item2.classList.add('phone-app__item--active');
+      if (lessonTitle) lessonTitle.textContent = 'Aula 02';
+      
+      if (progressFill) {
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
+        void progressFill.offsetWidth;
+        progressFill.style.transition = 'width 1.2s linear';
+        progressFill.style.width = '15%';
+      }
+    }, 7500);
+
+    // At 9.0s: Flip back to desktop
+    addTimeout(() => {
+      if (stage) stage.classList.remove('is-flipped');
+    }, 9000);
+
+    // At 10.2s: Reset in background
+    addTimeout(() => {
+      if (playBtn) playBtn.classList.remove('is-active');
+      if (progressFill) {
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
+      }
+      if (lessonTitle) lessonTitle.textContent = 'Aula 01';
+      if (item1) item1.classList.add('phone-app__item--active');
+      if (item2) item2.classList.remove('phone-app__item--active');
+    }, 10200);
+
+    cycleTimer = addTimeout(runCycle, 13000);
+  }
+
+  function startAppLoop() {
+    isRunning = true;
+    runCycle();
+  }
+
+  function stopAppLoop() {
+    isRunning = false;
+    clearTimeouts();
+    if (cycleTimer) {
+      clearTimeout(cycleTimer);
+      cycleTimer = null;
+    }
+    resetAll();
+  }
+
+  const mediaQueryDesktop = window.matchMedia('(min-width: 1025px)');
+  const mediaQueryReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function checkAndControlLoop() {
+    const shouldRun = mediaQueryDesktop.matches && !mediaQueryReducedMotion.matches;
+    if (shouldRun) {
+      if (!isRunning) {
+        startAppLoop();
+      }
+    } else {
+      if (isRunning) {
+        stopAppLoop();
+      }
+    }
+  }
+
+  checkAndControlLoop();
+  mediaQueryDesktop.addEventListener('change', checkAndControlLoop);
+  mediaQueryReducedMotion.addEventListener('change', checkAndControlLoop);
+})();

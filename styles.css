@@ -422,25 +422,76 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   justify-content: center;
 }
 
-.mockup {
+.mockup-stage {
   position: relative;
   width: 100%;
   max-width: 560px;
-  min-height: 420px;
+  height: 420px;
+  max-height: 420px;
+  box-sizing: border-box;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mockup-flip {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mockup-stage.is-flipped .mockup-flip {
+  transform: rotateY(180deg);
+}
+
+.mockup-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.mockup-face--desktop {
+  transform: rotateY(0deg);
+  z-index: 2;
   background: rgba(13, 14, 34, 0.92);
   border: 1px solid rgba(107, 112, 240, 0.22);
-  border-radius: 16px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  overflow: hidden;
   box-shadow:
     0 32px 80px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(255, 255, 255, 0.04) inset,
     0 0 80px rgba(107, 112, 240, 0.08);
 }
 
-/* Mockup internal tech grid */
-.mockup::before {
+.mockup-face--phone {
+  transform: rotateY(180deg);
+  z-index: 1;
+  background: rgba(13, 14, 34, 0.92);
+  border: 1px solid rgba(107, 112, 240, 0.22);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 80px rgba(107, 112, 240, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Mockup internal tech grid pseudo-element */
+.mockup-face--desktop::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -451,6 +502,312 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   pointer-events: none;
   z-index: 0;
   border-radius: inherit;
+}
+
+/* ── PHONE PREVIEW & CSS VIDEO APP STYLE ── */
+.phone-mockup {
+  width: 240px;
+  height: 380px;
+  padding: 6px;
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.03)) border-box, #050610;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 24px rgba(107, 112, 240, 0.08);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #090a16;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.phone-screen__island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 16px;
+  border-radius: 8px;
+  background: #02030a;
+  z-index: 10;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.phone-app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 12px 12px;
+  box-sizing: border-box;
+  background: #080914;
+}
+
+.phone-app,
+.phone-screen,
+.phone-screen * {
+  box-sizing: border-box !important;
+  overflow-wrap: anywhere !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* Containment resets for all text inside phone */
+.phone-screen h1,
+.phone-screen h2,
+.phone-screen h3,
+.phone-screen h4,
+.phone-screen h5,
+.phone-screen h6,
+.phone-screen p,
+.phone-screen span,
+.phone-screen a,
+.phone-screen button,
+.phone-screen input,
+.phone-screen div {
+  font-size: inherit;
+  line-height: 1.25 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Time & top status bar */
+.phone-app__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 14px;
+  margin-bottom: 8px;
+}
+
+.phone-app__time {
+  font-size: 8px !important;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  line-height: 1 !important;
+}
+
+.phone-app__status {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.phone-app__signal {
+  width: 8px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 1px;
+}
+
+.phone-app__battery {
+  width: 12px;
+  height: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1px;
+  position: relative;
+}
+
+.phone-app__battery::after {
+  content: '';
+  position: absolute;
+  left: 1px; top: 1px; bottom: 1px;
+  width: 6px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.phone-app__title {
+  font-size: 11px !important;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-align: left;
+  line-height: 1.2 !important;
+}
+
+.phone-app__player {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #02030a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-app__video-frame {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(16, 36, 93, 0.5) 0%, #02030a 100%);
+  position: relative;
+}
+
+.phone-app__play-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue, #292d96);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(41, 45, 150, 0.4);
+  transition: all 0.3s ease;
+}
+
+.phone-app__play-btn.is-active {
+  background: var(--blue-light, #6b70f0) !important;
+  transform: scale(1.08);
+}
+
+/* CSS only Play / Pause Icons */
+.phone-app__play-icon {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 2px;
+  transition: all 0.2s ease;
+}
+
+.phone-app__play-btn.is-active .phone-app__play-icon {
+  border-style: double;
+  border-width: 0px 0 0px 8px;
+  border-color: transparent transparent transparent #ffffff;
+  width: 8px;
+  height: 10px;
+  margin-left: 0;
+}
+
+.phone-app__progress-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  width: 100%;
+}
+
+.phone-app__progress-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0%;
+  background: var(--blue-light, #6b70f0);
+  transition: width 0.3s ease;
+}
+
+.phone-app__lesson-title {
+  font-size: 9px !important;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-align: left;
+  line-height: 1.2 !important;
+}
+
+/* Video List items */
+.phone-app__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.phone-app__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  padding: 6px;
+  transition: all 0.3s ease;
+}
+
+.phone-app__item--active {
+  background: rgba(107, 112, 240, 0.08) !important;
+  border-color: rgba(107, 112, 240, 0.25) !important;
+}
+
+.phone-app__item-thumb {
+  width: 24px;
+  height: 16px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.phone-app__item--active .phone-app__item-thumb {
+  background: rgba(107, 112, 240, 0.3) !important;
+}
+
+.phone-app__item-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.phone-app__item-line-1 {
+  height: 4px;
+  width: 70%;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+
+.phone-app__item--active .phone-app__item-line-1 {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.phone-app__item-line-2 {
+  height: 3px;
+  width: 40%;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 1px;
+}
+
+.phone-app__item--active .phone-app__item-line-2 {
+  background: rgba(107, 112, 240, 0.2) !important;
+}
+
+/* Media Query accessibility prefers-reduced-motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  .mockup-stage {
+    transition: none !important;
+  }
+  .mockup-flip {
+    transition: none !important;
+    transform: none !important;
+  }
+  .mockup-face--desktop {
+    position: relative !important;
+    transform: none !important;
+    backface-visibility: visible !important;
+    z-index: 2 !important;
+  }
+  .mockup-face--phone {
+    display: none !important;
+  }
 }
 
 .mockup__bar,
