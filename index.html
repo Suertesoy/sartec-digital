@@ -65,257 +65,130 @@
 
         <!-- Lado direito: mockup visual -->
         <div class="hero__visual" aria-hidden="true">
-          <div class="mockup-perspective" id="js-mockup-perspective">
-            <div class="mockup-flipper">
-              
-              <!-- FRENTE: Painel de Atendimento (Dashboard) -->
-              <div class="mockup mockup-front">
-                <div class="mockup__bar">
-                  <div class="mockup__dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="mockup__title">Painel · Sartec Digital</span>
-                  <span class="mockup__badge">● Ao vivo</span>
-                </div>
-                
-                <div class="mockup__toolbar">
-                  <div class="mockup__search">
-                    <span class="mockup__search-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </span>
-                    <span class="mockup__search-text"></span>
-                  </div>
-                  <div class="mockup__tabs">
-                    <span class="mockup__tab mockup__tab--active">Painel</span>
-                    <span class="mockup__tab">Métricas</span>
-                  </div>
-                </div>
-
-                <div class="mockup__body">
-                  <div class="mockup__kanban">
-                    <!-- Coluna 1: Entrada -->
-                    <div class="mockup__col">
-                      <div class="mockup__col-label">Entrada <span class="mockup__count" id="js-count-entrada">2</span></div>
-                      <div class="mockup__card">
-                        <div class="mockup__card-avatar">C</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name">Cliente #241</div>
-                          <div class="mockup__card-msg">Orçamento pendente 📄</div>
-                        </div>
-                      </div>
-                      <div class="mockup__card" id="js-card-entrada-b">
-                        <div class="mockup__card-avatar">E</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name">Empresa B</div>
-                          <div class="mockup__card-msg">Horário de entrega</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Coluna 2: Triagem -->
-                    <div class="mockup__col">
-                      <div class="mockup__col-label">Triagem <span class="mockup__count" id="js-count-triagem">1</span></div>
-                      <div class="mockup__card" id="js-card-triagem-delta">
-                        <div class="mockup__card-avatar">L</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name">Loja Delta</div>
-                          <div class="mockup__card-msg">Valores de serviço</div>
-                        </div>
-                      </div>
-                      <!-- Cópia da Empresa B (entra na Triagem) -->
-                      <div class="mockup__card is-collapsed" id="js-card-triagem-b">
-                        <div class="mockup__card-avatar">E</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name">Empresa B</div>
-                          <div class="mockup__card-msg">Horário de entrega</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Coluna 3: Em andamento (Fila) -->
-                    <div class="mockup__col">
-                      <div class="mockup__col-label">Fila <span class="mockup__count mockup__count--blue" id="js-count-fila">2</span></div>
-                      <div class="mockup__card mockup__card--active">
-                        <div class="mockup__card-avatar mockup__card-avatar--blue">A</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name">Assoc. Alpha</div>
-                          <div class="mockup__card-msg">Contrato inicial</div>
-                        </div>
-                        <span class="mockup__card-resp">Ana</span>
-                      </div>
-                      <div class="mockup__card" id="js-card-fila-gama">
-                        <div class="mockup__card-avatar">P</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name">Proj. Gama</div>
-                          <div class="mockup__card-msg">Validação de dados</div>
-                        </div>
-                        <span class="mockup__card-resp">Carlos</span>
-                      </div>
-                      <!-- Cópia da Loja Delta (entra na Fila) -->
-                      <div class="mockup__card is-collapsed" id="js-card-fila-delta">
-                        <div class="mockup__card-avatar mockup__card-avatar--blue">L</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name">Loja Delta</div>
-                          <div class="mockup__card-msg">Valores de serviço</div>
-                        </div>
-                        <span class="mockup__card-resp">Ana</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Mini área de métricas e gráfico -->
-                  <div class="mockup__chart">
-                    <div class="mockup__chart-bars" id="js-chart-bars">
-                      <div class="mockup__chart-bar" style="--h: 40%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 65%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 50%;"></div>
-                      <div class="mockup__chart-bar mockup__chart-bar--active" style="--h: 90%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 75%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 60%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 45%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 80%;"></div>
-                    </div>
-                    <div class="mockup__chart-label">Desempenho operacional · <span id="js-chart-percent">94%</span> no prazo</div>
-                  </div>
-
-                  <div class="mockup__metrics">
-                    <div class="mockup__metric">
-                      <div class="mockup__metric-val" id="js-metric-today">38</div>
-                      <div class="mockup__metric-label">hoje</div>
-                    </div>
-                    <div class="mockup__metric">
-                      <div class="mockup__metric-val mockup__metric-val--green" id="js-metric-resp">2.5m</div>
-                      <div class="mockup__metric-label">resp. média</div>
-                    </div>
-                    <div class="mockup__metric">
-                      <div class="mockup__metric-val mockup__metric-val--blue" id="js-metric-wait">6</div>
-                      <div class="mockup__metric-label">em espera</div>
-                    </div>
-                    <div class="mockup__metric">
-                      <div class="mockup__metric-val" id="js-metric-done">98%</div>
-                      <div class="mockup__metric-label">resolvidos</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="mockup__wa">
-                  <div class="mockup__wa-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  </div>
-                  <div class="mockup__wa-text">
-                    <div class="mockup__wa-msg">Olá! Lista escolar do 5º ano, tem disponível?</div>
-                    <div class="mockup__wa-time">agora ✓✓</div>
-                  </div>
-                </div>
+          <div class="mockup">
+            <div class="mockup__bar">
+              <div class="mockup__dots">
+                <span></span><span></span><span></span>
               </div>
-              
-              <!-- VERSO: Mockup de Celular (App de Aulas) -->
-              <div class="mockup-back">
-                <div class="phone-screen">
-                  <div class="phone-screen__island"></div>
-                  
-                  <div class="phone-app">
-                    
-                    <!-- Tela 1: Login -->
-                    <div class="phone-app__screen phone-app__screen--login is-active" id="js-phone-login">
-                      <div class="phone-app__brand">
-                        <div class="phone-app__logo">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                            <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
-                          </svg>
-                        </div>
-                        <span class="phone-app__brand-name">Portal de Aulas</span>
-                      </div>
-                      
-                      <div class="phone-app__form">
-                        <div class="phone-app__input-field" id="js-login-field-email">
-                          <span class="phone-app__placeholder">E-mail</span>
-                          <span class="phone-app__typing-text"></span>
-                        </div>
-                        <div class="phone-app__input-field" id="js-login-field-pass">
-                          <span class="phone-app__placeholder">Senha</span>
-                          <span class="phone-app__typing-text"></span>
-                        </div>
-                        <button class="phone-app__btn" id="js-btn-login" type="button">Entrar</button>
-                      </div>
+              <span class="mockup__title">Painel · Sartec Digital</span>
+              <span class="mockup__badge">● Ao vivo</span>
+            </div>
+            
+            <div class="mockup__toolbar">
+              <div class="mockup__search">
+                <span class="mockup__search-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </span>
+                <span class="mockup__search-text"></span>
+              </div>
+              <div class="mockup__tabs">
+                <span class="mockup__tab mockup__tab--active">Painel</span>
+                <span class="mockup__tab">Métricas</span>
+              </div>
+            </div>
+
+            <div class="mockup__body">
+              <div class="mockup__kanban">
+                <!-- Coluna 1: Entrada -->
+                <div class="mockup__col">
+                  <div class="mockup__col-label">Entrada <span class="mockup__count">2</span></div>
+                  <div class="mockup__card">
+                    <div class="mockup__card-avatar">C</div>
+                    <div class="mockup__card-info">
+                      <div class="mockup__card-name">Cliente #241</div>
+                      <div class="mockup__card-msg">Orçamento pendente 📄</div>
                     </div>
-                    
-                    <!-- Tela 2: Home -->
-                    <div class="phone-app__screen phone-app__screen--home" id="js-phone-home">
-                      <div class="phone-app__header">
-                        <div class="phone-app__user-info">
-                          <span class="phone-app__greeting">Minhas aulas</span>
-                          <span class="phone-app__welcome">Olá, Aluno!</span>
-                        </div>
-                        <div class="phone-app__avatar">A</div>
-                      </div>
-                      
-                      <div class="phone-app__body">
-                        <div class="phone-app__section-label">AULA DE HOJE</div>
-                        <div class="phone-app__featured" id="js-card-featured">
-                          <div class="phone-app__featured-badge">NOVO</div>
-                          <div class="phone-app__featured-title">Introdução ao curso</div>
-                          <div class="phone-app__featured-desc">Continuar assistindo</div>
-                          <div class="phone-app__featured-bar"></div>
-                        </div>
-                        
-                        <div class="phone-app__section-label">SEUS CURSOS</div>
-                        <div class="phone-app__courses">
-                          <div class="phone-app__course">
-                            <div class="phone-app__course-icon"></div>
-                            <div class="phone-app__course-lines">
-                              <div class="phone-app__course-line-1"></div>
-                              <div class="phone-app__course-line-2"></div>
-                            </div>
-                          </div>
-                          <div class="phone-app__course">
-                            <div class="phone-app__course-icon"></div>
-                            <div class="phone-app__course-lines">
-                              <div class="phone-app__course-line-1"></div>
-                              <div class="phone-app__course-line-2"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                  </div>
+                  <div class="mockup__card">
+                    <div class="mockup__card-avatar">E</div>
+                    <div class="mockup__card-info">
+                      <div class="mockup__card-name">Empresa B</div>
+                      <div class="mockup__card-msg">Horário de entrega</div>
                     </div>
-                    
-                    <!-- Tela 3: Aula -->
-                    <div class="phone-app__screen phone-app__screen--lesson" id="js-phone-lesson">
-                      <div class="phone-app__nav">
-                        <span class="phone-app__back">← Voltar</span>
-                        <span class="phone-app__lesson-badge">Módulo 1</span>
-                      </div>
-                      
-                      <div class="phone-app__player">
-                        <div class="phone-app__video">
-                          <button class="phone-app__play-trigger" id="js-play-trigger" type="button">
-                            <svg class="phone-app__play-svg" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            <svg class="phone-app__pause-svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
-                              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                            </svg>
-                          </button>
-                        </div>
-                        <div class="phone-app__progress-bar">
-                          <div class="phone-app__progress-fill" id="js-video-progress"></div>
-                        </div>
-                      </div>
-                      
-                      <div class="phone-app__lesson-info">
-                        <h3>Introdução ao curso</h3>
-                        <p>Aprenda a mapear e otimizar processos na sua operação.</p>
-                      </div>
-                    </div>
-                    
                   </div>
                 </div>
+
+                <!-- Coluna 2: Triagem -->
+                <div class="mockup__col">
+                  <div class="mockup__col-label">Triagem <span class="mockup__count">1</span></div>
+                  <div class="mockup__card">
+                    <div class="mockup__card-avatar">L</div>
+                    <div class="mockup__card-info">
+                      <div class="mockup__card-name">Loja Delta</div>
+                      <div class="mockup__card-msg">Valores de serviço</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Coluna 3: Em andamento -->
+                <div class="mockup__col">
+                  <div class="mockup__col-label">Fila <span class="mockup__count mockup__count--blue">2</span></div>
+                  <div class="mockup__card mockup__card--active">
+                    <div class="mockup__card-avatar mockup__card-avatar--blue">A</div>
+                    <div class="mockup__card-info">
+                      <div class="mockup__card-name">Assoc. Alpha</div>
+                      <div class="mockup__card-msg">Contrato inicial</div>
+                    </div>
+                    <span class="mockup__card-resp">Ana</span>
+                  </div>
+                  <div class="mockup__card">
+                    <div class="mockup__card-avatar">P</div>
+                    <div class="mockup__card-info">
+                      <div class="mockup__card-name">Proj. Gama</div>
+                      <div class="mockup__card-msg">Validação de dados</div>
+                    </div>
+                    <span class="mockup__card-resp">Carlos</span>
+                  </div>
+                </div>
+
               </div>
 
+              <!-- Mini área de métricas e gráfico -->
+              <div class="mockup__chart">
+                <div class="mockup__chart-bars">
+                  <div class="mockup__chart-bar" style="--h: 40%;"></div>
+                  <div class="mockup__chart-bar" style="--h: 65%;"></div>
+                  <div class="mockup__chart-bar" style="--h: 50%;"></div>
+                  <div class="mockup__chart-bar mockup__chart-bar--active" style="--h: 90%;"></div>
+                  <div class="mockup__chart-bar" style="--h: 75%;"></div>
+                  <div class="mockup__chart-bar" style="--h: 60%;"></div>
+                  <div class="mockup__chart-bar" style="--h: 45%;"></div>
+                  <div class="mockup__chart-bar" style="--h: 80%;"></div>
+                </div>
+                <div class="mockup__chart-label">Desempenho operacional · 94% no prazo</div>
+              </div>
+
+              <div class="mockup__metrics">
+                <div class="mockup__metric">
+                  <div class="mockup__metric-val">38</div>
+                  <div class="mockup__metric-label">hoje</div>
+                </div>
+                <div class="mockup__metric">
+                  <div class="mockup__metric-val mockup__metric-val--green">2.5m</div>
+                  <div class="mockup__metric-label">resp. média</div>
+                </div>
+                <div class="mockup__metric">
+                  <div class="mockup__metric-val mockup__metric-val--blue">6</div>
+                  <div class="mockup__metric-label">em espera</div>
+                </div>
+                <div class="mockup__metric">
+                  <div class="mockup__metric-val">98%</div>
+                  <div class="mockup__metric-label">resolvidos</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mockup__wa">
+              <div class="mockup__wa-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div class="mockup__wa-text">
+                <div class="mockup__wa-msg">Olá! Lista escolar do 5º ano, tem disponível?</div>
+                <div class="mockup__wa-time">agora ✓✓</div>
+              </div>
             </div>
           </div>
         </div>
