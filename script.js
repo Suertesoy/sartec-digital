@@ -135,11 +135,10 @@ if (pricingGrid) {
   });
 }
 
-// ── Hero grid digital trail effect ─────────────────────────────
+// ── Global grid energy trail effect ─────────────────────────────
 (() => {
-  const hero = document.getElementById('hero');
-  const canvas = hero && hero.querySelector('.hero__trails');
-  if (!hero || !canvas) return;
+  const canvas = document.querySelector('.grid-trails');
+  if (!canvas) return;
 
   const canUsePointerEffect = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -147,9 +146,15 @@ if (pricingGrid) {
 
   const ctx = canvas.getContext('2d');
   const GRID = 72;
-  const MAX_PULSES = 70;
-  const MOVE_THROTTLE = 45; // ms
-  let pulses = [];
+  const LIFE_MIN = 900;
+  const LIFE_MAX = 1800;
+  const SAMPLE_THROTTLE = 40; // ms
+  const MAX_NODES = 50;
+
+  // Chain of recent grid intersections the cursor has passed through,
+  // newest last — segments are drawn connecting consecutive nodes,
+  // brighter toward the newest (cursor-ward) end.
+  let path = [];
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
   let width = 0;
   let height = 0;
@@ -159,9 +164,8 @@ if (pricingGrid) {
   let rafId = null;
 
   function resize() {
-    const rect = hero.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
+    width = window.innerWidth;
+    height = window.innerHeight;
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     canvas.style.width = `${width}px`;
@@ -171,85 +175,95 @@ if (pricingGrid) {
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
-  function spawnPulse(cellX, cellY, dirX, dirY) {
-    const base = {
-      x: cellX,
-      y: cellY,
-      born: performance.now(),
-      life: 700 + Math.random() * 500,
-      reach: 36 + Math.random() * 36,
-    };
-    pulses.push({ ...base, axis: 'h', dir: dirX || (Math.random() < 0.5 ? -1 : 1) });
-    pulses.push({ ...base, axis: 'v', dir: dirY || (Math.random() < 0.5 ? -1 : 1) });
-    if (pulses.length > MAX_PULSES) {
-      pulses.splice(0, pulses.length - MAX_PULSES);
-    }
+  function pushNode(x, y) {
+    path.push({ x, y, t: performance.now(), life: LIFE_MIN + Math.random() * (LIFE_MAX - LIFE_MIN) });
+    if (path.length > MAX_NODES) path.shift();
   }
 
   function handlePointerMove(event) {
     const now = performance.now();
-    if (now - lastSampleTime < MOVE_THROTTLE) return;
+    if (now - lastSampleTime < SAMPLE_THROTTLE) return;
 
-    const rect = hero.getBoundingClientRect();
-    const localX = event.clientX - rect.left;
-    const localY = event.clientY - rect.top;
-    if (localX < 0 || localY < 0 || localX > rect.width || localY > rect.height) return;
-
-    const cellX = Math.round(localX / GRID) * GRID;
-    const cellY = Math.round(localY / GRID) * GRID;
+    const cellX = Math.round(event.clientX / GRID) * GRID;
+    const cellY = Math.round(event.clientY / GRID) * GRID;
     if (cellX === lastCellX && cellY === lastCellY) return;
 
-    const dirX = lastCellX === null ? 0 : Math.sign(cellX - lastCellX);
-    const dirY = lastCellY === null ? 0 : Math.sign(cellY - lastCellY);
-
     lastSampleTime = now;
+
+    // Fill in intermediate grid steps so fast movements still read as a
+    // continuous chain rather than disconnected jumps.
+    if (lastCellX !== null) {
+      let stepX = lastCellX;
+      let stepY = lastCellY;
+      const dirX = Math.sign(cellX - lastCellX);
+      const dirY = Math.sign(cellY - lastCellY);
+      let guard = 0;
+      while ((stepX !== cellX || stepY !== cellY) && guard < MAX_NODES) {
+        if (stepX !== cellX) stepX += dirX * GRID;
+        else if (stepY !== cellY) stepY += dirY * GRID;
+        pushNode(stepX, stepY);
+        guard++;
+      }
+    } else {
+      pushNode(cellX, cellY);
+    }
+
     lastCellX = cellX;
     lastCellY = cellY;
-    spawnPulse(cellX, cellY, dirX, dirY);
     startLoop();
+  }
+
+  function drawSegment(x1, y1, x2, y2, alphaFrom, alphaTo) {
+    if (x1 === x2 && y1 === y2) return;
+    const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+    gradient.addColorStop(0, `rgba(196,214,255,${alphaFrom})`);
+    gradient.addColorStop(1, `rgba(225,236,255,${alphaTo})`);
+    ctx.strokeStyle = gradient;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
   }
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
     const now = performance.now();
 
-    pulses = pulses.filter(p => now - p.born < p.life);
+    path = path.filter(node => now - node.t < node.life);
 
-    for (const p of pulses) {
-      const t = (now - p.born) / p.life;
-      const eased = Math.sin(Math.PI * t); // fade in then out
-      const alpha = eased * 0.34;
-      if (alpha <= 0.01) continue;
+    ctx.save();
+    ctx.lineWidth = 1.3;
+    ctx.shadowColor = 'rgba(160,185,255,0.5)';
+    ctx.shadowBlur = 4;
 
-      const travel = t * p.reach;
-      const segLen = 22 + eased * 18;
+    for (let i = 0; i < path.length - 1; i++) {
+      const a = path[i];
+      const b = path[i + 1];
 
-      let x1, y1, x2, y2;
-      if (p.axis === 'h') {
-        const center = p.x + p.dir * travel;
-        x1 = center - segLen / 2;
-        x2 = center + segLen / 2;
-        y1 = y2 = p.y;
+      const ageA = now - a.t;
+      const ageB = now - b.t;
+      if (ageA > a.life && ageB > b.life) continue;
+
+      const fadeA = Math.max(0, 1 - ageA / a.life) * 0.16;
+      const fadeB = Math.max(0, 1 - ageB / b.life) * 0.4;
+      if (fadeA <= 0.01 && fadeB <= 0.01) continue;
+
+      if (a.x === b.x || a.y === b.y) {
+        drawSegment(a.x, a.y, b.x, b.y, fadeA, fadeB);
       } else {
-        const center = p.y + p.dir * travel;
-        y1 = center - segLen / 2;
-        y2 = center + segLen / 2;
-        x1 = x2 = p.x;
+        // Diagonal jump between sampled nodes — connect with an L bend
+        // along the grid so the energy still only travels axis-aligned.
+        const cornerX = b.x;
+        const cornerY = a.y;
+        const fadeMid = (fadeA + fadeB) / 2;
+        drawSegment(a.x, a.y, cornerX, cornerY, fadeA, fadeMid);
+        drawSegment(cornerX, cornerY, b.x, b.y, fadeMid, fadeB);
       }
-
-      ctx.save();
-      ctx.lineWidth = 1.4;
-      ctx.shadowColor = 'rgba(150,170,255,0.55)';
-      ctx.shadowBlur = 5;
-      ctx.strokeStyle = `rgba(214,224,255,${alpha})`;
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-      ctx.restore();
     }
 
-    if (pulses.length > 0) {
+    ctx.restore();
+
+    if (path.length > 1) {
       rafId = requestAnimationFrame(draw);
     } else {
       rafId = null;
@@ -260,8 +274,8 @@ if (pricingGrid) {
     if (!rafId) rafId = requestAnimationFrame(draw);
   }
 
-  hero.addEventListener('pointermove', handlePointerMove, { passive: true });
-  hero.addEventListener('pointerleave', () => {
+  window.addEventListener('pointermove', handlePointerMove, { passive: true });
+  window.addEventListener('pointerleave', () => {
     lastCellX = null;
     lastCellY = null;
   });

@@ -85,23 +85,22 @@ body::before {
   -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.35));
 }
 
-.hero__trails {
-  position: absolute;
+.grid-trails {
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  z-index: -1;
   pointer-events: none;
   mix-blend-mode: screen;
 }
 
 @media (hover: none), (pointer: coarse) {
-  .hero__trails {
+  .grid-trails {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__trails {
+  .grid-trails {
     display: none;
   }
 }
