@@ -421,6 +421,26 @@ if (pricingGrid) {
   const stage = document.querySelector('.mockup-stage');
   if (!stage) return;
 
+  // Desktop dashboard nodes
+  const dCardEntradaB = document.getElementById('js-card-entrada-b');
+  const dCardTriagemB = document.getElementById('js-card-triagem-b');
+  const dCardTriagemDelta = document.getElementById('js-card-triagem-delta');
+  const dCardFilaDelta = document.getElementById('js-card-fila-delta');
+
+  const dCountEntrada = document.getElementById('js-count-entrada');
+  const dCountTriagem = document.getElementById('js-count-triagem');
+  const dCountFila = document.getElementById('js-count-fila');
+
+  const dChartPercent = document.getElementById('js-chart-percent');
+  const dChartBars = document.querySelectorAll('#js-chart-bars .mockup__chart-bar');
+
+  const dMetricToday = document.getElementById('js-metric-today');
+  const dMetricResp = document.getElementById('js-metric-resp');
+  const dMetricWait = document.getElementById('js-metric-wait');
+  const dMetricDone = document.getElementById('js-metric-done');
+
+  // Mobile phone nodes
+  const phonePlayerContainer = document.getElementById('js-phone-player-container');
   const playBtn = document.getElementById('js-phone-play-btn');
   const progressFill = document.getElementById('js-phone-progress-fill');
   const lessonTitle = document.getElementById('js-phone-lesson-title');
@@ -444,7 +464,32 @@ if (pricingGrid) {
   }
 
   function resetAll() {
+    // 1. Reset flip stage
     if (stage) stage.classList.remove('is-flipped');
+
+    // 2. Reset desktop dashboard
+    if (dCardEntradaB) dCardEntradaB.classList.remove('is-collapsed');
+    if (dCardTriagemB) dCardTriagemB.classList.add('is-collapsed');
+    if (dCardTriagemDelta) dCardTriagemDelta.classList.remove('is-collapsed');
+    if (dCardFilaDelta) dCardFilaDelta.classList.add('is-collapsed');
+
+    if (dCountEntrada) dCountEntrada.textContent = '2';
+    if (dCountTriagem) dCountTriagem.textContent = '1';
+    if (dCountFila) dCountFila.textContent = '2';
+
+    if (dChartPercent) dChartPercent.textContent = '94%';
+    const initialBarHeights = ['40%', '65%', '50%', '90%', '75%', '60%', '45%', '80%'];
+    dChartBars.forEach((bar, idx) => {
+      if (bar) bar.style.setProperty('--h', initialBarHeights[idx]);
+    });
+
+    if (dMetricToday) dMetricToday.textContent = '38';
+    if (dMetricResp) dMetricResp.textContent = '2.5m';
+    if (dMetricWait) dMetricWait.textContent = '6';
+    if (dMetricDone) dMetricDone.textContent = '98%';
+
+    // 3. Reset mobile app
+    if (phonePlayerContainer) phonePlayerContainer.classList.remove('is-expanded');
     if (playBtn) playBtn.classList.remove('is-active');
     if (progressFill) {
       progressFill.style.transition = 'none';
@@ -461,45 +506,94 @@ if (pricingGrid) {
     clearTimeouts();
     resetAll();
 
-    // At 4.0s: Flip to mobile
+    // 0.8s: números mudam e gráfico altera
+    addTimeout(() => {
+      if (dMetricToday) dMetricToday.textContent = '41';
+      if (dMetricWait) dMetricWait.textContent = '4';
+      if (dMetricResp) dMetricResp.textContent = '2.1m';
+      if (dMetricDone) dMetricDone.textContent = '96%';
+      if (dChartPercent) dChartPercent.textContent = '95%';
+      
+      const newHeights = ['55%', '70%', '40%', '85%', '80%', '50%', '60%', '75%'];
+      dChartBars.forEach((bar, idx) => {
+        if (bar) bar.style.setProperty('--h', newHeights[idx]);
+      });
+    }, 800);
+
+    // 1.6s: card muda de coluna (Entrada -> Triagem)
+    addTimeout(() => {
+      if (dCardEntradaB) dCardEntradaB.classList.add('is-collapsed');
+      if (dCardTriagemB) dCardTriagemB.classList.remove('is-collapsed');
+      
+      if (dCountEntrada) dCountEntrada.textContent = '1';
+      if (dCountTriagem) dCountTriagem.textContent = '2';
+    }, 1600);
+
+    // 2.4s: segundo ajuste de gráfico/números & card muda de coluna (Triagem -> Fila)
+    addTimeout(() => {
+      if (dCardTriagemDelta) dCardTriagemDelta.classList.add('is-collapsed');
+      if (dCardFilaDelta) dCardFilaDelta.classList.remove('is-collapsed');
+      
+      if (dCountTriagem) dCountTriagem.textContent = '1';
+      if (dCountFila) dCountFila.textContent = '3';
+
+      if (dMetricToday) dMetricToday.textContent = '36';
+      if (dMetricWait) dMetricWait.textContent = '7';
+      if (dMetricResp) dMetricResp.textContent = '2.8m';
+      if (dMetricDone) dMetricDone.textContent = '99%';
+      if (dChartPercent) dChartPercent.textContent = '96%';
+
+      const finalHeights = ['70%', '60%', '65%', '95%', '70%', '75%', '50%', '85%'];
+      dChartBars.forEach((bar, idx) => {
+        if (bar) bar.style.setProperty('--h', finalHeights[idx]);
+      });
+    }, 2400);
+
+    // 3.2s: flip para celular
     addTimeout(() => {
       if (stage) stage.classList.add('is-flipped');
-    }, 4000);
+    }, 3200);
 
-    // At 5.5s: Highlight play button
+    // 4.2s: lista de vídeos no celular
     addTimeout(() => {
-      if (playBtn) playBtn.classList.add('is-active');
-    }, 5500);
-
-    // At 6.0s: Progress bar starts filling
-    addTimeout(() => {
-      if (progressFill) {
-        progressFill.style.transition = 'width 1.5s linear';
-        progressFill.style.width = '45%';
-      }
-    }, 6000);
-
-    // At 7.5s: Highlight next item
-    addTimeout(() => {
-      if (item1) item1.classList.remove('phone-app__item--active');
-      if (item2) item2.classList.add('phone-app__item--active');
-      if (lessonTitle) lessonTitle.textContent = 'Aula 02';
-      
+      if (phonePlayerContainer) phonePlayerContainer.classList.remove('is-expanded');
+      if (playBtn) playBtn.classList.remove('is-active');
       if (progressFill) {
         progressFill.style.transition = 'none';
         progressFill.style.width = '0%';
-        void progressFill.offsetWidth;
-        progressFill.style.transition = 'width 1.2s linear';
-        progressFill.style.width = '15%';
       }
+      if (lessonTitle) lessonTitle.textContent = 'Aula 01';
+      if (item1) item1.classList.add('phone-app__item--active');
+      if (item2) item2.classList.remove('phone-app__item--active');
+      if (item3) item3.classList.remove('phone-app__item--active');
+    }, 4200);
+
+    // 5.5s: abre player
+    addTimeout(() => {
+      if (phonePlayerContainer) phonePlayerContainer.classList.add('is-expanded');
+    }, 5500);
+
+    // 6.5s: play/progresso
+    addTimeout(() => {
+      if (playBtn) playBtn.classList.add('is-active');
+      if (progressFill) {
+        progressFill.style.transition = 'width 1.3s linear';
+        progressFill.style.width = '100%';
+      }
+    }, 6500);
+
+    // 7.5s: highlight próximo item
+    addTimeout(() => {
+      if (item1) item1.classList.remove('phone-app__item--active');
+      if (item2) item2.classList.add('phone-app__item--active');
     }, 7500);
 
-    // At 9.0s: Flip back to desktop
+    // 8.0s: flip de volta
     addTimeout(() => {
       if (stage) stage.classList.remove('is-flipped');
-    }, 9000);
+    }, 8000);
 
-    // At 10.2s: Reset in background
+    // 9.2s: reset em background
     addTimeout(() => {
       if (playBtn) playBtn.classList.remove('is-active');
       if (progressFill) {
@@ -509,9 +603,10 @@ if (pricingGrid) {
       if (lessonTitle) lessonTitle.textContent = 'Aula 01';
       if (item1) item1.classList.add('phone-app__item--active');
       if (item2) item2.classList.remove('phone-app__item--active');
-    }, 10200);
+      if (phonePlayerContainer) phonePlayerContainer.classList.remove('is-expanded');
+    }, 9200);
 
-    cycleTimer = addTimeout(runCycle, 13000);
+    cycleTimer = addTimeout(runCycle, 11000);
   }
 
   function startAppLoop() {
@@ -529,7 +624,7 @@ if (pricingGrid) {
     resetAll();
   }
 
-  const mediaQueryDesktop = window.matchMedia('(min-width: 1025px)');
+  const mediaQueryDesktop = window.matchMedia('(min-width: 1024px)');
   const mediaQueryReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function checkAndControlLoop() {

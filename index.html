@@ -8,7 +8,7 @@
   <meta property="og:description" content="A Sartec Digital desenha e implementa sites, sistemas, automações, aplicativos e fluxos digitais a partir dos problemas reais da sua operação." />
   <meta property="og:type" content="website" />
   <title>Sartec Digital — Soluções digitais sob medida</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=1.2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -98,7 +98,7 @@
                   <div class="mockup__kanban">
                     <!-- Coluna 1: Entrada -->
                     <div class="mockup__col">
-                      <div class="mockup__col-label">Entrada <span class="mockup__count">2</span></div>
+                      <div class="mockup__col-label">Entrada <span class="mockup__count" id="js-count-entrada">2</span></div>
                       <div class="mockup__card">
                         <div class="mockup__card-avatar">C</div>
                         <div class="mockup__card-info">
@@ -106,7 +106,7 @@
                           <div class="mockup__card-msg">Orçamento pendente 📄</div>
                         </div>
                       </div>
-                      <div class="mockup__card">
+                      <div class="mockup__card" id="js-card-entrada-b">
                         <div class="mockup__card-avatar">E</div>
                         <div class="mockup__card-info">
                           <div class="mockup__card-name">Empresa B</div>
@@ -117,19 +117,27 @@
 
                     <!-- Coluna 2: Triagem -->
                     <div class="mockup__col">
-                      <div class="mockup__col-label">Triagem <span class="mockup__count">1</span></div>
-                      <div class="mockup__card">
+                      <div class="mockup__col-label">Triagem <span class="mockup__count" id="js-count-triagem">1</span></div>
+                      <div class="mockup__card" id="js-card-triagem-delta">
                         <div class="mockup__card-avatar">L</div>
                         <div class="mockup__card-info">
                           <div class="mockup__card-name">Loja Delta</div>
                           <div class="mockup__card-msg">Valores de serviço</div>
                         </div>
                       </div>
+                      <!-- Card B Copy (starts collapsed) -->
+                      <div class="mockup__card is-collapsed" id="js-card-triagem-b">
+                        <div class="mockup__card-avatar">E</div>
+                        <div class="mockup__card-info">
+                          <div class="mockup__card-name">Empresa B</div>
+                          <div class="mockup__card-msg">Horário de entrega</div>
+                        </div>
+                      </div>
                     </div>
 
                     <!-- Coluna 3: Em andamento -->
                     <div class="mockup__col">
-                      <div class="mockup__col-label">Fila <span class="mockup__count mockup__count--blue">2</span></div>
+                      <div class="mockup__col-label">Fila <span class="mockup__count mockup__count--blue" id="js-count-fila">2</span></div>
                       <div class="mockup__card mockup__card--active">
                         <div class="mockup__card-avatar mockup__card-avatar--blue">A</div>
                         <div class="mockup__card-info">
@@ -138,7 +146,7 @@
                         </div>
                         <span class="mockup__card-resp">Ana</span>
                       </div>
-                      <div class="mockup__card">
+                      <div class="mockup__card" id="js-card-fila-gama">
                         <div class="mockup__card-avatar">P</div>
                         <div class="mockup__card-info">
                           <div class="mockup__card-name">Proj. Gama</div>
@@ -146,13 +154,22 @@
                         </div>
                         <span class="mockup__card-resp">Carlos</span>
                       </div>
+                      <!-- Card Delta Copy (starts collapsed) -->
+                      <div class="mockup__card is-collapsed" id="js-card-fila-delta">
+                        <div class="mockup__card-avatar mockup__card-avatar--blue">L</div>
+                        <div class="mockup__card-info">
+                          <div class="mockup__card-name">Loja Delta</div>
+                          <div class="mockup__card-msg">Valores de serviço</div>
+                        </div>
+                        <span class="mockup__card-resp">Ana</span>
+                      </div>
                     </div>
 
                   </div>
 
                   <!-- Mini área de métricas e gráfico -->
                   <div class="mockup__chart">
-                    <div class="mockup__chart-bars">
+                    <div class="mockup__chart-bars" id="js-chart-bars">
                       <div class="mockup__chart-bar" style="--h: 40%;"></div>
                       <div class="mockup__chart-bar" style="--h: 65%;"></div>
                       <div class="mockup__chart-bar" style="--h: 50%;"></div>
@@ -162,24 +179,24 @@
                       <div class="mockup__chart-bar" style="--h: 45%;"></div>
                       <div class="mockup__chart-bar" style="--h: 80%;"></div>
                     </div>
-                    <div class="mockup__chart-label">Desempenho operacional · 94% no prazo</div>
+                    <div class="mockup__chart-label">Desempenho operacional · <span id="js-chart-percent">94%</span> no prazo</div>
                   </div>
 
                   <div class="mockup__metrics">
                     <div class="mockup__metric">
-                      <div class="mockup__metric-val">38</div>
+                      <div class="mockup__metric-val" id="js-metric-today">38</div>
                       <div class="mockup__metric-label">hoje</div>
                     </div>
                     <div class="mockup__metric">
-                      <div class="mockup__metric-val mockup__metric-val--green">2.5m</div>
+                      <div class="mockup__metric-val mockup__metric-val--green" id="js-metric-resp">2.5m</div>
                       <div class="mockup__metric-label">resp. média</div>
                     </div>
                     <div class="mockup__metric">
-                      <div class="mockup__metric-val mockup__metric-val--blue">6</div>
+                      <div class="mockup__metric-val mockup__metric-val--blue" id="js-metric-wait">6</div>
                       <div class="mockup__metric-label">em espera</div>
                     </div>
                     <div class="mockup__metric">
-                      <div class="mockup__metric-val">98%</div>
+                      <div class="mockup__metric-val" id="js-metric-done">98%</div>
                       <div class="mockup__metric-label">resolvidos</div>
                     </div>
                   </div>
@@ -212,25 +229,32 @@
                         </div>
                       </div>
 
-                      <div class="phone-app__title">Vídeos</div>
+                      <div class="phone-app__title" id="js-phone-title">Aulas</div>
                       
-                      <!-- Video Player Card -->
-                      <div class="phone-app__player">
-                        <div class="phone-app__video-frame">
-                          <!-- CSS only Play button (no SVG, no external icon) -->
-                          <button class="phone-app__play-btn" id="js-phone-play-btn" type="button">
-                            <i class="phone-app__play-icon"></i>
-                          </button>
+                      <!-- Video Player Section (Expands in State 2/3) -->
+                      <div class="phone-app__player-container" id="js-phone-player-container">
+                        <div class="phone-app__player">
+                          <div class="phone-app__video-frame">
+                            <!-- CSS-only play button -->
+                            <button class="phone-app__play-btn" id="js-phone-play-btn" type="button">
+                              <i class="phone-app__play-icon"></i>
+                            </button>
+                          </div>
+                          <div class="phone-app__progress-bar">
+                            <div class="phone-app__progress-fill" id="js-phone-progress-fill"></div>
+                          </div>
                         </div>
-                        <div class="phone-app__progress-bar">
-                          <div class="phone-app__progress-fill" id="js-phone-progress-fill"></div>
+                        <div class="phone-app__lesson-info">
+                          <div class="phone-app__lesson-title" id="js-phone-lesson-title">Aula 01</div>
+                          <div class="phone-app__desc-lines">
+                            <div class="phone-app__desc-line"></div>
+                            <div class="phone-app__desc-line phone-app__desc-line--sm"></div>
+                          </div>
                         </div>
                       </div>
 
-                      <!-- Video Title -->
-                      <div class="phone-app__lesson-title" id="js-phone-lesson-title">Aula 01</div>
-
-                      <!-- Simple Video List -->
+                      <!-- Video list -->
+                      <div class="phone-app__list-header" id="js-phone-list-header">Próximas aulas</div>
                       <div class="phone-app__list">
                         <div class="phone-app__item phone-app__item--active" id="js-phone-item-1">
                           <div class="phone-app__item-thumb"></div>
@@ -1049,6 +1073,6 @@
     </svg>
   </a>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=1.2"></script>
 </body>
 </html>

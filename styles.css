@@ -458,36 +458,54 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   border-radius: 16px;
   overflow: hidden;
   box-sizing: border-box;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .mockup-face--desktop {
   transform: rotateY(0deg);
-  z-index: 2;
-  background: rgba(13, 14, 34, 0.92);
-  border: 1px solid rgba(107, 112, 240, 0.22);
+  background: rgba(15, 32, 82, 0.95);
+  border: 1px solid rgba(142, 162, 255, 0.24);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow:
-    0 32px 80px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 32px 80px rgba(8, 16, 45, 0.6),
+    0 0 0 1px rgba(183, 199, 255, 0.05) inset,
     0 0 80px rgba(107, 112, 240, 0.08);
+  opacity: 1;
+  visibility: visible;
+}
+
+.mockup-stage.is-flipped .mockup-face--desktop {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: opacity 0.4s ease 0.2s, visibility 0.4s ease 0.2s, background-color 0.4s ease 0.2s, border-color 0.4s ease 0.2s, box-shadow 0.4s ease 0.2s, backdrop-filter 0.4s ease 0.2s;
 }
 
 .mockup-face--phone {
   transform: rotateY(180deg);
-  z-index: 1;
-  background: rgba(13, 14, 34, 0.92);
-  border: 1px solid rgba(107, 112, 240, 0.22);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow:
-    0 32px 80px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-    0 0 80px rgba(107, 112, 240, 0.08);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.mockup-stage.is-flipped .mockup-face--phone {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease 0.2s, visibility 0.4s ease 0.2s;
 }
 
 /* Mockup internal tech grid pseudo-element */
@@ -510,10 +528,10 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   height: 380px;
   padding: 6px;
   border-radius: 32px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.03)) border-box, #050610;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.03)) border-box, #091330;
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 12px 32px rgba(8, 16, 45, 0.6),
+    0 0 0 1px rgba(142, 162, 255, 0.12),
     0 0 24px rgba(107, 112, 240, 0.08);
   overflow: hidden;
   position: relative;
@@ -528,7 +546,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   height: 100%;
   border-radius: 26px;
   overflow: hidden;
-  background: #090a16;
+  background: #0b1a45;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -556,7 +574,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   flex-direction: column;
   padding: 34px 12px 12px;
   box-sizing: border-box;
-  background: #080914;
+  background: #0a1c4b;
 }
 
 .phone-app,
@@ -642,11 +660,26 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   line-height: 1.2 !important;
 }
 
+.phone-app__player-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--ease), opacity 0.5s var(--ease), margin-bottom 0.5s var(--ease);
+}
+
+.phone-app__player-container.is-expanded {
+  max-height: 160px;
+  opacity: 1;
+  margin-bottom: 10px;
+}
+
 .phone-app__player {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #02030a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #081333;
+  border: 1px solid rgba(142, 162, 255, 0.15);
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 6px;
@@ -659,7 +692,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, rgba(16, 36, 93, 0.5) 0%, #02030a 100%);
+  background: radial-gradient(circle, rgba(25, 49, 108, 0.8) 0%, #091330 100%);
   position: relative;
 }
 
@@ -667,7 +700,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--blue, #292d96);
+  background: var(--blue);
   border: none;
   display: flex;
   align-items: center;
@@ -678,7 +711,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 }
 
 .phone-app__play-btn.is-active {
-  background: var(--blue-light, #6b70f0) !important;
+  background: var(--blue-light, #8ea2ff) !important;
   transform: scale(1.08);
 }
 
@@ -714,20 +747,60 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 0%;
-  background: var(--blue-light, #6b70f0);
+  background: var(--blue-light, #8ea2ff);
   transition: width 0.3s ease;
+}
+
+.phone-app__lesson-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .phone-app__lesson-title {
   font-size: 9px !important;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 12px;
   text-align: left;
   line-height: 1.2 !important;
 }
 
+.phone-app__desc-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.phone-app__desc-line {
+  height: 3px;
+  width: 90%;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1px;
+}
+
+.phone-app__desc-line--sm {
+  width: 60%;
+}
+
 /* Video List items */
+.phone-app__list-header {
+  font-size: 7px !important;
+  font-weight: 700;
+  color: var(--text-3, #8d9bcf);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  text-align: left;
+  line-height: 1 !important;
+}
+
+.phone-app__list-header.is-visible {
+  opacity: 0.6;
+}
+
 .phone-app__list {
   display: flex;
   flex-direction: column;
@@ -738,27 +811,27 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(25, 49, 108, 0.3);
+  border: 1px solid rgba(142, 162, 255, 0.08);
   border-radius: 6px;
   padding: 6px;
   transition: all 0.3s ease;
 }
 
 .phone-app__item--active {
-  background: rgba(107, 112, 240, 0.08) !important;
-  border-color: rgba(107, 112, 240, 0.25) !important;
+  background: rgba(107, 112, 240, 0.2) !important;
+  border-color: rgba(107, 112, 240, 0.5) !important;
 }
 
 .phone-app__item-thumb {
   width: 24px;
   height: 16px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(142, 162, 255, 0.12);
 }
 
 .phone-app__item--active .phone-app__item-thumb {
-  background: rgba(107, 112, 240, 0.3) !important;
+  background: rgba(142, 162, 255, 0.35) !important;
 }
 
 .phone-app__item-lines {
@@ -868,18 +941,26 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
+  height: 168px;
+}
+
+.mockup__col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .mockup__col-label {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.28);
-  padding-bottom: 6px;
+  padding-bottom: 4px;
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .mockup__count {
@@ -900,26 +981,42 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 
 .mockup__card {
   display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  padding: 8px 9px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  margin-bottom: 5px;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: rgba(25, 49, 108, 0.4);
+  border: 1px solid rgba(142, 162, 255, 0.12);
+  border-radius: 6px;
+  margin-bottom: 4px;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-bottom 0.4s ease, padding 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
+  max-height: 48px;
+  opacity: 1;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mockup__card.is-collapsed {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-top-width: 0 !important;
+  border-bottom-width: 0 !important;
+  pointer-events: none;
 }
 
 .mockup__card--active {
-  background: rgba(107, 112, 240, 0.1);
-  border-color: rgba(107, 112, 240, 0.22);
+  background: rgba(41, 45, 150, 0.3);
+  border-color: rgba(142, 162, 255, 0.32);
 }
 
 .mockup__card-avatar {
-  width: 22px; height: 22px;
+  width: 18px; height: 18px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   display: flex; align-items: center; justify-content: center;
-  font-size: 9px; font-weight: 700;
+  font-size: 8px; font-weight: 700;
   color: rgba(255, 255, 255, 0.45);
   flex-shrink: 0;
 }
@@ -932,36 +1029,36 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 .mockup__card-info { flex: 1; min-width: 0; }
 
 .mockup__card-name {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.65);
-  line-height: 1.3;
+  line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .mockup__card-msg {
-  font-size: 9px;
+  font-size: 8px;
   color: rgba(255, 255, 255, 0.3);
-  line-height: 1.4;
-  margin-top: 2px;
+  line-height: 1.2;
+  margin-top: 1px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .mockup__card-resp {
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 600;
   color: var(--blue-light);
   background: rgba(107, 112, 240, 0.15);
-  padding: 2px 5px;
+  padding: 1px 4px;
   border-radius: 100px;
   flex-shrink: 0;
   white-space: nowrap;
-  align-self: flex-start;
-  margin-top: 1px;
+  align-self: center;
+  margin-top: 0;
 }
 
 .mockup__metrics {
@@ -975,7 +1072,8 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 .mockup__metric {
   text-align: center;
   padding: 8px 4px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(25, 49, 108, 0.3);
+  border: 1px solid rgba(142, 162, 255, 0.08);
   border-radius: 8px;
 }
 
@@ -1007,7 +1105,7 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   align-items: flex-start;
   gap: 8px;
   padding: 9px 12px;
-  background: rgba(10, 12, 24, 0.92);
+  background: rgba(16, 32, 82, 0.95);
   border: 1px solid rgba(37, 211, 102, 0.25);
   border-radius: 12px 12px 4px 12px;
   backdrop-filter: blur(16px);
@@ -1052,8 +1150,8 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   align-items: center;
   gap: 5px;
   padding: 4px 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(25, 49, 108, 0.3);
+  border: 1px solid rgba(142, 162, 255, 0.1);
   border-radius: 6px;
   flex: 0 1 120px;
 }
@@ -1117,9 +1215,9 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 .mockup__chart-bar {
   flex: 1;
   height: var(--h, 50%);
-  background: rgba(107, 112, 240, 0.2);
+  background: rgba(25, 49, 108, 0.65);
   border-radius: 2px 2px 0 0;
-  transition: background var(--t);
+  transition: background var(--t), height 0.4s ease;
 }
 
 .mockup__chart-bar--active { background: var(--blue-light); }
