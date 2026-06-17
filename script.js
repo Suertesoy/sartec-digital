@@ -146,21 +146,32 @@ if (pricingGrid) {
 
   const ctx = canvas.getContext('2d');
   const GRID = 72;
-  const LIFE_MIN = 900;
-  const LIFE_MAX = 1800;
+  const LIFE_MIN = 450;
+  const LIFE_MAX = 900;
   const SAMPLE_THROTTLE = 40; // ms
   const MAX_NODES = 50;
+  const BRANCH_THROTTLE = 90; // ms
+  const MAX_BRANCHES = 36;
+  const SCROLL_THROTTLE = 70; // ms
 
-  // Chain of recent grid intersections the cursor has passed through,
-  // newest last — segments are drawn connecting consecutive nodes,
-  // brighter toward the newest (cursor-ward) end.
+  // Chain of recent grid intersections the cursor (or scroll) has passed
+  // through, newest last — segments are drawn connecting consecutive
+  // nodes, brighter toward the newest (cursor-ward) end.
   let path = [];
+  // Short-lived secondary glows on grid lines neighboring the main path,
+  // giving the trail a "mesh" feel instead of a single lit line.
+  let branches = [];
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
   let width = 0;
   let height = 0;
   let lastSampleTime = 0;
+  let lastBranchTime = 0;
+  let lastScrollTime = 0;
   let lastCellX = null;
   let lastCellY = null;
+  let lastMouseX = null;
+  let lastMouseY = null;
+  let lastScrollY = window.scrollY;
   let rafId = null;
 
   function resize() {
@@ -180,7 +191,50 @@ if (pricingGrid) {
     if (path.length > MAX_NODES) path.shift();
   }
 
+  function spawnBranch(axis, fixed, center, now) {
+    branches.push({
+      axis,
+      fixed,
+      center,
+      len: 18 + Math.random() * 18,
+      born: now,
+      life: LIFE_MIN * 0.5 + Math.random() * (LIFE_MAX * 0.5 - LIFE_MIN * 0.5),
+      peak: 0.09 + Math.random() * 0.07,
+    });
+    if (branches.length > MAX_BRANCHES) branches.shift();
+  }
+
+  function maybeSpawnBranches(cellX, cellY, now) {
+    if (now - lastBranchTime < BRANCH_THROTTLE) return;
+    lastBranchTime = now;
+
+    [-GRID, GRID].forEach(off => {
+      if (Math.random() < 0.5) spawnBranch('h', cellY + off, cellX, now);
+      if (Math.random() < 0.5) spawnBranch('v', cellX + off, cellY, now);
+    });
+  }
+
+  function advanceChain(fromX, fromY, toX, toY, now) {
+    // Fill in intermediate grid steps so jumps still read as a continuous
+    // chain rather than disconnected pieces.
+    let stepX = fromX;
+    let stepY = fromY;
+    const dirX = Math.sign(toX - fromX);
+    const dirY = Math.sign(toY - fromY);
+    let guard = 0;
+    while ((stepX !== toX || stepY !== toY) && guard < MAX_NODES) {
+      if (stepX !== toX) stepX += dirX * GRID;
+      else if (stepY !== toY) stepY += dirY * GRID;
+      pushNode(stepX, stepY);
+      guard++;
+    }
+    maybeSpawnBranches(toX, toY, now);
+  }
+
   function handlePointerMove(event) {
+    lastMouseX = event.clientX;
+    lastMouseY = event.clientY;
+
     const now = performance.now();
     if (now - lastSampleTime < SAMPLE_THROTTLE) return;
 
@@ -190,23 +244,43 @@ if (pricingGrid) {
 
     lastSampleTime = now;
 
-    // Fill in intermediate grid steps so fast movements still read as a
-    // continuous chain rather than disconnected jumps.
     if (lastCellX !== null) {
-      let stepX = lastCellX;
-      let stepY = lastCellY;
-      const dirX = Math.sign(cellX - lastCellX);
-      const dirY = Math.sign(cellY - lastCellY);
-      let guard = 0;
-      while ((stepX !== cellX || stepY !== cellY) && guard < MAX_NODES) {
-        if (stepX !== cellX) stepX += dirX * GRID;
-        else if (stepY !== cellY) stepY += dirY * GRID;
-        pushNode(stepX, stepY);
-        guard++;
-      }
+      advanceChain(lastCellX, lastCellY, cellX, cellY, now);
     } else {
       pushNode(cellX, cellY);
     }
+
+    lastCellX = cellX;
+    lastCellY = cellY;
+    startLoop();
+  }
+
+  function handleScroll() {
+    const now = performance.now();
+    const currentScrollY = window.scrollY;
+
+    if (now - lastScrollTime < SCROLL_THROTTLE) return;
+    if (lastMouseX === null) {
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    const deltaY = currentScrollY - lastScrollY;
+    lastScrollY = currentScrollY;
+    if (Math.abs(deltaY) < 2) return;
+
+    lastScrollTime = now;
+
+    // Scrolling down moves page content up under the cursor, so the
+    // energy should appear to arrive from below (and vice versa).
+    const dirSign = Math.sign(deltaY);
+    const cellX = Math.round(lastMouseX / GRID) * GRID;
+    const cellY = Math.round(lastMouseY / GRID) * GRID;
+    const sourceY = cellY + dirSign * GRID;
+
+    pushNode(cellX, sourceY);
+    pushNode(cellX, cellY);
+    maybeSpawnBranches(cellX, cellY, now);
 
     lastCellX = cellX;
     lastCellY = cellY;
@@ -230,6 +304,7 @@ if (pricingGrid) {
     const now = performance.now();
 
     path = path.filter(node => now - node.t < node.life);
+    branches = branches.filter(b => now - b.born < b.life);
 
     ctx.save();
     ctx.lineWidth = 1.3;
@@ -240,6 +315,14 @@ if (pricingGrid) {
       const a = path[i];
       const b = path[i + 1];
 
+      // Only connect nodes that are genuinely adjacent on the grid (one
+      // step apart on a single axis) — anything else is a seam between
+      // unrelated chain segments (e.g. mouse path vs. a scroll-injected
+      // node) and must stay disconnected.
+      const sameAxis = a.x === b.x || a.y === b.y;
+      const stepDist = Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+      if (!sameAxis || stepDist !== GRID) continue;
+
       const ageA = now - a.t;
       const ageB = now - b.t;
       if (ageA > a.life && ageB > b.life) continue;
@@ -248,22 +331,26 @@ if (pricingGrid) {
       const fadeB = Math.max(0, 1 - ageB / b.life) * 0.4;
       if (fadeA <= 0.01 && fadeB <= 0.01) continue;
 
-      if (a.x === b.x || a.y === b.y) {
-        drawSegment(a.x, a.y, b.x, b.y, fadeA, fadeB);
+      drawSegment(a.x, a.y, b.x, b.y, fadeA, fadeB);
+    }
+
+    for (const br of branches) {
+      const age = now - br.born;
+      const t = age / br.life;
+      const alpha = Math.sin(Math.PI * t) * br.peak;
+      if (alpha <= 0.01) continue;
+
+      const half = br.len / 2;
+      if (br.axis === 'h') {
+        drawSegment(br.center - half, br.fixed, br.center + half, br.fixed, alpha * 0.7, alpha);
       } else {
-        // Diagonal jump between sampled nodes — connect with an L bend
-        // along the grid so the energy still only travels axis-aligned.
-        const cornerX = b.x;
-        const cornerY = a.y;
-        const fadeMid = (fadeA + fadeB) / 2;
-        drawSegment(a.x, a.y, cornerX, cornerY, fadeA, fadeMid);
-        drawSegment(cornerX, cornerY, b.x, b.y, fadeMid, fadeB);
+        drawSegment(br.fixed, br.center - half, br.fixed, br.center + half, alpha * 0.7, alpha);
       }
     }
 
     ctx.restore();
 
-    if (path.length > 1) {
+    if (path.length > 1 || branches.length > 0) {
       rafId = requestAnimationFrame(draw);
     } else {
       rafId = null;
@@ -278,5 +365,8 @@ if (pricingGrid) {
   window.addEventListener('pointerleave', () => {
     lastCellX = null;
     lastCellY = null;
+    lastMouseX = null;
+    lastMouseY = null;
   });
+  window.addEventListener('scroll', handleScroll, { passive: true });
 })();
