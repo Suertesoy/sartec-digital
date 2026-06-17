@@ -146,20 +146,24 @@ if (pricingGrid) {
 
   const ctx = canvas.getContext('2d');
   const GRID = 72;
-  const LIFE_MIN = 450;
-  const LIFE_MAX = 900;
+  const PRIMARY_LIFE_MIN = 950;
+  const PRIMARY_LIFE_MAX = 1400;
+  const SECONDARY_LIFE_MIN = 550;
+  const SECONDARY_LIFE_MAX = 950;
   const SAMPLE_THROTTLE = 40; // ms
-  const MAX_NODES = 50;
-  const BRANCH_THROTTLE = 90; // ms
-  const MAX_BRANCHES = 36;
+  const MAX_NODES = 80;
+  const BRANCH_THROTTLE = 70; // ms
+  const MAX_BRANCHES = 60;
   const SCROLL_THROTTLE = 70; // ms
+  const MAX_SCROLL_STEPS = 6;
 
-  // Chain of recent grid intersections the cursor (or scroll) has passed
-  // through, newest last — segments are drawn connecting consecutive
-  // nodes, brighter toward the newest (cursor-ward) end.
+  // Chain of recent grid intersections the cursor (or a scroll sweep) has
+  // passed through, newest last — segments are drawn connecting consecutive
+  // nodes, brighter toward the newest (cursor-ward) end. This is the
+  // brighter "spine" of the trail.
   let path = [];
-  // Short-lived secondary glows on grid lines neighboring the main path,
-  // giving the trail a "mesh" feel instead of a single lit line.
+  // Short-lived secondary glows on grid lines 1-2 cells away from the
+  // spine, giving the trail a circuit/mesh feel instead of a single line.
   let branches = [];
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
   let width = 0;
@@ -186,31 +190,61 @@ if (pricingGrid) {
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
-  function pushNode(x, y) {
-    path.push({ x, y, t: performance.now(), life: LIFE_MIN + Math.random() * (LIFE_MAX - LIFE_MIN) });
+  function pushNode(x, y, boost, bornOverride) {
+    const born = bornOverride !== undefined ? bornOverride : performance.now();
+    path.push({
+      x, y, t: born, boost: boost === undefined ? 1 : boost,
+      life: PRIMARY_LIFE_MIN + Math.random() * (PRIMARY_LIFE_MAX - PRIMARY_LIFE_MIN),
+    });
     if (path.length > MAX_NODES) path.shift();
   }
 
-  function spawnBranch(axis, fixed, center, now) {
+  function pushBranch(axis, fixed, p1, p2, now, peak) {
     branches.push({
-      axis,
-      fixed,
-      center,
-      len: 18 + Math.random() * 18,
-      born: now,
-      life: LIFE_MIN * 0.5 + Math.random() * (LIFE_MAX * 0.5 - LIFE_MIN * 0.5),
-      peak: 0.09 + Math.random() * 0.07,
+      axis, fixed, p1, p2, born: now, peak,
+      life: SECONDARY_LIFE_MIN + Math.random() * (SECONDARY_LIFE_MAX - SECONDARY_LIFE_MIN),
     });
     if (branches.length > MAX_BRANCHES) branches.shift();
   }
 
-  function maybeSpawnBranches(cellX, cellY, now) {
-    if (now - lastBranchTime < BRANCH_THROTTLE) return;
-    lastBranchTime = now;
+  // Lights up grid lines 1-2 cells away from (nodeX, nodeY): short parallel
+  // "lane" segments, occasionally tapped to the spine with a perpendicular
+  // "rung" — together they read as a small circuit branching off the path
+  // rather than a single lit line.
+  function spawnNetwork(nodeX, nodeY, now, boost, bypassThrottle) {
+    if (!bypassThrottle) {
+      if (now - lastBranchTime < BRANCH_THROTTLE) return;
+      lastBranchTime = now;
+    }
 
-    [-GRID, GRID].forEach(off => {
-      if (Math.random() < 0.5) spawnBranch('h', cellY + off, cellX, now);
-      if (Math.random() < 0.5) spawnBranch('v', cellX + off, cellY, now);
+    [1, 2].forEach(rank => {
+      const chance = rank === 1 ? 0.55 : 0.3;
+      const peak = (rank === 1 ? 0.18 : 0.1) * boost;
+
+      [-1, 1].forEach(side => {
+        // Neighbor horizontal line (offset in Y) — lane runs along X.
+        if (Math.random() < chance) {
+          const fixedY = nodeY + side * rank * GRID;
+          if (Math.random() < 0.4) {
+            pushBranch('v', nodeX, nodeY, fixedY, now, peak * 0.8);
+          } else {
+            const len = 22 + Math.random() * 26;
+            const center = nodeX + (Math.random() - 0.5) * 18;
+            pushBranch('h', fixedY, center - len / 2, center + len / 2, now, peak);
+          }
+        }
+        // Neighbor vertical line (offset in X) — lane runs along Y.
+        if (Math.random() < chance) {
+          const fixedX = nodeX + side * rank * GRID;
+          if (Math.random() < 0.4) {
+            pushBranch('h', nodeY, nodeX, fixedX, now, peak * 0.8);
+          } else {
+            const len = 22 + Math.random() * 26;
+            const center = nodeY + (Math.random() - 0.5) * 18;
+            pushBranch('v', fixedX, center - len / 2, center + len / 2, now, peak);
+          }
+        }
+      });
     });
   }
 
@@ -225,10 +259,10 @@ if (pricingGrid) {
     while ((stepX !== toX || stepY !== toY) && guard < MAX_NODES) {
       if (stepX !== toX) stepX += dirX * GRID;
       else if (stepY !== toY) stepY += dirY * GRID;
-      pushNode(stepX, stepY);
+      pushNode(stepX, stepY, 1);
       guard++;
     }
-    maybeSpawnBranches(toX, toY, now);
+    spawnNetwork(toX, toY, now, 1, false);
   }
 
   function handlePointerMove(event) {
@@ -247,7 +281,7 @@ if (pricingGrid) {
     if (lastCellX !== null) {
       advanceChain(lastCellX, lastCellY, cellX, cellY, now);
     } else {
-      pushNode(cellX, cellY);
+      pushNode(cellX, cellY, 1);
     }
 
     lastCellX = cellX;
@@ -271,16 +305,27 @@ if (pricingGrid) {
 
     lastScrollTime = now;
 
-    // Scrolling down moves page content up under the cursor, so the
-    // energy should appear to arrive from below (and vice versa).
+    // Scrolling down moves page content up under the cursor, so the trail
+    // should read as energy arriving from below (and vice versa).
     const dirSign = Math.sign(deltaY);
+    const trailDir = -dirSign;
     const cellX = Math.round(lastMouseX / GRID) * GRID;
     const cellY = Math.round(lastMouseY / GRID) * GRID;
-    const sourceY = cellY + dirSign * GRID;
+    const boost = 0.82;
 
-    pushNode(cellX, sourceY);
-    pushNode(cellX, cellY);
-    maybeSpawnBranches(cellX, cellY, now);
+    // Faster scroll covers more grid cells per processed tick, so the
+    // trail naturally reads longer for a faster sweep.
+    const steps = Math.min(MAX_SCROLL_STEPS, Math.max(1, Math.round(Math.abs(deltaY) / GRID)));
+
+    // Build the chain from the far end down to the cursor cell (which is
+    // pushed last/freshest) so it fades in brighter toward the cursor,
+    // same as the mouse-driven trail. A slight stagger on the older end
+    // makes the sweep read as energy already in motion, not a flicker.
+    for (let i = steps; i >= 0; i--) {
+      const y = cellY + trailDir * i * GRID;
+      pushNode(cellX, y, boost, now - i * 14);
+      if (i % 2 === 0) spawnNetwork(cellX, y, now, boost * 0.85, true);
+    }
 
     lastCellX = cellX;
     lastCellY = cellY;
@@ -318,7 +363,7 @@ if (pricingGrid) {
       // Only connect nodes that are genuinely adjacent on the grid (one
       // step apart on a single axis) — anything else is a seam between
       // unrelated chain segments (e.g. mouse path vs. a scroll-injected
-      // node) and must stay disconnected.
+      // sweep) and must stay disconnected.
       const sameAxis = a.x === b.x || a.y === b.y;
       const stepDist = Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
       if (!sameAxis || stepDist !== GRID) continue;
@@ -327,8 +372,9 @@ if (pricingGrid) {
       const ageB = now - b.t;
       if (ageA > a.life && ageB > b.life) continue;
 
-      const fadeA = Math.max(0, 1 - ageA / a.life) * 0.16;
-      const fadeB = Math.max(0, 1 - ageB / b.life) * 0.4;
+      const boost = (a.boost + b.boost) / 2;
+      const fadeA = Math.max(0, 1 - ageA / a.life) * 0.16 * boost;
+      const fadeB = Math.max(0, 1 - ageB / b.life) * 0.4 * boost;
       if (fadeA <= 0.01 && fadeB <= 0.01) continue;
 
       drawSegment(a.x, a.y, b.x, b.y, fadeA, fadeB);
@@ -340,11 +386,10 @@ if (pricingGrid) {
       const alpha = Math.sin(Math.PI * t) * br.peak;
       if (alpha <= 0.01) continue;
 
-      const half = br.len / 2;
       if (br.axis === 'h') {
-        drawSegment(br.center - half, br.fixed, br.center + half, br.fixed, alpha * 0.7, alpha);
+        drawSegment(br.p1, br.fixed, br.p2, br.fixed, alpha * 0.7, alpha);
       } else {
-        drawSegment(br.fixed, br.center - half, br.fixed, br.center + half, alpha * 0.7, alpha);
+        drawSegment(br.fixed, br.p1, br.fixed, br.p2, alpha * 0.7, alpha);
       }
     }
 
