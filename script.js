@@ -135,6 +135,19 @@ if (pricingGrid) {
   });
 }
 
+// ── Antes vs Depois — "Ver mais comparações" (mobile) ───────────
+(() => {
+  const toggle = document.getElementById('baMoreToggle');
+  const rows = document.getElementById('baRows');
+  if (!toggle || !rows) return;
+
+  toggle.addEventListener('click', () => {
+    const expanded = rows.classList.toggle('is-expanded');
+    toggle.setAttribute('aria-expanded', String(expanded));
+    toggle.textContent = expanded ? 'Ver menos' : 'Ver mais comparações';
+  });
+})();
+
 // ── Global grid energy trail effect ─────────────────────────────
 (() => {
   const canvas = document.querySelector('.grid-trails');

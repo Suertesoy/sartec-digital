@@ -348,7 +348,7 @@
             <div class="ba-col ba-col--before">Como era antes</div>
             <div class="ba-col ba-col--after">Com a Sartec Digital</div>
           </div>
-          <div class="ba-rows">
+          <div class="ba-rows" id="baRows">
             <div class="ba-row">
               <div class="ba-before">
                 <span class="ba-x" aria-hidden="true">✗</span>
@@ -359,7 +359,7 @@
                 <p>Automações úteis que reduzem tarefas repetitivas e organizam a rotina da equipe.</p>
               </div>
             </div>
-            <div class="ba-row">
+            <div class="ba-row ba-row--more">
               <div class="ba-before">
                 <span class="ba-x" aria-hidden="true">✗</span>
                 <p>Site antigo que não explica bem o serviço e deixa o cliente sem clareza do próximo passo.</p>
@@ -389,7 +389,7 @@
                 <p>Painéis simples com responsáveis definidos e métricas fáceis de acompanhar.</p>
               </div>
             </div>
-            <div class="ba-row">
+            <div class="ba-row ba-row--more">
               <div class="ba-before">
                 <span class="ba-x" aria-hidden="true">✗</span>
                 <p>Ideia de produto digital, aplicativo ou melhoria interna que fica parada no papel.</p>
@@ -400,6 +400,7 @@
               </div>
             </div>
           </div>
+          <button class="ba-more-toggle" id="baMoreToggle" type="button" aria-expanded="false" aria-controls="baRows">Ver mais comparações</button>
         </div>
       </div>
     </section>
@@ -650,6 +651,7 @@
           <h2>Escolha o ponto de entrada que faz sentido agora.</h2>
           <p>Conectamos as soluções de acordo com a sua necessidade. Iniciamos com uma conversa sem compromisso para indicar o melhor caminho de escopo e implementação.</p>
         </header>
+        <p class="pricing__hint" aria-hidden="true">Arraste para o lado para ver os outros pacotes →</p>
         <div class="pricing__grid">
 
           <!-- Presença Digital -->
