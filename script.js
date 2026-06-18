@@ -18,7 +18,7 @@ burger.addEventListener('click', () => {
 nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
 document.addEventListener('click', e => {
-  if (nav.classList.contains('is-open') && !nav.contains(e.target) && e.target !== burger) {
+  if (nav.classList.contains('is-open') && !nav.contains(e.target) && !burger.contains(e.target)) {
     closeMenu();
   }
 });
