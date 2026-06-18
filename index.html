@@ -651,11 +651,19 @@
           <h2>Escolha o ponto de entrada que faz sentido agora.</h2>
           <p>Conectamos as soluções de acordo com a sua necessidade. Iniciamos com uma conversa sem compromisso para indicar o melhor caminho de escopo e implementação.</p>
         </header>
+        <!-- Abas Mobile para Pacotes -->
+        <div class="pricing-tabs" role="tablist" aria-label="Pacotes Sartec Digital">
+          <button class="pricing-tab" role="tab" aria-selected="false" aria-controls="panel-presenca" id="tab-presenca">Presença</button>
+          <button class="pricing-tab" role="tab" aria-selected="false" aria-controls="panel-atendimento" id="tab-atendimento">Atendimento</button>
+          <button class="pricing-tab pricing-tab--active" role="tab" aria-selected="true" aria-controls="panel-ecossistema" id="tab-ecossistema">Ecossistema</button>
+          <button class="pricing-tab" role="tab" aria-selected="false" aria-controls="panel-sobmedida" id="tab-sobmedida">Sob Medida</button>
+        </div>
+
         <p class="pricing__hint" aria-hidden="true">Arraste para o lado para ver os outros pacotes →</p>
         <div class="pricing__grid">
 
           <!-- Presença Digital -->
-          <div class="pricing-card" data-plan-card tabindex="0">
+          <div class="pricing-card" data-plan-card tabindex="0" id="panel-presenca" role="tabpanel" aria-labelledby="tab-presenca">
             <div class="pricing-card__head">
               <h3>Presença Digital</h3>
               <p><strong>Ideal para:</strong> negócios e profissionais que precisam apresentar melhor seus serviços, organizar a informação e facilitar o caminho do cliente até o contato certo.</p>
@@ -698,10 +706,10 @@
             </div>
           </div>
 
-          <!-- Operação Organizada -->
-          <div class="pricing-card" data-plan-card tabindex="0">
+          <!-- Atendimento Organizado -->
+          <div class="pricing-card" data-plan-card tabindex="0" id="panel-atendimento" role="tabpanel" aria-labelledby="tab-atendimento">
             <div class="pricing-card__head">
-              <h3>Operação Organizada</h3>
+              <h3>Atendimento Organizado</h3>
               <p><strong>Ideal para:</strong> negócios e profissionais que precisam organizar atendimento, pedidos, agenda, orçamento, histórico ou processos internos.</p>
             </div>
             <div class="pricing-card__price">
@@ -742,9 +750,9 @@
           </div>
 
           <!-- Ecossistema Digital (destaque) -->
-          <div class="pricing-card pricing-card--highlight is-selected" data-plan-card tabindex="0">
+          <div class="pricing-card pricing-card--highlight is-selected is-active-tab" data-plan-card tabindex="0" id="panel-ecossistema" role="tabpanel" aria-labelledby="tab-ecossistema">
             <div class="pricing-card__head">
-              <div class="pricing-card__recommended">Mais completo</div>
+              <div class="pricing-card__recommended">Mais recomendado</div>
               <h3>Ecossistema Digital</h3>
               <p><strong>Ideal para:</strong> operações que querem conectar presença digital, atendimento, automações, sistemas internos e métricas em uma operação mais integrada.</p>
             </div>
@@ -786,10 +794,10 @@
             </div>
           </div>
 
-          <!-- Projetos Sob Medida -->
-          <div class="pricing-card pricing-card--custom" data-plan-card tabindex="0">
+          <!-- Sob Medida -->
+          <div class="pricing-card pricing-card--custom" data-plan-card tabindex="0" id="panel-sobmedida" role="tabpanel" aria-labelledby="tab-sobmedida">
             <div class="pricing-card__head">
-              <h3>Projetos Sob Medida</h3>
+              <h3>Sob Medida</h3>
               <p><strong>Ideal para:</strong> demandas específicas como dashboards, e-commerce, ou para quem quer desenvolver protótipos, aplicativos, MVPs e aplicações digitais sob medida.</p>
             </div>
             <div class="pricing-card__price">
@@ -840,9 +848,9 @@
                 <tr>
                   <th scope="col">Recurso</th>
                   <th scope="col">Presença Digital</th>
-                  <th scope="col">Operação Organizada</th>
+                  <th scope="col">Atendimento Organizado</th>
                   <th scope="col">Ecossistema Digital</th>
-                  <th scope="col">Projetos Sob Medida</th>
+                  <th scope="col">Sob Medida</th>
                 </tr>
               </thead>
               <tbody>

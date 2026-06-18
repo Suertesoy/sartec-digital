@@ -1722,6 +1722,10 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 /* ── PRICING ──────────────────────────────────── */
 .pricing { background: rgba(8, 22, 62, 0.28); }
 
+.pricing-tabs {
+  display: none;
+}
+
 /* Drag hint for the mobile pricing carousel — hidden on desktop */
 .pricing__hint {
   display: none;
@@ -2782,33 +2786,73 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   .lucas-card__top { padding: 20px; }
   .lucas-fact      { padding: 11px 20px; }
 
-  /* Pricing — horizontal scroll-snap carousel instead of a tall stack */
-  .pricing__hint { display: block; }
-  .pricing__grid {
+  /* Pricing — Tabs Navigation instead of carousel */
+  .pricing__hint { display: none; }
+  
+  .pricing-tabs {
     display: flex;
-    grid-template-columns: none;
-    gap: 14px;
+    background: rgba(16, 34, 84, 0.4);
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    padding: 4px;
+    margin: -10px auto 28px;
+    max-width: 480px;
+    width: 100%;
+    gap: 4px;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    scroll-padding-left: 20px;
-    padding-bottom: 8px;
+  }
+  .pricing-tabs::-webkit-scrollbar { display: none; }
+  
+  .pricing-tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-3);
+    border-radius: var(--r-pill);
+    transition: all var(--t) var(--ease);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .pricing-tab:hover {
+    color: var(--text);
+  }
+  .pricing-tab--active {
+    background: var(--blue);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(41, 45, 150, 0.3);
+  }
+
+  .pricing__grid {
+    display: block;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    padding-bottom: 0;
     margin-bottom: 0;
   }
-  .pricing__grid::-webkit-scrollbar { display: none; }
+  
   .pricing-card {
-    display: flex;
+    display: none !important;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    scroll-snap-align: none;
+    flex-shrink: 1;
+    margin: 0 auto;
+  }
+  
+  .pricing-card.is-active-tab {
+    display: flex !important;
     flex-direction: column;
     gap: 18px;
     align-items: stretch;
     padding: 22px 20px;
-    scroll-snap-align: start;
-    min-width: calc(100vw - 40px);
-    max-width: calc(100vw - 40px);
-    flex-shrink: 0;
+    transform: none !important;
   }
-  .pricing-card:hover,
-  .pricing-card.is-selected { transform: none !important; }
+  
   .pkg-details { align-self: auto; margin-top: auto; }
   .pkg-details__body {
     display: flex;
@@ -2824,8 +2868,10 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
     display: flex;
   }
 
-  /* Comparison table — already scrollable via overflow-x */
-  .pkg-compare { margin-top: 36px; }
+  /* Ocultar tabela comparativa no mobile */
+  .pkg-compare {
+    display: none !important;
+  }
 
   /* Pilot */
   .pilot__steps { flex-direction: column; align-items: stretch; }

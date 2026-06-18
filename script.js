@@ -135,6 +135,37 @@ if (pricingGrid) {
   });
 }
 
+// ── Pricing tabs (mobile) ─────────────────────────────────────
+(() => {
+  const tabs = document.querySelectorAll('.pricing-tab');
+  const cards = document.querySelectorAll('.pricing-card');
+  if (tabs.length === 0) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // 1. Update tabs active state
+      tabs.forEach(t => {
+        t.classList.remove('pricing-tab--active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('pricing-tab--active');
+      tab.setAttribute('aria-selected', 'true');
+
+      // 2. Update cards active state
+      const targetId = tab.getAttribute('aria-controls');
+      cards.forEach(card => {
+        if (card.id === targetId) {
+          card.classList.add('is-active-tab');
+          card.classList.add('is-selected');
+        } else {
+          card.classList.remove('is-active-tab');
+          card.classList.remove('is-selected');
+        }
+      });
+    });
+  });
+})();
+
 // ── Antes vs Depois — "Ver mais comparações" (mobile) ───────────
 (() => {
   const toggle = document.getElementById('baMoreToggle');
