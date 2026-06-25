@@ -1,3 +1,626 @@
+// ── i18n ─────────────────────────────────────────────────────
+const WA_NUMBER = '5512997863832';
+
+const I18N = {
+  pt: {
+    docTitle: `Sartec Digital — Soluções digitais sob medida`,
+    metaDescription: `Sartec Digital — soluções digitais para organizar atendimento, presença online, automações e métricas para empresas, profissionais e operações em crescimento.`,
+    metaOgTitle: `Sartec Digital — Soluções digitais sob medida para negócios reais`,
+    metaOgDescription: `Design, automação e sistemas para empresas que querem trabalhar melhor.`,
+
+    brandTagline: `Soluções digitais sob medida`,
+    navSolutions: `Soluções`,
+    navPackages: `Pacotes`,
+    navAbout: `Sobre`,
+    navContact: `Contato`,
+    ariaMainNav: `Navegação principal`,
+    ariaLangGroup: `Idioma do site`,
+    ariaOpenMenu: `Abrir menu`,
+
+    heroTag: `Soluções sob medida`,
+    heroTitle: `Design, automação e sistemas para empresas que querem trabalhar melhor.`,
+    heroDesc: `A Sartec Digital desenha e implementa sites, sistemas, automações, aplicativos e fluxos digitais a partir dos problemas reais da sua operação.`,
+    heroBtnPrimary: `Falar sobre minha operação`,
+    heroBtnGhost: `Ver soluções`,
+    heroMicro: `Fale direto com o responsável pela Sartec para entender qual solução faz mais sentido para o seu negócio.`,
+
+    mockupTitle: `Painel · Sartec Digital`,
+    mockupBadge: `● Ao vivo`,
+    mockupTabPanel: `Painel`,
+    mockupTabMetrics: `Métricas`,
+    mockupColEntrada: `Entrada`,
+    mockupColTriagem: `Triagem`,
+    mockupColFila: `Fila`,
+    mockupClient241: `Cliente #241`,
+    mockupMsgOrcamento: `Orçamento pendente 📄`,
+    mockupEmpresaB: `Empresa B`,
+    mockupMsgEntrega: `Horário de entrega`,
+    mockupLojaDelta: `Loja Delta`,
+    mockupMsgValores: `Valores de serviço`,
+    mockupAssocAlpha: `Assoc. Alpha`,
+    mockupMsgContrato: `Contrato inicial`,
+    mockupProjGama: `Proj. Gama`,
+    mockupMsgValidacao: `Validação de dados`,
+    mockupChartPrefix: `Desempenho operacional ·`,
+    mockupChartSuffix: `no prazo`,
+    mockupMetricToday: `hoje`,
+    mockupMetricResp: `resp. média`,
+    mockupMetricWait: `em espera`,
+    mockupMetricDone: `resolvidos`,
+    mockupWaMsg: `Olá! Lista escolar do 5º ano, tem disponível?`,
+    mockupWaTime: `agora ✓✓`,
+
+    phoneTitle: `Aulas`,
+    phoneWelcome: `Continue seu aprendizado`,
+    phoneChipAutomation: `Automação`,
+    phoneContinueTitle: `Design de Produto`,
+    phoneContinueProgress: `62% concluído`,
+    phoneSectionTitle: `Suas aulas`,
+    phoneListHeader: `Próximas aulas`,
+    phoneLessonLabel: `Aula`,
+
+    tagTransformation: `A transformação`,
+    baHeading: `Quando a operação cresce, a organização precisa acompanhar.`,
+    baDesc: `Não é sobre complicar com tecnologia. É sobre dar fluxo, clareza e controle para o seu negócio funcionar melhor.`,
+    baColBefore: `Como era antes`,
+    baColAfter: `Com a Sartec Digital`,
+    baRow1Before: `Processos manuais e planilhas soltas tomam o tempo que deveria ser focado em vender.`,
+    baRow1After: `Automações úteis que reduzem tarefas repetitivas e organizam a rotina da equipe.`,
+    baRow2Before: `Site antigo que não explica bem o serviço e deixa o cliente sem clareza do próximo passo.`,
+    baRow2After: `Páginas comerciais claras que direcionam o cliente e facilitam o caminho até o contato certo.`,
+    baRow3Before: `Agenda confusa, além de pedidos ou orçamentos que se perdem no meio do dia a dia.`,
+    baRow3After: `Sistemas internos e fluxos claros para organizar pedidos, agendamentos e orçamentos.`,
+    baRow4Before: `Equipe sem visibilidade do andamento e gestor precisando perguntar o status de tudo.`,
+    baRow4After: `Painéis simples com responsáveis definidos e métricas fáceis de acompanhar.`,
+    baRow5Before: `Ideia de produto digital, aplicativo ou melhoria interna que fica parada no papel.`,
+    baRow5After: `Protótipos, MVPs e aplicações sob medida implementadas com escopo bem desenhado.`,
+    baShowMore: `Ver mais comparações`,
+    baShowLess: `Ver menos`,
+
+    tagOrigin: `Nossa origem`,
+    originHeading: `Nascida dentro de uma operação comercial real.`,
+    originDesc: `A Sartec Digital nasceu resolvendo desafios reais da própria Sartec: atendimento, pedidos, organização de demandas, responsáveis e gestão. O que começou como necessidade interna virou solução para empresas e profissionais que precisam organizar atendimento, processos e presença digital.`,
+    originCard1Title: `Mais de 30 anos de operação comercial`,
+    originCard1Desc: `A Sartec opera com equipe, clientes e rotinas comerciais diárias há mais de três décadas em São José dos Campos.`,
+    originCard2Title: `Processos e rotinas reais`,
+    originCard2Desc: `O fluxo diário de atendimentos e pedidos serviu de base para desenhar soluções práticas e fáceis de usar.`,
+    originCard3Title: `Validadas no dia a dia da equipe`,
+    originCard3Desc: `Nada aqui é teórico. Entendemos a rotina de quem opera para desenhar caminhos que realmente funcionem no dia a dia.`,
+
+    tagEcosystem: `O que entregamos`,
+    ecosystemHeading: `O que a Sartec Digital pode estruturar na sua operação.`,
+    ecosystemDesc: `Soluções conectadas para os pontos onde o cliente chega, a equipe atende e a gestão acompanha.`,
+    ecoCard1Title: `Presença digital e landing pages`,
+    ecoCard1Desc: `Sites, páginas comerciais e experiências digitais que apresentam a empresa com clareza e facilitam o caminho do cliente até o contato certo.`,
+    ecoCard2Title: `Sistemas internos e painéis`,
+    ecoCard2Desc: `Ferramentas sob medida para organizar pedidos, atendimentos, processos, dados e rotinas da equipe com simplicidade.`,
+    ecoCard3Title: `Automações e IA aplicada`,
+    ecoCard3Desc: `Fluxos automáticos para reduzir tarefas repetitivas, direcionar demandas, lembrar prazos, responder dúvidas e apoiar a operação.`,
+    ecoCard4Title: `Aplicativos e produtos digitais`,
+    ecoCard4Desc: `Protótipos, MVPs, melhorias em produtos existentes e aplicações digitais pensadas para uso real e desenhadas com foco em UX.`,
+    ecoCard5Title: `Agendamentos e fluxos de serviço`,
+    ecoCard5Desc: `Soluções para marcar, confirmar, reagendar, avisar disponibilidade e organizar a jornada do cliente de ponta a ponta.`,
+    ecoCard6Title: `Venda digital e catálogos`,
+    ecoCard6Desc: `Páginas de produto, catálogos digitais, jornadas de orçamento, pedidos online e estruturas de e-commerce conforme o escopo.`,
+
+    tagProjects: `Projetos`,
+    projectsHeading: `Projetos que mostram caminhos diferentes.`,
+    projectsDesc: `Da presença digital de uma empresa real ao protótipo de um aplicativo, a Sartec Digital trabalha a partir do problema, do fluxo e da experiência de uso.`,
+    projStatus1: `Projeto em produção`,
+    proj1Desc: `Site institucional conectado à rotina real da empresa, com apresentação de serviços, caminhos claros de contato e identidade visual aplicada.`,
+    proj1Cta: `Ver site →`,
+    projStatus2: `Protótipo de aplicativo`,
+    proj2Desc: `Aplicativo educacional com protótipo navegável, identidade visual e experiência mobile pensada para usuários reais.`,
+    proj2Cta: `Ver protótipo →`,
+
+    tagAbout: `Quem está por trás`,
+    aboutHeading: `Produto, automação e operação trabalhando juntos.`,
+    aboutP1: `Sou Lucas Cabral, Product Designer à frente da Sartec Digital. Minha entrega une UX/UI, automações, IA aplicada e vivência prática em atendimento, gestão, processos comerciais e operação real para transformar rotinas confusas em soluções digitais mais claras.`,
+    aboutP2: `A lógica é simples: entender a rotina, desenhar o fluxo e implementar uma solução que a equipe consiga usar sem travar o dia a dia.`,
+    aboutQuote: `"Antes de escolher a ferramenta, entendemos o gargalo que está custando tempo, venda ou clareza."`,
+    proofCard1Title: `Operação real`,
+    proofCard1Desc: `Vivência em atendimento, compras, financeiro e gestão comercial dentro da Sartec.`,
+    proofCard2Title: `Produto e UX/UI`,
+    proofCard2Desc: `Desenho de jornadas, telas e fluxos pensados para clientes, equipe e gestor.`,
+    proofCard3Title: `Automações úteis`,
+    proofCard3Desc: `IA, triagem, painéis e métricas para reduzir retrabalho e dar mais controle.`,
+    lucasAvatarAlt: `Lucas Cabral, Product Designer responsável pela Sartec Digital`,
+    factFormacaoLabel: `Formação`,
+    factFormacaoValue: `Formado pela UFSC`,
+    factEspecialidadeLabel: `Especialidade`,
+    factEspecialidadeValue: `UX/UI, produto, automações e IA aplicada`,
+    factVivenciaLabel: `Vivência prática`,
+    factVivenciaValue: `Atendimento, gestão comercial e processos reais`,
+    factEntregaLabel: `Entrega`,
+    factEntregaValue: `Soluções digitais simples de operar`,
+    factParaQuemLabel: `Para quem`,
+    factParaQuemValue: `Clínicas, escritórios, escolas, cursos, lojas e profissionais que precisam transformar atendimento, presença digital e processos em uma operação mais clara.`,
+
+    tagPackages: `Pacotes`,
+    pricingHeading: `Escolha o ponto de entrada que faz sentido agora.`,
+    pricingDesc: `Conectamos as soluções de acordo com a sua necessidade. Iniciamos com uma conversa sem compromisso para indicar o melhor caminho de escopo e implementação.`,
+    ariaPricingTabs: `Pacotes Sartec Digital`,
+    tabPresenca: `Presença`,
+    tabAtendimento: `Atendimento`,
+    tabEcossistema: `Ecossistema`,
+    pricingHint: `Arraste para o lado para ver os outros pacotes →`,
+
+    presencaTitle: `Presença Digital`,
+    presencaIdeal: `<strong>Ideal para:</strong> negócios e profissionais que precisam apresentar melhor seus serviços, organizar a informação e facilitar o caminho do cliente até o contato certo.`,
+    priceLabelScope: `Escopo`,
+    presencaScopeValue: `Definido por projeto`,
+    priceLabelProposal: `Proposta`,
+    proposalCustom: `Sob Medida`,
+    ctaConversar: `Conversar sobre este caminho`,
+    presencaInclude1: `Página comercial responsiva`,
+    presencaInclude2: `Arquitetura das seções`,
+    presencaInclude3: `Identidade visual adaptada`,
+    presencaInclude4: `Textos e imagens sob medida`,
+    presencaInclude5: `Caminho claro de contato`,
+    pkgDetailsToggle: `Ver detalhes do pacote`,
+    pkgLabelResolve: `O que resolve`,
+    presencaResolveDesc: `Site antigo, comunicação confusa ou dificuldade do cliente em entender o que a empresa oferece e qual próximo passo tomar.`,
+    pkgLabelInclude: `O que pode incluir`,
+    presencaIncludeDesc: `Página comercial responsiva, arquitetura das seções, direção de usabilidade, adaptação da identidade visual, imagens personalizadas, elementos da marca, botões de contato, formulário ou outros caminhos de conversão conforme o negócio.`,
+    pkgLabelFit: `Quando faz sentido`,
+    presencaFitDesc: `Quando o negócio ou profissional precisa apresentar melhor seus serviços e facilitar o caminho do cliente até o contato certo, antes de partir para automações ou sistemas mais complexos.`,
+    presencaNote: `A personalização visual faz parte do trabalho, sempre dentro de um escopo definido antes da implementação.`,
+
+    atendimentoTitle: `Atendimento Organizado`,
+    atendimentoIdeal: `<strong>Ideal para:</strong> negócios e profissionais que precisam organizar atendimento, pedidos, agenda, orçamento, histórico ou processos internos.`,
+    scopeComplexidade: `Conforme complexidade`,
+    atendimentoInclude1: `Organização de processos`,
+    atendimentoInclude2: `Painel interno sob medida`,
+    atendimentoInclude3: `Responsáveis por demanda`,
+    atendimentoInclude4: `Histórico e dados centralizados`,
+    atendimentoInclude5: `Métricas simples de rotina`,
+    atendimentoResolveDesc: `Pedidos ou solicitações esquecidos, falta de clareza sobre responsabilidades, histórico espalhado e ausência de controle sobre a rotina.`,
+    atendimentoIncludeDesc: `Painel de controle, etapas de acompanhamento, responsáveis por atividade, histórico centralizado, filtros, métricas operacionais e fluxos para reduzir repetição.`,
+    atendimentoFitDesc: `Quando o principal problema está na operação interna e no fluxo de trabalho da equipe, e o negócio quer organizar o atendimento e o histórico sem necessariamente mudar o site público.`,
+
+    recommendedBadge: `Mais recomendado`,
+    ecossistemaTitle: `Ecossistema Digital`,
+    ecossistemaIdeal: `<strong>Ideal para:</strong> operações que querem conectar presença digital, atendimento, automações, sistemas internos e métricas em uma operação mais integrada.`,
+    ecossistemaCta: `Analisar meu cenário`,
+    ecossistemaInclude1: `Landing page integrada`,
+    ecossistemaInclude2: `Painel de atendimento/pedidos`,
+    ecossistemaInclude3: `Automações de fluxo úteis`,
+    ecossistemaInclude4: `Triagem inteligente`,
+    ecossistemaInclude5: `Métricas operacionais completas`,
+    ecossistemaResolveDesc: `Site, atendimento e gestão funcionando de forma desconectada. Evita que o cliente fique sem clareza do próximo passo e reduz tarefas repetitivas da equipe.`,
+    ecossistemaIncludeDesc: `Página comercial conectada ao fluxo, painel de controle, triagem automatizada, direcionamento de demandas, métricas de produtividade e rotinas da equipe.`,
+    ecossistemaFitDesc: `Quando o negócio quer unir a presença digital que direciona o cliente ao painel interno que organiza a rotina da equipe, centralizando a operação em um fluxo único.`,
+    ecossistemaNote: `No Ecossistema Digital, todas as partes trabalham juntas: a página apresenta com clareza, o painel organiza e as métricas acompanham.`,
+
+    sobmedidaIdeal: `<strong>Ideal para:</strong> demandas específicas como dashboards, e-commerce, ou para quem quer desenvolver protótipos, aplicativos, MVPs e aplicações digitais sob medida.`,
+    sobmedidaScopeValue: `Definido após análise`,
+    sobmedidaCta: `Solicitar análise`,
+    sobmedidaInclude1: `Aplicativos e MVPs`,
+    sobmedidaInclude2: `Dashboards e painéis específicos`,
+    sobmedidaInclude3: `Integrações e banco de dados`,
+    sobmedidaInclude4: `E-commerce e catálogos sob medida`,
+    sobmedidaInclude5: `Escopo e prazo bem definidos`,
+    sobmedidaResolveDesc: `Processos específicos ou ideias de novos produtos digitais que não se encaixam em soluções prontas e exigem análise profunda de escopo.`,
+    sobmedidaIncludeDesc: `Desenho de protótipos, desenvolvimento de aplicativos, sistemas integrados a APIs, e-commerce personalizado, painéis gerenciais e fluxos complexos.`,
+    sobmedidaFitDesc: `Quando a operação ou empresa tem uma necessidade sob medida, quer tirar um MVP/aplicativo do papel, ou quer integrar múltiplos sistemas existentes em uma infraestrutura própria.`,
+
+    comparisonTitle: `Comparativo dos pacotes`,
+    tableHeaderRecurso: `Recurso`,
+    tableRowLanding: `Landing page / presença digital`,
+    tableRowOrganizacao: `Organização de processos`,
+    tableRowPainel: `Painel interno`,
+    tableRowAutomacoes: `Automações / IA`,
+    tableRowApp: `Aplicativo ou MVP`,
+    tableRowAgendamento: `Agendamento / fluxo de serviço`,
+    tableRowVenda: `Venda digital / catálogo`,
+    tableRowMetricas: `Métricas`,
+    tableRowIntegracoes: `Integrações`,
+    tableRowEscopo: `Escopo personalizado`,
+    cellOpcional: `opcional`,
+    cellConformeEscopo: `conforme escopo`,
+    cellBasico: `básico`,
+
+    tagMethod: `Método de trabalho`,
+    pilotHeading: `Como começamos e conduzimos cada projeto.`,
+    pilotDesc: `Não começamos pela ferramenta, começamos pelo problema real da sua operação. Nosso processo é desenhado para garantir que a solução final seja simples, usável e bem implementada.`,
+    pilotStep1Label: `Etapa 1`,
+    pilotStep1Content: `<strong>Entendimento</strong><br>Mapeamos o problema, a rotina e o objetivo da solução.`,
+    pilotStep2Label: `Etapa 2`,
+    pilotStep2Content: `<strong>Desenho</strong><br>Organizamos o fluxo, as telas e o caminho do usuário.`,
+    pilotStep3Label: `Etapa 3`,
+    pilotStep3Content: `<strong>Implementação</strong><br>Construímos a solução no nível adequado ao escopo.`,
+    pilotStep4Label: `Etapa 4`,
+    pilotStep4Content: `<strong>Ajuste</strong><br>Acompanhamos o uso real e refinamos o que for necessário.`,
+    pilotNote: `Projetos que envolvem automações, painéis ou sistemas internos contam com implantação assistida e treinamento da equipe para garantir o uso no dia a dia.`,
+
+    tagFaq: `Dúvidas`,
+    faqHeading: `Perguntas frequentes`,
+    faqQ1: `Vocês fazem apenas sites?`,
+    faqA1: `Não. Desenvolvemos soluções digitais sob medida com base nos seus problemas reais. Isso inclui desde páginas comerciais e landing pages até sistemas internos para organizar processos, aplicativos, fluxos de agendamento, catálogos e automações com IA aplicada.`,
+    faqQ2: `Vocês desenvolvem aplicativos e produtos digitais?`,
+    faqA2: `Sim. Criamos protótipos navegáveis, produtos em fase inicial (MVPs) e aplicativos sob medida. Analisamos a ideia e o público-alvo para desenhar um escopo bem definido que resolva problemas reais de uso.`,
+    faqQ3: `Vocês fazem projetos de e-commerce?`,
+    faqA3: `Sim, desenvolvemos jornadas de pedido online, catálogos digitais de produtos e estruturas de e-commerce personalizadas. Avaliamos a complexidade das integrações e do fluxo de pagamento para propor o caminho ideal.`,
+    faqQ4: `Como sei qual é a solução digital ideal para o meu negócio?`,
+    faqA4: `Não começamos pela ferramenta, começamos pelo problema. Em uma conversa inicial sem compromisso, mapeamos como funciona sua rotina de operação, vendas e atendimento para recomendar a solução mais simples e viável.`,
+    faqQ5: `Por que o valor do investimento é sob análise?`,
+    faqA5: `Por se tratarem de soluções personalizadas e sob medida, o investimento varia conforme o escopo do projeto: o número de páginas, a necessidade de banco de dados, integrações com outras ferramentas, volume de automações e suporte necessário.`,
+    faqQ6: `A mensalidade de suporte é obrigatória?`,
+    faqA6: `Depende do tipo de solução. Em landing pages ou sites institucionais simples, o suporte e manutenção podem ser combinados sob demanda. Em painéis internos, automações com IA, APIs ou aplicações que dependem de servidores ativos, a manutenção é essencial para garantir a operação contínua.`,
+    faqQ7: `Vocês trabalham com melhorias em sistemas que já existem?`,
+    faqA7: `Sim. Avaliamos seu sistema ou site atual para identificar gargalos de usabilidade, desenhar novas interfaces, criar novas integrações automáticas ou desenvolver novas rotinas sobre o que já está funcionando.`,
+    faqQ8: `O projeto inclui suporte e acompanhamento após a entrega?`,
+    faqA8: `Sim. Principalmente em sistemas e automações que mudam a rotina de trabalho, acompanhamos o uso inicial pela equipe e fazemos os refinamentos de usabilidade necessários para garantir a adaptação.`,
+
+    tagCtaFinal: `Conversa sem compromisso`,
+    ctaFinalHeading: `Vamos conversar sobre o que sua operação precisa agora?`,
+    ctaFinalDesc: `Você me conta como sua empresa recebe clientes, organiza demandas e acompanha a rotina. A partir dessa conversa, eu trago uma visão prática de negócio, produto e tecnologia para entendermos juntos qual caminho faz mais sentido.`,
+    ctaFinalBtn: `Conversar sobre minha operação`,
+    ctaFinalWaLink: `Chamar no WhatsApp →`,
+    ctaFinalNote: `Sem compromisso · Uma conversa inicial para entender possibilidades`,
+
+    footerTagline: `Soluções digitais sob medida para organizar processos, melhorar atendimento e facilitar a jornada do cliente.`,
+    ariaFooterNav: `Links rápidos`,
+    footerDisclaimer: `As propostas e prazos são definidos sob medida para cada projeto após a análise inicial de escopo e complexidade do cenário comercial.`,
+    footerBottom: `© 2025 Sartec Digital · Frente de soluções da Sartec · Alves &amp; Cabral LTDA EPP · CNPJ 06.241.041/0001-56 · Todos os direitos reservados`,
+
+    ariaWaFloat: `Falar pelo WhatsApp`,
+
+    waGeneral: `Olá, vim pelo site da Sartec Digital e quero conversar sobre minha operação.`,
+    waPresenca: `Olá, vim pelo site da Sartec Digital e quero conversar sobre o pacote Presença Digital.`,
+    waAtendimento: `Olá, vim pelo site da Sartec Digital e quero conversar sobre o pacote Atendimento Organizado.`,
+    waEcossistema: `Olá, vim pelo site da Sartec Digital e quero conversar sobre o pacote Ecossistema Digital.`,
+    waSobMedida: `Olá, vim pelo site da Sartec Digital e quero conversar sobre Projetos Sob Medida.`,
+    waFloatGeneral: `Olá, vim pelo site da Sartec Digital.`,
+  },
+
+  en: {
+    docTitle: `Sartec Digital — Custom digital solutions`,
+    metaDescription: `Sartec Digital — digital solutions to organize customer service, online presence, automation and metrics for growing businesses, professionals and operations.`,
+    metaOgTitle: `Sartec Digital — Custom digital solutions for real businesses`,
+    metaOgDescription: `Design, automation and systems for businesses that want to work better.`,
+
+    brandTagline: `Custom digital solutions`,
+    navSolutions: `Solutions`,
+    navPackages: `Packages`,
+    navAbout: `About`,
+    navContact: `Contact`,
+    ariaMainNav: `Main navigation`,
+    ariaLangGroup: `Site language`,
+    ariaOpenMenu: `Open menu`,
+
+    heroTag: `Custom solutions`,
+    heroTitle: `Design, automation and systems for businesses that want to work better.`,
+    heroDesc: `Sartec Digital designs and implements websites, systems, automations, apps and digital workflows based on the real problems in your operation.`,
+    heroBtnPrimary: `Talk about my operation`,
+    heroBtnGhost: `See solutions`,
+    heroMicro: `Talk directly with the person behind Sartec to find out which solution makes the most sense for your business.`,
+
+    mockupTitle: `Dashboard · Sartec Digital`,
+    mockupBadge: `● Live`,
+    mockupTabPanel: `Dashboard`,
+    mockupTabMetrics: `Metrics`,
+    mockupColEntrada: `Inbox`,
+    mockupColTriagem: `Triage`,
+    mockupColFila: `Queue`,
+    mockupClient241: `Client #241`,
+    mockupMsgOrcamento: `Pending quote 📄`,
+    mockupEmpresaB: `Company B`,
+    mockupMsgEntrega: `Delivery time`,
+    mockupLojaDelta: `Delta Store`,
+    mockupMsgValores: `Service pricing`,
+    mockupAssocAlpha: `Alpha Assoc.`,
+    mockupMsgContrato: `Initial contract`,
+    mockupProjGama: `Gamma Project`,
+    mockupMsgValidacao: `Data validation`,
+    mockupChartPrefix: `Operational performance ·`,
+    mockupChartSuffix: `on time`,
+    mockupMetricToday: `today`,
+    mockupMetricResp: `avg. response`,
+    mockupMetricWait: `waiting`,
+    mockupMetricDone: `resolved`,
+    mockupWaMsg: `Hi! Do you have the 5th grade school list in stock?`,
+    mockupWaTime: `now ✓✓`,
+
+    phoneTitle: `Lessons`,
+    phoneWelcome: `Continue your learning`,
+    phoneChipAutomation: `Automation`,
+    phoneContinueTitle: `Product Design`,
+    phoneContinueProgress: `62% complete`,
+    phoneSectionTitle: `Your lessons`,
+    phoneListHeader: `Next lessons`,
+    phoneLessonLabel: `Lesson`,
+
+    tagTransformation: `The transformation`,
+    baHeading: `As the operation grows, organization has to keep up.`,
+    baDesc: `It's not about complicating things with technology. It's about giving your business flow, clarity and control to work better.`,
+    baColBefore: `How it used to be`,
+    baColAfter: `With Sartec Digital`,
+    baRow1Before: `Manual processes and scattered spreadsheets eat up time that should be focused on selling.`,
+    baRow1After: `Useful automations that cut repetitive tasks and organize the team's routine.`,
+    baRow2Before: `An outdated site that doesn't explain the service well and leaves the customer unsure of the next step.`,
+    baRow2After: `Clear business pages that guide the customer and make the path to the right contact easier.`,
+    baRow3Before: `A confusing schedule, plus orders or quotes that get lost in the day-to-day.`,
+    baRow3After: `Internal systems and clear workflows to organize orders, scheduling and quotes.`,
+    baRow4Before: `A team with no visibility into progress, and a manager who has to ask for status updates on everything.`,
+    baRow4After: `Simple dashboards with clear ownership and metrics that are easy to track.`,
+    baRow5Before: `A digital product idea, app or internal improvement that stays stuck on paper.`,
+    baRow5After: `Prototypes, MVPs and custom applications built with a well-defined scope.`,
+    baShowMore: `See more comparisons`,
+    baShowLess: `See less`,
+
+    tagOrigin: `Our origin`,
+    originHeading: `Born inside a real commercial operation.`,
+    originDesc: `Sartec Digital was born solving real challenges inside Sartec itself: customer service, orders, demand organization, ownership and management. What started as an internal need became a solution for companies and professionals who need to organize customer service, processes and digital presence.`,
+    originCard1Title: `Over 30 years of commercial operation`,
+    originCard1Desc: `Sartec has run a team, clients and daily business routines for more than three decades in São José dos Campos.`,
+    originCard2Title: `Real processes and routines`,
+    originCard2Desc: `The daily flow of customer service and orders served as the basis for designing practical, easy-to-use solutions.`,
+    originCard3Title: `Validated in the team's daily work`,
+    originCard3Desc: `Nothing here is theoretical. We understand the routine of the people who operate it to design paths that actually work day to day.`,
+
+    tagEcosystem: `What we deliver`,
+    ecosystemHeading: `What Sartec Digital can structure in your operation.`,
+    ecosystemDesc: `Connected solutions for the points where the customer arrives, the team serves and management keeps track.`,
+    ecoCard1Title: `Digital presence and landing pages`,
+    ecoCard1Desc: `Websites, business pages and digital experiences that present the company clearly and make the customer's path to the right contact easier.`,
+    ecoCard2Title: `Internal systems and dashboards`,
+    ecoCard2Desc: `Custom tools to simply organize orders, customer service, processes, data and team routines.`,
+    ecoCard3Title: `Automation and applied AI`,
+    ecoCard3Desc: `Automated workflows that cut repetitive tasks, route demands, flag deadlines, answer questions and support the operation.`,
+    ecoCard4Title: `Apps and digital products`,
+    ecoCard4Desc: `Prototypes, MVPs, improvements to existing products and digital applications designed for real use with a strong focus on UX.`,
+    ecoCard5Title: `Scheduling and service workflows`,
+    ecoCard5Desc: `Solutions to book, confirm, reschedule, flag availability and organize the customer's journey end to end.`,
+    ecoCard6Title: `Digital sales and catalogs`,
+    ecoCard6Desc: `Product pages, digital catalogs, quote journeys, online orders and e-commerce structures tailored to the scope.`,
+
+    tagProjects: `Projects`,
+    projectsHeading: `Projects that show different paths.`,
+    projectsDesc: `From the digital presence of a real company to an app prototype, Sartec Digital works from the problem, the workflow and the user experience.`,
+    projStatus1: `Live project`,
+    proj1Desc: `An institutional website connected to the company's real routine, presenting services, clear contact paths and applied visual identity.`,
+    proj1Cta: `View site →`,
+    projStatus2: `App prototype`,
+    proj2Desc: `An educational app with a navigable prototype, visual identity and a mobile experience designed for real users.`,
+    proj2Cta: `View prototype →`,
+
+    tagAbout: `Who's behind it`,
+    aboutHeading: `Product, automation and operations working together.`,
+    aboutP1: `I'm Lucas Cabral, the Product Designer leading Sartec Digital. My work combines UX/UI, automation, applied AI and hands-on experience in customer service, management, business processes and real operations to turn confusing routines into clearer digital solutions.`,
+    aboutP2: `The logic is simple: understand the routine, design the workflow and implement a solution the team can actually use without disrupting day-to-day work.`,
+    aboutQuote: `"Before choosing the tool, we understand the bottleneck that's costing time, sales or clarity."`,
+    proofCard1Title: `Real operations`,
+    proofCard1Desc: `Hands-on experience in customer service, purchasing, finance and business management inside Sartec.`,
+    proofCard2Title: `Product and UX/UI`,
+    proofCard2Desc: `Designing journeys, screens and workflows built for customers, the team and management.`,
+    proofCard3Title: `Useful automation`,
+    proofCard3Desc: `AI, triage, dashboards and metrics to cut rework and give you more control.`,
+    lucasAvatarAlt: `Lucas Cabral, Product Designer behind Sartec Digital`,
+    factFormacaoLabel: `Education`,
+    factFormacaoValue: `Graduated from UFSC`,
+    factEspecialidadeLabel: `Specialty`,
+    factEspecialidadeValue: `UX/UI, product, automation and applied AI`,
+    factVivenciaLabel: `Hands-on experience`,
+    factVivenciaValue: `Customer service, business management and real processes`,
+    factEntregaLabel: `What you get`,
+    factEntregaValue: `Digital solutions that are simple to operate`,
+    factParaQuemLabel: `Who it's for`,
+    factParaQuemValue: `Clinics, offices, schools, course providers, stores and professionals who need to turn customer service, digital presence and processes into a clearer operation.`,
+
+    tagPackages: `Packages`,
+    pricingHeading: `Choose the entry point that makes sense right now.`,
+    pricingDesc: `We connect the solutions according to your needs. We start with a no-commitment conversation to point you to the best path for scope and implementation.`,
+    ariaPricingTabs: `Sartec Digital Packages`,
+    tabPresenca: `Presence`,
+    tabAtendimento: `Service`,
+    tabEcossistema: `Ecosystem`,
+    pricingHint: `Swipe sideways to see the other packages →`,
+
+    presencaTitle: `Digital Presence`,
+    presencaIdeal: `<strong>Ideal for:</strong> businesses and professionals who need to better present their services, organize information and make it easier for the customer to reach the right contact.`,
+    priceLabelScope: `Scope`,
+    presencaScopeValue: `Defined per project`,
+    priceLabelProposal: `Proposal`,
+    proposalCustom: `Custom Solution`,
+    ctaConversar: `Talk about this path`,
+    presencaInclude1: `Responsive business page`,
+    presencaInclude2: `Section architecture`,
+    presencaInclude3: `Adapted visual identity`,
+    presencaInclude4: `Custom copy and images`,
+    presencaInclude5: `Clear contact path`,
+    pkgDetailsToggle: `View package details`,
+    pkgLabelResolve: `What it solves`,
+    presencaResolveDesc: `An outdated site, confusing communication, or customers struggling to understand what the company offers and what to do next.`,
+    pkgLabelInclude: `What it can include`,
+    presencaIncludeDesc: `A responsive business page, section architecture, usability direction, adapted visual identity, custom images, brand elements, contact buttons, a form or other conversion paths depending on the business.`,
+    pkgLabelFit: `When it makes sense`,
+    presencaFitDesc: `When the business or professional needs to better present their services and make it easier for the customer to reach the right contact, before moving on to automation or more complex systems.`,
+    presencaNote: `Visual customization is part of the work, always within a scope defined before implementation.`,
+
+    atendimentoTitle: `Organized Customer Service`,
+    atendimentoIdeal: `<strong>Ideal for:</strong> businesses and professionals who need to organize customer service, orders, scheduling, quotes, history or internal processes.`,
+    scopeComplexidade: `Based on complexity`,
+    atendimentoInclude1: `Process organization`,
+    atendimentoInclude2: `Custom internal dashboard`,
+    atendimentoInclude3: `Owners assigned per demand`,
+    atendimentoInclude4: `Centralized history and data`,
+    atendimentoInclude5: `Simple routine metrics`,
+    atendimentoResolveDesc: `Forgotten orders or requests, unclear ownership, scattered history and a lack of control over the daily routine.`,
+    atendimentoIncludeDesc: `A control panel, tracking stages, owners per activity, centralized history, filters, operational metrics and workflows that cut repetition.`,
+    atendimentoFitDesc: `When the main problem is in the internal operation and the team's workflow, and the business wants to organize service and history without necessarily changing the public website.`,
+
+    recommendedBadge: `Most recommended`,
+    ecossistemaTitle: `Digital Ecosystem`,
+    ecossistemaIdeal: `<strong>Ideal for:</strong> operations that want to connect digital presence, customer service, automation, internal systems and metrics into a more integrated operation.`,
+    ecossistemaCta: `Review my scenario`,
+    ecossistemaInclude1: `Integrated landing page`,
+    ecossistemaInclude2: `Service/order dashboard`,
+    ecossistemaInclude3: `Useful workflow automations`,
+    ecossistemaInclude4: `Smart triage`,
+    ecossistemaInclude5: `Complete operational metrics`,
+    ecossistemaResolveDesc: `Website, customer service and management running disconnected from each other. It keeps customers from losing track of the next step and cuts repetitive tasks for the team.`,
+    ecossistemaIncludeDesc: `A business page connected to the workflow, a control panel, automated triage, demand routing, productivity metrics and team routines.`,
+    ecossistemaFitDesc: `When the business wants to connect the digital presence that guides the customer to the internal dashboard that organizes the team's routine, centralizing the operation in a single flow.`,
+    ecossistemaNote: `In the Digital Ecosystem, every part works together: the page presents with clarity, the dashboard organizes, and the metrics keep track.`,
+
+    sobmedidaIdeal: `<strong>Ideal for:</strong> specific needs such as dashboards, e-commerce, or for anyone who wants to develop prototypes, apps, MVPs and custom digital applications.`,
+    sobmedidaScopeValue: `Defined after review`,
+    sobmedidaCta: `Request a review`,
+    sobmedidaInclude1: `Apps and MVPs`,
+    sobmedidaInclude2: `Specific dashboards and panels`,
+    sobmedidaInclude3: `Integrations and databases`,
+    sobmedidaInclude4: `Custom e-commerce and catalogs`,
+    sobmedidaInclude5: `Well-defined scope and timeline`,
+    sobmedidaResolveDesc: `Specific processes or new digital product ideas that don't fit ready-made solutions and require an in-depth scope review.`,
+    sobmedidaIncludeDesc: `Prototype design, app development, systems integrated with APIs, custom e-commerce, management dashboards and complex workflows.`,
+    sobmedidaFitDesc: `When the operation or company has a custom need, wants to get an MVP or app off the ground, or wants to integrate multiple existing systems into its own infrastructure.`,
+
+    comparisonTitle: `Package comparison`,
+    tableHeaderRecurso: `Feature`,
+    tableRowLanding: `Landing page / digital presence`,
+    tableRowOrganizacao: `Process organization`,
+    tableRowPainel: `Internal dashboard`,
+    tableRowAutomacoes: `Automation / AI`,
+    tableRowApp: `App or MVP`,
+    tableRowAgendamento: `Scheduling / service flow`,
+    tableRowVenda: `Digital sales / catalog`,
+    tableRowMetricas: `Metrics`,
+    tableRowIntegracoes: `Integrations`,
+    tableRowEscopo: `Custom scope`,
+    cellOpcional: `optional`,
+    cellConformeEscopo: `scope-dependent`,
+    cellBasico: `basic`,
+
+    tagMethod: `Our process`,
+    pilotHeading: `How we start and run every project.`,
+    pilotDesc: `We don't start with the tool — we start with the real problem in your operation. Our process is designed to make sure the final solution is simple, usable and well implemented.`,
+    pilotStep1Label: `Step 1`,
+    pilotStep1Content: `<strong>Understanding</strong><br>We map the problem, the routine and the goal of the solution.`,
+    pilotStep2Label: `Step 2`,
+    pilotStep2Content: `<strong>Design</strong><br>We organize the workflow, the screens and the user's path.`,
+    pilotStep3Label: `Step 3`,
+    pilotStep3Content: `<strong>Implementation</strong><br>We build the solution at the level the scope calls for.`,
+    pilotStep4Label: `Step 4`,
+    pilotStep4Content: `<strong>Refinement</strong><br>We track real-world use and refine whatever is needed.`,
+    pilotNote: `Projects involving automation, dashboards or internal systems include guided rollout and team training to make sure they're actually used day to day.`,
+
+    tagFaq: `FAQ`,
+    faqHeading: `Frequently asked questions`,
+    faqQ1: `Do you only build websites?`,
+    faqA1: `No. We develop custom digital solutions based on your real problems. That ranges from business pages and landing pages to internal systems for organizing processes, apps, scheduling flows, catalogs and automation with applied AI.`,
+    faqQ2: `Do you develop apps and digital products?`,
+    faqA2: `Yes. We build navigable prototypes, early-stage products (MVPs) and custom apps. We analyze the idea and target audience to design a well-defined scope that solves real usage problems.`,
+    faqQ3: `Do you build e-commerce projects?`,
+    faqA3: `Yes, we build online ordering journeys, digital product catalogs and custom e-commerce structures. We assess the complexity of integrations and the payment flow to propose the ideal path.`,
+    faqQ4: `How do I know which digital solution is right for my business?`,
+    faqA4: `We don't start with the tool, we start with the problem. In an initial, no-commitment conversation, we map how your operation, sales and customer service routine works to recommend the simplest, most viable solution.`,
+    faqQ5: `Why is the investment amount determined after a review?`,
+    faqA5: `Because these are personalized, custom solutions, the investment varies according to the project's scope: number of pages, database needs, integrations with other tools, the volume of automation and the level of support required.`,
+    faqQ6: `Is the monthly support fee mandatory?`,
+    faqA6: `It depends on the type of solution. For landing pages or simple institutional sites, support and maintenance can be arranged on demand. For internal dashboards, AI automation, APIs or applications that depend on active servers, maintenance is essential to keep the operation running.`,
+    faqQ7: `Do you work on improving systems that already exist?`,
+    faqA7: `Yes. We assess your current system or website to identify usability bottlenecks, design new interfaces, build new automated integrations or develop new workflows on top of what's already working.`,
+    faqQ8: `Does the project include support and follow-up after delivery?`,
+    faqA8: `Yes. Especially for systems and automations that change the team's work routine, we follow the initial usage by the team and make the usability refinements needed to ensure smooth adoption.`,
+
+    tagCtaFinal: `No-commitment conversation`,
+    ctaFinalHeading: `Let's talk about what your operation needs right now?`,
+    ctaFinalDesc: `Tell me how your company welcomes customers, organizes demands and keeps track of the routine. From that conversation, I'll bring a practical view of business, product and technology so we can figure out together which path makes the most sense.`,
+    ctaFinalBtn: `Talk about my operation`,
+    ctaFinalWaLink: `Message on WhatsApp →`,
+    ctaFinalNote: `No commitment · An initial conversation to explore possibilities`,
+
+    footerTagline: `Custom digital solutions to organize processes, improve customer service and make the customer journey easier.`,
+    ariaFooterNav: `Quick links`,
+    footerDisclaimer: `Proposals and timelines are defined on a custom basis for each project after an initial review of scope and the complexity of the business scenario.`,
+    footerBottom: `© 2025 Sartec Digital · Sartec's digital solutions branch · Alves &amp; Cabral LTDA EPP · CNPJ 06.241.041/0001-56 · All rights reserved`,
+
+    ariaWaFloat: `Chat on WhatsApp`,
+
+    waGeneral: `Hi, I found you through the Sartec Digital website and I'd like to talk about my operation.`,
+    waPresenca: `Hi, I found you through the Sartec Digital website and I'd like to talk about the Digital Presence package.`,
+    waAtendimento: `Hi, I found you through the Sartec Digital website and I'd like to talk about the Organized Customer Service package.`,
+    waEcossistema: `Hi, I found you through the Sartec Digital website and I'd like to talk about the Digital Ecosystem package.`,
+    waSobMedida: `Hi, I found you through the Sartec Digital website and I'd like to talk about a Custom Project.`,
+    waFloatGeneral: `Hi, I found you through the Sartec Digital website.`,
+  },
+};
+
+function applyTranslations(lang) {
+  const dict = I18N[lang] || I18N.pt;
+  document.documentElement.setAttribute('lang', lang === 'en' ? 'en-US' : 'pt-BR');
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+
+  document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+    el.getAttribute('data-i18n-attr').split(';').forEach(pair => {
+      const [attr, key] = pair.split(':').map(s => s.trim());
+      if (attr && key && dict[key] !== undefined) el.setAttribute(attr, dict[key]);
+    });
+  });
+
+  document.querySelectorAll('[data-wa-key]').forEach(el => {
+    const key = el.getAttribute('data-wa-key');
+    if (dict[key] !== undefined) {
+      el.setAttribute('href', `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(dict[key])}`);
+    }
+  });
+
+  const btnPt = document.getElementById('langBtnPt');
+  const btnEn = document.getElementById('langBtnEn');
+  if (btnPt && btnEn) {
+    const isEn = lang === 'en';
+    btnPt.classList.toggle('is-active', !isEn);
+    btnEn.classList.toggle('is-active', isEn);
+    btnPt.setAttribute('aria-pressed', String(!isEn));
+    btnEn.setAttribute('aria-pressed', String(isEn));
+  }
+
+  const baRows = document.getElementById('baRows');
+  const baToggle = document.getElementById('baMoreToggle');
+  if (baRows && baToggle) {
+    baToggle.textContent = baRows.classList.contains('is-expanded') ? dict.baShowLess : dict.baShowMore;
+  }
+
+  const lessonTitleEl = document.getElementById('js-phone-lesson-title');
+  if (lessonTitleEl) lessonTitleEl.textContent = `${dict.phoneLessonLabel} 01`;
+
+  // Re-measure any open FAQ panel so its height isn't left clipped to the old text.
+  document.querySelectorAll('.faq-item.is-open').forEach(item => {
+    const panel = item.querySelector('.faq-a');
+    const inner = item.querySelector('.faq-a__inner');
+    if (panel && inner) panel.style.height = inner.offsetHeight + 'px';
+  });
+}
+
+function getCurrentLang() {
+  return document.documentElement.getAttribute('lang') === 'en-US' ? 'en' : 'pt';
+}
+
+function setLanguage(lang) {
+  applyTranslations(lang);
+  localStorage.setItem('sartec_lang', lang);
+}
+
+(() => {
+  const saved = localStorage.getItem('sartec_lang');
+  applyTranslations(saved === 'en' ? 'en' : 'pt');
+
+  const btnPt = document.getElementById('langBtnPt');
+  const btnEn = document.getElementById('langBtnEn');
+  if (btnPt) btnPt.addEventListener('click', () => setLanguage('pt'));
+  if (btnEn) btnEn.addEventListener('click', () => setLanguage('en'));
+})();
+
 // ── Header scroll ─────────────────────────────────────────────
 const header = document.getElementById('header');
 const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 20);
@@ -175,7 +798,8 @@ if (pricingGrid) {
   toggle.addEventListener('click', () => {
     const expanded = rows.classList.toggle('is-expanded');
     toggle.setAttribute('aria-expanded', String(expanded));
-    toggle.textContent = expanded ? 'Ver menos' : 'Ver mais comparações';
+    const dict = I18N[getCurrentLang()];
+    toggle.textContent = expanded ? dict.baShowLess : dict.baShowMore;
   });
 })();
 
@@ -492,6 +1116,10 @@ if (pricingGrid) {
   const item1 = document.getElementById('js-phone-item-1');
   const item2 = document.getElementById('js-phone-item-2');
 
+  function lessonLabel() {
+    return `${I18N[getCurrentLang()].phoneLessonLabel} 01`;
+  }
+
   let activeTimeouts = [];
   let isRunning = false;
   let cycleTimer = null;
@@ -540,7 +1168,7 @@ if (pricingGrid) {
       progressFill.style.transition = 'none';
       progressFill.style.width = '0%';
     }
-    if (lessonTitle) lessonTitle.textContent = 'Aula 01';
+    if (lessonTitle) lessonTitle.textContent = lessonLabel();
 
     if (item1) item1.classList.add('phone-app__item--active');
     if (item2) item2.classList.remove('phone-app__item--active');
@@ -557,7 +1185,7 @@ if (pricingGrid) {
       if (dMetricResp) dMetricResp.textContent = '2.1m';
       if (dMetricDone) dMetricDone.textContent = '96%';
       if (dChartPercent) dChartPercent.textContent = '95%';
-      
+
       const newHeights = ['55%', '70%', '40%', '85%', '80%', '50%', '60%', '75%'];
       dChartBars.forEach((bar, idx) => {
         if (bar) bar.style.setProperty('--h', newHeights[idx]);
@@ -568,7 +1196,7 @@ if (pricingGrid) {
     addTimeout(() => {
       if (dCardEntradaB) dCardEntradaB.classList.add('is-collapsed');
       if (dCardTriagemB) dCardTriagemB.classList.remove('is-collapsed');
-      
+
       if (dCountEntrada) dCountEntrada.textContent = '1';
       if (dCountTriagem) dCountTriagem.textContent = '2';
     }, 1600);
@@ -577,7 +1205,7 @@ if (pricingGrid) {
     addTimeout(() => {
       if (dCardTriagemDelta) dCardTriagemDelta.classList.add('is-collapsed');
       if (dCardFilaDelta) dCardFilaDelta.classList.remove('is-collapsed');
-      
+
       if (dCountTriagem) dCountTriagem.textContent = '1';
       if (dCountFila) dCountFila.textContent = '3';
 
@@ -607,7 +1235,7 @@ if (pricingGrid) {
         progressFill.style.transition = 'none';
         progressFill.style.width = '0%';
       }
-      if (lessonTitle) lessonTitle.textContent = 'Aula 01';
+      if (lessonTitle) lessonTitle.textContent = lessonLabel();
       if (item1) item1.classList.add('phone-app__item--active');
       if (item2) item2.classList.remove('phone-app__item--active');
     }, 4200);
@@ -649,7 +1277,7 @@ if (pricingGrid) {
         progressFill.style.transition = 'none';
         progressFill.style.width = '0%';
       }
-      if (lessonTitle) lessonTitle.textContent = 'Aula 01';
+      if (lessonTitle) lessonTitle.textContent = lessonLabel();
       if (item1) item1.classList.add('phone-app__item--active');
       if (item2) item2.classList.remove('phone-app__item--active');
       if (phoneApp) phoneApp.classList.remove('show-player');
