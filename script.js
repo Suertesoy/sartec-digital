@@ -272,6 +272,112 @@ const I18N = {
     waEcossistema: `Olá, vim pelo site da Sartec Digital e quero conversar sobre o pacote Ecossistema Digital.`,
     waSobMedida: `Olá, vim pelo site da Sartec Digital e quero conversar sobre Projetos Sob Medida.`,
     waFloatGeneral: `Olá, vim pelo site da Sartec Digital.`,
+
+    // ── Reorganização da arquitetura (navegação por soluções) ──
+    navCases: `Cases`,
+    navHowWeWork: `Como trabalhamos`,
+    ctaSaibaMais: `Saiba mais →`,
+    footerAuthorship: `Liderado por Lucas Cabral, Product Designer.`,
+    tagSolution: `Solução`,
+    solutionConnectionLabel: `Como se conecta à operação`,
+
+    homeSolTag: `Nossas soluções`,
+    homeSolHeading: `Quatro caminhos para organizar sua operação digital.`,
+    homeSolDesc: `Cada solução resolve um tipo de problema. Escolha o ponto de partida que faz mais sentido para o seu momento.`,
+    homeSolCard1Desc: `Para quem precisa apresentar a empresa com clareza e facilitar o caminho até o contato certo.`,
+    homeSolCard2Desc: `Para quem precisa organizar pedidos, agenda, histórico e processos internos.`,
+    homeSolCard3Desc: `Para quem quer conectar presença, atendimento, automações e métricas em um fluxo só.`,
+    homeSolCard4Desc: `Para demandas específicas, protótipos, aplicativos e integrações fora do padrão.`,
+
+    homeTransitionLine: `Algumas empresas precisam apenas de uma página profissional. Outras precisam reorganizar atendimento, automações e gestão. As soluções evoluem conforme a operação pede.`,
+
+    howHeading: `Como funciona.`,
+    howStep1: `Diagnóstico`,
+    howStep2: `Planejamento`,
+    howStep3: `Implementação`,
+    howStep4: `Acompanhamento`,
+    howStep5: `Evolução`,
+    howStep1Desc: `Mapeamos o problema, a rotina e o objetivo da solução.`,
+    howStep2Desc: `Organizamos o fluxo, as telas e o caminho do usuário.`,
+    howStep3Desc: `Construímos a solução no nível adequado ao escopo.`,
+    howStep4Desc: `Acompanhamos o uso real da equipe e ajustamos o que for necessário.`,
+    howStep5Desc: `Evoluímos a solução conforme a operação cresce e novas necessidades aparecem.`,
+
+    projectsSeeAllCta: `Ver todos os projetos →`,
+
+    solPageHeading: `Explore as soluções da Sartec Digital.`,
+    solPageIntro: `Cada solução é uma porta de entrada diferente. Veja qual caminho conversa mais com a sua operação.`,
+    solFaqHeading: `Perguntas sobre nossas soluções`,
+
+    presencaPageIntro: `A primeira impressão da sua empresa no digital, organizada para gerar contato, não só visual.`,
+    presencaBeforeAfterHeading: `Antes → depois da presença digital`,
+    presencaConnection: `A Presença Digital é o ponto de entrada. Depois que ela existe, normalmente o próximo passo é organizar o atendimento que ela gera.`,
+    presencaPlanMention: `Essa solução pode fazer parte do <a href="como-trabalhamos.html#pacotes">plano Presença Digital</a>.`,
+
+    atendimentoPageIntro: `Pedidos, agenda e histórico organizados em um fluxo que a equipe consegue acompanhar pelo WhatsApp e por um painel simples.`,
+    atendimentoBeforeAfterHeading: `Antes → depois do atendimento pelo WhatsApp`,
+    atendimentoConnection: `Organizar o atendimento normalmente é o passo depois da presença digital — e a base para conectar automações e métricas mais adiante.`,
+    atendimentoPlanMention: `Essa solução pode fazer parte do <a href="como-trabalhamos.html#pacotes">plano Atendimento Organizado</a>.`,
+
+    ecossistemaPageIntro: `Presença, atendimento, automações e métricas funcionando juntos, em vez de ferramentas soltas que não se conversam.`,
+    ecossistemaBeforeAfterHeading: `Antes → depois da operação integrada`,
+    ecossistemaConnection: `O Ecossistema Digital normalmente reúne o que já existe de Presença Digital e Atendimento Organizado em um fluxo único, com automações e métricas por cima.`,
+    ecossistemaPlanMention: `Essa solução pode fazer parte do <a href="como-trabalhamos.html#pacotes">plano Ecossistema Digital</a>.`,
+
+    sobmedidaPageIntro: `Para quando o problema é específico demais para um pacote padrão: protótipos, aplicativos, integrações e sistemas sob medida.`,
+    sobmedidaBeforeAfterHeading: `Antes → depois de transformar um processo específico em solução`,
+    sobmedidaConnection: `Projetos Sob Medida costumam nascer de uma necessidade que não se encaixa nos outros caminhos — ou de uma ideia que ainda não saiu do papel.`,
+    sobmedidaPlanMention: `Essa solução pode fazer parte do <a href="como-trabalhamos.html#pacotes">plano Sob Medida</a>.`,
+
+    comoTrabTag: `Como trabalhamos`,
+    comoTrabHeading: `Abordagem, processo e formas de contratação.`,
+    comoTrabIntro: `Não começamos pela ferramenta, começamos pelo problema real da sua operação. Esta página reúne como pensamos, como conduzimos um projeto e como funciona a contratação.`,
+    processHeading: `Nosso processo de trabalho`,
+    contractingHeading: `Como funciona a contratação`,
+    comoTrabFaqHeading: `Perguntas sobre contratação`,
+
+    casesPageHeading: `Projetos que mostram a Sartec Digital na prática.`,
+    caseTypeLabel: `Tipo de solução:`,
+
+    docTitleSolucoes: `Soluções — Sartec Digital`,
+    metaDescSolucoes: `Conheça as soluções da Sartec Digital: Presença Digital, Atendimento Organizado, Ecossistema Digital e Projetos Sob Medida.`,
+    metaOgTitleSolucoes: `Soluções da Sartec Digital`,
+    metaOgDescSolucoes: `Quatro caminhos para organizar a operação digital da sua empresa.`,
+
+    docTitlePresenca: `Presença Digital — Sartec Digital`,
+    metaDescPresenca: `Sites e páginas comerciais que apresentam sua empresa com clareza e facilitam o caminho até o contato certo.`,
+    metaOgTitlePresenca: `Presença Digital — Sartec Digital`,
+    metaOgDescPresenca: `A primeira impressão da sua empresa no digital, organizada para gerar contato.`,
+
+    docTitleAtendimento: `Atendimento Organizado — Sartec Digital`,
+    metaDescAtendimento: `Organize pedidos, agenda, histórico e processos internos com um painel sob medida conectado ao WhatsApp.`,
+    metaOgTitleAtendimento: `Atendimento Organizado — Sartec Digital`,
+    metaOgDescAtendimento: `Pedidos, agenda e histórico organizados em um fluxo que a equipe consegue acompanhar.`,
+
+    docTitleEcossistema: `Ecossistema Digital — Sartec Digital`,
+    metaDescEcossistema: `Conecte presença digital, atendimento, automações e métricas em uma operação só.`,
+    metaOgTitleEcossistema: `Ecossistema Digital — Sartec Digital`,
+    metaOgDescEcossistema: `Presença, atendimento, automações e métricas funcionando juntos.`,
+
+    docTitleSobMedida: `Sob Medida — Sartec Digital`,
+    metaDescSobMedida: `Protótipos, aplicativos, integrações e sistemas sob medida para demandas específicas.`,
+    metaOgTitleSobMedida: `Projetos Sob Medida — Sartec Digital`,
+    metaOgDescSobMedida: `Quando o problema é específico demais para um pacote padrão.`,
+
+    docTitleComoTrab: `Como trabalhamos — Sartec Digital`,
+    metaDescComoTrab: `Abordagem, processo de trabalho e formas de contratação da Sartec Digital.`,
+    metaOgTitleComoTrab: `Como trabalhamos — Sartec Digital`,
+    metaOgDescComoTrab: `Como pensamos, como conduzimos um projeto e como funciona a contratação.`,
+
+    docTitleCases: `Cases — Sartec Digital`,
+    metaDescCases: `Projetos reais e protótipos desenvolvidos pela Sartec Digital, da presença digital ao aplicativo.`,
+    metaOgTitleCases: `Cases — Sartec Digital`,
+    metaOgDescCases: `Projetos que mostram a Sartec Digital na prática.`,
+
+    docTitleSobre: `Sobre — Sartec Digital`,
+    metaDescSobre: `Conheça a origem da Sartec Digital e quem está por trás das soluções: Lucas Cabral, Product Designer.`,
+    metaOgTitleSobre: `Sobre a Sartec Digital`,
+    metaOgDescSobre: `Nascida dentro de uma operação comercial real, com mais de 30 anos de história.`,
   },
 
   en: {
@@ -544,6 +650,112 @@ const I18N = {
     waEcossistema: `Hi, I found you through the Sartec Digital website and I'd like to talk about the Digital Ecosystem package.`,
     waSobMedida: `Hi, I found you through the Sartec Digital website and I'd like to talk about a Custom Project.`,
     waFloatGeneral: `Hi, I found you through the Sartec Digital website.`,
+
+    // ── Information architecture reorganization (solutions-first nav) ──
+    navCases: `Cases`,
+    navHowWeWork: `How we work`,
+    ctaSaibaMais: `Learn more →`,
+    footerAuthorship: `Led by Lucas Cabral, Product Designer.`,
+    tagSolution: `Solution`,
+    solutionConnectionLabel: `How it connects to your operation`,
+
+    homeSolTag: `Our solutions`,
+    homeSolHeading: `Four paths to organize your digital operation.`,
+    homeSolDesc: `Each solution solves a different kind of problem. Choose the starting point that makes the most sense for where you are right now.`,
+    homeSolCard1Desc: `For businesses that need to present themselves clearly and make it easy for customers to reach the right contact.`,
+    homeSolCard2Desc: `For businesses that need to organize orders, scheduling, history and internal processes.`,
+    homeSolCard3Desc: `For businesses that want to connect presence, service, automation and metrics into a single flow.`,
+    homeSolCard4Desc: `For specific needs, prototypes, apps and integrations outside the standard.`,
+
+    homeTransitionLine: `Some businesses just need a professional page. Others need to reorganize customer service, automation and management. The solutions evolve as the operation demands.`,
+
+    howHeading: `How it works.`,
+    howStep1: `Diagnosis`,
+    howStep2: `Planning`,
+    howStep3: `Implementation`,
+    howStep4: `Follow-up`,
+    howStep5: `Evolution`,
+    howStep1Desc: `We map the problem, the routine and the goal of the solution.`,
+    howStep2Desc: `We organize the workflow, the screens and the user's path.`,
+    howStep3Desc: `We build the solution at the level the scope calls for.`,
+    howStep4Desc: `We follow the team's real-world use and adjust whatever is needed.`,
+    howStep5Desc: `We evolve the solution as the operation grows and new needs come up.`,
+
+    projectsSeeAllCta: `See all projects →`,
+
+    solPageHeading: `Explore Sartec Digital's solutions.`,
+    solPageIntro: `Each solution is a different entry point. See which path speaks most to your operation.`,
+    solFaqHeading: `Questions about our solutions`,
+
+    presencaPageIntro: `Your company's first digital impression, organized to generate contact, not just visuals.`,
+    presencaBeforeAfterHeading: `Before → after, digital presence`,
+    presencaConnection: `Digital Presence is the entry point. Once it exists, the next step is usually organizing the service it generates.`,
+    presencaPlanMention: `This solution can be part of the <a href="como-trabalhamos.html#pacotes">Digital Presence plan</a>.`,
+
+    atendimentoPageIntro: `Orders, scheduling and history organized into a workflow the team can follow through WhatsApp and a simple dashboard.`,
+    atendimentoBeforeAfterHeading: `Before → after, WhatsApp customer service`,
+    atendimentoConnection: `Organizing customer service is usually the step after digital presence — and the foundation for connecting automation and metrics later on.`,
+    atendimentoPlanMention: `This solution can be part of the <a href="como-trabalhamos.html#pacotes">Organized Customer Service plan</a>.`,
+
+    ecossistemaPageIntro: `Presence, service, automation and metrics working together, instead of disconnected tools that don't talk to each other.`,
+    ecossistemaBeforeAfterHeading: `Before → after, an integrated operation`,
+    ecossistemaConnection: `The Digital Ecosystem usually brings together what already exists from Digital Presence and Organized Customer Service into a single flow, with automation and metrics on top.`,
+    ecossistemaPlanMention: `This solution can be part of the <a href="como-trabalhamos.html#pacotes">Digital Ecosystem plan</a>.`,
+
+    sobmedidaPageIntro: `For when the problem is too specific for a standard package: prototypes, apps, integrations and custom systems.`,
+    sobmedidaBeforeAfterHeading: `Before → after, turning a specific process into a solution`,
+    sobmedidaConnection: `Custom Projects usually come from a need that doesn't fit the other paths — or from an idea that hasn't left the drawing board yet.`,
+    sobmedidaPlanMention: `This solution can be part of the <a href="como-trabalhamos.html#pacotes">Custom Solution plan</a>.`,
+
+    comoTrabTag: `How we work`,
+    comoTrabHeading: `Approach, process and how to get started.`,
+    comoTrabIntro: `We don't start with the tool, we start with the real problem in your operation. This page covers how we think, how we run a project and how engagement works.`,
+    processHeading: `Our work process`,
+    contractingHeading: `How engagement works`,
+    comoTrabFaqHeading: `Contracting questions`,
+
+    casesPageHeading: `Projects that show Sartec Digital in practice.`,
+    caseTypeLabel: `Solution type:`,
+
+    docTitleSolucoes: `Solutions — Sartec Digital`,
+    metaDescSolucoes: `Explore Sartec Digital's solutions: Digital Presence, Organized Customer Service, Digital Ecosystem and Custom Projects.`,
+    metaOgTitleSolucoes: `Sartec Digital's solutions`,
+    metaOgDescSolucoes: `Four paths to organize your company's digital operation.`,
+
+    docTitlePresenca: `Digital Presence — Sartec Digital`,
+    metaDescPresenca: `Websites and business pages that present your company clearly and make it easy to reach the right contact.`,
+    metaOgTitlePresenca: `Digital Presence — Sartec Digital`,
+    metaOgDescPresenca: `Your company's first digital impression, organized to generate contact.`,
+
+    docTitleAtendimento: `Organized Customer Service — Sartec Digital`,
+    metaDescAtendimento: `Organize orders, scheduling, history and internal processes with a custom dashboard connected to WhatsApp.`,
+    metaOgTitleAtendimento: `Organized Customer Service — Sartec Digital`,
+    metaOgDescAtendimento: `Orders, scheduling and history organized into a workflow the team can actually follow.`,
+
+    docTitleEcossistema: `Digital Ecosystem — Sartec Digital`,
+    metaDescEcossistema: `Connect digital presence, customer service, automation and metrics into a single operation.`,
+    metaOgTitleEcossistema: `Digital Ecosystem — Sartec Digital`,
+    metaOgDescEcossistema: `Presence, service, automation and metrics working together.`,
+
+    docTitleSobMedida: `Custom Solutions — Sartec Digital`,
+    metaDescSobMedida: `Prototypes, apps, integrations and custom systems for specific needs.`,
+    metaOgTitleSobMedida: `Custom Projects — Sartec Digital`,
+    metaOgDescSobMedida: `For when the problem is too specific for a standard package.`,
+
+    docTitleComoTrab: `How we work — Sartec Digital`,
+    metaDescComoTrab: `Sartec Digital's approach, work process and how engagement works.`,
+    metaOgTitleComoTrab: `How we work — Sartec Digital`,
+    metaOgDescComoTrab: `How we think, how we run a project and how engagement works.`,
+
+    docTitleCases: `Cases — Sartec Digital`,
+    metaDescCases: `Real projects and prototypes built by Sartec Digital, from digital presence to mobile apps.`,
+    metaOgTitleCases: `Cases — Sartec Digital`,
+    metaOgDescCases: `Projects that show Sartec Digital in practice.`,
+
+    docTitleSobre: `About — Sartec Digital`,
+    metaDescSobre: `Learn about Sartec Digital's origin and who's behind the solutions: Lucas Cabral, Product Designer.`,
+    metaOgTitleSobre: `About Sartec Digital`,
+    metaOgDescSobre: `Born inside a real commercial operation, with more than 30 years of history.`,
   },
 };
 
