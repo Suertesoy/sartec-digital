@@ -309,6 +309,15 @@ const I18N = {
     solPageIntro: `Cada solução é uma porta de entrada diferente. Veja qual caminho conversa mais com a sua operação.`,
     solFaqHeading: `Perguntas sobre nossas soluções`,
 
+    compareHeading: `Qual solução faz mais sentido para você?`,
+    compareIntro: `Compare rapidamente para entender qual caminho conversa mais com o momento da sua empresa.`,
+    compareTableLabel: `Ideal para`,
+    compareIdealPresenca: `Quem precisa melhorar a apresentação da empresa, organizar a informação e gerar mais contatos.`,
+    compareIdealAtendimento: `Empresas que já atendem bastante pelo WhatsApp e precisam organizar conversas, histórico e responsáveis.`,
+    compareIdealEcossistema: `Quem quer integrar presença digital, atendimento, automações e gestão.`,
+    compareIdealSobMedida: `Operações com necessidades específicas, fluxos internos próprios ou sistemas personalizados.`,
+    compareScopeNote: `Presença Digital pode ser apenas um site ou página profissional. Já o Ecossistema Digital pode incluir presença digital, atendimento, automações e métricas em uma solução integrada — ou seja, vai além de "só um site".`,
+
     presencaPageIntro: `A primeira impressão da sua empresa no digital, organizada para gerar contato, não só visual.`,
     presencaBeforeAfterHeading: `Antes → depois da presença digital`,
     presencaConnection: `A Presença Digital é o ponto de entrada. Depois que ela existe, normalmente o próximo passo é organizar o atendimento que ela gera.`,
@@ -686,6 +695,15 @@ const I18N = {
     solPageHeading: `Explore Sartec Digital's solutions.`,
     solPageIntro: `Each solution is a different entry point. See which path speaks most to your operation.`,
     solFaqHeading: `Questions about our solutions`,
+
+    compareHeading: `Which solution makes the most sense for you?`,
+    compareIntro: `Compare them quickly to see which path speaks most to where your business is right now.`,
+    compareTableLabel: `Ideal for`,
+    compareIdealPresenca: `Businesses that need to improve their presentation, organize information and generate more contacts.`,
+    compareIdealAtendimento: `Businesses that already handle a lot of WhatsApp service and need to organize conversations, history and ownership.`,
+    compareIdealEcossistema: `Businesses that want to integrate digital presence, customer service, automation and management.`,
+    compareIdealSobMedida: `Operations with specific needs, their own internal workflows or custom systems.`,
+    compareScopeNote: `Digital Presence can be just a professional website or page. The Digital Ecosystem, on the other hand, can include digital presence, customer service, automation and metrics in one integrated solution — in other words, it goes beyond "just a website".`,
 
     presencaPageIntro: `Your company's first digital impression, organized to generate contact, not just visuals.`,
     presencaBeforeAfterHeading: `Before → after, digital presence`,

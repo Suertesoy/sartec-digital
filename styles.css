@@ -342,24 +342,33 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
   border-radius: var(--r-pill);
   font-size: 15px;
   line-height: 1;
+  /* Buttons don't inherit page text color by default in every browser —
+     without this, the BR/US fallback label (shown when a platform lacks
+     flag-emoji glyphs) can render in the browser's default dark button
+     text on our dark header, which is unreadable. */
+  color: var(--text-2);
   opacity: 0.45;
   filter: grayscale(0.5);
-  transition: opacity var(--t) var(--ease), filter var(--t) var(--ease), background var(--t) var(--ease), box-shadow var(--t) var(--ease);
+  transition: opacity var(--t) var(--ease), filter var(--t) var(--ease), background var(--t) var(--ease), box-shadow var(--t) var(--ease), color var(--t) var(--ease);
 }
 .lang-switch__btn:hover {
   opacity: 0.8;
+  color: var(--text);
 }
 .lang-switch__btn.is-active {
   opacity: 1;
   filter: none;
+  color: var(--text);
   background: rgba(142, 162, 255, 0.18);
   box-shadow: inset 0 0 0 1px var(--blue-border);
 }
 .lang-switch__btn:focus-visible {
   outline: 2px solid var(--blue-light);
   outline-offset: 2px;
+  color: var(--text);
 }
 .lang-switch__flag {
+  color: inherit;
   font-size: 15px;
   line-height: 1;
 }
@@ -2140,6 +2149,57 @@ h3 { font-size: 17px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01e
 .pkg-compare__table td.cmp-no   { color: var(--text-3); font-size: 18px; }
 .pkg-compare__table td.cmp-opt  { font-size: 11px; color: var(--amber); font-weight: 500; }
 
+/* ── COMPARATIVO DE SOLUÇÕES (solucoes.html) ──────
+   Visual análogo ao .pkg-compare, mas em classe própria: o comparativo de
+   pacotes fica escondido no mobile (linhas curtas, tabela densa); este
+   comparativo tem só 1 linha de texto corrido por solução e deve continuar
+   visível no mobile (com rolagem horizontal), por isso não reaproveita a
+   regra "display:none" do .pkg-compare. */
+.sol-compare { margin-top: 24px; }
+.sol-compare__wrap {
+  overflow-x: auto;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+}
+.sol-compare__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 760px;
+}
+.sol-compare__table th,
+.sol-compare__table td {
+  padding: 16px 18px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.55;
+}
+.sol-compare__table tbody tr:last-child td { border-bottom: none; }
+.sol-compare__table th:first-child,
+.sol-compare__table td:first-child {
+  font-weight: 600;
+  color: var(--text-2);
+  width: 16%;
+  white-space: nowrap;
+}
+.sol-compare__table thead th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: var(--bg);
+}
+.sol-compare__table tbody tr { background: var(--surface); }
+.sol-compare__table td { color: var(--text-2); }
+.sol-compare__note {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--text-3);
+  line-height: 1.65;
+}
+
 /* ── APLICAÇÃO REAL ───────────────────────────── */
 .real-app-section { background: transparent; }
 
@@ -2734,13 +2794,21 @@ main h1:not(.hero__title) {
 
 /* Páginas individuais de solução — coluna de leitura central */
 .solution-page { max-width: 720px; margin: 0 auto; }
-.solution-page .ba-wrapper { margin: 0 0 40px; }
-.solution-before-after__heading {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-2);
-  margin-bottom: 14px;
+/* O título do bloco Antes → Depois vive FORA da caixa (.ba-wrapper),
+   como uma legenda acima da tabela — assim ele respira em vez de ficar
+   colado no topo arredondado do componente. */
+.solution-before-after {
+  margin: 36px 0 40px;
+  text-align: center;
 }
+.solution-before-after__heading {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+.solution-before-after .ba-wrapper { margin: 0; }
 .solution-page .pkg-details__block { margin-bottom: 28px; }
 .solution-page .pkg-details__block strong {
   font-size: 12px;
