@@ -2865,6 +2865,70 @@ main h1:not(.hero__title) {
    então essa é a única visual do hero em telas pequenas. */
 .hero__mobile-flow { display: none; }
 
+/* Grade de 9 blocos de capacidade (solucoes.html — "O que pode ser entregue") */
+.eco-grid--capabilities {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 980px;
+}
+
+/* Grade de 8 cards de contratação (como-trabalhamos.html) — 4 colunas para
+   fechar em duas linhas parelhas em vez de 3+3+2. */
+.contracting-grid { grid-template-columns: repeat(4, 1fr); }
+
+/* Timeline vertical do processo de trabalho (como-trabalhamos.html) —
+   pensada para muitos passos (10), por isso não reaproveita o layout
+   horizontal de setas do .pilot__steps (feito para 4-5 itens). */
+.process-timeline {
+  max-width: 640px;
+  margin: 0 auto;
+  list-style: none;
+}
+.process-step {
+  display: flex;
+  gap: 18px;
+  padding-bottom: 28px;
+  position: relative;
+}
+.process-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-light);
+}
+.process-step__num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--blue-dim);
+  border: 1px solid var(--blue-border);
+  color: var(--blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+.process-step__body h3 { font-size: 16px; margin-bottom: 4px; }
+.process-step__body p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+
+/* Bloco "processo por tipo de solução" — lista de perguntas dentro do
+   card de Presença Digital */
+.process-questions {
+  margin-top: 12px;
+  padding-left: 18px;
+}
+.process-questions li {
+  font-size: 13px;
+  color: var(--text-3);
+  line-height: 1.6;
+  list-style: disc;
+  margin-bottom: 4px;
+}
+
 /* ── ANIMATIONS ───────────────────────────────── */
 .fade-up {
   opacity: 0;
