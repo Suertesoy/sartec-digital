@@ -20,7 +20,7 @@
   <link rel="icon" href="/logo-branca-gpt.png" type="image/png" />
   <link rel="apple-touch-icon" href="/logo-branca-gpt.png" />
   <title data-i18n="docTitleSolucoes">Soluções — Sartec Digital</title>
-  <link rel="stylesheet" href="styles.css?v=1.8" />
+  <link rel="stylesheet" href="styles.css?v=1.9" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -41,7 +41,7 @@
       </div>
       <nav class="nav" id="nav" aria-label="Navegação principal" data-i18n-attr="aria-label:ariaMainNav">
         <a href="solucoes.html" class="nav__link" data-i18n="navSolutions">Soluções</a>
-        <a href="cases.html" class="nav__link" data-i18n="navCases">Cases</a>
+        <a href="cases.html" class="nav__link" data-i18n="navCases">Projetos</a>
         <a href="como-trabalhamos.html" class="nav__link" data-i18n="navHowWeWork">Como trabalhamos</a>
         <a href="sobre.html" class="nav__link" data-i18n="navAbout">Sobre</a>
         <div class="lang-switch" id="langSwitch" role="group" aria-label="Idioma do site" data-i18n-attr="aria-label:ariaLangGroup">
@@ -62,59 +62,206 @@
 
   <main>
 
-    <!-- ═══ SOLUÇÕES — página de exploração ═══ -->
-    <section class="section ecosystem page-intro" id="solucoes-page">
+    <!-- ═══ Intro ═══ -->
+    <section class="section page-intro" id="solucoes-page">
       <div class="container">
         <header class="section__head">
-          <span class="tag" data-i18n="homeSolTag">Nossas soluções</span>
-          <h1 data-i18n="solPageHeading">Explore as soluções da Sartec Digital.</h1>
-          <p data-i18n="solPageIntro">Cada solução é uma porta de entrada diferente. Veja qual caminho conversa mais com a sua operação.</p>
+          <span class="tag" data-i18n="solPageTag">Pacotes e caminhos de entrada</span>
+          <h1 data-i18n="solPageHeading">Escolha o ponto de partida mais adequado para sua empresa.</h1>
+          <p data-i18n="solPageIntro">Cada pacote é um ponto de entrada. O escopo é definido depois de entendermos a sua operação — não antes.</p>
         </header>
-        <div class="eco-grid eco-grid--solutions">
-          <article class="eco-card">
-            <div class="eco-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="14" rx="2"/>
-                <path d="M8 21h8M12 17v4"/>
-              </svg>
+      </div>
+    </section>
+
+    <!-- ═══ Pacotes lado a lado ═══ -->
+    <section class="section pricing">
+      <div class="container">
+        <!-- Abas Mobile para Pacotes -->
+        <div class="pricing-tabs" role="tablist" aria-label="Pacotes Sartec Digital" data-i18n-attr="aria-label:ariaPricingTabs">
+          <button class="pricing-tab" role="tab" aria-selected="false" aria-controls="presenca-digital" id="tab-presenca" data-i18n="tabPresenca">Presença</button>
+          <button class="pricing-tab" role="tab" aria-selected="false" aria-controls="atendimento-organizado" id="tab-atendimento" data-i18n="tabAtendimento">Atendimento</button>
+          <button class="pricing-tab pricing-tab--active" role="tab" aria-selected="true" aria-controls="ecossistema-digital" id="tab-ecossistema" data-i18n="tabEcossistema">Ecossistema</button>
+          <button class="pricing-tab" role="tab" aria-selected="false" aria-controls="sob-medida" id="tab-sobmedida" data-i18n="proposalCustom">Sob Medida</button>
+        </div>
+
+        <p class="pricing__hint" aria-hidden="true" data-i18n="pricingHint">Arraste para o lado para ver os outros pacotes →</p>
+        <div class="pricing__grid">
+
+          <!-- Presença Digital -->
+          <div class="pricing-card" data-plan-card tabindex="0" id="presenca-digital" role="tabpanel" aria-labelledby="tab-presenca">
+            <div class="pricing-card__head">
+              <h3 data-i18n="presencaTitle">Presença Digital</h3>
+              <p data-i18n-html="presencaIdeal"><strong>Ideal para:</strong> negócios e profissionais que precisam apresentar melhor seus serviços, organizar a informação e facilitar o caminho do cliente até o contato certo.</p>
             </div>
-            <h3 data-i18n="presencaTitle">Presença Digital</h3>
-            <p data-i18n="homeSolCard1Desc">Para quem precisa apresentar a empresa com clareza e facilitar o caminho até o contato certo.</p>
-            <a href="#presenca-digital" class="eco-card__link" data-i18n="ctaSaibaMais">Saiba mais →</a>
-          </article>
-          <article class="eco-card">
-            <div class="eco-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <path d="M9 3v18M3 9h18"/>
-              </svg>
+            <div class="pricing-card__price">
+              <div class="price-line price-line--setup">
+                <span class="price-line__label" data-i18n="priceLabelScope">Escopo</span>
+                <span class="price-line__val" data-i18n="presencaScopeValue">Definido por projeto</span>
+              </div>
+              <div class="price-line price-line--monthly">
+                <span class="price-line__label" data-i18n="priceLabelProposal">Proposta</span>
+                <span class="price-line__val"><strong data-i18n="proposalCustom">Sob Medida</strong></span>
+              </div>
             </div>
-            <h3 data-i18n="atendimentoTitle">Atendimento Organizado</h3>
-            <p data-i18n="homeSolCard2Desc">Para quem precisa organizar pedidos, agenda, histórico e processos internos.</p>
-            <a href="#atendimento-organizado" class="eco-card__link" data-i18n="ctaSaibaMais">Saiba mais →</a>
-          </article>
-          <article class="eco-card">
-            <div class="eco-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="4" width="16" height="16" rx="2"/>
-                <path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/>
-              </svg>
+            <a href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+quero+conversar+sobre+o+pacote+Presen%C3%A7a+Digital." target="_blank" rel="noopener noreferrer" class="btn btn--outline-card pricing-card__cta" data-wa-key="waPresenca" data-i18n="ctaConversar">Conversar sobre este caminho</a>
+            <ul class="pricing-card__includes">
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude1">Página comercial responsiva</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude2">Arquitetura das seções</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude3">Identidade visual adaptada</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude4">Textos e imagens sob medida</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude5">Caminho claro de contato</span></li>
+            </ul>
+            <div class="pkg-details">
+              <button class="pkg-details__toggle" aria-expanded="false" type="button"><span data-i18n="pkgDetailsToggle">Ver detalhes do pacote</span><span class="pkg-details__icon" aria-hidden="true">+</span></button>
+              <div class="pkg-details__body" hidden>
+                <div class="pkg-details__block pricing-detail--resolve">
+                  <strong data-i18n="pkgLabelResolve">O que resolve</strong>
+                  <p data-i18n="presencaResolveDesc">Site antigo, comunicação confusa ou dificuldade do cliente em entender o que a empresa oferece e qual próximo passo tomar.</p>
+                </div>
+                <div class="pkg-details__block pricing-detail--include">
+                  <strong data-i18n="pkgLabelInclude">O que pode incluir</strong>
+                  <p data-i18n="presencaIncludeDesc">Página comercial responsiva, arquitetura das seções, direção de usabilidade, adaptação da identidade visual, imagens personalizadas, elementos da marca, botões de contato, formulário ou outros caminhos de conversão conforme o negócio.</p>
+                </div>
+                <div class="pkg-details__block pricing-detail--fit">
+                  <strong data-i18n="pkgLabelFit">Quando faz sentido</strong>
+                  <p data-i18n="presencaFitDesc">Quando o negócio ou profissional precisa apresentar melhor seus serviços e facilitar o caminho do cliente até o contato certo, antes de partir para automações ou sistemas mais complexos.</p>
+                </div>
+                <p class="pkg-details__note pricing-detail--note" data-i18n="presencaNote">A personalização visual faz parte do trabalho, sempre dentro de um escopo definido antes da implementação.</p>
+              </div>
             </div>
-            <h3 data-i18n="ecossistemaTitle">Ecossistema Digital</h3>
-            <p data-i18n="homeSolCard3Desc">Para quem quer conectar presença, atendimento, automações e métricas em um fluxo só.</p>
-            <a href="#ecossistema-digital" class="eco-card__link" data-i18n="ctaSaibaMais">Saiba mais →</a>
-          </article>
-          <article class="eco-card">
-            <div class="eco-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="5" y="2" width="14" height="20" rx="2"/>
-                <line x1="12" y1="18" x2="12" y2="18"/>
-              </svg>
+          </div>
+
+          <!-- Atendimento Organizado -->
+          <div class="pricing-card" data-plan-card tabindex="0" id="atendimento-organizado" role="tabpanel" aria-labelledby="tab-atendimento">
+            <div class="pricing-card__head">
+              <h3 data-i18n="atendimentoTitle">Atendimento Organizado</h3>
+              <p data-i18n-html="atendimentoIdeal"><strong>Ideal para:</strong> negócios e profissionais que precisam organizar atendimento, pedidos, agenda, orçamento, histórico ou processos internos.</p>
             </div>
-            <h3 data-i18n="proposalCustom">Sob Medida</h3>
-            <p data-i18n="homeSolCard4Desc">Para demandas específicas, protótipos, aplicativos e integrações fora do padrão.</p>
-            <a href="#sob-medida" class="eco-card__link" data-i18n="ctaSaibaMais">Saiba mais →</a>
-          </article>
+            <div class="pricing-card__price">
+              <div class="price-line price-line--setup">
+                <span class="price-line__label" data-i18n="priceLabelScope">Escopo</span>
+                <span class="price-line__val" data-i18n="scopeComplexidade">Conforme complexidade</span>
+              </div>
+              <div class="price-line price-line--monthly">
+                <span class="price-line__label" data-i18n="priceLabelProposal">Proposta</span>
+                <span class="price-line__val"><strong data-i18n="proposalCustom">Sob Medida</strong></span>
+              </div>
+            </div>
+            <a href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+quero+conversar+sobre+o+pacote+Atendimento+Organizado." target="_blank" rel="noopener noreferrer" class="btn btn--outline-card pricing-card__cta" data-wa-key="waAtendimento" data-i18n="ctaConversar">Conversar sobre este caminho</a>
+            <ul class="pricing-card__includes">
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude1">Organização de processos</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude2">Painel interno sob medida</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude3">Responsáveis por demanda</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude4">Histórico e dados centralizados</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude5">Métricas simples de rotina</span></li>
+            </ul>
+            <div class="pkg-details">
+              <button class="pkg-details__toggle" aria-expanded="false" type="button"><span data-i18n="pkgDetailsToggle">Ver detalhes do pacote</span><span class="pkg-details__icon" aria-hidden="true">+</span></button>
+              <div class="pkg-details__body" hidden>
+                <div class="pkg-details__block pricing-detail--resolve">
+                  <strong data-i18n="pkgLabelResolve">O que resolve</strong>
+                  <p data-i18n="atendimentoResolveDesc">Pedidos ou solicitações esquecidos, falta de clareza sobre responsabilidades, histórico espalhado e ausência de controle sobre a rotina.</p>
+                </div>
+                <div class="pkg-details__block pricing-detail--include">
+                  <strong data-i18n="pkgLabelInclude">O que pode incluir</strong>
+                  <p data-i18n="atendimentoIncludeDesc">Painel de controle, etapas de acompanhamento, responsáveis por atividade, histórico centralizado, filtros, métricas operacionais e fluxos para reduzir repetição.</p>
+                </div>
+                <div class="pkg-details__block pricing-detail--fit">
+                  <strong data-i18n="pkgLabelFit">Quando faz sentido</strong>
+                  <p data-i18n="atendimentoFitDesc">Quando o principal problema está na operação interna e no fluxo de trabalho da equipe, e o negócio quer organizar o atendimento e o histórico sem necessariamente mudar o site público.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ecossistema Digital (destaque) -->
+          <div class="pricing-card pricing-card--highlight is-selected is-active-tab" data-plan-card tabindex="0" id="ecossistema-digital" role="tabpanel" aria-labelledby="tab-ecossistema">
+            <div class="pricing-card__head">
+              <div class="pricing-card__recommended" data-i18n="recommendedBadge">Mais recomendado</div>
+              <h3 data-i18n="ecossistemaTitle">Ecossistema Digital</h3>
+              <p data-i18n-html="ecossistemaIdeal"><strong>Ideal para:</strong> operações que querem conectar presença digital, atendimento, automações, sistemas internos e métricas em uma operação mais integrada.</p>
+            </div>
+            <div class="pricing-card__price">
+              <div class="price-line price-line--setup">
+                <span class="price-line__label" data-i18n="priceLabelScope">Escopo</span>
+                <span class="price-line__val" data-i18n="scopeComplexidade">Conforme complexidade</span>
+              </div>
+              <div class="price-line price-line--monthly">
+                <span class="price-line__label" data-i18n="priceLabelProposal">Proposta</span>
+                <span class="price-line__val"><strong data-i18n="proposalCustom">Sob Medida</strong></span>
+              </div>
+            </div>
+            <a href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+quero+conversar+sobre+o+pacote+Ecossistema+Digital." target="_blank" rel="noopener noreferrer" class="btn btn--primary pricing-card__cta" data-wa-key="waEcossistema" data-i18n="ecossistemaCta">Analisar meu cenário</a>
+            <ul class="pricing-card__includes">
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude1">Landing page integrada</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude2">Painel de atendimento/pedidos</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude3">Automações de fluxo úteis</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude4">Triagem inteligente</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude5">Métricas operacionais completas</span></li>
+            </ul>
+            <div class="pkg-details">
+              <button class="pkg-details__toggle" aria-expanded="false" type="button"><span data-i18n="pkgDetailsToggle">Ver detalhes do pacote</span><span class="pkg-details__icon" aria-hidden="true">+</span></button>
+              <div class="pkg-details__body" hidden>
+                <div class="pkg-details__block pricing-detail--resolve">
+                  <strong data-i18n="pkgLabelResolve">O que resolve</strong>
+                  <p data-i18n="ecossistemaResolveDesc">Site, atendimento e gestão funcionando de forma desconectada. Evita que o cliente fique sem clareza do próximo passo e reduz tarefas repetitivas da equipe.</p>
+                </div>
+                <div class="pkg-details__block pricing-detail--include">
+                  <strong data-i18n="pkgLabelInclude">O que pode incluir</strong>
+                  <p data-i18n="ecossistemaIncludeDesc">Página comercial conectada ao fluxo, painel de controle, triagem automatizada, direcionamento de demandas, métricas de produtividade e rotinas da equipe.</p>
+                </div>
+                <div class="pkg-details__block pricing-detail--fit">
+                  <strong data-i18n="pkgLabelFit">Quando faz sentido</strong>
+                  <p data-i18n="ecossistemaFitDesc">Quando o negócio quer unir a presença digital que direciona o cliente ao painel interno que organiza a rotina da equipe, centralizando a operação em um fluxo único.</p>
+                </div>
+                <p class="pkg-details__note pricing-detail--note" data-i18n="ecossistemaNote">No Ecossistema Digital, todas as partes trabalham juntas: a página apresenta com clareza, o painel organiza e as métricas acompanham.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sob Medida -->
+          <div class="pricing-card pricing-card--custom" data-plan-card tabindex="0" id="sob-medida" role="tabpanel" aria-labelledby="tab-sobmedida">
+            <div class="pricing-card__head">
+              <h3 data-i18n="proposalCustom">Sob Medida</h3>
+              <p data-i18n-html="sobmedidaIdeal"><strong>Ideal para:</strong> demandas específicas como dashboards, e-commerce, ou para quem quer desenvolver protótipos, aplicativos, MVPs e aplicações digitais sob medida.</p>
+            </div>
+            <div class="pricing-card__price">
+              <div class="price-line price-line--setup">
+                <span class="price-line__label" data-i18n="priceLabelScope">Escopo</span>
+                <span class="price-line__val" data-i18n="sobmedidaScopeValue">Definido após análise</span>
+              </div>
+              <div class="price-line price-line--monthly">
+                <span class="price-line__label" data-i18n="priceLabelProposal">Proposta</span>
+                <span class="price-line__val"><strong data-i18n="proposalCustom">Sob Medida</strong></span>
+              </div>
+            </div>
+            <a href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+quero+conversar+sobre+Projetos+Sob+Medida." target="_blank" rel="noopener noreferrer" class="btn btn--outline-card pricing-card__cta" data-wa-key="waSobMedida" data-i18n="sobmedidaCta">Solicitar análise</a>
+            <ul class="pricing-card__includes">
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude1">Aplicativos e MVPs</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude2">Dashboards e painéis específicos</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude3">Integrações e banco de dados</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude4">E-commerce e catálogos sob medida</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude5">Escopo e prazo bem definidos</span></li>
+            </ul>
+            <div class="pkg-details">
+              <button class="pkg-details__toggle" aria-expanded="false" type="button"><span data-i18n="pkgDetailsToggle">Ver detalhes do pacote</span><span class="pkg-details__icon" aria-hidden="true">+</span></button>
+              <div class="pkg-details__body" hidden>
+                <div class="pkg-details__block pricing-detail--resolve">
+                  <strong data-i18n="pkgLabelResolve">O que resolve</strong>
+                  <p data-i18n="sobmedidaResolveDesc">Processos específicos ou ideias de novos produtos digitais que não se encaixam em soluções prontas e exigem análise profunda de escopo.</p>
+                </div>
+                <div class="pkg-details__block pricing-detail--include">
+                  <strong data-i18n="pkgLabelInclude">O que pode incluir</strong>
+                  <p data-i18n="sobmedidaIncludeDesc">Desenho de protótipos, desenvolvimento de aplicativos, sistemas integrados a APIs, e-commerce personalizado, painéis gerenciais e fluxos complexos.</p>
+                </div>
+                <div class="pkg-details__block pricing-detail--fit">
+                  <strong data-i18n="pkgLabelFit">Quando faz sentido</strong>
+                  <p data-i18n="sobmedidaFitDesc">Quando a operação ou empresa tem uma necessidade sob medida, quer tirar um MVP/aplicativo do papel, ou quer integrar múltiplos sistemas existentes em uma infraestrutura própria.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -135,7 +282,7 @@
                   <th scope="col" data-i18n="compareTableLabel">Ideal para</th>
                   <th scope="col" data-i18n="presencaTitle">Presença Digital</th>
                   <th scope="col" data-i18n="atendimentoTitle">Atendimento Organizado</th>
-                  <th scope="col" data-i18n="ecossistemaTitle">Ecossistema Digital</th>
+                  <th scope="col" class="sol-compare__col--highlight" data-i18n="ecossistemaTitle">Ecossistema Digital</th>
                   <th scope="col" data-i18n="proposalCustom">Sob Medida</th>
                 </tr>
               </thead>
@@ -144,100 +291,99 @@
                   <td data-i18n="compareTableLabel">Ideal para</td>
                   <td data-i18n="compareIdealPresenca">Quem precisa melhorar a apresentação da empresa, organizar a informação e gerar mais contatos.</td>
                   <td data-i18n="compareIdealAtendimento">Empresas que já atendem bastante pelo WhatsApp e precisam organizar conversas, histórico e responsáveis.</td>
-                  <td data-i18n="compareIdealEcossistema">Quem quer integrar presença digital, atendimento, automações e gestão.</td>
+                  <td class="sol-compare__col--highlight" data-i18n="compareIdealEcossistema">Quem quer integrar presença digital, atendimento, automações e gestão.</td>
                   <td data-i18n="compareIdealSobMedida">Operações com necessidades específicas, fluxos internos próprios ou sistemas personalizados.</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowLanding">Landing page / presença digital</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-yes">✓</td>
+                  <td class="cmp-yes">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-yes sol-compare__col--highlight">✓ <span data-i18n="cellIncluido">Incluído</span></td>
                   <td class="cmp-opt" data-i18n="cellOpcional">opcional</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowOrganizacao">Organização de processos</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-yes">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-yes sol-compare__col--highlight">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowPainel">Painel interno</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-yes">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-yes sol-compare__col--highlight">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowAutomacoes">Automações / IA</td>
-                  <td class="cmp-no">—</td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
                   <td class="cmp-opt" data-i18n="cellOpcional">opcional</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</td>
+                  <td class="cmp-yes sol-compare__col--highlight">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowApp">Aplicativo ou MVP</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-yes">✓</td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-no sol-compare__col--highlight">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-yes">✓ <span data-i18n="cellIncluido">Incluído</span></td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</td>
                   <td class="cmp-opt" data-i18n="cellOpcional">opcional</td>
                   <td class="cmp-opt" data-i18n="cellOpcional">opcional</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</td>
+                  <td class="cmp-yes sol-compare__col--highlight">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowVenda">Venda digital / catálogo</td>
                   <td class="cmp-opt" data-i18n="cellOpcional">opcional</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-opt" data-i18n="cellOpcional">opcional</td>
-                  <td class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-opt sol-compare__col--highlight" data-i18n="cellOpcional">opcional</td>
+                  <td class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowMetricas">Métricas</td>
-                  <td class="cmp-no">—</td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
                   <td class="cmp-opt" data-i18n="cellBasico">básico</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</td>
+                  <td class="cmp-yes sol-compare__col--highlight">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowIntegracoes">Integrações</td>
                   <td class="cmp-opt" data-i18n="cellOpcional">opcional</td>
                   <td class="cmp-opt" data-i18n="cellOpcional">opcional</td>
-                  <td class="cmp-yes">✓</td>
-                  <td class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</td>
+                  <td class="cmp-yes sol-compare__col--highlight">✓ <span data-i18n="cellIncluido">Incluído</span></td>
+                  <td class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</td>
                 </tr>
                 <tr>
                   <td data-i18n="tableRowEscopo">Escopo personalizado</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-no">—</td>
-                  <td class="cmp-yes">✓</td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-no">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-no sol-compare__col--highlight">— <span data-i18n="cellNaoIncluido">Não incluído</span></td>
+                  <td class="cmp-yes">✓ <span data-i18n="cellIncluido">Incluído</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <!-- Versão mobile: um card por solução em vez de tabela com rolagem horizontal,
-               assim o nome da solução e o contexto ficam sempre visíveis. -->
+          <!-- Versão mobile: um card por solução em vez de tabela com rolagem horizontal. -->
           <div class="sol-compare__mobile">
             <article class="sol-compare__card">
               <h3 data-i18n="presencaTitle">Presença Digital</h3>
               <p class="sol-compare__card-ideal" data-i18n="compareIdealPresenca">Quem precisa melhorar a apresentação da empresa, organizar a informação e gerar mais contatos.</p>
               <dl class="sol-compare__rows">
-                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-no">—</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-no">—</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-no">—</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
                 <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
                 <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
                 <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
               </dl>
               <a href="#presenca-digital" class="sol-compare__card-link" data-i18n="ctaSaibaMais">Saiba mais →</a>
             </article>
@@ -245,33 +391,34 @@
               <h3 data-i18n="atendimentoTitle">Atendimento Organizado</h3>
               <p class="sol-compare__card-ideal" data-i18n="compareIdealAtendimento">Empresas que já atendem bastante pelo WhatsApp e precisam organizar conversas, histórico e responsáveis.</p>
               <dl class="sol-compare__rows">
-                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-no">—</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
                 <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
                 <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
                 <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-opt" data-i18n="cellBasico">básico</dd></div>
                 <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
               </dl>
               <a href="#atendimento-organizado" class="sol-compare__card-link" data-i18n="ctaSaibaMais">Saiba mais →</a>
             </article>
-            <article class="sol-compare__card">
+            <article class="sol-compare__card sol-compare__card--highlight">
+              <span class="sol-compare__card-badge" data-i18n="recommendedBadge">Mais recomendado</span>
               <h3 data-i18n="ecossistemaTitle">Ecossistema Digital</h3>
               <p class="sol-compare__card-ideal" data-i18n="compareIdealEcossistema">Quem quer integrar presença digital, atendimento, automações e gestão.</p>
               <dl class="sol-compare__rows">
-                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no">—</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
                 <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no" data-i18n="cellNaoIncluido">Não incluído</dd></div>
               </dl>
               <a href="#ecossistema-digital" class="sol-compare__card-link" data-i18n="ctaSaibaMais">Saiba mais →</a>
             </article>
@@ -280,15 +427,15 @@
               <p class="sol-compare__card-ideal" data-i18n="compareIdealSobMedida">Operações com necessidades específicas, fluxos internos próprios ou sistemas personalizados.</p>
               <dl class="sol-compare__rows">
                 <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-yes">✓</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
-                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-scope" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-yes" data-i18n="cellIncluido">Incluído</dd></div>
               </dl>
               <a href="#sob-medida" class="sol-compare__card-link" data-i18n="ctaSaibaMais">Saiba mais →</a>
             </article>
@@ -299,13 +446,13 @@
       </div>
     </section>
 
-    <!-- ═══ O que pode ser entregue ═══ -->
-    <section class="section">
+    <!-- ═══ O que pode entrar no escopo ═══ -->
+    <section class="section ecosystem" id="o-que-pode-entrar">
       <div class="container">
         <header class="section__head">
-          <span class="tag" data-i18n="whatCanBeDeliveredTag">O que pode ser entregue</span>
-          <h2 data-i18n="whatCanBeDeliveredHeading">Os blocos que formam cada solução</h2>
-          <p data-i18n="whatCanBeDeliveredIntro">Cada solução combina alguns desses blocos. Veja o que pode ser entregue e o que pode ser combinado.</p>
+          <span class="tag" data-i18n="whatCanBeDeliveredTag">Escopo do projeto</span>
+          <h2 data-i18n="whatCanBeDeliveredHeading">O que pode entrar no escopo</h2>
+          <p data-i18n="whatCanBeDeliveredIntro">Cada projeto combina blocos diferentes conforme o problema: presença, atendimento, automação, painel, venda digital, integrações ou produto sob medida.</p>
         </header>
         <div class="eco-grid eco-grid--capabilities">
           <article class="eco-card">
@@ -315,19 +462,18 @@
                 <path d="M8 21h8M12 17v4"/>
               </svg>
             </div>
-            <h3 data-i18n="presencaTitle">Presença Digital</h3>
+            <h3 data-i18n="ecoCard1Title">Presença digital e landing pages</h3>
             <p data-i18n="ecoCard1Desc">Sites, páginas comerciais e experiências digitais que apresentam a empresa com clareza e facilitam o caminho do cliente até o contato certo.</p>
           </article>
           <article class="eco-card">
             <div class="eco-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <path d="M16 10a4 4 0 0 1-8 0"/>
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 3v18M3 9h18"/>
               </svg>
             </div>
-            <h3 data-i18n="ecoCard6Title">Venda digital e catálogos</h3>
-            <p data-i18n="ecoCard6Desc">Páginas de produto, catálogos digitais, jornadas de orçamento, pedidos online e estruturas de e-commerce conforme o escopo.</p>
+            <h3 data-i18n="ecoCard2Title">Painéis e sistemas internos</h3>
+            <p data-i18n="ecoCard2Desc">Ferramentas sob medida para organizar pedidos, atendimentos, processos, dados e rotinas da equipe com simplicidade.</p>
           </article>
           <article class="eco-card">
             <div class="eco-card__icon" aria-hidden="true">
@@ -338,8 +484,8 @@
                 <line x1="3" y1="10" x2="21" y2="10"/>
               </svg>
             </div>
-            <h3 data-i18n="atendimentoTitle">Atendimento Organizado</h3>
-            <p data-i18n="homeSolCard2Desc">Para quem precisa organizar pedidos, agenda, histórico e processos internos.</p>
+            <h3 data-i18n="capCrmTitle">Atendimento e CRM</h3>
+            <p data-i18n="capCrmDesc">Organização de conversas, histórico de clientes, responsáveis e etapas de atendimento.</p>
           </article>
           <article class="eco-card">
             <div class="eco-card__icon" aria-hidden="true">
@@ -361,6 +507,17 @@
           <article class="eco-card">
             <div class="eco-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+            </div>
+            <h3 data-i18n="ecoCard6Title">Venda digital e catálogos</h3>
+            <p data-i18n="ecoCard6Desc">Páginas de produto, catálogos digitais, jornadas de orçamento, pedidos online e estruturas de e-commerce conforme o escopo.</p>
+          </article>
+          <article class="eco-card">
+            <div class="eco-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="5" y="2" width="14" height="20" rx="2"/>
                 <line x1="12" y1="18" x2="12" y2="18"/>
               </svg>
@@ -371,318 +528,14 @@
           <article class="eco-card">
             <div class="eco-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <path d="M9 3v18M3 9h18"/>
+                <circle cx="9" cy="9" r="6"/>
+                <circle cx="15" cy="15" r="6"/>
               </svg>
             </div>
-            <h3 data-i18n="ecoCard2Title">Sistemas internos e painéis</h3>
-            <p data-i18n="ecoCard2Desc">Ferramentas sob medida para organizar pedidos, atendimentos, processos, dados e rotinas da equipe com simplicidade.</p>
-          </article>
-          <article class="eco-card">
-            <div class="eco-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="4" width="16" height="16" rx="2"/>
-                <path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/>
-              </svg>
-            </div>
-            <h3 data-i18n="ecossistemaTitle">Ecossistema Digital</h3>
-            <p data-i18n="homeSolCard3Desc">Para quem quer conectar presença, atendimento, automações e métricas em um fluxo só.</p>
-          </article>
-          <article class="eco-card">
-            <div class="eco-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="5" y="2" width="14" height="20" rx="2"/>
-                <line x1="12" y1="18" x2="12" y2="18"/>
-              </svg>
-            </div>
-            <h3 data-i18n="proposalCustom">Sob Medida</h3>
-            <p data-i18n="homeSolCard4Desc">Para demandas específicas, protótipos, aplicativos e integrações fora do padrão.</p>
+            <h3 data-i18n="capIntegracoesTitle">Integrações e relatórios</h3>
+            <p data-i18n="capIntegracoesDesc">Conectar ferramentas, organizar dados e gerar relatórios para acompanhar a operação.</p>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- ═══ Presença Digital ═══ -->
-    <section class="section" id="presenca-digital">
-      <div class="container solution-page">
-        <header class="section__head">
-          <span class="tag" data-i18n="tagSolution">Solução</span>
-          <h2 data-i18n="presencaTitle">Presença Digital</h2>
-          <p data-i18n="presencaPageIntro">A primeira impressão da sua empresa no digital, organizada para gerar contato, não só visual.</p>
-        </header>
-
-        <div class="solution-before-after">
-          <h3 class="solution-before-after__heading" data-i18n="presencaBeforeAfterHeading">Antes → depois da presença digital</h3>
-          <div class="ba-wrapper">
-            <div class="ba-header" aria-hidden="true">
-              <div class="ba-col ba-col--before" data-i18n="baColBefore">Como era antes</div>
-              <div class="ba-col ba-col--after" data-i18n="baColAfter">Com a Sartec Digital</div>
-            </div>
-            <div class="ba-rows">
-              <div class="ba-row">
-                <div class="ba-before">
-                  <span class="ba-x" aria-hidden="true">✗</span>
-                  <p data-i18n="baRow2Before">Site antigo que não explica bem o serviço e deixa o cliente sem clareza do próximo passo.</p>
-                </div>
-                <div class="ba-after">
-                  <span class="ba-check" aria-hidden="true">✓</span>
-                  <p data-i18n="baRow2After">Páginas comerciais claras que direcionam o cliente e facilitam o caminho até o contato certo.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--resolve">
-          <strong data-i18n="pkgLabelResolve">O que resolve</strong>
-          <p data-i18n="presencaResolveDesc">Site antigo, comunicação confusa ou dificuldade do cliente em entender o que a empresa oferece e qual próximo passo tomar.</p>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--include">
-          <strong data-i18n="pkgLabelInclude">O que pode incluir</strong>
-          <p data-i18n="presencaIncludeDesc">Página comercial responsiva, arquitetura das seções, direção de usabilidade, adaptação da identidade visual, imagens personalizadas, elementos da marca, botões de contato, formulário ou outros caminhos de conversão conforme o negócio.</p>
-          <ul class="pricing-card__includes">
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude1">Página comercial responsiva</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude2">Arquitetura das seções</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude3">Identidade visual adaptada</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude4">Textos e imagens sob medida</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="presencaInclude5">Caminho claro de contato</span></li>
-          </ul>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--fit">
-          <strong data-i18n="pkgLabelFit">Quando faz sentido</strong>
-          <p data-i18n="presencaFitDesc">Quando o negócio ou profissional precisa apresentar melhor seus serviços e facilitar o caminho do cliente até o contato certo, antes de partir para automações ou sistemas mais complexos.</p>
-        </div>
-
-        <div class="solution-cta">
-          <a
-            href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+quero+conversar+sobre+o+pacote+Presen%C3%A7a+Digital."
-            class="btn btn--primary btn--lg"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-wa-key="waPresenca"
-            data-i18n="ctaConversar"
-          >Conversar sobre este caminho</a>
-        </div>
-
-        <p class="solution-plan-mention" data-i18n-html="presencaPlanMention">Quer entender como funciona a contratação dessa solução? <a href="como-trabalhamos.html#contratacao">Veja como trabalhamos</a>.</p>
-      </div>
-    </section>
-
-    <!-- ═══ Atendimento Organizado ═══ -->
-    <section class="section" id="atendimento-organizado">
-      <div class="container solution-page">
-        <header class="section__head">
-          <span class="tag" data-i18n="tagSolution">Solução</span>
-          <h2 data-i18n="atendimentoTitle">Atendimento Organizado</h2>
-          <p data-i18n="atendimentoPageIntro">Pedidos, agenda e histórico organizados em um fluxo que a equipe consegue acompanhar pelo WhatsApp e por um painel simples.</p>
-        </header>
-
-        <div class="solution-before-after">
-          <h3 class="solution-before-after__heading" data-i18n="atendimentoBeforeAfterHeading">Antes → depois do atendimento pelo WhatsApp</h3>
-          <div class="ba-wrapper">
-            <div class="ba-header" aria-hidden="true">
-              <div class="ba-col ba-col--before" data-i18n="baColBefore">Como era antes</div>
-              <div class="ba-col ba-col--after" data-i18n="baColAfter">Com a Sartec Digital</div>
-            </div>
-            <div class="ba-rows">
-              <div class="ba-row">
-                <div class="ba-before">
-                  <span class="ba-x" aria-hidden="true">✗</span>
-                  <p data-i18n="baRow1Before">Processos manuais e planilhas soltas tomam o tempo que deveria ser focado em vender.</p>
-                </div>
-                <div class="ba-after">
-                  <span class="ba-check" aria-hidden="true">✓</span>
-                  <p data-i18n="baRow1After">Automações úteis que reduzem tarefas repetitivas e organizam a rotina da equipe.</p>
-                </div>
-              </div>
-              <div class="ba-row">
-                <div class="ba-before">
-                  <span class="ba-x" aria-hidden="true">✗</span>
-                  <p data-i18n="baRow3Before">Agenda confusa, além de pedidos ou orçamentos que se perdem no meio do dia a dia.</p>
-                </div>
-                <div class="ba-after">
-                  <span class="ba-check" aria-hidden="true">✓</span>
-                  <p data-i18n="baRow3After">Sistemas internos e fluxos claros para organizar pedidos, agendamentos e orçamentos.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--resolve">
-          <strong data-i18n="pkgLabelResolve">O que resolve</strong>
-          <p data-i18n="atendimentoResolveDesc">Pedidos ou solicitações esquecidos, falta de clareza sobre responsabilidades, histórico espalhado e ausência de controle sobre a rotina.</p>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--include">
-          <strong data-i18n="pkgLabelInclude">O que pode incluir</strong>
-          <p data-i18n="atendimentoIncludeDesc">Painel de controle, etapas de acompanhamento, responsáveis por atividade, histórico centralizado, filtros, métricas operacionais e fluxos para reduzir repetição.</p>
-          <ul class="pricing-card__includes">
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude1">Organização de processos</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude2">Painel interno sob medida</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude3">Responsáveis por demanda</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude4">Histórico e dados centralizados</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="atendimentoInclude5">Métricas simples de rotina</span></li>
-          </ul>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--fit">
-          <strong data-i18n="pkgLabelFit">Quando faz sentido</strong>
-          <p data-i18n="atendimentoFitDesc">Quando o principal problema está na operação interna e no fluxo de trabalho da equipe, e o negócio quer organizar o atendimento e o histórico sem necessariamente mudar o site público.</p>
-        </div>
-
-        <div class="solution-cta">
-          <a
-            href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+quero+conversar+sobre+o+pacote+Atendimento+Organizado."
-            class="btn btn--primary btn--lg"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-wa-key="waAtendimento"
-            data-i18n="ctaConversar"
-          >Conversar sobre este caminho</a>
-        </div>
-
-        <p class="solution-plan-mention" data-i18n-html="atendimentoPlanMention">Quer entender como funciona a contratação dessa solução? <a href="como-trabalhamos.html#contratacao">Veja como trabalhamos</a>.</p>
-      </div>
-    </section>
-
-    <!-- ═══ Ecossistema Digital ═══ -->
-    <section class="section" id="ecossistema-digital">
-      <div class="container solution-page">
-        <header class="section__head">
-          <span class="tag" data-i18n="tagSolution">Solução</span>
-          <h2 data-i18n="ecossistemaTitle">Ecossistema Digital</h2>
-          <p data-i18n="ecossistemaPageIntro">Presença, atendimento, automações e métricas funcionando juntos, em vez de ferramentas soltas que não se conversam.</p>
-        </header>
-
-        <div class="solution-before-after">
-          <h3 class="solution-before-after__heading" data-i18n="ecossistemaBeforeAfterHeading">Antes → depois da operação integrada</h3>
-          <div class="ba-wrapper">
-            <div class="ba-header" aria-hidden="true">
-              <div class="ba-col ba-col--before" data-i18n="baColBefore">Como era antes</div>
-              <div class="ba-col ba-col--after" data-i18n="baColAfter">Com a Sartec Digital</div>
-            </div>
-            <div class="ba-rows">
-              <div class="ba-row">
-                <div class="ba-before">
-                  <span class="ba-x" aria-hidden="true">✗</span>
-                  <p data-i18n="baRow4Before">Equipe sem visibilidade do andamento e gestor precisando perguntar o status de tudo.</p>
-                </div>
-                <div class="ba-after">
-                  <span class="ba-check" aria-hidden="true">✓</span>
-                  <p data-i18n="baRow4After">Painéis simples com responsáveis definidos e métricas fáceis de acompanhar.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--resolve">
-          <strong data-i18n="pkgLabelResolve">O que resolve</strong>
-          <p data-i18n="ecossistemaResolveDesc">Site, atendimento e gestão funcionando de forma desconectada. Evita que o cliente fique sem clareza do próximo passo e reduz tarefas repetitivas da equipe.</p>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--include">
-          <strong data-i18n="pkgLabelInclude">O que pode incluir</strong>
-          <p data-i18n="ecossistemaIncludeDesc">Página comercial conectada ao fluxo, painel de controle, triagem automatizada, direcionamento de demandas, métricas de produtividade e rotinas da equipe.</p>
-          <ul class="pricing-card__includes">
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude1">Landing page integrada</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude2">Painel de atendimento/pedidos</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude3">Automações de fluxo úteis</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude4">Triagem inteligente</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="ecossistemaInclude5">Métricas operacionais completas</span></li>
-          </ul>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--fit">
-          <strong data-i18n="pkgLabelFit">Quando faz sentido</strong>
-          <p data-i18n="ecossistemaFitDesc">Quando o negócio quer unir a presença digital que direciona o cliente ao painel interno que organiza a rotina da equipe, centralizando a operação em um fluxo único.</p>
-        </div>
-
-        <p class="pkg-details__note pricing-detail--note" data-i18n="ecossistemaNote">No Ecossistema Digital, todas as partes trabalham juntas: a página apresenta com clareza, o painel organiza e as métricas acompanham.</p>
-
-        <div class="solution-cta">
-          <a
-            href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+quero+conversar+sobre+o+pacote+Ecossistema+Digital."
-            class="btn btn--primary btn--lg"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-wa-key="waEcossistema"
-            data-i18n="ecossistemaCta"
-          >Analisar meu cenário</a>
-        </div>
-
-        <p class="solution-plan-mention" data-i18n-html="ecossistemaPlanMention">Quer entender como funciona a contratação dessa solução? <a href="como-trabalhamos.html#contratacao">Veja como trabalhamos</a>.</p>
-      </div>
-    </section>
-
-    <!-- ═══ Sob Medida ═══ -->
-    <section class="section" id="sob-medida">
-      <div class="container solution-page">
-        <header class="section__head">
-          <span class="tag" data-i18n="tagSolution">Solução</span>
-          <h2 data-i18n="proposalCustom">Sob Medida</h2>
-          <p data-i18n="sobmedidaPageIntro">Para quando o problema é específico demais para um pacote padrão: protótipos, aplicativos, integrações e sistemas sob medida.</p>
-        </header>
-
-        <div class="solution-before-after">
-          <h3 class="solution-before-after__heading" data-i18n="sobmedidaBeforeAfterHeading">Antes → depois de transformar um processo específico em solução</h3>
-          <div class="ba-wrapper">
-            <div class="ba-header" aria-hidden="true">
-              <div class="ba-col ba-col--before" data-i18n="baColBefore">Como era antes</div>
-              <div class="ba-col ba-col--after" data-i18n="baColAfter">Com a Sartec Digital</div>
-            </div>
-            <div class="ba-rows">
-              <div class="ba-row">
-                <div class="ba-before">
-                  <span class="ba-x" aria-hidden="true">✗</span>
-                  <p data-i18n="baRow5Before">Ideia de produto digital, aplicativo ou melhoria interna que fica parada no papel.</p>
-                </div>
-                <div class="ba-after">
-                  <span class="ba-check" aria-hidden="true">✓</span>
-                  <p data-i18n="baRow5After">Protótipos, MVPs e aplicações sob medida implementadas com escopo bem desenhado.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--resolve">
-          <strong data-i18n="pkgLabelResolve">O que resolve</strong>
-          <p data-i18n="sobmedidaResolveDesc">Processos específicos ou ideias de novos produtos digitais que não se encaixam em soluções prontas e exigem análise profunda de escopo.</p>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--include">
-          <strong data-i18n="pkgLabelInclude">O que pode incluir</strong>
-          <p data-i18n="sobmedidaIncludeDesc">Desenho de protótipos, desenvolvimento de aplicativos, sistemas integrados a APIs, e-commerce personalizado, painéis gerenciais e fluxos complexos.</p>
-          <ul class="pricing-card__includes">
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude1">Aplicativos e MVPs</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude2">Dashboards e painéis específicos</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude3">Integrações e banco de dados</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude4">E-commerce e catálogos sob medida</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="sobmedidaInclude5">Escopo e prazo bem definidos</span></li>
-          </ul>
-        </div>
-
-        <div class="pkg-details__block pricing-detail--fit">
-          <strong data-i18n="pkgLabelFit">Quando faz sentido</strong>
-          <p data-i18n="sobmedidaFitDesc">Quando a operação ou empresa tem uma necessidade sob medida, quer tirar um MVP/aplicativo do papel, ou quer integrar múltiplos sistemas existentes em uma infraestrutura própria.</p>
-        </div>
-
-        <div class="solution-cta">
-          <a
-            href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+Sartec+Digital+e+quero+conversar+sobre+Projetos+Sob+Medida."
-            class="btn btn--primary btn--lg"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-wa-key="waSobMedida"
-            data-i18n="sobmedidaCta"
-          >Solicitar análise</a>
-        </div>
-
-        <p class="solution-plan-mention" data-i18n-html="sobmedidaPlanMention">Quer entender como funciona a contratação dessa solução? <a href="como-trabalhamos.html#contratacao">Veja como trabalhamos</a>.</p>
       </div>
     </section>
 
@@ -798,7 +651,7 @@
       </div>
       <nav class="footer__nav" aria-label="Links rápidos" data-i18n-attr="aria-label:ariaFooterNav">
         <a href="solucoes.html" data-i18n="navSolutions">Soluções</a>
-        <a href="cases.html" data-i18n="navCases">Cases</a>
+        <a href="cases.html" data-i18n="navCases">Projetos</a>
         <a href="como-trabalhamos.html" data-i18n="navHowWeWork">Como trabalhamos</a>
         <a href="sobre.html" data-i18n="navAbout">Sobre</a>
         <a href="#contato" data-i18n="navContact">Contato</a>
@@ -827,6 +680,6 @@
     </svg>
   </a>
 
-  <script src="script.js?v=1.8"></script>
+  <script src="script.js?v=1.9"></script>
 </body>
 </html>
