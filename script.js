@@ -304,6 +304,10 @@ const I18N = {
     howStep5Desc: `Evoluímos a solução conforme a operação cresce e novas necessidades aparecem.`,
 
     projectsSeeAllCta: `Ver todos os projetos →`,
+    homeOriginProofText: `Há mais de 30 anos a Sartec opera no mundo real — e é dessa vivência que nasceu a Sartec Digital, hoje conduzida por Lucas Cabral, Product Designer.`,
+    homeOriginProofCta: `Conhecer a história completa →`,
+    midPageCtaText: `Quer conversar sobre o seu projeto?`,
+    midPageCtaLink: `Falar agora pelo WhatsApp →`,
 
     solPageHeading: `Explore as soluções da Sartec Digital.`,
     solPageIntro: `Cada solução é uma porta de entrada diferente. Veja qual caminho conversa mais com a sua operação.`,
@@ -752,6 +756,10 @@ const I18N = {
     howStep5Desc: `We evolve the solution as the operation grows and new needs come up.`,
 
     projectsSeeAllCta: `See all projects →`,
+    homeOriginProofText: `Sartec has been operating in the real world for more than 30 years — and that's where Sartec Digital comes from, led today by Lucas Cabral, Product Designer.`,
+    homeOriginProofCta: `See the full story →`,
+    midPageCtaText: `Want to talk about your project?`,
+    midPageCtaLink: `Chat on WhatsApp now →`,
 
     solPageHeading: `Explore Sartec Digital's solutions.`,
     solPageIntro: `Each solution is a different entry point. See which path speaks most to your operation.`,

@@ -20,7 +20,7 @@
   <link rel="icon" href="/logo-branca-gpt.png" type="image/png" />
   <link rel="apple-touch-icon" href="/logo-branca-gpt.png" />
   <title data-i18n="docTitleSolucoes">Soluções — Sartec Digital</title>
-  <link rel="stylesheet" href="styles.css?v=1.7" />
+  <link rel="stylesheet" href="styles.css?v=1.8" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -220,6 +220,80 @@
               </tbody>
             </table>
           </div>
+
+          <!-- Versão mobile: um card por solução em vez de tabela com rolagem horizontal,
+               assim o nome da solução e o contexto ficam sempre visíveis. -->
+          <div class="sol-compare__mobile">
+            <article class="sol-compare__card">
+              <h3 data-i18n="presencaTitle">Presença Digital</h3>
+              <p class="sol-compare__card-ideal" data-i18n="compareIdealPresenca">Quem precisa melhorar a apresentação da empresa, organizar a informação e gerar mais contatos.</p>
+              <dl class="sol-compare__rows">
+                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no">—</dd></div>
+              </dl>
+              <a href="#presenca-digital" class="sol-compare__card-link" data-i18n="ctaSaibaMais">Saiba mais →</a>
+            </article>
+            <article class="sol-compare__card">
+              <h3 data-i18n="atendimentoTitle">Atendimento Organizado</h3>
+              <p class="sol-compare__card-ideal" data-i18n="compareIdealAtendimento">Empresas que já atendem bastante pelo WhatsApp e precisam organizar conversas, histórico e responsáveis.</p>
+              <dl class="sol-compare__rows">
+                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-opt" data-i18n="cellBasico">básico</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no">—</dd></div>
+              </dl>
+              <a href="#atendimento-organizado" class="sol-compare__card-link" data-i18n="ctaSaibaMais">Saiba mais →</a>
+            </article>
+            <article class="sol-compare__card">
+              <h3 data-i18n="ecossistemaTitle">Ecossistema Digital</h3>
+              <p class="sol-compare__card-ideal" data-i18n="compareIdealEcossistema">Quem quer integrar presença digital, atendimento, automações e gestão.</p>
+              <dl class="sol-compare__rows">
+                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-no">—</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-no">—</dd></div>
+              </dl>
+              <a href="#ecossistema-digital" class="sol-compare__card-link" data-i18n="ctaSaibaMais">Saiba mais →</a>
+            </article>
+            <article class="sol-compare__card">
+              <h3 data-i18n="proposalCustom">Sob Medida</h3>
+              <p class="sol-compare__card-ideal" data-i18n="compareIdealSobMedida">Operações com necessidades específicas, fluxos internos próprios ou sistemas personalizados.</p>
+              <dl class="sol-compare__rows">
+                <div class="sol-compare__row"><dt data-i18n="tableRowLanding">Landing page / presença digital</dt><dd class="cmp-opt" data-i18n="cellOpcional">opcional</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowOrganizacao">Organização de processos</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowPainel">Painel interno</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAutomacoes">Automações / IA</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowApp">Aplicativo ou MVP</dt><dd class="cmp-yes">✓</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowAgendamento">Agendamento / fluxo de serviço</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowVenda">Venda digital / catálogo</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowMetricas">Métricas</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowIntegracoes">Integrações</dt><dd class="cmp-opt" data-i18n="cellConformeEscopo">conforme escopo</dd></div>
+                <div class="sol-compare__row"><dt data-i18n="tableRowEscopo">Escopo personalizado</dt><dd class="cmp-yes">✓</dd></div>
+              </dl>
+              <a href="#sob-medida" class="sol-compare__card-link" data-i18n="ctaSaibaMais">Saiba mais →</a>
+            </article>
+          </div>
+
           <p class="sol-compare__note" data-i18n="compareScopeNote">Presença Digital pode ser apenas um site ou página profissional. Já o Ecossistema Digital pode incluir presença digital, atendimento, automações e métricas em uma solução integrada — ou seja, vai além de "só um site".</p>
         </div>
       </div>
@@ -753,6 +827,6 @@
     </svg>
   </a>
 
-  <script src="script.js?v=1.7"></script>
+  <script src="script.js?v=1.8"></script>
 </body>
 </html>
