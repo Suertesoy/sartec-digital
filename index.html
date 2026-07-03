@@ -109,260 +109,31 @@
           <p class="hero__micro" data-i18n="heroMicro">Fale direto com o responsável pela Sartec para entender qual solução faz mais sentido para o seu negócio.</p>
         </div>
 
-        <!-- Lado direito: mockup visual (desktop) -->
+        <!-- Lado direito: composição visual do ecossistema (desktop + mobile) -->
         <div class="hero__visual" aria-hidden="true">
-          <div class="mockup-stage">
-            <div class="mockup-flip" id="js-mockup-flip">
-
-              <!-- FRENTE: Painel de Atendimento (Dashboard) -->
-              <div class="mockup-face mockup-face--desktop">
-                <div class="mockup__bar">
-                  <div class="mockup__dots">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <span class="mockup__title" data-i18n="mockupTitle">Painel · Sartec Digital</span>
-                  <span class="mockup__badge" data-i18n="mockupBadge">● Ao vivo</span>
-                </div>
-
-                <div class="mockup__toolbar">
-                  <div class="mockup__search">
-                    <span class="mockup__search-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </span>
-                    <span class="mockup__search-text"></span>
-                  </div>
-                  <div class="mockup__tabs">
-                    <span class="mockup__tab mockup__tab--active" data-i18n="mockupTabPanel">Painel</span>
-                    <span class="mockup__tab" data-i18n="mockupTabMetrics">Métricas</span>
-                  </div>
-                </div>
-
-                <div class="mockup__body">
-                  <div class="mockup__kanban">
-                    <!-- Coluna 1: Entrada -->
-                    <div class="mockup__col">
-                      <div class="mockup__col-label"><span data-i18n="mockupColEntrada">Entrada</span> <span class="mockup__count" id="js-count-entrada">2</span></div>
-                      <div class="mockup__card">
-                        <div class="mockup__card-avatar">C</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name" data-i18n="mockupClient241">Cliente #241</div>
-                          <div class="mockup__card-msg" data-i18n="mockupMsgOrcamento">Orçamento pendente 📄</div>
-                        </div>
-                      </div>
-                      <div class="mockup__card" id="js-card-entrada-b">
-                        <div class="mockup__card-avatar">E</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name" data-i18n="mockupEmpresaB">Empresa B</div>
-                          <div class="mockup__card-msg" data-i18n="mockupMsgEntrega">Horário de entrega</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Coluna 2: Triagem -->
-                    <div class="mockup__col">
-                      <div class="mockup__col-label"><span data-i18n="mockupColTriagem">Triagem</span> <span class="mockup__count" id="js-count-triagem">1</span></div>
-                      <div class="mockup__card" id="js-card-triagem-delta">
-                        <div class="mockup__card-avatar">L</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name" data-i18n="mockupLojaDelta">Loja Delta</div>
-                          <div class="mockup__card-msg" data-i18n="mockupMsgValores">Valores de serviço</div>
-                        </div>
-                      </div>
-                      <!-- Card B Copy (starts collapsed) -->
-                      <div class="mockup__card is-collapsed" id="js-card-triagem-b">
-                        <div class="mockup__card-avatar">E</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name" data-i18n="mockupEmpresaB">Empresa B</div>
-                          <div class="mockup__card-msg" data-i18n="mockupMsgEntrega">Horário de entrega</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Coluna 3: Em andamento -->
-                    <div class="mockup__col">
-                      <div class="mockup__col-label"><span data-i18n="mockupColFila">Fila</span> <span class="mockup__count mockup__count--blue" id="js-count-fila">2</span></div>
-                      <div class="mockup__card mockup__card--active">
-                        <div class="mockup__card-avatar mockup__card-avatar--blue">A</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name" data-i18n="mockupAssocAlpha">Assoc. Alpha</div>
-                          <div class="mockup__card-msg" data-i18n="mockupMsgContrato">Contrato inicial</div>
-                        </div>
-                        <span class="mockup__card-resp">Ana</span>
-                      </div>
-                      <div class="mockup__card" id="js-card-fila-gama">
-                        <div class="mockup__card-avatar">P</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name" data-i18n="mockupProjGama">Proj. Gama</div>
-                          <div class="mockup__card-msg" data-i18n="mockupMsgValidacao">Validação de dados</div>
-                        </div>
-                        <span class="mockup__card-resp">Carlos</span>
-                      </div>
-                      <!-- Card Delta Copy (starts collapsed) -->
-                      <div class="mockup__card is-collapsed" id="js-card-fila-delta">
-                        <div class="mockup__card-avatar mockup__card-avatar--blue">L</div>
-                        <div class="mockup__card-info">
-                          <div class="mockup__card-name" data-i18n="mockupLojaDelta">Loja Delta</div>
-                          <div class="mockup__card-msg" data-i18n="mockupMsgValores">Valores de serviço</div>
-                        </div>
-                        <span class="mockup__card-resp">Ana</span>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <!-- Mini área de métricas e gráfico -->
-                  <div class="mockup__chart">
-                    <div class="mockup__chart-bars" id="js-chart-bars">
-                      <div class="mockup__chart-bar" style="--h: 40%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 65%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 50%;"></div>
-                      <div class="mockup__chart-bar mockup__chart-bar--active" style="--h: 90%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 75%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 60%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 45%;"></div>
-                      <div class="mockup__chart-bar" style="--h: 80%;"></div>
-                    </div>
-                    <div class="mockup__chart-label"><span data-i18n="mockupChartPrefix">Desempenho operacional ·</span> <span id="js-chart-percent">94%</span> <span data-i18n="mockupChartSuffix">no prazo</span></div>
-                  </div>
-
-                  <div class="mockup__metrics">
-                    <div class="mockup__metric">
-                      <div class="mockup__metric-val" id="js-metric-today">38</div>
-                      <div class="mockup__metric-label" data-i18n="mockupMetricToday">hoje</div>
-                    </div>
-                    <div class="mockup__metric">
-                      <div class="mockup__metric-val mockup__metric-val--green" id="js-metric-resp">2.5m</div>
-                      <div class="mockup__metric-label" data-i18n="mockupMetricResp">resp. média</div>
-                    </div>
-                    <div class="mockup__metric">
-                      <div class="mockup__metric-val mockup__metric-val--blue" id="js-metric-wait">6</div>
-                      <div class="mockup__metric-label" data-i18n="mockupMetricWait">em espera</div>
-                    </div>
-                    <div class="mockup__metric">
-                      <div class="mockup__metric-val" id="js-metric-done">98%</div>
-                      <div class="mockup__metric-label" data-i18n="mockupMetricDone">resolvidos</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="mockup__wa">
-                  <div class="mockup__wa-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  </div>
-                  <div class="mockup__wa-text">
-                    <div class="mockup__wa-msg" data-i18n="mockupWaMsg">Olá! Lista escolar do 5º ano, tem disponível?</div>
-                    <div class="mockup__wa-time" data-i18n="mockupWaTime">agora ✓✓</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- VERSO: Celular contido (App de Vídeos) -->
-              <div class="mockup-face mockup-face--phone">
-                <div class="phone-mockup">
-                  <div class="phone-screen">
-                    <div class="phone-screen__island"></div>
-
-                    <div class="phone-app" id="js-phone-app">
-                      <!-- Top bar simulated -->
-                      <div class="phone-app__topbar">
-                        <span class="phone-app__time">12:00</span>
-                        <div class="phone-app__status">
-                          <span class="phone-app__signal"></span>
-                          <span class="phone-app__battery"></span>
-                        </div>
-                      </div>
-
-                      <!-- 1. HOME SCREEN VIEW -->
-                      <div class="phone-app__home" id="js-phone-home">
-                        <div class="phone-app__header">
-                          <span class="phone-app__title" data-i18n="phoneTitle">Aulas</span>
-                          <span class="phone-app__avatar"></span>
-                        </div>
-                        <div class="phone-app__welcome" data-i18n="phoneWelcome">Continue seu aprendizado</div>
-                        <div class="phone-app__chips">
-                          <span class="phone-app__chip phone-app__chip--active">UX/UI</span>
-                          <span class="phone-app__chip" data-i18n="phoneChipAutomation">Automação</span>
-                        </div>
-                        <!-- Continuar Assistindo Card -->
-                        <div class="phone-app__continue-card" id="js-phone-continue-card">
-                          <div class="phone-app__continue-info">
-                            <span class="phone-app__continue-title" data-i18n="phoneContinueTitle">Design de Produto</span>
-                            <span class="phone-app__continue-progress-text" data-i18n="phoneContinueProgress">62% concluído</span>
-                          </div>
-                          <div class="phone-app__continue-play">
-                            <span class="phone-app__continue-play-icon"></span>
-                          </div>
-                        </div>
-                        <!-- List of other lessons -->
-                        <div class="phone-app__section-title" data-i18n="phoneSectionTitle">Suas aulas</div>
-                        <div class="phone-app__list">
-                          <div class="phone-app__item" id="js-phone-home-item-1">
-                            <div class="phone-app__item-thumb"></div>
-                            <div class="phone-app__item-lines">
-                              <div class="phone-app__item-line-1"></div>
-                              <div class="phone-app__item-line-2"></div>
-                            </div>
-                          </div>
-                          <div class="phone-app__item" id="js-phone-home-item-2">
-                            <div class="phone-app__item-thumb"></div>
-                            <div class="phone-app__item-lines">
-                              <div class="phone-app__item-line-1"></div>
-                              <div class="phone-app__item-line-2"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- 2. PLAYER SCREEN VIEW -->
-                      <div class="phone-app__player-view" id="js-phone-player-view">
-                        <!-- Video Player Section -->
-                        <div class="phone-app__player">
-                          <div class="phone-app__video-frame">
-                            <!-- CSS-only play button -->
-                            <button class="phone-app__play-btn" id="js-phone-play-btn" type="button">
-                              <i class="phone-app__play-icon"></i>
-                            </button>
-                          </div>
-                          <div class="phone-app__progress-bar">
-                            <div class="phone-app__progress-fill" id="js-phone-progress-fill"></div>
-                          </div>
-                        </div>
-                        <div class="phone-app__lesson-info">
-                          <div class="phone-app__lesson-title" id="js-phone-lesson-title">Aula 01</div>
-                          <div class="phone-app__desc-lines">
-                            <div class="phone-app__desc-line"></div>
-                            <div class="phone-app__desc-line phone-app__desc-line--sm"></div>
-                          </div>
-                        </div>
-                        <!-- Video list below player -->
-                        <div class="phone-app__list-header" data-i18n="phoneListHeader">Próximas aulas</div>
-                        <div class="phone-app__list">
-                          <div class="phone-app__item phone-app__item--active" id="js-phone-item-1">
-                            <div class="phone-app__item-thumb"></div>
-                            <div class="phone-app__item-lines">
-                              <div class="phone-app__item-line-1"></div>
-                              <div class="phone-app__item-line-2"></div>
-                            </div>
-                          </div>
-                          <div class="phone-app__item" id="js-phone-item-2">
-                            <div class="phone-app__item-thumb"></div>
-                            <div class="phone-app__item-lines">
-                              <div class="phone-app__item-line-1"></div>
-                              <div class="phone-app__item-line-2"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+          <div class="hero-media">
+            <video
+              class="hero-media__video"
+              id="js-hero-video"
+              poster="assets/hero/sartec-hero-poster.webp"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              width="1280"
+              height="800"
+            >
+              <source src="assets/hero/sartec-hero-loop.mp4" type="video/mp4" />
+            </video>
+            <img
+              class="hero-media__fallback"
+              src="assets/hero/sartec-hero-poster.webp"
+              alt=""
+              width="1280"
+              height="800"
+              loading="eager"
+            />
           </div>
         </div>
 
