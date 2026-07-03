@@ -1,0 +1,16 @@
+{
+  "name": "sartec-digital",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Site institucional da Sartec Digital (HTML/CSS/JS estático + Tailwind CSS para tokens, layout e componentes novos)",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.css --watch",
+    "build": "npm run build:css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.2",
+    "postcss": "^8.5.16",
+    "tailwindcss": "^3.4.19"
+  }
+}
