@@ -442,14 +442,14 @@ p  { text-wrap: pretty; }
   z-index: 0;
 }
 
-/* Split layout — coluna de texto mais estreita, vídeo com mais presença
-   e permissão para sangrar levemente para a direita (ver .hero__visual). */
+/* Split layout — o Hero agora é uma coluna única de texto; o vídeo
+   deixou de ser uma "coluna direita" e virou o fundo de toda a seção
+   (ver .hero__video-bg, que fica antes deste container no DOM). */
 .hero__split {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 460px) 1fr;
-  gap: 24px;
+  grid-template-columns: minmax(0, 620px);
   align-items: center;
 }
 
@@ -490,79 +490,71 @@ p  { text-wrap: pretty; }
   box-shadow: 0 10px 38px rgba(107, 112, 240, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
-/* ── HERO MEDIA — composição integrada ao fundo do Hero ──────────
-   O vídeo deixa de ser um "card" isolado e passa a ser uma camada
-   visual ampla, com bordas emplumadas (mask) e overlays que a
-   conectam ao grid/glow/fundo já existentes, mantendo o texto à
-   esquerda com contraste total. */
-.hero__visual {
+/* ── HERO VIDEO BACKGROUND — o vídeo é o fundo da seção inteira ──
+   Nada de card, moldura ou coluna: a camada cobre todo o .hero,
+   fica atrás do conteúdo (z-index abaixo de .hero__split) e usa
+   fade/overlay para se fundir ao grid e ao azul do site. */
+.hero__video-bg {
   position: absolute;
   inset: 0;
-  left: 42%;
   z-index: 0;
-  pointer-events: none;
   overflow: hidden;
+  pointer-events: none;
 }
 
-.hero-media {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.hero-media__poster,
-.hero-media__video {
+.hero__video-bg-poster,
+.hero__video-bg-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 60% 50%;
-  /* Pluma as bordas do vídeo/poster para que a camada se dissolva no
-     fundo em vez de terminar numa borda dura de "card". */
-  mask-image:
-    linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.55) 16%, #000 34%, #000 82%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
-  mask-composite: intersect;
-  -webkit-mask-image:
-    linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.55) 16%, #000 34%, #000 82%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
-  -webkit-mask-composite: source-in;
+  object-position: 66% 46%;
+  filter: saturate(1.05) brightness(0.72);
+  /* Mais presente do centro para a direita, dissolvendo nas bordas e
+     principalmente à esquerda (onde fica o texto) para não competir
+     com a leitura. */
+  mask-image: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0,0,0,0.10) 18%,
+    rgba(0,0,0,0.55) 38%,
+    rgba(0,0,0,0.85) 58%,
+    #000 74%,
+    rgba(0,0,0,0.65) 96%,
+    transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0,0,0,0.10) 18%,
+    rgba(0,0,0,0.55) 38%,
+    rgba(0,0,0,0.85) 58%,
+    #000 74%,
+    rgba(0,0,0,0.65) 96%,
+    transparent 100%);
 }
 
-/* O poster real (primeiro frame do vídeo) fica sempre por baixo como
-   base estável. O <video poster="..."> usa o mesmo arquivo, então
-   antes do primeiro frame decodificar a tela já mostra exatamente a
-   mesma imagem — sem flash de composição diferente. */
-.hero-media__poster {
-  filter: saturate(1.05) brightness(0.92);
-}
-
-.hero-media__video {
-  filter: saturate(1.05) brightness(0.92);
-}
-
-/* Tinge azul + vinheta para o vídeo "conversar" com o fundo/glow em
-   vez de parecer um retângulo de mídia solto na seção. */
-.hero__visual::before {
+/* Vinheta azul + escurecimento à esquerda — garante contraste total
+   para o texto e "tinge" o vídeo com a paleta da marca em vez de
+   deixá-lo como uma imagem crua colada no fundo. */
+.hero__video-bg::before {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
   background:
-    linear-gradient(100deg, var(--bg-2) 0%, rgba(19,43,104,0.55) 22%, transparent 46%),
-    radial-gradient(ellipse at 78% 30%, rgba(142,162,255,0.10) 0%, transparent 55%),
-    linear-gradient(rgba(10,20,56,0.16), rgba(10,20,56,0.16));
+    linear-gradient(90deg, var(--bg) 0%, rgba(16,36,93,0.86) 30%, rgba(16,36,93,0.35) 52%, transparent 72%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(6,12,38,0.55) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 78% 20%, rgba(142,162,255,0.14) 0%, transparent 65%),
+    linear-gradient(rgba(11,20,58,0.22), rgba(11,20,58,0.22));
   pointer-events: none;
 }
 
 /* Grade técnica fina por cima do vídeo, na mesma linguagem do
-   .hero__grid, para amarrar a camada de mídia ao restante do Hero. */
-.hero__visual::after {
+   .hero__grid, para amarrar a camada de vídeo ao restante do Hero. */
+.hero__video-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 2;
   background-image:
     linear-gradient(rgba(183,199,255,0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(183,199,255,0.05) 1px, transparent 1px);
@@ -571,10 +563,14 @@ p  { text-wrap: pretty; }
   pointer-events: none;
 }
 
-.hero-media.is-video-error .hero-media__video { display: none; }
+/* O poster (primeiro frame real do vídeo) fica sempre por baixo como
+   base estável — o <video poster="..."> usa o mesmo arquivo, então
+   antes do primeiro frame decodificar a tela já mostra exatamente a
+   mesma imagem, sem flash de composição diferente. */
+.hero__video-bg.is-video-error .hero__video-bg-video { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-media__video { display: none; }
+  .hero__video-bg-video { display: none; }
 }
 
 .mockup-stage {
@@ -3322,9 +3318,8 @@ main h1:not(.hero__title) {
    RESPONSIVE — TABLET (≤ 1024px)
    ══════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .hero__split         { grid-template-columns: 1fr; gap: 48px; }
+  .hero__split         { grid-template-columns: 1fr; }
   .hero__content       { max-width: 100%; }
-  .hero__visual        { display: none; }
   .pricing__grid       { grid-template-columns: repeat(2, 1fr); }
   .about-lucas__wrap   { grid-template-columns: 1fr; gap: 48px; }
   .about-lucas__card   { max-width: 460px; }
@@ -3412,7 +3407,10 @@ main h1:not(.hero__title) {
     background-position: center 30%;
   }
   .hero__actions { flex-direction: column; align-items: stretch; }
-  .hero__visual  { display: none; }
+  /* O <video> de fundo some no mobile — o poster já assumiu como
+     background da própria .hero acima, então a camada fica escondida
+     para não pagar peso de vídeo à toa. */
+  .hero__video-bg { display: none; }
 
   /* Hero — composição visual leve, só no mobile: nós conectados em coluna
      no lugar do mockup de dashboard (que já não aparece no mobile). */

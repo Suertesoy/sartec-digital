@@ -65,6 +65,29 @@
 
     <!-- ═══ 1. HERO ═══ -->
     <section class="hero" id="hero">
+      <!-- Vídeo do ecossistema como camada de fundo de toda a seção -->
+      <div class="hero__video-bg" id="js-hero-media" aria-hidden="true">
+        <img
+          class="hero__video-bg-poster"
+          src="assets/hero/sartec-hero-poster.webp"
+          alt=""
+          width="1280"
+          height="800"
+          loading="eager"
+        />
+        <video
+          class="hero__video-bg-video"
+          id="js-hero-video"
+          poster="assets/hero/sartec-hero-poster.webp"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        >
+          <source src="assets/hero/sartec-hero-loop.mp4" type="video/mp4" />
+        </video>
+      </div>
       <div class="hero__glow"  aria-hidden="true"></div>
       <div class="hero__grid"  aria-hidden="true"></div>
       <div class="container hero__split">
@@ -107,34 +130,6 @@
           </div>
 
           <p class="hero__micro" data-i18n="heroMicro">Fale direto com o responsável pela Sartec para entender qual solução faz mais sentido para o seu negócio.</p>
-        </div>
-
-        <!-- Lado direito: composição visual do ecossistema, integrada ao fundo do Hero -->
-        <div class="hero__visual" aria-hidden="true">
-          <div class="hero-media" id="js-hero-media">
-            <img
-              class="hero-media__poster"
-              src="assets/hero/sartec-hero-poster.webp"
-              alt=""
-              width="1280"
-              height="800"
-              loading="eager"
-            />
-            <video
-              class="hero-media__video"
-              id="js-hero-video"
-              poster="assets/hero/sartec-hero-poster.webp"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="auto"
-              width="1280"
-              height="800"
-            >
-              <source src="assets/hero/sartec-hero-loop.mp4" type="video/mp4" />
-            </video>
-          </div>
         </div>
 
       </div>
