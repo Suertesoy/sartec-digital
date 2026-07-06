@@ -1804,3 +1804,14 @@ if (pricingGrid) {
   mediaQueryDesktop.addEventListener('change', checkAndControlLoop);
   mediaQueryReducedMotion.addEventListener('change', checkAndControlLoop);
 })();
+
+// ── Hero Video Fallback (marca erro de carregamento do vídeo, se houver) ──
+(() => {
+  const media = document.getElementById('js-hero-media');
+  const video = document.getElementById('js-hero-video');
+  if (!media || !video) return;
+
+  video.addEventListener('error', () => {
+    media.classList.add('is-video-error');
+  });
+})();

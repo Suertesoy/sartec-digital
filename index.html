@@ -109,9 +109,17 @@
           <p class="hero__micro" data-i18n="heroMicro">Fale direto com o responsável pela Sartec para entender qual solução faz mais sentido para o seu negócio.</p>
         </div>
 
-        <!-- Lado direito: composição visual do ecossistema (desktop + mobile) -->
+        <!-- Lado direito: composição visual do ecossistema, integrada ao fundo do Hero -->
         <div class="hero__visual" aria-hidden="true">
-          <div class="hero-media">
+          <div class="hero-media" id="js-hero-media">
+            <img
+              class="hero-media__poster"
+              src="assets/hero/sartec-hero-poster.webp"
+              alt=""
+              width="1280"
+              height="800"
+              loading="eager"
+            />
             <video
               class="hero-media__video"
               id="js-hero-video"
@@ -120,20 +128,12 @@
               muted
               loop
               playsinline
-              preload="metadata"
+              preload="auto"
               width="1280"
               height="800"
             >
               <source src="assets/hero/sartec-hero-loop.mp4" type="video/mp4" />
             </video>
-            <img
-              class="hero-media__fallback"
-              src="assets/hero/sartec-hero-poster.webp"
-              alt=""
-              width="1280"
-              height="800"
-              loading="eager"
-            />
           </div>
         </div>
 
