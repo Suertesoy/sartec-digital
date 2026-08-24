@@ -1,74 +1,52 @@
 # Sartec Digital
 
-Página comercial da **Sartec Digital** — soluções digitais sob medida para pequenos e médios negócios, com foco em presença digital, sistemas internos, automações, aplicativos, fluxos de atendimento, venda digital e gestão.
+Site institucional da **Sartec Digital** — a empresa entra na operação de empresas em crescimento e organiza atendimento, vendas e processos internos com software, automação e IA.
 
-## Objetivo
+## Posicionamento
 
-Apresentar a Sartec Digital como parceira de desenvolvimento sob medida, capaz de entender problemas reais de operação, atendimento, venda e experiência do cliente, e transformá-los em soluções digitais simples, usáveis e bem implementadas.
+Não começamos pela ferramenta, começamos pelo problema. A Sartec entende onde uma operação está perdendo tempo, vendas ou clareza e só depois define se a resposta é automação, integração de ferramentas existentes ou um sistema sob medida.
 
-## Seções da página
+## Páginas
 
-| # | Seção | Descrição |
+| Página | Arquivo | Conteúdo |
 |---|---|---|
-| 1 | Hero | Título, subtítulo, CTAs e selos de área de atuação |
-| 2 | Antes vs Depois | Mapeamento de dores operacionais clássicas versus fluxos organizados |
-| 3 | Nossa Origem | A história real nascida na operação comercial da Sartec Papelaria |
-| 4 | O que entregamos | 6 verticais de serviço (Landing pages, Sistemas internos, Automações, Apps/MVPs, Agendamento, Venda digital) |
-| 5 | Aplicação Real | Case prático e link de produção da Sartec Papelaria |
-| 6 | Sobre Lucas | Bio do Product Designer focado em UX/UI, automações e IA aplicada à rotina real |
-| 7 | Pacotes | 4 caminhos de entrada com escopo flexível (sem preços pré-definidos) |
-| 8 | Comparativo | Tabela detalhada de recursos, opcionais e escopos de cada pacote |
-| 9 | Como começamos | 4 etapas do método (Entendimento → Desenho → Implementação → Ajuste) |
-| 10 | FAQ | 8 perguntas frequentes com respostas honestas sobre escopo, e-commerce, apps e suporte |
-| 11 | CTA final | Chamada para análise inicial gratuita e conversa sem compromisso |
+| Home | `index.html` | Hero, reconhecimento do problema, forma de pensar, três formas de atuação, case principal, para quem fazemos sentido, capacidades, método (4 fases), projetos, CTA final |
+| Soluções | `solucoes.html` | As três formas de atuação (automação de atendimento e rotinas · operação conectada · sistemas operacionais sob medida), com FAQ |
+| Projetos | `cases.html` | Case completo da Sartec Papelaria (contexto → resultado) e demais projetos |
+| Como trabalhamos | `como-trabalhamos.html` | Processo em 4 fases, como o processo muda por tipo de problema, formas de contratação |
+| Sobre | `sobre.html` | Origem da Sartec, por que produto/design/software/automação/IA convivem na mesma empresa, e quem conduz (Lucas Cabral) |
 
 ## Stack
 
-- HTML5 semântico
-- CSS3 com custom properties, grid e flexbox
-- JavaScript vanilla — sem dependências, sem build
-- Fonte: Inter via Google Fonts
-- Botão flutuante de WhatsApp
-
-**Sem framework. Sem npm. Sem build command.**
+- HTML5 semântico, uma página por rota (sem framework de front-end)
+- CSS3 com custom properties, grid e flexbox (`styles.css`) + Tailwind apenas como pipeline de build (`src/tailwind-input.css` → `assets/css/tailwind.css`)
+- JavaScript vanilla (`script.js`) — i18n PT/EN, menu, FAQ, seleção de cards, efeito de grid no fundo
+- Fonte: Outfit via Google Fonts
 
 ## Como rodar localmente
-
-Abra `index.html` diretamente no navegador. Se precisar evitar problemas de CORS:
 
 ```bash
 python -m http.server 8080
 # Acesse: http://localhost:8080
 ```
 
+## Build
+
+```bash
+npm install
+npm run build   # compila assets/css/tailwind.css
+```
+
 ## Deploy — Vercel
 
-Deploy automático a cada push para `main`.
-
-Repositório: `https://github.com/Suertesoy/sartec-digital.git`
-
-| Parâmetro | Valor |
-|---|---|
-| Application Preset | Other |
-| Root Directory | `./` |
-| Build Command | *(vazio)* |
-| Output Directory | `.` |
-
-## Estrutura de arquivos
-
-```
-sartec-digital/
-├── index.html    ← página principal (11 seções)
-├── styles.css    ← design system + todos os estilos
-├── script.js     ← header scroll, menu mobile, FAQ accordion, fade-in
-└── README.md
-```
+Deploy automático a cada push para `main`. Build command: `npm run build:css` (ver `vercel.json`).
 
 ## Personalização rápida
 
-- **Número do WhatsApp**: substituir `5512997863832` no `index.html` pelo número real
-- **Cores primárias**: variável `--blue` em `:root` no `styles.css`
+- **Número do WhatsApp**: `WA_NUMBER` em `script.js`, usado para montar todos os links `wa.me`
+- **Textos PT/EN**: objeto `I18N` em `script.js` (chaves espelhadas em `data-i18n` no HTML)
+- **Cores e tokens**: `:root` em `styles.css`
 
 ---
 
-© 2025 Sartec Digital · Soluções digitais sob medida
+© 2025 Sartec Digital

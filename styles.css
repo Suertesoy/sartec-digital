@@ -1894,17 +1894,15 @@ p  { text-wrap: pretty; }
 
 .pricing__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   align-items: stretch;
   /* Row height tokens — cards use these to form aligned grid rows */
   --pkg-head-h:     165px;
-  --pkg-price-h:    112px;
   --pkg-cta-h:       60px;
-  --pkg-includes-h: 190px;
+  --pkg-includes-h: 210px;
   --pkg-resolve-h:  150px;
-  --pkg-include-h:  190px;
-  --pkg-fit-h:      110px;
+  --pkg-fit-h:      120px;
 }
 
 .pricing-card {
@@ -1917,7 +1915,6 @@ p  { text-wrap: pretty; }
   display: grid;
   grid-template-rows:
     var(--pkg-head-h)
-    var(--pkg-price-h)
     var(--pkg-cta-h)
     var(--pkg-includes-h)
     auto;
@@ -2161,7 +2158,6 @@ p  { text-wrap: pretty; }
   display: grid;
   grid-template-rows:
     var(--pkg-resolve-h)
-    var(--pkg-include-h)
     var(--pkg-fit-h)
     auto;
   row-gap: 10px;
@@ -3180,15 +3176,50 @@ main h1:not(.hero__title) {
 }
 .case-type span:last-child { color: var(--text-2); font-weight: 600; }
 
+/* Case detail — Contexto/Problema/Diagnóstico/Solução/Implementação/Resultado (cases.html) */
+.case-detail { margin-bottom: 56px; }
+.case-capabilities { margin-bottom: 48px; }
+.case-capabilities__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
 /* Hero — composição visual leve para mobile (nós conectados). Escondida
    no desktop; a versão desktop do mockup (.hero__visual) some no mobile,
    então essa é a única visual do hero em telas pequenas. */
 .hero__mobile-flow { display: none; }
 
-/* Grade de 9 blocos de capacidade (solucoes.html — "O que pode ser entregue") */
+/* Grade de 3x3 blocos curtos reaproveitada em várias seções da Home
+   (sintomas, formas de atuação, capacidades). */
 .eco-grid--capabilities {
   grid-template-columns: repeat(3, 1fr);
   max-width: 980px;
+}
+
+/* Checklist de 2 colunas — "Para quem fazemos mais sentido" (Home) */
+.fit-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 32px;
+  max-width: 760px;
+  margin: 0 auto 28px;
+}
+.fit-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+.fit-note {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-3);
 }
 
 /* Grade de 8 cards de contratação (como-trabalhamos.html) — 4 colunas para
@@ -3346,6 +3377,7 @@ main h1:not(.hero__title) {
      intervalo — duas colunas dão mais respiro até a quebra para 1 no mobile. */
   .eco-grid--capabilities { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
   .contracting-grid       { grid-template-columns: repeat(2, 1fr); }
+  .fit-list                { grid-template-columns: 1fr; max-width: 480px; }
 }
 
 /* ══════════════════════════════════════════════
