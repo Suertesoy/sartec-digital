@@ -5,6 +5,6 @@
 /* Estados de foco/hover consistentes para elementos interativos novos em Tailwind. */
 @layer utilities {
   .focus-ring {
-    @apply outline-none focus-visible:ring-2 focus-visible:ring-blue-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-3;
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg;
   }
 }

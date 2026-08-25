@@ -1,8 +1,8 @@
 {
-  "name": "sartec-digital",
+  "name": "la-cabral",
   "private": true,
   "version": "1.0.0",
-  "description": "Site institucional da Sartec Digital (HTML/CSS/JS estático + Tailwind CSS para tokens, layout e componentes novos)",
+  "description": "Site institucional da L A Cabral (HTML/CSS/JS estático + Tailwind CSS para tokens, layout e componentes novos)",
   "scripts": {
     "build:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.css --watch",

@@ -10,27 +10,24 @@ module.exports = {
     },
     extend: {
       colors: {
-        bg: { DEFAULT: "#10245d", 2: "#142b68", 3: "#0b1844" },
+        bg: { DEFAULT: "#0D1B16", 2: "#10241C" },
         surface: {
-          DEFAULT: "rgba(19, 39, 91, 0.72)",
-          2: "rgba(25, 49, 108, 0.78)",
+          DEFAULT: "#132A21",
+          2: "#1B362A",
+          hover: "#264236",
         },
-        blue: {
-          DEFAULT: "#292D96",
-          light: "#8ea2ff",
-        },
-        red: {
-          DEFAULT: "#FF1720",
-          light: "#ff5b62",
+        green: {
+          DEFAULT: "#22C55E",
+          light: "#4ADE80",
         },
         ink: {
-          DEFAULT: "#f4f7ff",
-          2: "#c2cbed",
-          3: "#a3b1de",
+          DEFAULT: "#F3F5F4",
+          2: "#B7C4BD",
+          3: "#869089",
         },
         line: {
-          DEFAULT: "rgba(183, 199, 255, 0.16)",
-          light: "rgba(206, 216, 255, 0.26)",
+          DEFAULT: "rgba(243, 245, 244, 0.08)",
+          light: "rgba(243, 245, 244, 0.14)",
         },
       },
       fontFamily: {
@@ -43,9 +40,9 @@ module.exports = {
         pill: "100px",
       },
       boxShadow: {
-        card: "0 8px 30px -12px rgba(4, 10, 32, 0.55)",
-        "card-hover": "0 16px 44px -14px rgba(4, 10, 32, 0.7)",
-        glow: "0 0 0 1px rgba(142, 162, 255, 0.28), 0 0 40px -8px rgba(41, 45, 150, 0.55)",
+        card: "0 8px 30px -12px rgba(0, 0, 0, 0.55)",
+        "card-hover": "0 16px 44px -14px rgba(0, 0, 0, 0.7)",
+        glow: "0 0 0 1px rgba(34, 197, 94, 0.28), 0 0 40px -8px rgba(34, 197, 94, 0.40)",
       },
       transitionTimingFunction: {
         smooth: "cubic-bezier(0.4, 0, 0.2, 1)",
