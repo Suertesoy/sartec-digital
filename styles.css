@@ -380,54 +380,93 @@ p  { text-wrap: pretty; }
 }
 
 /* ── HERO ─────────────────────────────────────── */
-/* Fundo neutro real (quase-preto, --ink-950), não o wash verde do body —
-   dá ao primeiro fold um tom próprio, diferente do resto do site. */
+/* Fotografia editorial como fundo integral do primeiro fold — a marca
+   e o contexto humano da L A Cabral entram primeiro; o site da Sartec
+   Papelaria e o app UniEdu aparecem depois, na seção Projetos, como
+   prova. Sem UI, sem browser chrome, sem mockup neste fold. */
 .hero {
   position: relative;
   min-height: 100svh;
   display: flex; align-items: center;
   padding: 132px 0 72px;
-  background:
-    radial-gradient(ellipse 70% 60% at 82% 88%, rgba(34, 197, 94, 0.10) 0%, transparent 60%),
-    linear-gradient(175deg, var(--ink-950) 0%, #0C0D0C 60%, var(--ink-950) 100%);
+  background: var(--ink-950);
   overflow: hidden;
 }
 
-.hero__grid {
+.hero__media {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(243,245,244,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(243,245,244,0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 55% 60% at 22% 40%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 55% 60% at 22% 40%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
-  pointer-events: none;
+  z-index: 0;
 }
 
-/* Split layout — coluna de texto + composição de trabalho real à
-   direita (site + produto, não um diagrama abstrato). Visível também
-   em tablet/mobile (ver responsivo), só empilhada e reduzida — é prova,
-   não decoração, por isso não desaparece fora do desktop. */
-.hero__split {
-  position: relative;
+.hero__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 66% 45%;
+  animation: hero-photo-in 1.8s var(--ease) both;
+}
+
+@keyframes hero-photo-in {
+  from { transform: scale(1.035); opacity: 0.001; }
+  to   { transform: scale(1);     opacity: 1; }
+}
+
+/* Contraste do texto resolvido pela composição da foto (espaço negativo
+   à esquerda) + este scrim localizado — neutro quase-preto, nunca verde,
+   e sem caixa translúcida grande atrás da copy. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(10, 11, 10, 0.92) 0%, rgba(10, 11, 10, 0.72) 30%, rgba(10, 11, 10, 0.28) 54%, rgba(10, 11, 10, 0.06) 72%, transparent 88%),
+    linear-gradient(180deg, rgba(10, 11, 10, 0.30) 0%, transparent 24%, transparent 76%, rgba(10, 11, 10, 0.38) 100%);
+}
+
+/* Traço geométrico do símbolo LA — discreto, funciona como assinatura,
+   não como protagonista visual (a fotografia é o elemento principal). */
+.hero__mark {
+  position: absolute;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 500px) minmax(0, 480px);
-  align-items: center;
-  gap: 32px;
+  left: 28px;
+  bottom: 30px;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  opacity: 0.55;
+}
+.hero__mark path {
+  fill: none;
+  stroke: var(--green-light);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.hero__content { max-width: 540px; position: relative; z-index: 2; }
+.hero__inner { position: relative; z-index: 2; }
+
+.hero__content {
+  max-width: 560px;
+  animation: hero-content-in 0.9s 0.2s var(--ease) both;
+}
+
+@keyframes hero-content-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .hero__content .tag { margin-bottom: 20px; }
 
-.hero__title   { margin-bottom: 24px; }
+.hero__title   { margin-bottom: 24px; text-shadow: 0 2px 28px rgba(0, 0, 0, 0.35); }
 
 .hero__desc {
   font-size: clamp(15px, 1.6vw, 17px);
   color: var(--text-2);
   margin-bottom: 32px;
   line-height: 1.74;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .hero__actions {
@@ -443,7 +482,7 @@ p  { text-wrap: pretty; }
   margin-top: 4px;
 }
 
-/* Hero primary CTA precisa de mais presença contra o fundo escuro */
+/* Hero primary CTA precisa de mais presença contra o fundo fotográfico */
 .hero__actions .btn--primary {
   background: var(--green);
   border: 1px solid var(--green-border);
@@ -454,58 +493,17 @@ p  { text-wrap: pretty; }
   border-color: var(--green-light);
   box-shadow: 0 10px 38px rgba(34, 197, 94, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
-
-/* ── HERO SHOWCASE — trabalho real, não diagrama ──────────────
-   Substitui o antigo SVG de pontos/linhas (ver .sysviz-*, ainda usado
-   mais abaixo em "Sistemas, automação e IA" e no manifesto). Peça
-   principal: .browser-chrome com o site real da Sartec Papelaria.
-   Camada secundária: .phone-preview (mesmo componente do case UniEdu)
-   ancorada no canto — peso claramente menor, nunca dois blocos iguais. */
-.hero__showcase {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 8px 0 8px 40px;
+.hero__actions .btn--ghost {
+  border-color: rgba(243, 245, 244, 0.28);
+  background: rgba(10, 11, 10, 0.28);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
+.hero__actions .btn--ghost:hover { border-color: rgba(243, 245, 244, 0.5); }
 
-.hero__showcase-primary {
-  width: min(100%, 440px);
-  position: relative;
-  z-index: 1;
-  margin-top: 26px;
-}
-
-.hero__showcase-secondary {
-  position: absolute;
-  right: -8px;
-  bottom: -34px;
-  width: 118px;
-  z-index: 2;
-  filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.5));
-}
-.hero__showcase-secondary .phone-preview { width: 100%; }
-
-/* Traço geométrico derivado do ângulo do símbolo LA (o "Λ") — assinatura
-   estrutural pousada sobre o canto do browser-chrome, não decoração
-   solta flutuando no vazio. */
-.hero__showcase-mark {
-  position: absolute;
-  left: 22px;
-  top: -26px;
-  width: 46px;
-  height: 46px;
-  pointer-events: none;
-  z-index: 2;
-}
-.hero__showcase-mark path {
-  fill: none;
-  stroke: var(--green-light);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.9;
+@media (prefers-reduced-motion: reduce) {
+  .hero__photo,
+  .hero__content { animation: none; opacity: 1; transform: none; }
 }
 
 /* ── BROWSER CHROME — moldura de navegador minimalista ────────
@@ -668,7 +666,8 @@ p  { text-wrap: pretty; }
   background: #E7E9EA;
 }
 .territory--web .territory__visual { aspect-ratio: 16 / 9; }
-.territory--web .territory__visual video {
+.territory--web .territory__visual video,
+.territory--web .territory__visual img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
 }
 
@@ -1881,15 +1880,18 @@ main h1:not(.hero__title) {
    RESPONSIVE — TABLET (≤ 1024px)
    ══════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .hero__split         { grid-template-columns: 1fr; gap: 56px; }
-  .hero__content       { max-width: 100%; text-align: center; }
+  .hero { align-items: flex-end; padding-bottom: 64px; }
+  .hero__content       { max-width: 100%; text-align: center; margin: 0 auto; }
   .hero__content .hero__actions { justify-content: center; }
-  .hero__showcase      { padding-left: 0; padding-top: 30px; justify-content: center; }
-  .hero__showcase-primary { width: min(100%, 420px); margin-top: 0; }
-  /* A posição do traço geométrico foi ajustada para o layout lado a
-     lado do desktop — no empilhado (tablet/mobile) ele fica solto,
-     sem tocar o canto do browser-chrome, então some aqui. */
-  .hero__showcase-mark { display: none; }
+  .hero__photo          { object-position: 62% 35%; }
+  .hero__scrim {
+    background:
+      linear-gradient(180deg, rgba(10, 11, 10, 0.10) 0%, rgba(10, 11, 10, 0.30) 45%, rgba(10, 11, 10, 0.88) 80%, rgba(10, 11, 10, 0.95) 100%);
+  }
+  /* No empilhado (tablet/mobile), a copy fica ancorada embaixo da foto,
+     sobre a zona mais escura do scrim — o traço geométrico (ligado ao
+     canto do layout desktop) some aqui. */
+  .hero__mark           { display: none; }
   .pricing__grid       { grid-template-columns: repeat(2, 1fr); }
   .about-lucas__wrap   { grid-template-columns: 1fr; gap: 48px; }
   .about-lucas__card   { max-width: 460px; }
@@ -1976,20 +1978,11 @@ main h1:not(.hero__title) {
   }
 
   .hero {
-    min-height: auto;
-    padding: 108px 0 56px;
+    min-height: 100svh;
+    padding: 108px 0 48px;
   }
-  .hero__split { gap: 40px; }
   .hero__actions { flex-direction: column; align-items: stretch; }
-
-  /* No mobile estreito, a camada secundária some da sobreposição (o
-     recorte ficaria pequeno demais para comunicar algo) — a peça
-     principal sozinha já prova capacidade web; UniEdu aparece de
-     verdade mais abaixo, na seção Projetos. */
-  .hero__showcase        { padding: 0 8px; }
-  .hero__showcase-primary { width: 100%; max-width: 340px; }
-  .hero__showcase-secondary,
-  .hero__showcase-mark   { display: none; }
+  .hero__photo { object-position: center 22%; }
 
   /* Páginas internas — primeira seção precisa de menos espaço para o
      header fixo de 76px (vs. 140px usados no desktop). */
@@ -2045,9 +2038,6 @@ main h1:not(.hero__title) {
     width: 64px;
     height: 19px;
   }
-
-  /* Tech grid subtle on mobile */
-  .hero__grid { opacity: 0.6; }
 
   /* Ecossistema */
   .eco-grid { grid-template-columns: 1fr; gap: 16px; }

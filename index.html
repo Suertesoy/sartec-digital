@@ -25,6 +25,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- Hero é o LCP da Home — preload da foto certa por breakpoint (mesma
+       lógica do <picture> no hero) para evitar atraso de descoberta. -->
+  <link rel="preload" as="image" href="assets/hero-photo-mobile.jpg" media="(max-width: 680px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/hero-photo-desktop.jpg" media="(min-width: 681px)" fetchpriority="high" />
 </head>
 <body>
 
@@ -63,12 +67,30 @@
 
   <main>
 
-    <!-- ═══ 1. HERO — trabalho real, não diagrama de sistema ═══ -->
+    <!-- ═══ 1. HERO — a marca e o contexto humano da L A Cabral primeiro;
+         os projetos reais (Sartec Papelaria, UniEdu) entram depois, na
+         seção Projetos, como prova. Fundo fotográfico editorial gerado
+         especificamente para esta composição (direção de arte
+         institucional — não representa cliente, case ou equipe real). ═══ -->
     <section class="hero" id="hero">
-      <div class="hero__grid"  aria-hidden="true"></div>
-      <div class="container hero__split">
+      <div class="hero__media" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 680px)" srcset="assets/hero-photo-mobile.jpg">
+          <img
+            src="assets/hero-photo-desktop.jpg"
+            alt=""
+            class="hero__photo"
+            width="2400" height="1350"
+            fetchpriority="high"
+          />
+        </picture>
+        <div class="hero__scrim"></div>
+      </div>
+      <svg class="hero__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <path d="M6 44 L30 8 L44 44"/>
+      </svg>
 
-        <!-- Lado esquerdo: copy -->
+      <div class="container hero__inner">
         <div class="hero__content">
           <span class="tag" data-i18n="heroTag">Sites, produtos digitais e sistemas</span>
           <h1 class="hero__title" data-i18n="heroTitle">
@@ -84,41 +106,6 @@
 
           <p class="hero__micro" data-i18n="heroMicro">Conversa direta com quem conduz a L A Cabral — sem formulário, sem intermediário.</p>
         </div>
-
-        <!-- Lado direito: composição real — o site da Sartec Papelaria
-             (peça principal, moldura de navegador) com o app UniEdu
-             ancorado no canto (peça secundária, moldura de celular).
-             Trabalho real tratado por crop/composição — nenhum pixel
-             gerado ou upscalado. -->
-        <div class="hero__showcase" aria-hidden="true">
-          <svg class="hero__showcase-mark" viewBox="0 0 64 64" focusable="false">
-            <path d="M6 44 L30 8 L44 44"/>
-          </svg>
-          <div class="hero__showcase-primary">
-            <div class="browser-chrome">
-              <div class="browser-chrome__bar">
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__url">sartec.vercel.app</span>
-              </div>
-              <div class="browser-chrome__frame">
-                <video autoplay muted loop playsinline preload="metadata" poster="assets/case-sartec-poster.webp">
-                  <source src="sartec-site-20s.mp4" type="video/mp4">
-                </video>
-              </div>
-            </div>
-          </div>
-          <div class="hero__showcase-secondary">
-            <div class="phone-preview">
-              <div class="phone-preview__island"></div>
-              <video class="phone-preview__video" autoplay muted loop playsinline preload="metadata" poster="assets/case-uniedu-poster.webp">
-                <source src="uniedu-20s.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
@@ -135,9 +122,7 @@
         <div class="territories-grid">
           <article class="territory territory--web">
             <div class="territory__visual">
-              <video autoplay muted loop playsinline preload="metadata" poster="assets/case-sartec-poster.webp">
-                <source src="sartec-site-20s.mp4" type="video/mp4">
-              </video>
+              <img src="assets/case-sartec-desktop.jpg" alt="" loading="lazy" />
             </div>
             <span class="territory__num">01</span>
             <h3 data-i18n="territory1Title">Sites e experiências web</h3>
@@ -200,9 +185,7 @@
                 <span class="browser-chrome__url">sartec.vercel.app</span>
               </div>
               <div class="browser-chrome__frame">
-                <video autoplay muted loop playsinline preload="metadata" poster="assets/case-sartec-poster.webp">
-                  <source src="sartec-site-20s.mp4" type="video/mp4">
-                </video>
+                <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" />
               </div>
             </div>
             <div class="showcase__head">

@@ -212,6 +212,7 @@ const I18N = {
     ecosystemSectionTag: `Case · Sartec Papelaria`,
     ecosystemSectionHeading: `Como a Sartec Papelaria virou um ecossistema conectado.`,
     ecosystemSectionSubtitle: `O site apresenta, a lista escolar direciona, o WhatsApp recebe, a IA faz a triagem e o painel organiza a equipe.`,
+    caseSartecShotAlt: `Página inicial do site da Sartec Papelaria, capturada em desktop.`,
 
     caseContextLabel: `Contexto`,
     caseProblemLabel: `Problema`,
@@ -557,6 +558,7 @@ const I18N = {
     ecosystemSectionTag: `Case · Sartec Papelaria`,
     ecosystemSectionHeading: `How Sartec Papelaria became a connected ecosystem.`,
     ecosystemSectionSubtitle: `The site presents, the school list routes, WhatsApp receives, AI handles triage and the dashboard organizes the team.`,
+    caseSartecShotAlt: `Sartec Papelaria homepage, captured on desktop.`,
 
     caseContextLabel: `Context`,
     caseProblemLabel: `Problem`,
