@@ -24,10 +24,21 @@ module.exports = {
           DEFAULT: "#F3F5F4",
           2: "#B7C4BD",
           3: "#869089",
+          // Aditivos (Fase 1 — Home): quase-preto real, sem tingimento
+          // verde — usado só pelos componentes novos (hero, territórios).
+          950: "#0A0B0A",
+          900: "#121312",
         },
         line: {
           DEFAULT: "rgba(243, 245, 244, 0.08)",
           light: "rgba(243, 245, 244, 0.14)",
+        },
+        // Aditivo (Fase 1 — Home): off-white usado só pela seção
+        // Territórios, para o ritmo claro/escuro da página.
+        paper: {
+          DEFAULT: "#F4F2EC",
+          ink: "#17181A",
+          "ink-2": "#55584f",
         },
       },
       fontFamily: {

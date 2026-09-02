@@ -39,6 +39,20 @@
   --project-phone-w:        300px;
   --project-phone-w-mobile: 200px;
   --project-phone-r:        38px;
+
+  /* ── Novos tokens (Fase 1 — Home) ──────────────────────────
+     Aditivos: não substituem os tokens acima. Usados apenas pelos
+     componentes novos da Home (hero, territórios, projetos) para dar
+     ritmo claro/escuro sem redefinir --bg/--surface/--green globais,
+     que .header/.footer/.btn/.tag/.section e as outras 4 páginas
+     continuam usando exatamente como hoje. */
+  --ink-950:     #0A0B0A;  /* quase-preto real, sem tingimento verde */
+  --ink-900:     #121312;
+  --paper:       #F4F2EC;  /* off-white para o ritmo claro da Home */
+  --paper-ink:   #17181A;
+  --paper-ink-2: #55584f;
+  --paper-line:  rgba(23, 24, 26, 0.12);
+  --paper-line-2: rgba(23, 24, 26, 0.07);
 }
 
 /* ── RESET ────────────────────────────────────── */
@@ -366,52 +380,42 @@ p  { text-wrap: pretty; }
 }
 
 /* ── HERO ─────────────────────────────────────── */
+/* Fundo neutro real (quase-preto, --ink-950), não o wash verde do body —
+   dá ao primeiro fold um tom próprio, diferente do resto do site. */
 .hero {
   position: relative;
   min-height: 100svh;
   display: flex; align-items: center;
-  padding: 120px 0 72px;
-  background: transparent;
-  overflow: hidden;
-}
-
-.hero__glow {
-  position: absolute;
-  top: -18%;
-  left: 36%;
-  transform: translateX(-50%);
-  width: 980px;
-  height: 720px;
+  padding: 132px 0 72px;
   background:
-    radial-gradient(ellipse at 30% 40%, rgba(34,197,94,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse at 72% 60%, rgba(34,197,94,0.06) 0%, transparent 58%);
-  pointer-events: none;
+    radial-gradient(ellipse 70% 60% at 82% 88%, rgba(34, 197, 94, 0.10) 0%, transparent 60%),
+    linear-gradient(175deg, var(--ink-950) 0%, #0C0D0C 60%, var(--ink-950) 100%);
+  overflow: hidden;
 }
 
 .hero__grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(243,245,244,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(243,245,244,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(243,245,244,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243,245,244,0.035) 1px, transparent 1px);
   background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 60% 70% at 50% 42%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.72) 65%, rgba(0,0,0,0.92) 100%);
-  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 42%, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.72) 65%, rgba(0,0,0,0.92) 100%);
+  mask-image: radial-gradient(ellipse 55% 60% at 22% 40%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 60% at 22% 40%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
   pointer-events: none;
 }
 
-/* Split layout — coluna de texto + sistema visual proprietário (SVG) à
-   direita. Assimétrico de propósito: a mensagem tem mais peso que o
-   diagrama. Colapsa para coluna única em .hero__split (tablet/mobile,
-   ver bloco responsivo), onde .hero__visual é escondido em favor de
-   .hero__mobile-flow. */
+/* Split layout — coluna de texto + composição de trabalho real à
+   direita (site + produto, não um diagrama abstrato). Visível também
+   em tablet/mobile (ver responsivo), só empilhada e reduzida — é prova,
+   não decoração, por isso não desaparece fora do desktop. */
 .hero__split {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 560px) minmax(0, 440px);
+  grid-template-columns: minmax(0, 500px) minmax(0, 480px);
   align-items: center;
-  gap: 24px;
+  gap: 32px;
 }
 
 .hero__content { max-width: 540px; position: relative; z-index: 2; }
@@ -451,21 +455,119 @@ p  { text-wrap: pretty; }
   box-shadow: 0 10px 38px rgba(34, 197, 94, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
-/* ── HERO VISUAL — sistema abstrato próprio (SVG), não estoque ──
-   Substitui o antigo vídeo de dashboards. Um pequeno vocabulário de nós
-   e conexões que representa módulos fragmentados convergindo para uma
-   operação organizada — reaproveitado (não copiado) em outras seções
-   via .sysviz-*. Puramente decorativo: aria-hidden, sem leitura por
-   leitor de tela. Escondido em tablet/mobile (ver responsivo), onde
-   .hero__mobile-flow assume como versão simplificada. */
-.hero__visual {
+/* ── HERO SHOWCASE — trabalho real, não diagrama ──────────────
+   Substitui o antigo SVG de pontos/linhas (ver .sysviz-*, ainda usado
+   mais abaixo em "Sistemas, automação e IA" e no manifesto). Peça
+   principal: .browser-chrome com o site real da Sartec Papelaria.
+   Camada secundária: .phone-preview (mesmo componente do case UniEdu)
+   ancorada no canto — peso claramente menor, nunca dois blocos iguais. */
+.hero__showcase {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding: 8px 0 8px 40px;
 }
-.hero__visual svg { width: 100%; height: auto; max-width: 460px; overflow: visible; }
+
+.hero__showcase-primary {
+  width: min(100%, 440px);
+  position: relative;
+  z-index: 1;
+  margin-top: 26px;
+}
+
+.hero__showcase-secondary {
+  position: absolute;
+  right: -8px;
+  bottom: -34px;
+  width: 118px;
+  z-index: 2;
+  filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.5));
+}
+.hero__showcase-secondary .phone-preview { width: 100%; }
+
+/* Traço geométrico derivado do ângulo do símbolo LA (o "Λ") — assinatura
+   estrutural pousada sobre o canto do browser-chrome, não decoração
+   solta flutuando no vazio. */
+.hero__showcase-mark {
+  position: absolute;
+  left: 22px;
+  top: -26px;
+  width: 46px;
+  height: 46px;
+  pointer-events: none;
+  z-index: 2;
+}
+.hero__showcase-mark path {
+  fill: none;
+  stroke: var(--green-light);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.9;
+}
+
+/* ── BROWSER CHROME — moldura de navegador minimalista ────────
+   Usada para apresentar trabalho de site/web (nunca para produto
+   mobile, que usa .phone-preview). object-fit:cover recorta o topo
+   real da captura (header + mensagem + CTA) sem esticar nem gerar
+   nenhum pixel novo — é crop/composição, não upscale generativo. */
+.browser-chrome {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--ink-900);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-card-hover), 0 0 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.browser-chrome__bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.browser-chrome__dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  flex-shrink: 0;
+}
+.browser-chrome__url {
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--text-3);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--r-pill);
+  padding: 3px 13px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.browser-chrome__frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #EEF0F2;
+}
+.browser-chrome__frame video,
+.browser-chrome__frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.browser-chrome--lg .browser-chrome__frame { aspect-ratio: 16 / 11; }
 
 /* ── Vocabulário visual reutilizável (sysviz) ─────────────────
    Nós, linhas e o pulso que percorre uma conexão. Usado no hero, no
@@ -509,6 +611,167 @@ p  { text-wrap: pretty; }
   .sysviz-line--flow { animation: none; stroke-dasharray: none; }
   .sysviz-node--active { animation: none; opacity: 1; transform: none; }
 }
+
+/* ── TERRITÓRIOS (Home) — três pilares com personalidade visual
+   própria, não três cards iguais com ícone+texto. Primeira seção
+   off-white da Home: os tokens de texto/superfície são redefinidos
+   localmente (mesmo mecanismo já usado para --text-3 no responsivo
+   mobile, ver final do arquivo) — .tag/.btn/h2/p herdam o contraste
+   certo sem que a regra base mude para as outras páginas. */
+.territories {
+  background: var(--paper);
+  --text: var(--paper-ink);
+  --text-2: var(--paper-ink-2);
+  --text-3: #7a7d72;
+  --border: var(--paper-line-2);
+  --border-light: var(--paper-line);
+  --surface: rgba(23, 24, 26, 0.035);
+  --surface-2: rgba(23, 24, 26, 0.05);
+  color: var(--paper-ink);
+}
+
+.territories-grid {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.territory {
+  position: relative;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--paper-line);
+  background: #FFFFFF;
+  padding: 24px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px -18px rgba(23, 24, 26, 0.18);
+}
+.territory__num {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 8px;
+}
+.territory h3 { font-size: 18px; margin-bottom: 8px; color: var(--paper-ink); }
+.territory p  { font-size: 13.5px; line-height: 1.62; color: var(--paper-ink-2); }
+
+.territory--web     { flex: 1.65; }
+.territory--product { flex: 1;    }
+.territory--systems { flex: 0.85; }
+
+.territory__visual {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  margin-bottom: 18px;
+  background: #E7E9EA;
+}
+.territory--web .territory__visual { aspect-ratio: 16 / 9; }
+.territory--web .territory__visual video {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+}
+
+.territory--product .territory__visual {
+  aspect-ratio: 3 / 4;
+  max-width: 132px;
+  margin-left: auto; margin-right: auto;
+  border-radius: 20px;
+  background: #0B0B0C;
+}
+.territory--product .territory__visual video {
+  width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 20px;
+}
+
+.territory--systems .territory__visual {
+  aspect-ratio: 4 / 3;
+  background: var(--ink-950);
+  display: flex; align-items: center; justify-content: center;
+}
+.territory--systems .territory__visual svg { width: 88%; height: auto; overflow: visible; }
+/* Nós estáticos ganham mais contraste aqui: contra o quase-preto puro
+   (--ink-950) da miniatura, o --surface-2 padrão do sysviz (pensado
+   para o verde-escuro do hero/manifesto) quase desaparece. */
+.territory--systems .sysviz-node {
+  fill: #2A2C2A;
+  stroke: rgba(243, 245, 244, 0.28);
+}
+
+.territories-cta { text-align: center; margin-top: 36px; }
+
+/* ── PROJETOS (Home) — prova principal, assimétrica de propósito.
+   Sartec Papelaria domina o espaço (case completo, mais escopo real);
+   UniEdu entra com composição própria de produto/mobile — nunca dois
+   containers iguais mudando só o conteúdo. */
+.projects-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: 26px;
+  align-items: stretch;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* ── CASES.HTML — grade equilibrada dos dois projetos ──────────
+   Reaproveita .showcase-primary/.showcase-secondary (mesmo cartão,
+   mesma moldura browser-chrome/phone-preview), só que lado a lado em
+   colunas iguais — aqui o papel da página é listar os projetos, não
+   hierarquizar um sobre o outro como na Home. */
+.cases-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  align-items: stretch;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.cases-grid .showcase-primary .browser-chrome__frame { aspect-ratio: 4 / 3; }
+.cases-grid .showcase-secondary { justify-content: center; }
+
+/* ── Cabeçalho visual do case (cases.html) — prova real logo no
+   topo, antes dos cartões de contexto/problema/diagnóstico. */
+.case-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  gap: 32px;
+  align-items: center;
+  margin: 0 auto 48px;
+  max-width: 1080px;
+}
+.case-hero__text { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.case-hero__logo { height: 30px; width: auto; }
+
+.showcase-primary,
+.showcase-secondary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.showcase-primary   { padding: 28px; }
+.showcase-secondary { padding: 26px 24px; align-items: center; text-align: center; }
+
+.showcase-primary .browser-chrome__frame  { aspect-ratio: 16 / 10; }
+.showcase-secondary .phone-preview { width: 176px; }
+
+.showcase__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.showcase__logo { height: 24px; width: auto; display: block; }
+.showcase__eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--green-light);
+}
+.showcase__badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.showcase-secondary .showcase__badges { justify-content: center; }
+.showcase__info h3 { font-size: 19px; margin-bottom: 8px; }
+.showcase__info p  { font-size: 14.5px; color: var(--text-2); line-height: 1.68; }
+.showcase__actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+.showcase-secondary .showcase__actions { justify-content: center; }
 
 /* ── ORIGIN SECTION ───────────────────────────── */
 .origin-section { background: transparent; }
@@ -623,63 +886,11 @@ p  { text-wrap: pretty; }
 .eco-card h3 { font-size: 16px; margin-bottom: 10px; }
 .eco-card p  { font-size: 14px; color: rgba(255, 255, 255, 0.70); line-height: 1.65; }
 
-/* ── ICON LIST — lista editorial com ícone, sem caixa/sombra ────
-   Alternativa mais leve ao .eco-card para conjuntos de 6-9 itens curtos
-   (sintomas, capacidades), onde uma grade de cartões pesava demais.
-   Divisor por linha em vez de borda ao redor de cada item. */
-.icon-list {
-  display: grid;
-  gap: 0 40px;
-  margin: 0 auto;
-  list-style: none;
-}
-.icon-list--2col { grid-template-columns: repeat(2, 1fr); max-width: 880px; }
-.icon-list--3col { grid-template-columns: repeat(3, 1fr); max-width: 1080px; }
-.icon-list__item {
-  display: flex;
-  gap: 14px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--border);
-}
-.icon-list__icon {
-  width: 20px; height: 20px;
-  flex-shrink: 0;
-  margin-top: 2px;
-  color: var(--green-light);
-}
-.icon-list__icon svg { width: 100%; height: 100%; }
-.icon-list__item h3 { font-size: 15px; margin-bottom: 5px; }
-.icon-list__item p  { font-size: 13px; color: var(--text-2); line-height: 1.62; margin: 0; }
 
-/* ── MANIFESTO — "Nem tudo vira sistema" ─────────────────────────
-   Tratamento próprio (não .pilot): mais espaço negativo, declaração
-   central em destaque tipográfico, acento sysviz discreto. */
-.manifesto {
-  position: relative;
-  padding: 128px 0;
-  text-align: center;
-  overflow: hidden;
-}
-.manifesto__glow {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 70% at 50% 45%, rgba(34,197,94,0.07), transparent 65%);
-  pointer-events: none;
-}
-.manifesto__wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 700px;
-  margin: 0 auto;
-}
-.manifesto__wrap .tag { margin-bottom: 22px; }
-.manifesto__wrap h2 { font-size: clamp(26px, 3.6vw, 42px); margin-bottom: 20px; }
-.manifesto__desc {
-  font-size: 16px;
-  color: var(--text-2);
-  line-height: 1.72;
-  max-width: 560px;
-  margin: 0 auto 44px;
-}
+/* ── Citação de destaque — declaração central em ênfase tipográfica.
+   Nasceu no antigo manifesto "Nem tudo vira sistema" (removido: o
+   ponto foi fundido em #como-pensamos); a classe continua em uso ali,
+   reaproveitada como fecho de seção. */
 .manifesto__quote {
   font-size: clamp(21px, 2.4vw, 28px);
   font-weight: 600;
@@ -1041,64 +1252,8 @@ p  { text-wrap: pretty; }
 /* ── APLICAÇÃO REAL ───────────────────────────── */
 .real-app-section { background: transparent; }
 
-/* ── PROJECTS GRID ───────────────────────────── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.project-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(243,245,244,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(243,245,244,0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 20%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.6) 100%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 20%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.6) 100%);
-  pointer-events: none;
-  z-index: 0;
-  border-radius: inherit;
-}
-
-.project-card > * { position: relative; z-index: 1; }
-
-.project-card__visual {
-  width: 100%;
-  min-height: calc(var(--project-phone-w) * 16 / 9);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
-
-.project-card__visual--phone {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
-
-/* ── Phone preview: mockup idêntico nos dois cards ── */
+/* ── Phone preview: moldura de celular reutilizada em qualquer case
+   de produto/app (hero, territórios, projetos, cases.html). ── */
 .phone-preview {
   position: relative;
   width: var(--project-phone-w);
@@ -1151,26 +1306,6 @@ p  { text-wrap: pretty; }
   transform: none;
 }
 
-.project-card__info {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.project-card__info p {
-  font-size: 15px;
-  color: var(--text-2);
-  line-height: 1.72;
-}
-
-/* Label neutro para projetos que não estão em produção — o verde fica
-   reservado para o status "em produção" do .real-app-label base. */
-.real-app-label--blue {
-  color: var(--text-2);
-  background: var(--surface-2);
-  border-color: var(--border-light);
-}
 
 /* ── PILOT ────────────────────────────────────── */
 .pilot { background: transparent; }
@@ -1238,8 +1373,8 @@ p  { text-wrap: pretty; }
 
 /* ── ECOSSISTEMA REAL (cases.html) ───────────────
    Fluxo de nós conectados em CSS puro — reaproveita o vocabulário visual
-   já usado no .pilot-step (selo numerado) e no .flow-node do hero mobile
-   (cartão + conector), agora para os 7 pontos do ecossistema. */
+   já usado no .pilot-step (selo numerado + cartão), agora para os 7
+   pontos do ecossistema. */
 .eco-flow {
   display: flex;
   flex-wrap: wrap;
@@ -1588,47 +1723,6 @@ main h1:not(.hero__title) {
   margin-top: 12px;
 }
 
-/* Hero — composição visual simplificada para tablet/mobile (nós
-   conectados, linguagem sysviz). Escondida no desktop, onde
-   .hero__visual (SVG do sistema) já cumpre esse papel — ver breakpoint
-   de 1024px, que alterna entre os dois. */
-.hero__mobile-flow {
-  display: none;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 10px 0;
-  margin-top: 28px;
-}
-.flow-node {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  background: var(--surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--r-pill);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-2);
-}
-.flow-node__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 8px;
-  height: 8px;
-  flex-shrink: 0;
-  background: var(--green-light);
-  border-radius: 50%;
-}
-.flow-node__connector {
-  width: 20px;
-  height: 1.4px;
-  background: linear-gradient(90deg, var(--green-border), var(--border-light));
-  flex-shrink: 0;
-}
-
 /* Grade de 3x3 blocos curtos reaproveitada em várias seções da Home
    (sintomas, formas de atuação, capacidades). */
 .eco-grid--capabilities {
@@ -1787,10 +1881,15 @@ main h1:not(.hero__title) {
    RESPONSIVE — TABLET (≤ 1024px)
    ══════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .hero__split         { grid-template-columns: 1fr; }
-  .hero__content       { max-width: 100%; }
-  .hero__visual        { display: none; }
-  .hero__mobile-flow   { display: flex; }
+  .hero__split         { grid-template-columns: 1fr; gap: 56px; }
+  .hero__content       { max-width: 100%; text-align: center; }
+  .hero__content .hero__actions { justify-content: center; }
+  .hero__showcase      { padding-left: 0; padding-top: 30px; justify-content: center; }
+  .hero__showcase-primary { width: min(100%, 420px); margin-top: 0; }
+  /* A posição do traço geométrico foi ajustada para o layout lado a
+     lado do desktop — no empilhado (tablet/mobile) ele fica solto,
+     sem tocar o canto do browser-chrome, então some aqui. */
+  .hero__showcase-mark { display: none; }
   .pricing__grid       { grid-template-columns: repeat(2, 1fr); }
   .about-lucas__wrap   { grid-template-columns: 1fr; gap: 48px; }
   .about-lucas__card   { max-width: 460px; }
@@ -1799,7 +1898,16 @@ main h1:not(.hero__title) {
   .real-app-card       { grid-template-columns: 1fr; gap: 36px; padding: 32px; }
   .real-app-card::after { left: 32px; right: 32px; }
   .real-app-card__visual { max-width: 560px; margin: 0 auto; width: 100%; }
-  .projects-grid       { gap: 20px; }
+
+  .territories-grid    { flex-direction: column; }
+  .territory--web, .territory--product, .territory--systems { flex: none; }
+  .territory--product .territory__visual { max-width: 160px; }
+
+  .projects-showcase   { grid-template-columns: 1fr; max-width: 560px; }
+  .cases-grid          { grid-template-columns: 1fr; max-width: 560px; }
+  .case-hero           { grid-template-columns: 1fr; gap: 28px; }
+  .case-hero__text     { align-items: center; text-align: center; }
+  .case-hero__visual   { max-width: 420px; margin: 0 auto; width: 100%; }
 
   /* The language switcher widens the nav enough that the tagline can wrap
      and collide with the nav links in this range, so it steps aside here
@@ -1816,8 +1924,6 @@ main h1:not(.hero__title) {
   /* Grids novos de 8-9 itens curtos ficam apertados em 3-4 colunas neste
      intervalo — duas colunas dão mais respiro até a quebra para 1 no mobile. */
   .eco-grid--capabilities { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
-  .icon-list--3col { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
-  .manifesto { padding: 96px 0; }
   .contracting-grid       { grid-template-columns: repeat(2, 1fr); }
   .fit-list                { grid-template-columns: 1fr; max-width: 480px; }
 }
@@ -1871,25 +1977,19 @@ main h1:not(.hero__title) {
 
   .hero {
     min-height: auto;
-    padding: 108px 0 60px;
+    padding: 108px 0 56px;
   }
+  .hero__split { gap: 40px; }
   .hero__actions { flex-direction: column; align-items: stretch; }
 
-  /* Nós conectados em coluna no mobile estreito (fila horizontal acima
-     disso, ver base .hero__mobile-flow). */
-  .hero__mobile-flow {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    margin-top: 24px;
-  }
-  .flow-node { justify-content: center; }
-  .flow-node__connector {
-    width: 1.4px;
-    height: 16px;
-    margin: 2px auto;
-    background: linear-gradient(180deg, var(--green-border), var(--border-light));
-  }
+  /* No mobile estreito, a camada secundária some da sobreposição (o
+     recorte ficaria pequeno demais para comunicar algo) — a peça
+     principal sozinha já prova capacidade web; UniEdu aparece de
+     verdade mais abaixo, na seção Projetos. */
+  .hero__showcase        { padding: 0 8px; }
+  .hero__showcase-primary { width: 100%; max-width: 340px; }
+  .hero__showcase-secondary,
+  .hero__showcase-mark   { display: none; }
 
   /* Páginas internas — primeira seção precisa de menos espaço para o
      header fixo de 76px (vs. 140px usados no desktop). */
@@ -1912,11 +2012,6 @@ main h1:not(.hero__title) {
   .real-app-card { gap: 28px; padding: 24px 20px; }
   .real-app-card::after { left: 20px; right: 20px; }
   .browser-sim-grid { grid-template-columns: repeat(3, 1fr); }
-  .projects-grid { grid-template-columns: 1fr; gap: 14px; }
-  .project-card  { padding: 20px 18px; gap: 18px; }
-  .project-card__visual {
-    min-height: calc(var(--project-phone-w-mobile) * 16 / 9);
-  }
 
   .phone-preview {
     width: var(--project-phone-w-mobile);
@@ -1933,27 +2028,29 @@ main h1:not(.hero__title) {
     border-radius: 27px;
   }
 
+  /* Territórios — pilha única, sem os pesos assimétricos do desktop */
+  .territories-grid { gap: 16px; }
+  .territory { padding: 22px 20px 24px; }
+  .territory--product .territory__visual { max-width: 128px; }
+
+  /* Projetos (showcase assimétrico + grade equilibrada de cases.html) */
+  .showcase-primary   { padding: 20px; }
+  .showcase-secondary { padding: 22px 20px; }
+  .showcase-secondary .phone-preview { width: 168px; }
+  .showcase__actions { flex-direction: column; align-items: stretch; }
+  .case-hero__logo { height: 24px; }
+
   .phone-preview__island {
     top: 15px;
     width: 64px;
     height: 19px;
   }
 
-  .project-card__info {
-    margin-top: 16px;
-    gap: 10px;
-  }
-
-
   /* Tech grid subtle on mobile */
   .hero__grid { opacity: 0.6; }
 
   /* Ecossistema */
   .eco-grid { grid-template-columns: 1fr; gap: 16px; }
-  .icon-list--2col, .icon-list--3col { grid-template-columns: 1fr; gap: 0; max-width: 480px; }
-  .icon-list__item { padding: 18px 0; }
-  .manifesto { padding: 72px 0; }
-  .manifesto__desc { margin-bottom: 32px; }
   .manifesto__accent { width: 160px; margin-top: 36px; }
   .eco-grid--solutions { flex-direction: column; align-items: stretch; }
   .eco-grid--solutions .eco-card { max-width: none; }
