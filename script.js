@@ -3,12 +3,12 @@ const WA_NUMBER = '5512997863832';
 
 const I18N = {
   pt: {
-    docTitle: `L A Cabral — Sites, produtos digitais e sistemas`,
-    metaDescription: `A L A Cabral cria sites, produtos digitais e sistemas a partir de problemas reais de negócio — direção visual, produto e tecnologia de ponta a ponta.`,
-    metaOgTitle: `L A Cabral — Design e tecnologia para negócios reais`,
-    metaOgDescription: `Sites, produtos digitais e sistemas construídos a partir de problemas reais de negócio.`,
+    docTitle: `L A Cabral — Design e tecnologia para negócios`,
+    metaDescription: `A L A Cabral cria sites, produtos digitais e sistemas a partir de problemas de negócio — direção visual, produto e tecnologia de ponta a ponta.`,
+    metaOgTitle: `L A Cabral — Design e tecnologia para negócios`,
+    metaOgDescription: `Sites, produtos digitais e sistemas construídos a partir de problemas de negócio.`,
 
-    brandTagline: `Design e tecnologia para negócios reais`,
+    brandTagline: `Design e tecnologia para negócios`,
     navSolutions: `Soluções`,
     navCases: `Projetos`,
     navHowWeWork: `Como trabalhamos`,
@@ -42,7 +42,7 @@ const I18N = {
 
     // ── HOME · Hero ──────────────────────────────────────────
     heroTag: `Sites, produtos digitais e sistemas`,
-    heroTitle: `Sites, produtos digitais e sistemas construídos a partir de problemas reais de negócio.`,
+    heroTitle: `Sites, produtos digitais e sistemas construídos a partir de problemas de negócio.`,
     heroDesc: `Entendemos como sua empresa funciona antes de decidir se a resposta é um redesign, um produto digital ou um sistema interno — e cuidamos da direção visual, da experiência e da implementação, do início ao fim.`,
     heroBtnPrimary: `Falar sobre um projeto`,
     heroBtnGhost: `Ver projetos`,
@@ -58,7 +58,7 @@ const I18N = {
     approachHeading: `Sites, produtos digitais e sistemas — cada um com a linguagem certa.`,
     approachIntro: `Três territórios, um mesmo ponto de partida: entender o problema antes de escolher o formato.`,
     territory1Title: `Sites e experiências web`,
-    territory1Desc: `Sites institucionais, landing pages, redesign, arquitetura da informação, UX/UI e direção visual — a porta de entrada feita para representar o porte real da empresa.`,
+    territory1Desc: `Sites institucionais, landing pages, redesign, arquitetura da informação, UX/UI e direção visual — a porta de entrada feita para representar o porte da empresa.`,
     territory2Title: `Produtos digitais`,
     territory2Desc: `Aplicativos, MVPs, protótipos e produtos digitais — do desenho da experiência à evolução de produtos que já existem.`,
     territory3Title: `Sistemas, automação e IA`,
@@ -72,7 +72,7 @@ const I18N = {
 
     approach1Num: `01`,
     approach1Title: `Sites e experiências web`,
-    approach1ShortDesc: `Sites institucionais, landing pages, redesign e arquitetura da informação — a porta de entrada da empresa, desenhada para representar o porte real do negócio.`,
+    approach1ShortDesc: `Sites institucionais, landing pages, redesign e arquitetura da informação — a porta de entrada da empresa, desenhada para representar o porte do negócio.`,
     approach1Ideal: `<strong>Ideal para:</strong> empresas cujo site atual não representa mais o tamanho ou a qualidade do negócio, ou que precisam de uma presença digital nova.`,
     approach1List1: `Redesign e sites institucionais`,
     approach1List2: `Landing pages`,
@@ -80,7 +80,7 @@ const I18N = {
     approach1List4: `Direção visual e conteúdo`,
     approach1List5: `Responsividade e performance`,
     approach1List6: `Catálogos e jornadas digitais`,
-    approach1Resolve: `Um site desatualizado, difícil de navegar ou que não transmite a qualidade real da empresa.`,
+    approach1Resolve: `Um site desatualizado, difícil de navegar ou que não transmite a qualidade da empresa.`,
     approach1Fit: `Quando a primeira impressão digital não corresponde ao que a empresa realmente entrega.`,
     approach1Note: `Um bom site começa na marca e no público — não na programação.`,
     approach1ProcessNote: `Processo de marca e produto: entender público, conteúdo e referências antes de desenhar e implementar.`,
@@ -103,7 +103,7 @@ const I18N = {
     approach3Num: `03`,
     approach3Title: `Sistemas, automação e IA`,
     approach3ShortDesc: `Sistemas internos, automações, integrações e IA aplicada — quando a operação já tem o essencial, mas precisa funcionar de forma conectada.`,
-    approach3Ideal: `<strong>Ideal para:</strong> operações com processos próprios, ferramentas que não conversam entre si, ou tarefas repetitivas que já custam tempo real.`,
+    approach3Ideal: `<strong>Ideal para:</strong> operações com processos próprios, ferramentas que não conversam entre si, ou tarefas repetitivas que já custam tempo.`,
     approach3List1: `Sistemas internos e painéis`,
     approach3List2: `CRM e organização operacional`,
     approach3List3: `Automações e agentes de IA`,
@@ -161,7 +161,7 @@ const I18N = {
     // ── HOME + CASES · Projetos (tagProjects/projectsDesc também usados
     //    na página de Projetos — ver cases.html) ──────────────
     tagProjects: `Projetos`,
-    projectsDesc: `De uma operação real reorganizada de ponta a ponta a um produto digital desenhado do zero, a L A Cabral parte do problema — não do formato da entrega.`,
+    projectsDesc: `De uma operação reorganizada de ponta a ponta a um produto digital desenhado do zero, a L A Cabral parte do problema — não do formato da entrega.`,
     projStatus1: `Ecossistema em produção`,
     proj1Desc: `Redesenhamos o site, a jornada de listas escolares, o atendimento via WhatsApp, a triagem por IA e o painel interno — uma operação conectada, não páginas isoladas.`,
     proj1Cta: `Ver o case completo →`,
@@ -172,7 +172,7 @@ const I18N = {
     allProjectsTag: `Todos os projetos`,
     allProjectsHeading: `Contextos diferentes, mesmo ponto de partida.`,
 
-    homeOriginProofText: `Foi dentro da Sartec, em mais de 30 anos de operação real, que Lucas Cabral formou o método que hoje aplica à frente da L A Cabral.`,
+    homeOriginProofText: `Foi dentro da Sartec, em mais de 30 anos de operação, que Lucas Cabral formou o método que hoje aplica à frente da L A Cabral.`,
     homeOriginProofCta: `Conhecer a história completa →`,
     lucasAvatarAlt: `Lucas Cabral, à frente da L A Cabral`,
 
@@ -200,11 +200,11 @@ const I18N = {
     faqQ7: `Vocês trabalham com melhorias em sistemas que já existem?`,
     faqA7: `Sim. Avaliamos o que já está em uso para identificar gargalos, redesenhar interfaces, criar integrações ou construir novas rotinas sobre o que já funciona — em vez de substituir por substituir.`,
     faqQ4: `Como sei qual é a solução ideal para o meu negócio?`,
-    faqA4: `Você não precisa saber. Em uma conversa inicial sem compromisso, mapeamos como funciona sua operação, suas vendas e seu atendimento para indicar o caminho mais simples que resolve o problema real.`,
+    faqA4: `Você não precisa saber. Em uma conversa inicial sem compromisso, mapeamos como funciona sua operação, suas vendas e seu atendimento para indicar o caminho mais simples que resolve o problema.`,
 
     // ── PROJETOS / CASES ─────────────────────────────────────
     docTitleCases: `Projetos — L A Cabral`,
-    metaDescCases: `Projetos reais de sites, produtos digitais e sistemas — da Sartec Papelaria ao protótipo da UniEdu.`,
+    metaDescCases: `Projetos de sites, produtos digitais e sistemas — da Sartec Papelaria ao protótipo da UniEdu.`,
     metaOgTitleCases: `Projetos — L A Cabral`,
     metaOgDescCases: `Como pensamos, na prática: ecossistemas conectados, não entregas isoladas.`,
     casesPageHeading: `Projetos que mostram como pensamos.`,
@@ -221,12 +221,12 @@ const I18N = {
     caseResultLabel: `Resultado`,
     caseCapabilitiesLabel: `Capacidades utilizadas`,
 
-    caseSartecContext: `A Sartec Papelaria é uma papelaria com mais de 30 anos de operação real, atendimento presencial e uma rotina sazonal pesada — principalmente na época de listas escolares — que sempre dependeu de conversas manuais no balcão e no WhatsApp.`,
+    caseSartecContext: `A Sartec Papelaria é uma papelaria com mais de 30 anos de operação, atendimento presencial e uma rotina sazonal pesada — principalmente na época de listas escolares — que sempre dependeu de conversas manuais no balcão e no WhatsApp.`,
     caseSartecProblem: `Nos picos de demanda, os pedidos chegavam por canais diferentes, sem organização entre quem perguntava, quem orçava e quem separava o material — a equipe perdia tempo repetindo triagem manual e a direção não tinha visibilidade do andamento.`,
     caseSartecDiagnosis: `O gargalo não era falta de um site — era a ausência de um fluxo único entre a entrada do cliente, a triagem da demanda e a organização da equipe.`,
     caseSartecSolution: `Desenhamos um ecossistema conectado: um site que apresenta a operação e direciona por lista escolar, um canal único de WhatsApp, uma camada de IA para triagem inicial e um painel interno que organiza conversas, pedidos e responsáveis.`,
     caseSartecImplementation: `Implementamos as sete partes em conjunto — site, listas e produtos, WhatsApp, triagem por IA, painel de atendimento, distribuição por setor e automação de relatórios — como um fluxo único, não como entregas separadas.`,
-    caseSartecResult: `A equipe passou a atender por um canal único, com a triagem inicial já resolvida antes de chegar a um responsável — e a direção ganhou visão real da fila de atendimento, sem precisar perguntar pessoa por pessoa.`,
+    caseSartecResult: `A equipe passou a atender por um canal único, com a triagem inicial já resolvida antes de chegar a um responsável — e a direção ganhou visão da fila de atendimento, sem precisar perguntar pessoa por pessoa.`,
 
     caseBadgeProduto: `Produto`,
     caseBadgeUX: `UX/UI`,
@@ -254,7 +254,7 @@ const I18N = {
     ecoFlow6Title: `Equipe e setores`,
     ecoFlow6Desc: `Cada demanda chega para quem realmente deve resolver.`,
     ecoFlow7Title: `Automação e relatórios`,
-    ecoFlow7Desc: `Reduz tarefas repetitivas e dá visão real da operação.`,
+    ecoFlow7Desc: `Reduz tarefas repetitivas e dá visão da operação.`,
 
     // ── COMO TRABALHAMOS ─────────────────────────────────────
     docTitleComoTrab: `Como trabalhamos — L A Cabral`,
@@ -264,9 +264,9 @@ const I18N = {
 
     comoTrabTag: `Como trabalhamos`,
     comoTrabHeading: `Entendemos a operação antes de escolher a ferramenta.`,
-    comoTrabIntro: `Não começamos pela ferramenta, começamos pelo problema real da sua operação. Esta página reúne como pensamos, como conduzimos um projeto e como funciona o início de um trabalho.`,
+    comoTrabIntro: `Não começamos pela ferramenta, começamos pelo problema da sua operação. Esta página reúne como pensamos, como conduzimos um projeto e como funciona o início de um trabalho.`,
     processHeading: `Nosso processo em quatro fases`,
-    pilotDesc: `Não começamos pela ferramenta, começamos pelo problema real da sua operação. Cada fase existe para garantir que a solução final seja simples, usável e do tamanho certo para o problema.`,
+    pilotDesc: `Não começamos pela ferramenta, começamos pelo problema da sua operação. Cada fase existe para garantir que a solução final seja simples, usável e do tamanho certo para o problema.`,
     midPageCtaText: `Quer conversar sobre o seu projeto?`,
     midPageCtaLink: `Falar agora pelo WhatsApp →`,
 
@@ -309,16 +309,16 @@ const I18N = {
 
     // ── SOBRE ─────────────────────────────────────────────────
     docTitleSobre: `Sobre — L A Cabral`,
-    metaDescSobre: `Conheça o método por trás da L A Cabral, formado dentro de uma operação comercial real, e quem conduz as soluções hoje: Lucas Cabral.`,
+    metaDescSobre: `Conheça o método por trás da L A Cabral, formado dentro de uma operação comercial, e quem conduz as soluções hoje: Lucas Cabral.`,
     metaOgTitleSobre: `Sobre a L A Cabral`,
-    metaOgDescSobre: `Um método formado dentro de uma operação comercial real de mais de 30 anos, aplicado hoje a diferentes empresas.`,
+    metaOgDescSobre: `Um método formado dentro de uma operação comercial de mais de 30 anos, aplicado hoje a diferentes empresas.`,
 
     tagOrigin: `Origem do método`,
-    originHeading: `Um método formado dentro de uma operação comercial real.`,
-    originDesc: `Antes de fundar a L A Cabral, Lucas Cabral viveu por dentro uma operação comercial real: atendimento, pedidos, organização de demandas e gestão de uma papelaria com mais de 30 anos de história. Foi nessa vivência que ficou claro que crescer sem organizar processos custa tempo, vendas e clareza — e que tecnologia bem aplicada resolve isso sem precisar reinventar a empresa. Hoje, essa forma de enxergar problemas estrutura a atuação da L A Cabral em diferentes empresas.`,
+    originHeading: `Um método formado dentro de uma operação comercial.`,
+    originDesc: `Antes de fundar a L A Cabral, Lucas Cabral viveu por dentro uma operação comercial: atendimento, pedidos, organização de demandas e gestão de uma papelaria com mais de 30 anos de história. Foi nessa vivência que ficou claro que crescer sem organizar processos custa tempo, vendas e clareza — e que tecnologia bem aplicada resolve isso sem precisar reinventar a empresa. Hoje, essa forma de enxergar problemas estrutura a atuação da L A Cabral em diferentes empresas.`,
     originCard1Title: `Mais de 30 anos de operação comercial`,
     originCard1Desc: `A Sartec Papelaria opera com equipe, clientes e rotinas comerciais diárias há mais de três décadas em São José dos Campos.`,
-    originCard2Title: `Processos e rotinas reais`,
+    originCard2Title: `Processos e rotinas`,
     originCard2Desc: `O fluxo diário de atendimentos e pedidos serviu de base para desenhar soluções que realmente encaixam na rotina de quem opera.`,
     originCard3Title: `Validadas no dia a dia da equipe`,
     originCard3Desc: `Nada aqui é teórico. Entendemos a rotina de quem opera para desenhar caminhos que realmente funcionem no dia a dia.`,
@@ -332,7 +332,7 @@ const I18N = {
     aboutP1: `Sou Lucas Cabral. Trabalho na interseção entre produto, operações, design, tecnologia, automação e IA — entendendo como uma empresa funciona por dentro antes de decidir o que construir.`,
     aboutP2: `A formação em Product Design entra aqui como abordagem, não como rótulo: ela ajuda a começar pelo problema, entender marca, público e processos, e só depois desenhar a solução — seja ela um site, um produto digital, uma automação ou um sistema novo.`,
     aboutQuote: `"Antes de escolher a ferramenta, entendemos o gargalo que está custando tempo, venda ou clareza."`,
-    proofCard1Title: `Operação real`,
+    proofCard1Title: `Operação`,
     proofCard1Desc: `Vivência em atendimento, compras, financeiro e gestão comercial dentro da própria Sartec.`,
     proofCard2Title: `Produto e UX/UI`,
     proofCard2Desc: `Desenho de jornadas, telas e fluxos pensados para clientes, equipe e gestor.`,
@@ -344,7 +344,7 @@ const I18N = {
     factEspecialidadeLabel: `Especialidade`,
     factEspecialidadeValue: `Produto, operações, automação e IA aplicada`,
     factVivenciaLabel: `Vivência prática`,
-    factVivenciaValue: `Atendimento, gestão comercial e processos reais`,
+    factVivenciaValue: `Atendimento, gestão comercial e processos`,
     factEntregaLabel: `Entrega`,
     factEntregaValue: `Soluções digitais simples de operar`,
     factParaQuemLabel: `Para quem`,
@@ -352,12 +352,12 @@ const I18N = {
   },
 
   en: {
-    docTitle: `L A Cabral — Websites, digital products and systems`,
-    metaDescription: `L A Cabral builds websites, digital products and systems starting from real business problems — visual direction, product and technology end to end.`,
-    metaOgTitle: `L A Cabral — Design and technology for real businesses`,
-    metaOgDescription: `Websites, digital products and systems built from real business problems.`,
+    docTitle: `L A Cabral — Design and technology for businesses`,
+    metaDescription: `L A Cabral builds websites, digital products and systems starting from business problems — visual direction, product and technology end to end.`,
+    metaOgTitle: `L A Cabral — Design and technology for businesses`,
+    metaOgDescription: `Websites, digital products and systems built from business problems.`,
 
-    brandTagline: `Design and technology for real businesses`,
+    brandTagline: `Design and technology for businesses`,
     navSolutions: `Solutions`,
     navCases: `Projects`,
     navHowWeWork: `How we work`,
@@ -391,7 +391,7 @@ const I18N = {
 
     // ── HOME · Hero ──────────────────────────────────────────
     heroTag: `Websites, digital products and systems`,
-    heroTitle: `Websites, digital products and systems built from real business problems.`,
+    heroTitle: `Websites, digital products and systems built from business problems.`,
     heroDesc: `We understand how your company works before deciding whether the answer is a redesign, a digital product or an internal system — and we handle the visual direction, the experience and the implementation, start to finish.`,
     heroBtnPrimary: `Talk about a project`,
     heroBtnGhost: `See projects`,
@@ -407,7 +407,7 @@ const I18N = {
     approachHeading: `Websites, digital products and systems — each in its own language.`,
     approachIntro: `Three territories, one starting point: understanding the problem before choosing the format.`,
     territory1Title: `Websites and web experiences`,
-    territory1Desc: `Institutional sites, landing pages, redesigns, information architecture, UX/UI and visual direction — the front door built to represent the company's real size.`,
+    territory1Desc: `Institutional sites, landing pages, redesigns, information architecture, UX/UI and visual direction — the front door built to represent the company's size.`,
     territory2Title: `Digital products`,
     territory2Desc: `Apps, MVPs, prototypes and digital products — from designing the experience to evolving products that already exist.`,
     territory3Title: `Systems, automation and AI`,
@@ -417,7 +417,7 @@ const I18N = {
     // ── SOLUTIONS + HOW WE WORK · The three territories ─────────
     approach1Num: `01`,
     approach1Title: `Websites and web experiences`,
-    approach1ShortDesc: `Institutional sites, landing pages, redesigns and information architecture — the company's front door, built to represent the real size of the business.`,
+    approach1ShortDesc: `Institutional sites, landing pages, redesigns and information architecture — the company's front door, built to represent the size of the business.`,
     approach1Ideal: `<strong>Ideal for:</strong> companies whose current site no longer represents the size or quality of the business, or that need a new digital presence.`,
     approach1List1: `Redesigns and institutional sites`,
     approach1List2: `Landing pages`,
@@ -425,7 +425,7 @@ const I18N = {
     approach1List4: `Visual direction and content`,
     approach1List5: `Responsiveness and performance`,
     approach1List6: `Catalogs and digital journeys`,
-    approach1Resolve: `An outdated site, one that's hard to navigate, or one that doesn't convey the company's real quality.`,
+    approach1Resolve: `An outdated site, one that's hard to navigate, or one that doesn't convey the company's quality.`,
     approach1Fit: `When the digital first impression doesn't match what the company actually delivers.`,
     approach1Note: `A good website starts with the brand and the audience — not the code.`,
     approach1ProcessNote: `Brand and product process: understanding audience, content and references before designing and building.`,
@@ -448,7 +448,7 @@ const I18N = {
     approach3Num: `03`,
     approach3Title: `Systems, automation and AI`,
     approach3ShortDesc: `Internal systems, automations, integrations and applied AI — when the operation already has the essentials but needs to run connected.`,
-    approach3Ideal: `<strong>Ideal for:</strong> operations with their own processes, tools that don't talk to each other, or repetitive tasks that already cost real time.`,
+    approach3Ideal: `<strong>Ideal for:</strong> operations with their own processes, tools that don't talk to each other, or repetitive tasks that already cost time.`,
     approach3List1: `Internal systems and dashboards`,
     approach3List2: `CRM and operational organization`,
     approach3List3: `Automations and AI agents`,
@@ -472,7 +472,7 @@ const I18N = {
     // ── HOME · Who we're a fit for ────────────────────────────
     fitTag: `Who we're a fit for`,
     fitHeading: `We make the most sense when the company already works, but the operation has outgrown the processes holding it together.`,
-    fit0: `A website or digital product that no longer represents the company's real size`,
+    fit0: `A website or digital product that no longer represents the company's size`,
     fit1: `A growing team or multiple people in charge`,
     fit2: `Multiple locations or service points`,
     fit3: `WhatsApp as a core part of the operation`,
@@ -506,7 +506,7 @@ const I18N = {
     // ── HOME + CASES · Projects (tagProjects/projectsDesc also used
     //    on the Projects page — see cases.html) ────────────────
     tagProjects: `Projects`,
-    projectsDesc: `From a real operation reorganized end to end to a digital product designed from scratch, L A Cabral starts from the problem — not from the shape of the deliverable.`,
+    projectsDesc: `From an operation reorganized end to end to a digital product designed from scratch, L A Cabral starts from the problem — not from the shape of the deliverable.`,
     projStatus1: `Live ecosystem`,
     proj1Desc: `We redesigned the website, the school-list journey, WhatsApp service, AI triage and the internal dashboard — one connected operation, not isolated pages.`,
     proj1Cta: `See the full case →`,
@@ -517,7 +517,7 @@ const I18N = {
     allProjectsTag: `All projects`,
     allProjectsHeading: `Different contexts, the same starting point.`,
 
-    homeOriginProofText: `It was inside Sartec, over more than 30 years of real operation, that Lucas Cabral formed the method he now applies as the lead of L A Cabral.`,
+    homeOriginProofText: `It was inside Sartec, over more than 30 years of operation, that Lucas Cabral formed the method he now applies as the lead of L A Cabral.`,
     homeOriginProofCta: `See the full story →`,
     lucasAvatarAlt: `Lucas Cabral, leading L A Cabral`,
 
@@ -545,11 +545,11 @@ const I18N = {
     faqQ7: `Do you work on improving systems that already exist?`,
     faqA7: `Yes. We assess what's already in use to spot bottlenecks, redesign interfaces, build integrations, or create new workflows on top of what's already working — instead of replacing for the sake of replacing.`,
     faqQ4: `How do I know which solution is right for my business?`,
-    faqA4: `You don't need to know. In an initial, no-commitment conversation, we map how your operation, sales and customer service work to point you to the simplest path that solves the real problem.`,
+    faqA4: `You don't need to know. In an initial, no-commitment conversation, we map how your operation, sales and customer service work to point you to the simplest path that solves the problem.`,
 
     // ── PROJECTS / CASES ─────────────────────────────────────
     docTitleCases: `Projects — L A Cabral`,
-    metaDescCases: `Real projects — websites, digital products and systems — from Sartec Papelaria to the UniEdu prototype.`,
+    metaDescCases: `Projects — websites, digital products and systems — from Sartec Papelaria to the UniEdu prototype.`,
     metaOgTitleCases: `Projects — L A Cabral`,
     metaOgDescCases: `How we think, in practice: connected ecosystems, not isolated deliverables.`,
     casesPageHeading: `Projects that show how we think.`,
@@ -566,12 +566,12 @@ const I18N = {
     caseResultLabel: `Result`,
     caseCapabilitiesLabel: `Capabilities used`,
 
-    caseSartecContext: `Sartec Papelaria is a stationery store with more than 30 years of real operation, in-person service and a heavy seasonal routine — especially during school-list season — that always depended on manual conversations at the counter and on WhatsApp.`,
+    caseSartecContext: `Sartec Papelaria is a stationery store with more than 30 years of operation, in-person service and a heavy seasonal routine — especially during school-list season — that always depended on manual conversations at the counter and on WhatsApp.`,
     caseSartecProblem: `At peak demand, orders arrived through different channels with no organization between who was asking, who was quoting and who was picking the order — the team lost time repeating manual triage, and management had no visibility into what was moving.`,
     caseSartecDiagnosis: `The bottleneck wasn't the lack of a website — it was the absence of a single flow connecting the customer's entry point, demand triage and team organization.`,
     caseSartecSolution: `We designed a connected ecosystem: a website that presents the operation and routes by school list, a single WhatsApp channel, an AI layer for initial triage, and an internal dashboard that organizes conversations, orders and ownership.`,
     caseSartecImplementation: `We implemented all seven parts together — site, lists and products, WhatsApp, AI triage, service dashboard, routing by department and automated reporting — as a single flow, not as separate deliverables.`,
-    caseSartecResult: `The team now serves customers through a single channel, with initial triage already resolved before it reaches a team member — and management gained real visibility into the service queue, without having to ask person by person.`,
+    caseSartecResult: `The team now serves customers through a single channel, with initial triage already resolved before it reaches a team member — and management gained visibility into the service queue, without having to ask person by person.`,
 
     caseBadgeProduto: `Product`,
     caseBadgeUX: `UX/UI`,
@@ -599,7 +599,7 @@ const I18N = {
     ecoFlow6Title: `Team and departments`,
     ecoFlow6Desc: `Each demand reaches whoever should actually handle it.`,
     ecoFlow7Title: `Automation and reports`,
-    ecoFlow7Desc: `Cuts repetitive tasks and gives a real view of the operation.`,
+    ecoFlow7Desc: `Cuts repetitive tasks and gives a view of the operation.`,
 
     // ── HOW WE WORK ───────────────────────────────────────────
     docTitleComoTrab: `How we work — L A Cabral`,
@@ -609,9 +609,9 @@ const I18N = {
 
     comoTrabTag: `How we work`,
     comoTrabHeading: `We understand the operation before choosing the tool.`,
-    comoTrabIntro: `We don't start with the tool, we start with the real problem in your operation. This page covers how we think, how we run a project and how we get started.`,
+    comoTrabIntro: `We don't start with the tool, we start with the problem in your operation. This page covers how we think, how we run a project and how we get started.`,
     processHeading: `Our four-phase process`,
-    pilotDesc: `We don't start with the tool, we start with the real problem in your operation. Each phase exists to make sure the final solution is simple, usable and the right size for the problem.`,
+    pilotDesc: `We don't start with the tool, we start with the problem in your operation. Each phase exists to make sure the final solution is simple, usable and the right size for the problem.`,
     midPageCtaText: `Want to talk about your project?`,
     midPageCtaLink: `Chat on WhatsApp now →`,
 
@@ -654,16 +654,16 @@ const I18N = {
 
     // ── ABOUT ──────────────────────────────────────────────────
     docTitleSobre: `About — L A Cabral`,
-    metaDescSobre: `Learn about the method behind L A Cabral, formed inside a real commercial operation, and who leads the solutions today: Lucas Cabral.`,
+    metaDescSobre: `Learn about the method behind L A Cabral, formed inside a commercial operation, and who leads the solutions today: Lucas Cabral.`,
     metaOgTitleSobre: `About L A Cabral`,
-    metaOgDescSobre: `A method formed inside a real commercial operation of more than 30 years, applied today to different companies.`,
+    metaOgDescSobre: `A method formed inside a commercial operation of more than 30 years, applied today to different companies.`,
 
     tagOrigin: `Origin of the method`,
-    originHeading: `A method formed inside a real commercial operation.`,
-    originDesc: `Before founding L A Cabral, Lucas Cabral lived a real commercial operation from the inside: customer service, orders, demand organization and management at a stationery store with more than 30 years of history. That experience made it clear that growing without organizing processes costs time, sales and clarity — and that well-applied technology solves that without having to reinvent the company. Today, that way of seeing problems shapes how L A Cabral operates across different companies.`,
+    originHeading: `A method formed inside a commercial operation.`,
+    originDesc: `Before founding L A Cabral, Lucas Cabral lived a commercial operation from the inside: customer service, orders, demand organization and management at a stationery store with more than 30 years of history. That experience made it clear that growing without organizing processes costs time, sales and clarity — and that well-applied technology solves that without having to reinvent the company. Today, that way of seeing problems shapes how L A Cabral operates across different companies.`,
     originCard1Title: `Over 30 years of commercial operation`,
     originCard1Desc: `Sartec Papelaria has run a team, clients and daily business routines for more than three decades in São José dos Campos.`,
-    originCard2Title: `Real processes and routines`,
+    originCard2Title: `Processes and routines`,
     originCard2Desc: `The daily flow of customer service and orders served as the basis for designing solutions that actually fit the routine of the people running it.`,
     originCard3Title: `Validated in the team's daily work`,
     originCard3Desc: `Nothing here is theoretical. We understand the routine of the people who operate it to design paths that actually work day to day.`,
@@ -677,7 +677,7 @@ const I18N = {
     aboutP1: `I'm Lucas Cabral. I work at the intersection of product, operations, design, technology, automation and AI — understanding how a company actually works before deciding what to build.`,
     aboutP2: `Product Design training comes in here as an approach, not a label: it helps start from the problem, understand brand, audience and processes, and only then design the solution — whether that's a website, a digital product, an automation or a new system.`,
     aboutQuote: `"Before choosing the tool, we understand the bottleneck that's costing time, sales or clarity."`,
-    proofCard1Title: `Real operations`,
+    proofCard1Title: `Operations`,
     proofCard1Desc: `Hands-on experience in customer service, purchasing, finance and business management inside Sartec itself.`,
     proofCard2Title: `Product and UX/UI`,
     proofCard2Desc: `Designing journeys, screens and workflows built for customers, the team and management.`,
@@ -689,7 +689,7 @@ const I18N = {
     factEspecialidadeLabel: `Specialty`,
     factEspecialidadeValue: `Product, operations, automation and applied AI`,
     factVivenciaLabel: `Hands-on experience`,
-    factVivenciaValue: `Customer service, business management and real processes`,
+    factVivenciaValue: `Customer service, business management and processes`,
     factEntregaLabel: `What you get`,
     factEntregaValue: `Digital solutions that are simple to operate`,
     factParaQuemLabel: `Who it's for`,
