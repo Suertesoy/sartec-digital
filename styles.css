@@ -906,9 +906,36 @@ p  { text-wrap: pretty; }
 
 .about-lucas__wrap {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 80px;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: 64px;
   align-items: start;
+}
+
+/* Fotografia grande — protagonista da seção, não um avatar dentro de
+   card. Retrato editorial tratado a partir da foto real de Lucas. */
+.about-lucas__media {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  background: var(--surface);
+}
+.about-lucas__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 24%;
+}
+/* Vinheta discreta: aprofunda o canto inferior esquerdo do ambiente
+   (estante ao fundo), sem tocar a fotografia em si — mesmo vocabulário
+   do .hero__scrim, aplicado aqui de forma muito mais sutil. */
+.about-lucas__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 85% 65% at 8% 92%, rgba(5, 7, 6, 0.92) 0%, rgba(5, 7, 6, 0.55) 45%, transparent 72%);
+  pointer-events: none;
 }
 
 .about-lucas__text .tag { margin-bottom: 18px; }
@@ -956,49 +983,24 @@ p  { text-wrap: pretty; }
   margin-bottom: 0;
 }
 
-.lucas-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  overflow: hidden;
+/* Credenciais secundárias — de-boxed: apoiam o texto sem repetir o
+   vocabulário de card/borda já usado no .lucas-proof-grid acima. */
+.lucas-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 32px;
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
 }
-
-.lucas-card__top {
-  display: flex; align-items: center;
-  gap: 14px;
-  padding: 24px;
-  border-bottom: 1px solid var(--border);
-}
-
-.lucas-card__avatar {
-  width: 56px; height: 56px;
-  border-radius: var(--r-sm);
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1.5px solid var(--green-border);
-  background: var(--bg-2);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-}
-
-.lucas-card__id strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 3px; }
-.lucas-card__id span   { font-size: 12px; color: var(--green-light); font-weight: 500; }
-
-.lucas-card__facts { padding: 6px 0; }
-
-.lucas-fact {
-  display: flex; flex-direction: column; gap: 3px;
-  padding: 13px 24px;
-  border-bottom: 1px solid var(--border);
-  transition: background var(--t);
-}
-.lucas-fact:last-child { border-bottom: none; }
-.lucas-fact:hover { background: var(--surface-2); }
-.lucas-fact dt {
+.lucas-facts__item { display: flex; flex-direction: column; gap: 3px; }
+.lucas-facts__item--wide { flex-basis: 100%; }
+.lucas-facts__item dt {
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--text-3);
 }
-.lucas-fact dd { font-size: 13px; color: var(--text-2); font-weight: 500; line-height: 1.5; }
+.lucas-facts__item dd { font-size: 13px; color: var(--text-2); font-weight: 500; line-height: 1.5; max-width: 440px; }
 
 /* ── PRICING ──────────────────────────────────── */
 .pricing { background: rgba(0, 0, 0, 0.16); }
@@ -1370,6 +1372,35 @@ p  { text-wrap: pretty; }
 
 .pilot__cta { text-align: center; margin-top: 36px; }
 
+/* ── ABERTURA DO MÉTODO (como-trabalhamos.html) — âncora editorial:
+   fotografia de diagnóstico + título, antes da timeline de 4 fases. ── */
+.method-intro__wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+.method-intro__media {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  aspect-ratio: 6 / 5;
+  background: var(--surface);
+}
+.method-intro__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 38%;
+}
+.method-intro__content .tag { margin-bottom: 18px; }
+.method-intro__content h1  { margin-bottom: 16px; }
+.method-intro__content > p {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.72;
+}
+
 /* ── ECOSSISTEMA REAL (cases.html) ───────────────
    Fluxo de nós conectados em CSS puro — reaproveita o vocabulário visual
    já usado no .pilot-step (selo numerado + cartão), agora para os 7
@@ -1729,13 +1760,14 @@ main h1:not(.hero__title) {
   max-width: 980px;
 }
 
-/* Checklist de 2 colunas — "Para quem fazemos mais sentido" (Home) */
+/* Checklist — "Para quem fazemos mais sentido" (Home). Coluna única:
+   dentro do .fit-split__content a lista divide a largura com a
+   fotografia, uma grade de 2 colunas ficaria espremida. */
 .fit-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px 32px;
-  max-width: 760px;
-  margin: 0 auto 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 0 24px;
 }
 .fit-list li {
   display: flex;
@@ -1746,12 +1778,33 @@ main h1:not(.hero__title) {
   line-height: 1.5;
 }
 .fit-note {
-  max-width: 640px;
-  margin: 0 auto;
-  text-align: center;
   font-size: 13px;
   color: var(--text-3);
 }
+
+/* ── PARA QUEM FAZEMOS SENTIDO (Home) — composição editorial: fotografia
+   + conteúdo lado a lado, quebrando a sequência de grids/cards da Home. ── */
+.fit-split__wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+.fit-split__media {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  background: var(--surface);
+}
+.fit-split__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 32% 35%;
+}
+.fit-split__content .tag { margin-bottom: 18px; }
+.fit-split__content h2  { margin-bottom: 20px; }
 
 /* Grade de 8 cards de contratação (como-trabalhamos.html) — 4 colunas para
    fechar em duas linhas parelhas em vez de 3+3+2. */
@@ -1893,8 +1946,12 @@ main h1:not(.hero__title) {
      canto do layout desktop) some aqui. */
   .hero__mark           { display: none; }
   .pricing__grid       { grid-template-columns: repeat(2, 1fr); }
-  .about-lucas__wrap   { grid-template-columns: 1fr; gap: 48px; }
-  .about-lucas__card   { max-width: 460px; }
+  .about-lucas__wrap   { grid-template-columns: 1fr; gap: 40px; }
+  .about-lucas__media  { max-width: 420px; margin: 0 auto; aspect-ratio: 3 / 4; }
+  .about-lucas__media img { object-position: 50% 15%; }
+  .fit-split__wrap, .method-intro__wrap { grid-template-columns: 1fr; gap: 32px; }
+  .fit-split__media    { max-width: 560px; margin: 0 auto; aspect-ratio: 16 / 10; }
+  .method-intro__media { max-width: 560px; margin: 0 auto; aspect-ratio: 16 / 10; }
   .origin-grid         { gap: 16px; }
   .origin-grid--3      { grid-template-columns: repeat(3, 1fr); }
   .real-app-card       { grid-template-columns: 1fr; gap: 36px; padding: 32px; }
@@ -1927,7 +1984,6 @@ main h1:not(.hero__title) {
      intervalo — duas colunas dão mais respiro até a quebra para 1 no mobile. */
   .eco-grid--capabilities { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
   .contracting-grid       { grid-template-columns: repeat(2, 1fr); }
-  .fit-list                { grid-template-columns: 1fr; max-width: 480px; }
 }
 
 /* ══════════════════════════════════════════════
@@ -1944,7 +2000,8 @@ main h1:not(.hero__title) {
      without going fully white. Scoped to content sections only (not
      hero/header/footer). */
   .origin-section, .ecosystem, .real-app-section,
-  .about-lucas, .pricing, .pilot, .faq, .cta-final {
+  .about-lucas, .pricing, .pilot, .faq, .cta-final,
+  .fit-split, .method-intro {
     --text-3: #a8b8e3;
   }
 
@@ -2048,11 +2105,16 @@ main h1:not(.hero__title) {
   .eco-card p { color: rgba(255, 255, 255, 0.80); }
 
   /* About Lucas */
-  .about-lucas__wrap { gap: 32px; }
-  .about-lucas__card { max-width: 100%; }
+  .about-lucas__wrap  { gap: 28px; }
+  .about-lucas__media { max-width: 280px; aspect-ratio: 3 / 4; }
+  .about-lucas__media img { object-position: 50% 15%; }
   .lucas-proof-grid  { grid-template-columns: 1fr; gap: 12px; }
-  .lucas-card__top { padding: 20px; }
-  .lucas-fact      { padding: 11px 20px; }
+  .lucas-facts       { gap: 12px 24px; }
+
+  /* Para quem fazemos sentido (Home) / Abertura do método (Como trabalhamos) —
+     pilha única no mobile, foto acima do conteúdo */
+  .fit-split__wrap, .method-intro__wrap { gap: 24px; }
+  .fit-split__media, .method-intro__media { aspect-ratio: 4 / 3; }
 
   /* Pricing — Tabs Navigation instead of carousel */
   .pricing__hint { display: none; }
