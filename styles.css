@@ -15,6 +15,10 @@
   --green-dim:    rgba(34, 197, 94, 0.12);
   --green-border: rgba(34, 197, 94, 0.32);
 
+  --amber-light:  #FBBF24;
+  --amber-dim:    rgba(245, 158, 11, 0.14);
+  --amber-border: rgba(245, 158, 11, 0.34);
+
   --text: #F3F5F4;
   --text-2: #B7C4BD;
   --text-3: #869089;
@@ -223,6 +227,14 @@ p  { text-wrap: pretty; }
 }
 
 .btn--lg { padding: 17px 36px; font-size: 16px; }
+
+/* Ação indisponível por ora (ex.: protótipo do Grupo Almeida ainda sem
+   URL) — visual de botão preservado, sem fingir ser um link funcional. */
+.btn--disabled {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
 
 /* ── HEADER ───────────────────────────────────── */
 .header {
@@ -512,6 +524,7 @@ p  { text-wrap: pretty; }
    real da captura (header + mensagem + CTA) sem esticar nem gerar
    nenhum pixel novo — é crop/composição, não upscale generativo. */
 .browser-chrome {
+  display: block;
   position: relative;
   border-radius: var(--r-lg);
   overflow: hidden;
@@ -566,6 +579,106 @@ p  { text-wrap: pretty; }
 }
 
 .browser-chrome--lg .browser-chrome__frame { aspect-ratio: 16 / 11; }
+
+/* Mesmo vocabulário do .pricing-card--custom: borda tracejada sinaliza
+   "ainda não é a captura real do projeto". */
+.browser-chrome--placeholder { border-style: dashed; border-color: var(--border-light); }
+
+/* Placeholder para projetos sem screenshot real ainda (ex.: protótipo em
+   homologação) — nunca uma captura de tela fictícia, só um monograma
+   editorial que deixa claro que é um espaço reservado. */
+.browser-chrome__frame--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink-900);
+  aspect-ratio: 4 / 3;
+}
+.browser-chrome__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.browser-chrome__placeholder-mark {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--text-2);
+}
+.browser-chrome__placeholder-note {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--text-3);
+}
+
+/* ── MÍDIA CLICÁVEL — browser-chrome e phone-preview funcionam como
+   link direto para o projeto. O indicador é discreto por padrão (não
+   depende de hover para existir no touch) e ganha leve destaque no
+   hover/focus do desktop — sem chamar atenção indevida. */
+a.browser-chrome,
+a.phone-preview {
+  cursor: pointer;
+  transition: transform var(--t) var(--ease), border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+a.browser-chrome:hover,
+a.browser-chrome:focus-visible {
+  transform: translateY(-2px) scale(1.012);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+a.phone-preview:hover,
+a.phone-preview:focus-visible {
+  transform: scale(1.02);
+}
+
+.media-link__badge {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(10, 11, 10, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text);
+  opacity: 0.85;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease), background var(--t) var(--ease), color var(--t) var(--ease);
+}
+.media-link__badge svg { width: 14px; height: 14px; }
+a.browser-chrome:hover .media-link__badge,
+a.browser-chrome:focus-visible .media-link__badge,
+a.phone-preview:hover .media-link__badge,
+a.phone-preview:focus-visible .media-link__badge {
+  opacity: 1;
+  background: var(--green);
+  border-color: transparent;
+  color: #08150F;
+  transform: scale(1.08);
+}
+
+/* Touch: o indicador não pode depender de hover para existir */
+@media (hover: none), (pointer: coarse) {
+  .media-link__badge { opacity: 0.92; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.browser-chrome, a.phone-preview { transition: none; }
+  a.browser-chrome:hover, a.browser-chrome:focus-visible,
+  a.phone-preview:hover, a.phone-preview:focus-visible { transform: none; }
+}
 
 /* ── Vocabulário visual reutilizável (sysviz) ─────────────────
    Nós, linhas e o pulso que percorre uma conexão. Usado no hero, no
@@ -711,34 +824,56 @@ p  { text-wrap: pretty; }
   margin: 0 auto;
 }
 
-/* ── CASES.HTML — grade equilibrada dos dois projetos ──────────
+/* ── CASES.HTML — grade dos três projetos ──────────────────────
    Reaproveita .showcase-primary/.showcase-secondary (mesmo cartão,
-   mesma moldura browser-chrome/phone-preview), só que lado a lado em
-   colunas iguais — aqui o papel da página é listar os projetos, não
-   hierarquizar um sobre o outro como na Home. */
+   mesma moldura browser-chrome/phone-preview) em três colunas iguais.
+   Sartec já ganhou destaque no case completo acima — aqui os três
+   projetos entram no mesmo nível, sem repetir a hierarquia. */
 .cases-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 26px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   align-items: stretch;
-  max-width: 1080px;
+  max-width: 1180px;
   margin: 0 auto;
 }
 .cases-grid .showcase-primary .browser-chrome__frame { aspect-ratio: 4 / 3; }
 .cases-grid .showcase-secondary { justify-content: center; }
 
-/* ── Cabeçalho visual do case (cases.html) — prova real logo no
-   topo, antes dos cartões de contexto/problema/diagnóstico. */
+/* ── Hero do case (cases.html) — identidade, status, título, CTA e
+   fatos curtos de um lado; mockup grande e clicável do outro. Substitui
+   o antigo par "cabeçalho centralizado + mockup pequeno isolado". */
 .case-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
-  gap: 32px;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.28fr);
+  gap: 48px;
   align-items: center;
-  margin: 0 auto 48px;
-  max-width: 1080px;
+  margin: 0 auto 64px;
+  max-width: 1140px;
 }
-.case-hero__text { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
-.case-hero__logo { height: 30px; width: auto; }
+.case-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  text-align: left;
+}
+.case-hero__text .tag { margin-bottom: 0; }
+.case-hero__text h2 { margin: 0; }
+.case-hero__desc {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.68;
+  max-width: 460px;
+}
+.case-hero__actions { margin-top: 2px; }
+.case-hero__facts.lucas-facts { width: 100%; margin-top: 6px; }
+
+.case-hero__brand { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; }
+.case-hero__logo { height: 40px; width: auto; display: block; }
+.case-hero__divider { width: 1px; height: 22px; background: var(--border-light); flex-shrink: 0; }
+
+.case-hero__visual { position: relative; width: 100%; }
 
 .showcase-primary,
 .showcase-secondary {
@@ -761,9 +896,42 @@ p  { text-wrap: pretty; }
   gap: 12px; flex-wrap: wrap;
 }
 .showcase__logo { height: 24px; width: auto; display: block; }
+/* Status do projeto — pill com indicador de cor, mesma linguagem em
+   toda listagem (Home, cases.html e hero do case): verde = entregue,
+   neutro = protótipo navegável, âmbar = em homologação. */
 .showcase__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px 5px 10px;
+  border-radius: var(--r-pill);
   font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--green-light);
+  text-transform: uppercase;
+  border: 1px solid var(--green-border);
+  background: var(--green-dim);
+  color: var(--green-light);
+}
+.showcase__eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.showcase__eyebrow--delivered {
+  border-color: var(--green-border);
+  background: var(--green-dim);
+  color: var(--green-light);
+}
+.showcase__eyebrow--prototype {
+  border-color: var(--border-light);
+  background: var(--surface-2);
+  color: var(--text-2);
+}
+.showcase__eyebrow--review {
+  border-color: var(--amber-border);
+  background: var(--amber-dim);
+  color: var(--amber-light);
 }
 .showcase__badges { display: flex; flex-wrap: wrap; gap: 8px; }
 .showcase-secondary .showcase__badges { justify-content: center; }
@@ -1256,6 +1424,7 @@ p  { text-wrap: pretty; }
 /* ── Phone preview: moldura de celular reutilizada em qualquer case
    de produto/app (hero, territórios, projetos, cases.html). ── */
 .phone-preview {
+  display: block;
   position: relative;
   width: var(--project-phone-w);
   aspect-ratio: 9 / 16;
@@ -1743,8 +1912,30 @@ main h1:not(.hero__title) {
 }
 .case-type span:last-child { color: var(--text-2); font-weight: 600; }
 
-/* Case detail — Contexto/Problema/Diagnóstico/Solução/Implementação/Resultado (cases.html) */
-.case-detail { margin-bottom: 56px; }
+/* Narrativa condensada do case (cases.html) — Desafio/Solução/Resultado
+   como texto editorial com numeração tipográfica, não uma nova grade de
+   cards substituindo a anterior (Contexto/Problema/Diagnóstico/Solução/
+   Implementação/Resultado). */
+.case-narrative {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1140px;
+  margin: 0 auto 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.case-narrative__item { display: flex; flex-direction: column; gap: 10px; }
+.case-narrative__num {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--border-light);
+}
+.case-narrative__item h3 { font-size: 15px; }
+.case-narrative__item p { font-size: 14px; color: var(--text-2); line-height: 1.68; }
+
 .case-capabilities { margin-bottom: 48px; }
 .case-capabilities__badges {
   display: flex;
@@ -1965,8 +2156,8 @@ main h1:not(.hero__title) {
   .projects-showcase   { grid-template-columns: 1fr; max-width: 560px; }
   .cases-grid          { grid-template-columns: 1fr; max-width: 560px; }
   .case-hero           { grid-template-columns: 1fr; gap: 28px; }
-  .case-hero__text     { align-items: center; text-align: center; }
-  .case-hero__visual   { max-width: 420px; margin: 0 auto; width: 100%; }
+  .case-hero__visual   { max-width: 560px; margin: 0 auto; width: 100%; }
+  .case-narrative      { grid-template-columns: 1fr; gap: 28px; padding-top: 32px; }
 
   /* The language switcher widens the nav enough that the tagline can wrap
      and collide with the nav links in this range, so it steps aside here
@@ -2088,7 +2279,10 @@ main h1:not(.hero__title) {
   .showcase-secondary { padding: 22px 20px; }
   .showcase-secondary .phone-preview { width: 168px; }
   .showcase__actions { flex-direction: column; align-items: stretch; }
-  .case-hero__logo { height: 24px; }
+  .case-hero { margin-bottom: 48px; gap: 24px; }
+  .case-hero__logo { height: 30px; }
+  .case-hero__desc { max-width: none; }
+  .case-narrative { margin-bottom: 40px; }
 
   .phone-preview__island {
     top: 15px;
