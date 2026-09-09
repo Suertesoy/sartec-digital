@@ -283,28 +283,33 @@
             </div>
           </div>
 
-          <!-- Case 3: Grupo Almeida — site institucional, em homologação.
-               URL do protótipo/site ainda não confirmada no projeto: card
-               implementado por completo, mídia e CTA ficam inertes até que
-               o endereço final seja informado (ver relatório da rodada). -->
+          <!-- Case 3: Grupo Almeida — site institucional, em homologação. -->
           <div class="showcase-primary">
-            <div class="browser-chrome browser-chrome--placeholder">
+            <a
+              class="browser-chrome"
+              href="https://site-prototipo-grupo-almeida.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n-attr="aria-label:ariaAlmeidaMediaLink"
+              aria-label="Abrir o protótipo do Grupo Almeida em nova aba"
+            >
               <div class="browser-chrome__bar">
                 <span class="browser-chrome__dot"></span>
                 <span class="browser-chrome__dot"></span>
                 <span class="browser-chrome__dot"></span>
+                <span class="browser-chrome__url">site-prototipo-grupo-almeida.vercel.app</span>
               </div>
-              <div class="browser-chrome__frame browser-chrome__frame--placeholder">
-                <div class="browser-chrome__placeholder">
-                  <span class="browser-chrome__placeholder-mark" aria-hidden="true">GA</span>
-                  <span class="browser-chrome__placeholder-note" data-i18n="proj3FrameNote">Site em construção</span>
-                </div>
+              <div class="browser-chrome__frame">
+                <img src="assets/case-almeida-desktop.jpg" alt="" data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" />
               </div>
-            </div>
+              <span class="media-link__badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              </span>
+            </a>
             <span class="showcase__eyebrow showcase__eyebrow--review" data-i18n="projStatus3">Projeto em homologação</span>
             <div class="showcase__info">
               <h3>Grupo Almeida</h3>
-              <p data-i18n="proj3Desc">Novo site institucional em desenvolvimento para o Grupo Almeida, com identidade própria e estrutura pensada para apresentar a operação e facilitar o primeiro contato.</p>
+              <p data-i18n="proj3Desc">Novo site institucional para o Grupo Almeida, empresa de gestão de resíduos industriais e operação ambiental desde 1985 — identidade própria e estrutura pensada para apresentar o ecossistema da operação.</p>
             </div>
             <div class="showcase__badges">
               <span class="badge" data-i18n="caseBadgeSites">Sites e jornadas digitais</span>
@@ -312,12 +317,15 @@
               <span class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</span>
             </div>
             <div class="showcase__actions">
-              <span class="btn btn--ghost btn--disabled" aria-disabled="true" data-i18n="proj3Cta">Protótipo em breve</span>
+              <a href="https://site-prototipo-grupo-almeida.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj3Cta">Ver protótipo →</a>
             </div>
           </div>
 
           <!-- Próximos cases entram aqui, seguindo .showcase-primary (site/web)
-               ou .showcase-secondary (produto/app), conforme a natureza do projeto. -->
+               ou .showcase-secondary (produto/app), conforme a natureza do projeto.
+               Se um próximo projeto ainda não tiver URL/assets confirmados, usar
+               .browser-chrome--placeholder + .browser-chrome__frame--placeholder
+               (ver histórico do git) em vez de inventar captura ou endereço. -->
 
         </div>
       </div>

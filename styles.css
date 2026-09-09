@@ -228,14 +228,6 @@ p  { text-wrap: pretty; }
 
 .btn--lg { padding: 17px 36px; font-size: 16px; }
 
-/* Ação indisponível por ora (ex.: protótipo do Grupo Almeida ainda sem
-   URL) — visual de botão preservado, sem fingir ser um link funcional. */
-.btn--disabled {
-  opacity: 0.55;
-  cursor: default;
-  pointer-events: none;
-}
-
 /* ── HEADER ───────────────────────────────────── */
 .header {
   position: fixed;
@@ -579,45 +571,6 @@ p  { text-wrap: pretty; }
 }
 
 .browser-chrome--lg .browser-chrome__frame { aspect-ratio: 16 / 11; }
-
-/* Mesmo vocabulário do .pricing-card--custom: borda tracejada sinaliza
-   "ainda não é a captura real do projeto". */
-.browser-chrome--placeholder { border-style: dashed; border-color: var(--border-light); }
-
-/* Placeholder para projetos sem screenshot real ainda (ex.: protótipo em
-   homologação) — nunca uma captura de tela fictícia, só um monograma
-   editorial que deixa claro que é um espaço reservado. */
-.browser-chrome__frame--placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--ink-900);
-  aspect-ratio: 4 / 3;
-}
-.browser-chrome__placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.browser-chrome__placeholder-mark {
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid var(--border-light);
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  color: var(--text-2);
-}
-.browser-chrome__placeholder-note {
-  font-size: 11px;
-  letter-spacing: 0.02em;
-  color: var(--text-3);
-}
 
 /* ── MÍDIA CLICÁVEL — browser-chrome e phone-preview funcionam como
    link direto para o projeto. O indicador é discreto por padrão (não
