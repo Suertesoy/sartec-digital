@@ -633,50 +633,7 @@ a.phone-preview:focus-visible .media-link__badge {
   a.phone-preview:hover, a.phone-preview:focus-visible { transform: none; }
 }
 
-/* ── Vocabulário visual reutilizável (sysviz) ─────────────────
-   Nós, linhas e o pulso que percorre uma conexão. Usado no hero, no
-   acento da seção "Nem tudo vira sistema" e em pequenos divisores. */
-.sysviz-line {
-  fill: none;
-  stroke: var(--border-light);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-}
-.sysviz-line--flow {
-  stroke: var(--green-light);
-  stroke-width: 1.6;
-  opacity: 0.85;
-  stroke-dasharray: 5 9;
-  animation: sysviz-flow 14s linear infinite;
-}
-.sysviz-node {
-  fill: var(--surface-2);
-  stroke: var(--border-light);
-  stroke-width: 1.3;
-}
-.sysviz-node--active {
-  fill: var(--green-dim);
-  stroke: var(--green-border);
-  transform-origin: center;
-  transform-box: fill-box;
-  animation: sysviz-pulse 5s ease-in-out infinite;
-}
-.sysviz-dot { fill: var(--green-light); }
-
-@keyframes sysviz-flow {
-  to { stroke-dashoffset: -280; }
-}
-@keyframes sysviz-pulse {
-  0%, 100% { opacity: 0.75; transform: scale(1); }
-  50%      { opacity: 1;    transform: scale(1.06); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sysviz-line--flow { animation: none; stroke-dasharray: none; }
-  .sysviz-node--active { animation: none; opacity: 1; transform: none; }
-}
-
-/* ── TERRITÓRIOS (Home) — três pilares com personalidade visual
+/* ── TERRITÓRIOS (Home) — três pilares, mesma linguagem visual
    própria, não três cards iguais com ícone+texto. Primeira seção
    off-white da Home: os tokens de texto/superfície são redefinidos
    localmente (mesmo mecanismo já usado para --text-3 no responsivo
@@ -720,62 +677,39 @@ a.phone-preview:focus-visible .media-link__badge {
 .territory h3 { font-size: 18px; margin-bottom: 8px; color: var(--paper-ink); }
 .territory p  { font-size: 13.5px; line-height: 1.62; color: var(--paper-ink-2); }
 
-.territory--web     { flex: 1.65; }
-.territory--product { flex: 1;    }
-.territory--systems { flex: 0.85; }
+.territory--web, .territory--product, .territory--systems { flex: 1; }
 
+/* As três ilustrações conceituais (Magnific) compartilham a mesma
+   direção de arte e proporção — nenhuma frente é tratada como
+   "principal", diferente do showcase de projetos reais abaixo. */
 .territory__visual {
   position: relative;
   border-radius: var(--r-md);
   overflow: hidden;
   margin-bottom: 18px;
-  background: #E7E9EA;
-}
-.territory--web .territory__visual { aspect-ratio: 16 / 9; }
-.territory--web .territory__visual video,
-.territory--web .territory__visual img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
-}
-
-.territory--product .territory__visual {
-  aspect-ratio: 3 / 4;
-  max-width: 132px;
-  margin-left: auto; margin-right: auto;
-  border-radius: 20px;
-  background: #0B0B0C;
-}
-.territory--product .territory__visual video {
-  width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 20px;
-}
-
-.territory--systems .territory__visual {
   aspect-ratio: 4 / 3;
-  background: var(--ink-950);
-  display: flex; align-items: center; justify-content: center;
+  background: #EFEDE6;
 }
-.territory--systems .territory__visual svg { width: 88%; height: auto; overflow: visible; }
-/* Nós estáticos ganham mais contraste aqui: contra o quase-preto puro
-   (--ink-950) da miniatura, o --surface-2 padrão do sysviz (pensado
-   para o verde-escuro do hero/manifesto) quase desaparece. */
-.territory--systems .sysviz-node {
-  fill: #2A2C2A;
-  stroke: rgba(243, 245, 244, 0.28);
+.territory__visual img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
 }
 
 .territories-cta { text-align: center; margin-top: 36px; }
 
-/* ── PROJETOS (Home) — prova principal, assimétrica de propósito.
-   Sartec Papelaria domina o espaço (case completo, mais escopo real);
-   UniEdu entra com composição própria de produto/mobile — nunca dois
-   containers iguais mudando só o conteúdo. */
+/* ── PROJETOS (Home) — três cases reais, mesmo peso visual. Reaproveita
+   .showcase-primary/.showcase-secondary (mesma linguagem de cartão da
+   grade de cases.html) em três colunas iguais, para que nenhum projeto
+   pareça secundário por acidente. */
 .projects-showcase {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
-  gap: 26px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
   align-items: stretch;
-  max-width: 1080px;
+  max-width: 1180px;
   margin: 0 auto;
 }
+.projects-showcase .showcase-primary .browser-chrome__frame { aspect-ratio: 4 / 3; }
+.projects-showcase .showcase-secondary { justify-content: center; }
 
 /* ── CASES.HTML — grade dos três projetos ──────────────────────
    Reaproveita .showcase-primary/.showcase-secondary (mesmo cartão,
@@ -1020,7 +954,7 @@ a.phone-preview:focus-visible .media-link__badge {
   max-width: 600px;
   margin: 0 auto;
 }
-.manifesto__accent { display: block; width: 200px; height: auto; margin: 48px auto 0; opacity: 0.9; }
+.manifesto__mark { display: block; width: 110px; height: auto; margin: 64px auto 0; opacity: 0.55; }
 
 /* ── SOBRE LUCAS ──────────────────────────────── */
 .about-lucas { background: transparent; }
@@ -1524,22 +1458,23 @@ a.phone-preview:focus-visible .media-link__badge {
 }
 
 /* ── ECOSSISTEMA REAL (cases.html) ───────────────
-   Fluxo de nós conectados em CSS puro — reaproveita o vocabulário visual
-   já usado no .pilot-step (selo numerado + cartão), agora para os 7
-   pontos do ecossistema. */
+   7 partes do ecossistema Sartec em grade equilibrada: 4 cartões na
+   primeira linha, 3 centralizados na segunda — flex-wrap com largura
+   fixa por item garante que a última linha centralize sozinha, sem
+   esticar para preencher e sem deixar buraco de coluna vazia. */
 .eco-flow {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
   justify-content: center;
-  gap: 0;
-  max-width: 1120px;
+  gap: 20px;
+  max-width: 1160px;
   margin: 0 auto;
 }
 .eco-flow__node {
-  flex: 1 1 190px;
-  max-width: 210px;
-  padding: 22px 18px;
+  flex: 0 1 260px;
+  max-width: 260px;
+  padding: 24px 20px;
   background: var(--surface);
   border: 1px solid var(--border-light);
   border-radius: var(--r-lg);
@@ -1572,13 +1507,6 @@ a.phone-preview:focus-visible .media-link__badge {
 }
 .eco-flow__node h3 { font-size: 14px; margin-bottom: 6px; }
 .eco-flow__node p  { font-size: 12px; color: var(--text-2); line-height: 1.55; }
-.eco-flow__connector {
-  flex: 0 0 26px;
-  align-self: center;
-  height: 2px;
-  background: linear-gradient(90deg, var(--green-border), transparent, var(--green-border));
-  opacity: 0.6;
-}
 
 .pilot__note {
   font-size: 14px;
@@ -2025,42 +1953,54 @@ main h1:not(.hero__title) {
 }
 .mid-page-cta a:hover { color: var(--text); }
 
-/* ── HOME — prova de origem/autoria (resumo compacto) ───────────
-   Toque breve de credibilidade (Sartec real + Lucas) sem recriar as
-   seções completas, que vivem em sobre.html. */
-.home-proof { padding: 8px 0 80px; }
-.home-proof__inner {
-  max-width: 640px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+/* ── HOME — quem está por trás (resumo editorial) ────────────────
+   Retrato + texto lado a lado, integrado à página (sem card com borda
+   nem avatar circular) — teaser leve da seção completa em sobre.html,
+   não um currículo. */
+.home-founder { padding: 8px 0 80px; }
+.home-founder__wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.58fr) minmax(0, 1fr);
+  gap: 40px;
   align-items: center;
-  text-align: center;
-  gap: 14px;
-  padding: 32px 28px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  max-width: 860px;
+  margin: 0 auto;
+}
+.home-founder__media {
+  position: relative;
   border-radius: var(--r-lg);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--surface);
 }
-.home-proof__avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+.home-founder__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 2px solid var(--green-border);
+  object-position: 50% 20%;
 }
-.home-proof__text {
-  font-size: 15px;
+.home-founder__content .tag { margin-bottom: 14px; }
+.home-founder__text {
+  font-size: 16px;
   color: var(--text-2);
-  line-height: 1.65;
+  line-height: 1.7;
+  margin-bottom: 14px;
 }
-.home-proof__link {
+.home-founder__specialties {
+  font-size: 13px;
+  color: var(--text-3);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-bottom: 18px;
+}
+.home-founder__link {
   font-size: 14px;
   font-weight: 600;
   color: var(--green-light);
   transition: color var(--t);
 }
-.home-proof__link:hover { color: var(--text); }
+.home-founder__link:hover { color: var(--text); }
 
 /* ── ANIMATIONS ───────────────────────────────── */
 .fade-up {
@@ -2104,7 +2044,6 @@ main h1:not(.hero__title) {
 
   .territories-grid    { flex-direction: column; }
   .territory--web, .territory--product, .territory--systems { flex: none; }
-  .territory--product .territory__visual { max-width: 160px; }
 
   .projects-showcase   { grid-template-columns: 1fr; max-width: 560px; }
   .cases-grid          { grid-template-columns: 1fr; max-width: 560px; }
@@ -2128,6 +2067,10 @@ main h1:not(.hero__title) {
      intervalo — duas colunas dão mais respiro até a quebra para 1 no mobile. */
   .eco-grid--capabilities { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
   .contracting-grid       { grid-template-columns: repeat(2, 1fr); }
+
+  /* Ecossistema Sartec (7 cartões) — 2 por linha no tablet, última linha
+     (ímpar) centralizada pelo justify-content do .eco-flow. */
+  .eco-flow__node { flex: 0 1 calc(50% - 10px); max-width: 320px; }
 }
 
 /* ══════════════════════════════════════════════
@@ -2191,8 +2134,8 @@ main h1:not(.hero__title) {
 
   .transition-line { padding: 0 20px 36px; font-size: 16px; }
 
-  .home-proof { padding: 0 0 56px; }
-  .home-proof__inner { padding: 26px 20px; }
+  .home-founder__wrap { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+  .home-founder__media { max-width: 220px; margin: 0 auto; }
 
   .mid-page-cta { display: flex; flex-direction: column; gap: 6px; }
   .mid-page-cta a { margin-left: 0; }
@@ -2245,7 +2188,7 @@ main h1:not(.hero__title) {
 
   /* Ecossistema */
   .eco-grid { grid-template-columns: 1fr; gap: 16px; }
-  .manifesto__accent { width: 160px; margin-top: 36px; }
+  .manifesto__mark { width: 72px; margin-top: 44px; }
   .eco-grid--solutions { flex-direction: column; align-items: stretch; }
   .eco-grid--solutions .eco-card { max-width: none; }
   .eco-card { padding: 22px; }
@@ -2348,10 +2291,9 @@ main h1:not(.hero__title) {
   .pilot-step    { padding: 20px 18px; max-width: none; }
   .pilot-step__arrow { transform: rotate(90deg); text-align: center; }
 
-  /* Ecossistema real — vira coluna única, conector vira tracinho vertical */
+  /* Ecossistema real — vira coluna única */
   .eco-flow { flex-direction: column; align-items: stretch; }
   .eco-flow__node { max-width: none; }
-  .eco-flow__connector { width: 2px; height: 18px; flex: 0 0 18px; align-self: center; }
 
   /* FAQ — a touch tighter so long answers read comfortably */
   .faq-q { padding: 18px 0; }

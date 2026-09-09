@@ -124,9 +124,9 @@ const I18N = {
     //    fundida em #como-pensamos — ver notEverythingQuote acima) ─
     notEverythingQuote: `A tecnologia é consequência do diagnóstico.`,
 
-    // ── HOME · Para quem fazemos mais sentido ───────────────
-    fitTag: `Para quem fazemos sentido`,
-    fitHeading: `Fazemos mais sentido quando a empresa já funciona, mas a operação começou a ficar maior do que os processos que a sustentam.`,
+    // ── HOME · Quando entramos ───────────────────────────────
+    fitTag: `Quando entramos`,
+    fitHeading: `A L A Cabral entra quando a empresa já funciona, mas a operação começa a pedir mais estrutura.`,
     fit0: `Site ou produto digital que não representa mais o tamanho da empresa`,
     fit1: `Equipe crescendo ou múltiplos responsáveis`,
     fit2: `Múltiplas unidades ou pontos de atendimento`,
@@ -136,7 +136,7 @@ const I18N = {
     fit6: `Falta de indicadores para acompanhar a operação`,
     fit7: `Ferramentas que não conversam entre si`,
     fit8: `Processos que dependem do conhecimento de pessoas específicas`,
-    fitNote: `Alguns exemplos de quem já trabalha assim: clínicas, escolas, comércios com múltiplas unidades e escritórios em crescimento — mas o que define se faz sentido é o estágio da operação, não o setor.`,
+    fitNote: `Clínicas, escolas, comércios com múltiplas unidades e escritórios em crescimento são alguns exemplos. O ponto em comum é uma operação ativa que já começou a exigir mais clareza, integração e controle.`,
 
     // ── HOME + COMO TRABALHAMOS · As 4 fases ────────────────
     tagMethod: `Método de trabalho`,
@@ -175,7 +175,9 @@ const I18N = {
     allProjectsTag: `Todos os projetos`,
     allProjectsHeading: `Contextos diferentes, mesmo ponto de partida.`,
 
-    homeOriginProofText: `Foi dentro da Sartec, em mais de 30 anos de operação, que Lucas Cabral formou o método que hoje aplica à frente da L A Cabral.`,
+    homeFounderTag: `Quem está por trás`,
+    homeFounderText: `À frente da L A Cabral está Lucas Cabral, UX Designer e Design Engineer, biólogo e ex gestor de negócio. Sua atuação combina design, tecnologia e experiência prática de operação para enxergar problemas além da interface e construir soluções conectadas à realidade da empresa.`,
+    homeFounderSpecialties: `UX Design · Design Engineering · Automação e IA · Operação`,
     homeOriginProofCta: `Conhecer a história completa →`,
     lucasAvatarAlt: `Lucas Cabral, à frente da L A Cabral`,
 
@@ -476,9 +478,9 @@ const I18N = {
     //    merged into #como-pensamos — see notEverythingQuote above) ──
     notEverythingQuote: `Technology is a consequence of the diagnosis.`,
 
-    // ── HOME · Who we're a fit for ────────────────────────────
-    fitTag: `Who we're a fit for`,
-    fitHeading: `We make the most sense when the company already works, but the operation has outgrown the processes holding it together.`,
+    // ── HOME · When we step in ────────────────────────────────
+    fitTag: `When we step in`,
+    fitHeading: `L A Cabral steps in when the company is already up and running, but the operation is starting to outgrow the structure behind it.`,
     fit0: `A website or digital product that no longer represents the company's size`,
     fit1: `A growing team or multiple people in charge`,
     fit2: `Multiple locations or service points`,
@@ -488,7 +490,7 @@ const I18N = {
     fit6: `No indicators to track the operation`,
     fit7: `Tools that don't talk to each other`,
     fit8: `Processes that depend on specific people's knowledge`,
-    fitNote: `A few examples of who already works this way: clinics, schools, multi-location retailers and growing offices — but what determines fit is the stage of the operation, not the industry.`,
+    fitNote: `Clinics, schools, multi-location retailers and growing offices are a few examples. What they have in common is an active operation that has started to demand more clarity, integration and control.`,
 
     // ── HOME + HOW WE WORK · The 4 phases ─────────────────────
     tagMethod: `Our process`,
@@ -527,7 +529,9 @@ const I18N = {
     allProjectsTag: `All projects`,
     allProjectsHeading: `Different contexts, the same starting point.`,
 
-    homeOriginProofText: `It was inside Sartec, over more than 30 years of operation, that Lucas Cabral formed the method he now applies as the lead of L A Cabral.`,
+    homeFounderTag: `Who's behind it`,
+    homeFounderText: `L A Cabral is led by Lucas Cabral — UX Designer and Design Engineer, biologist and former business manager. His work combines design, technology and hands-on operational experience to see problems beyond the interface and build solutions grounded in the reality of the business.`,
+    homeFounderSpecialties: `UX Design · Design Engineering · Automation & AI · Operations`,
     homeOriginProofCta: `See the full story →`,
     lucasAvatarAlt: `Lucas Cabral, leading L A Cabral`,
 
