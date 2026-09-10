@@ -27,6 +27,7 @@ const I18N = {
     waAutomacao: `Olá, vim pelo site da L A Cabral e quero conversar sobre um site ou uma experiência web.`,
     waConectada: `Olá, vim pelo site da L A Cabral e quero conversar sobre um produto digital ou aplicativo.`,
     waSistemas: `Olá, vim pelo site da L A Cabral e quero entender se minha operação precisa de um sistema, automação ou integração.`,
+    waAquisicao: `Olá, vim pelo site da L A Cabral e quero entender como organizar a jornada entre o primeiro contato e o comercial.`,
 
     tagCtaFinal: `Conversa sem compromisso`,
     ctaFinalHeading: `Sua operação está custando mais tempo, vendas ou clareza do que deveria?`,
@@ -115,6 +116,21 @@ const I18N = {
     approach3Note: `Nem todo problema de operação precisa de um sistema novo — às vezes basta conectar o que já existe.`,
     approach3ProcessNote: `Processo mais investigativo: mapeamento de regras, integrações e automação testada com uso real.`,
 
+    approach4Num: `04`,
+    approach4Title: `Aquisição e conversão`,
+    approach4ShortDesc: `A jornada entre o primeiro interesse e a oportunidade comercial — páginas, qualificação, CRM, WhatsApp, automações e IA conectados quando fizer sentido.`,
+    approach4Ideal: `<strong>Ideal para:</strong> empresas que já geram interesse — por site, indicação ou campanhas — mas sentem que parte dele se perde antes de chegar ao comercial.`,
+    approach4List1: `Landing pages e páginas de campanha`,
+    approach4List2: `Formulários e diagnósticos de qualificação`,
+    approach4List3: `CRM e organização do pipeline comercial`,
+    approach4List4: `WhatsApp integrado ao processo comercial`,
+    approach4List5: `Automações de acompanhamento e agendamento`,
+    approach4List6: `IA aplicada à triagem e ao contexto de cada contato`,
+    approach4Resolve: `Contato chegando sem contexto, demora no primeiro atendimento e oportunidades esquecidas depois da primeira conversa.`,
+    approach4Fit: `Quando o site ou as campanhas já trazem interesse, mas o que acontece depois do primeiro contato ainda depende de memória e retrabalho manual.`,
+    approach4Note: `Nem toda jornada precisa de todas essas peças — a estrutura é desenhada conforme como a empresa capta, qualifica e atende.`,
+    approach4ProcessNote: `Processo de jornada: mapear como o contato chega, o que precisa ser perguntado e onde a passagem para o comercial hoje trava.`,
+
     ctaConversar: `Conversar sobre este caminho`,
     pkgDetailsToggle: `Ver detalhes`,
     pkgLabelResolve: `O que resolve`,
@@ -136,6 +152,8 @@ const I18N = {
     fit6: `Falta de indicadores para acompanhar a operação`,
     fit7: `Ferramentas que não conversam entre si`,
     fit8: `Processos que dependem do conhecimento de pessoas específicas`,
+    fit9: `Contato comercial chegando sem contexto sobre a necessidade do cliente`,
+    fit10: `Falta de retorno para quem já demonstrou interesse no negócio`,
     fitNote: `Clínicas, escolas, comércios com múltiplas unidades e escritórios em crescimento são alguns exemplos. O ponto em comum é uma operação ativa que já começou a exigir mais clareza, integração e controle.`,
 
     // ── HOME + COMO TRABALHAMOS · As 4 fases ────────────────
@@ -194,6 +212,7 @@ const I18N = {
     tabAutomacao: `Sites`,
     tabConectada: `Produtos`,
     tabSistemas: `Sistemas`,
+    tabAquisicao: `Aquisição`,
 
     solFaqHeading: `Perguntas sobre nossas soluções`,
     faqQ1: `Vocês fazem apenas sites?`,
@@ -204,6 +223,10 @@ const I18N = {
     faqA3: `Sim, quando esse é o gargalo identificado: jornadas de pedido online, catálogos digitais e estruturas de venda avaliadas conforme a complexidade das integrações e do fluxo de pagamento.`,
     faqQ7: `Vocês trabalham com melhorias em sistemas que já existem?`,
     faqA7: `Sim. Avaliamos o que já está em uso para identificar gargalos, redesenhar interfaces, criar integrações ou construir novas rotinas sobre o que já funciona — em vez de substituir por substituir.`,
+    faqQ11: `Aquisição e Conversão substitui o site ou é a mesma coisa que gestão de tráfego?`,
+    faqA11: `Nenhum dos dois. O site cuida da apresentação e da experiência digital, e não cuidamos de campanhas de mídia nem da geração de tráfego. Aquisição e Conversão entra a partir do momento em que alguém demonstra interesse: a página que recebe esse contato, a qualificação, o CRM, o WhatsApp, o acompanhamento e, quando faz sentido, a IA que ajuda a organizar cada contato.`,
+    faqQ12: `Como a IA entra nesse processo?`,
+    faqA12: `De forma aplicada, não como promessa genérica: ajuda a interpretar respostas de um formulário ou diagnóstico, resumir o contexto de um contato antes do atendimento humano e apoiar a priorização de quem falar primeiro. A decisão final e o relacionamento continuam com a sua equipe.`,
     faqQ4: `Como sei qual é a solução ideal para o meu negócio?`,
     faqA4: `Você não precisa saber. Em uma conversa inicial sem compromisso, mapeamos como funciona sua operação, suas vendas e seu atendimento para indicar o caminho mais simples que resolve o problema.`,
 
@@ -385,6 +408,7 @@ const I18N = {
     waAutomacao: `Hi, I found you through the L A Cabral website and I'd like to talk about a website or a web experience.`,
     waConectada: `Hi, I found you through the L A Cabral website and I'd like to talk about a digital product or app.`,
     waSistemas: `Hi, I found you through the L A Cabral website and I'd like to understand if my operation needs a system, automation or integration.`,
+    waAquisicao: `Hi, I found you through the L A Cabral website and I'd like to understand how to organize the journey between the first contact and the sales team.`,
 
     tagCtaFinal: `No-commitment conversation`,
     ctaFinalHeading: `Is your operation costing more time, sales or clarity than it should?`,
@@ -469,6 +493,21 @@ const I18N = {
     approach3Note: `Not every operational problem needs a new system — sometimes it just needs to connect what's already there.`,
     approach3ProcessNote: `The most investigative process: mapping rules, integrations and automation tested with real use.`,
 
+    approach4Num: `04`,
+    approach4Title: `Acquisition and conversion`,
+    approach4ShortDesc: `The journey between the first interest and the sales opportunity — pages, qualification, CRM, WhatsApp, automation and AI connected when it makes sense.`,
+    approach4Ideal: `<strong>Ideal for:</strong> companies that already generate interest — through their website, referrals or campaigns — but feel that some of it gets lost before reaching sales.`,
+    approach4List1: `Landing pages and campaign pages`,
+    approach4List2: `Forms and qualification diagnostics`,
+    approach4List3: `CRM and sales pipeline organization`,
+    approach4List4: `WhatsApp integrated into the sales process`,
+    approach4List5: `Follow-up and scheduling automation`,
+    approach4List6: `AI applied to triage and context for each contact`,
+    approach4Resolve: `Contacts arriving with no context, a slow first response, and opportunities forgotten after the first conversation.`,
+    approach4Fit: `When the website or campaigns already bring in interest, but what happens after the first contact still depends on memory and manual rework.`,
+    approach4Note: `Not every journey needs every piece — the structure is designed around how each company attracts, qualifies and serves.`,
+    approach4ProcessNote: `Journey process: mapping how contacts arrive, what needs to be asked, and where the handoff to sales breaks down today.`,
+
     ctaConversar: `Talk about this path`,
     pkgDetailsToggle: `See details`,
     pkgLabelResolve: `What it solves`,
@@ -490,6 +529,8 @@ const I18N = {
     fit6: `No indicators to track the operation`,
     fit7: `Tools that don't talk to each other`,
     fit8: `Processes that depend on specific people's knowledge`,
+    fit9: `Sales contacts arriving with no context about the customer's need`,
+    fit10: `No follow-up for people who already showed interest`,
     fitNote: `Clinics, schools, multi-location retailers and growing offices are a few examples. What they have in common is an active operation that has started to demand more clarity, integration and control.`,
 
     // ── HOME + HOW WE WORK · The 4 phases ─────────────────────
@@ -548,6 +589,7 @@ const I18N = {
     tabAutomacao: `Websites`,
     tabConectada: `Products`,
     tabSistemas: `Systems`,
+    tabAquisicao: `Acquisition`,
 
     solFaqHeading: `Questions about our solutions`,
     faqQ1: `Do you only build websites?`,
@@ -558,6 +600,10 @@ const I18N = {
     faqA3: `Yes, when that's the bottleneck we identify: online ordering journeys, digital catalogs and sales structures, scoped according to the complexity of integrations and the payment flow.`,
     faqQ7: `Do you work on improving systems that already exist?`,
     faqA7: `Yes. We assess what's already in use to spot bottlenecks, redesign interfaces, build integrations, or create new workflows on top of what's already working — instead of replacing for the sake of replacing.`,
+    faqQ11: `Does Acquisition and Conversion replace the website, or is it the same as running ad campaigns?`,
+    faqA11: `Neither. The website handles presentation and the digital experience, and we don't run media campaigns or generate traffic. Acquisition and Conversion starts the moment someone shows interest: the page that receives that contact, qualification, the CRM, WhatsApp, follow-up and, when it makes sense, the AI that helps organize each contact.`,
+    faqQ12: `How does AI fit into this?`,
+    faqA12: `In an applied way, not as a generic promise: it helps interpret answers from a form or diagnostic, summarize a contact's context before a human takes over, and support prioritizing who to talk to first. The final decision and the relationship stay with your team.`,
     faqQ4: `How do I know which solution is right for my business?`,
     faqA4: `You don't need to know. In an initial, no-commitment conversation, we map how your operation, sales and customer service work to point you to the simplest path that solves the problem.`,
 

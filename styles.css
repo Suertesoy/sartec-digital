@@ -1075,7 +1075,11 @@ a.phone-preview:focus-visible .media-link__badge {
 
 .pricing__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* 2x2 — quatro caminhos agora (Sites / Produtos / Sistemas / Aquisição
+     e conversão); largura contida para o card não ficar raso demais. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 900px;
+  margin: 0 auto;
   gap: 18px;
   align-items: stretch;
   /* Row height tokens — cards use these to form aligned grid rows */
@@ -1825,11 +1829,12 @@ main h1:not(.hero__title) {
   margin-top: 12px;
 }
 
-/* Grade de 3x3 blocos curtos reaproveitada em várias seções da Home
-   (sintomas, formas de atuação, capacidades). */
+/* Grade de blocos curtos com o "o que muda por tipo de problema"
+   (como-trabalhamos.html) — 2x2 para acomodar as quatro frentes de
+   atuação sem apertar o texto de cada bloco. */
 .eco-grid--capabilities {
-  grid-template-columns: repeat(3, 1fr);
-  max-width: 980px;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 640px;
 }
 
 /* Checklist — "Para quem fazemos mais sentido" (Home). Coluna única:
@@ -2029,7 +2034,6 @@ main h1:not(.hero__title) {
      sobre a zona mais escura do scrim — o traço geométrico (ligado ao
      canto do layout desktop) some aqui. */
   .hero__mark           { display: none; }
-  .pricing__grid       { grid-template-columns: repeat(2, 1fr); }
   .about-lucas__wrap   { grid-template-columns: 1fr; gap: 40px; }
   .about-lucas__media  { max-width: 420px; margin: 0 auto; aspect-ratio: 3 / 4; }
   .about-lucas__media img { object-position: 50% 15%; }
@@ -2064,8 +2068,8 @@ main h1:not(.hero__title) {
   .lang-switch    { margin: 0 4px; }
 
   /* Grids novos de 8-9 itens curtos ficam apertados em 3-4 colunas neste
-     intervalo — duas colunas dão mais respiro até a quebra para 1 no mobile. */
-  .eco-grid--capabilities { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
+     intervalo — duas colunas dão mais respiro até a quebra para 1 no mobile.
+     (eco-grid--capabilities já usa 2 colunas por padrão — ver regra base.) */
   .contracting-grid       { grid-template-columns: repeat(2, 1fr); }
 
   /* Ecossistema Sartec (7 cartões) — 2 por linha no tablet, última linha
