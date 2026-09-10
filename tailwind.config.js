@@ -42,7 +42,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Outfit", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        sans: ["Space Grotesk", "Outfit", "Inter", "system-ui", "-apple-system", "sans-serif"],
       },
       borderRadius: {
         sm: "10px",

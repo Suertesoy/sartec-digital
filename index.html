@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="styles.css?v=2.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Hero é o LCP da Home — preload da foto certa por breakpoint (mesma
        lógica do <picture> no hero) para evitar atraso de descoberta. -->
   <link rel="preload" as="image" href="assets/hero-photo-mobile.jpg" media="(max-width: 680px)" fetchpriority="high" />
@@ -144,6 +144,14 @@
             <h3 data-i18n="territory3Title">Sistemas, automação e IA</h3>
             <p data-i18n="territory3Desc">Sistemas internos, dashboards, automações, integrações e IA aplicada — quando a operação pede uma solução própria.</p>
           </article>
+          <article class="territory territory--acquisition">
+            <div class="territory__visual">
+              <img src="assets/capability-aquisicao.jpg" alt="" loading="lazy" width="1000" height="750" />
+            </div>
+            <span class="territory__num">04</span>
+            <h3 data-i18n="territory4Title">Aquisição e conversão</h3>
+            <p data-i18n="territory4Desc">Landing pages, qualificação, CRM, WhatsApp e automações conectadas — a estrutura entre o primeiro interesse e a oportunidade comercial.</p>
+          </article>
         </div>
 
         <div class="territories-cta">
@@ -152,136 +160,170 @@
       </div>
     </section>
 
-    <!-- ═══ 3. PROJETOS — prova principal, assimétrica de propósito ═══ -->
-    <section class="section" id="projetos">
-      <div class="container">
+    <!-- ═══ 3. PROJETOS — scrollytelling: o palco fica preso à viewport
+         (position: sticky) enquanto o progresso do scroll dentro da
+         trilha (.proj-scroll__track) controla, de forma contínua, qual
+         dos três projetos está em foco. Sem scroll hijacking: o
+         documento continua rolando normalmente, o JS só lê a posição
+         (ver script.js) — nunca intercepta a rodinha do mouse. Base
+         (sem JS/mobile/reduced-motion): os três itens empilham
+         normalmente, imagem acima da ficha, sem sticky nem trilha alta. ═══ -->
+    <section class="section proj-scroll chapter-grid" id="projetos">
+      <div class="container proj-scroll__head">
         <header class="section__head">
           <span class="tag" data-i18n="projectsShowcaseTag">Projetos</span>
           <h2 data-i18n="projectsShowcaseHeading">Projetos que mostram como pensamos.</h2>
           <p data-i18n="projectsShowcaseDesc">De um redesign completo a um produto desenhado do zero — a L A Cabral parte do problema, não do formato da entrega.</p>
         </header>
+      </div>
 
-        <div class="projects-showcase">
+      <div class="proj-scroll__track" id="projScrollTrack">
+        <div class="proj-scroll__stage">
+          <div class="container proj-scroll__stage-inner" aria-label="Projetos — navegação por scroll" data-i18n-attr="aria-label:projScrollAriaLabel">
 
-          <!-- Principal: Sartec Papelaria — case completo, web -->
-          <div class="showcase-primary">
-            <a
-              class="browser-chrome"
-              href="https://www.sartecpapelaria.com.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n-attr="aria-label:ariaSartecMediaLink"
-              aria-label="Abrir o site da Sartec Papelaria em nova aba"
-            >
-              <div class="browser-chrome__bar">
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__url">sartecpapelaria.com.br</span>
+            <!-- 01 · Sartec Papelaria -->
+            <div class="proj-scroll__item" data-project="0">
+              <div class="proj-scroll__visual-wrap">
+                <div class="proj-scroll__frame">
+                  <a
+                    class="browser-chrome proj-scroll__visual"
+                    href="https://www.sartecpapelaria.com.br/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-i18n-attr="aria-label:ariaSartecMediaLink"
+                    aria-label="Abrir o site da Sartec Papelaria em nova aba"
+                  >
+                    <div class="browser-chrome__bar">
+                      <span class="browser-chrome__dot"></span>
+                      <span class="browser-chrome__dot"></span>
+                      <span class="browser-chrome__dot"></span>
+                      <span class="browser-chrome__url">sartecpapelaria.com.br</span>
+                    </div>
+                    <div class="browser-chrome__frame">
+                      <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" />
+                    </div>
+                    <span class="media-link__badge" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+                    </span>
+                  </a>
+                </div>
               </div>
-              <div class="browser-chrome__frame">
-                <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" />
+              <div class="proj-scroll__panel">
+                <div class="proj-scroll__meta">
+                  <span class="proj-scroll__index" aria-hidden="true">01 / 03</span>
+                  <span class="proj-scroll__ruler" aria-hidden="true"><span class="proj-scroll__ruler-fill"></span></span>
+                </div>
+                <h3>Sartec Papelaria</h3>
+                <p class="proj-scroll__category" data-i18n="proj1Category">Site institucional + ecossistema digital</p>
+                <p class="proj-scroll__desc" data-i18n="proj1Desc">Redesenhamos o site, a jornada de listas escolares, o atendimento via WhatsApp, a triagem por IA e o painel interno — uma operação conectada, não páginas isoladas.</p>
+                <ul class="proj-scroll__tags">
+                  <li class="badge" data-i18n="caseBadgeRedesign">Redesign</li>
+                  <li class="badge" data-i18n="caseBadgeUX">UX/UI</li>
+                  <li class="badge" data-i18n="caseBadgeAutomacao">Automação</li>
+                  <li class="badge" data-i18n="caseBadgeIA">IA</li>
+                </ul>
+                <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
+                <div class="proj-scroll__actions">
+                  <a href="cases.html#ecossistema-papelaria" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
+                  <a href="https://www.sartecpapelaria.com.br/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj1CtaSite">Visitar site →</a>
+                </div>
               </div>
-              <span class="media-link__badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-              </span>
-            </a>
-            <div class="showcase__head">
-              <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="showcase__logo" />
-              <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
             </div>
-            <div class="showcase__info">
-              <h3>Sartec Papelaria</h3>
-              <p data-i18n="proj1Desc">Redesenhamos o site, a jornada de listas escolares, o atendimento via WhatsApp, a triagem por IA e o painel interno — uma operação conectada, não páginas isoladas.</p>
+
+            <!-- 02 · UniEdu -->
+            <div class="proj-scroll__item" data-project="1">
+              <div class="proj-scroll__visual-wrap">
+                <div class="proj-scroll__frame proj-scroll__frame--phone">
+                  <a
+                    class="phone-preview proj-scroll__visual"
+                    href="https://case-app-uniedu.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-i18n-attr="aria-label:ariaUniEduMediaLink"
+                    aria-label="Abrir o protótipo do UniEdu em nova aba"
+                  >
+                    <div class="phone-preview__island"></div>
+                    <video class="phone-preview__video" autoplay muted loop playsinline preload="metadata" poster="assets/case-uniedu-poster.webp">
+                      <source src="uniedu-20s.mp4" type="video/mp4">
+                    </video>
+                    <span class="media-link__badge" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="proj-scroll__panel">
+                <div class="proj-scroll__meta">
+                  <span class="proj-scroll__index" aria-hidden="true">02 / 03</span>
+                  <span class="proj-scroll__ruler" aria-hidden="true"><span class="proj-scroll__ruler-fill"></span></span>
+                </div>
+                <h3>UniEdu</h3>
+                <p class="proj-scroll__category" data-i18n="proj2Category">Produto digital · Protótipo mobile</p>
+                <p class="proj-scroll__desc" data-i18n="proj2Desc">Protótipo navegável de um aplicativo educacional, com identidade própria e experiência mobile desenhada para uso real.</p>
+                <ul class="proj-scroll__tags">
+                  <li class="badge" data-i18n="caseBadgeProduto">Produto</li>
+                  <li class="badge" data-i18n="caseBadgeUX">UX/UI</li>
+                  <li class="badge" data-i18n="caseBadgePrototipagem">Prototipagem</li>
+                  <li class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</li>
+                </ul>
+                <span class="showcase__eyebrow showcase__eyebrow--prototype" data-i18n="projStatus2">Protótipo de produto</span>
+                <div class="proj-scroll__actions">
+                  <a href="https://case-app-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj2Cta">Ver protótipo →</a>
+                </div>
+              </div>
             </div>
-            <div class="showcase__badges">
-              <span class="badge" data-i18n="caseBadgeRedesign">Redesign</span>
-              <span class="badge" data-i18n="caseBadgeUX">UX/UI</span>
-              <span class="badge" data-i18n="caseBadgeArquitetura">Arquitetura da informação</span>
-              <span class="badge" data-i18n="caseBadgeDirecao">Direção visual</span>
-              <span class="badge" data-i18n="caseBadgeResponsividade">Responsividade</span>
-              <span class="badge" data-i18n="caseBadgeIntegracoes">Integrações</span>
-              <span class="badge" data-i18n="caseBadgeAutomacao">Automação</span>
-              <span class="badge" data-i18n="caseBadgeIA">IA</span>
+
+            <!-- 03 · Grupo Almeida -->
+            <div class="proj-scroll__item" data-project="2">
+              <div class="proj-scroll__visual-wrap">
+                <div class="proj-scroll__frame">
+                  <a
+                    class="browser-chrome proj-scroll__visual"
+                    href="https://almeidaambiental.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-i18n-attr="aria-label:ariaAlmeidaMediaLink"
+                    aria-label="Abrir o protótipo do Grupo Almeida em nova aba"
+                  >
+                    <div class="browser-chrome__bar">
+                      <span class="browser-chrome__dot"></span>
+                      <span class="browser-chrome__dot"></span>
+                      <span class="browser-chrome__dot"></span>
+                    </div>
+                    <div class="browser-chrome__frame">
+                      <img src="assets/case-almeida-desktop.jpg" alt="" data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" />
+                    </div>
+                    <span class="media-link__badge" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="proj-scroll__panel">
+                <div class="proj-scroll__meta">
+                  <span class="proj-scroll__index" aria-hidden="true">03 / 03</span>
+                  <span class="proj-scroll__ruler" aria-hidden="true"><span class="proj-scroll__ruler-fill"></span></span>
+                </div>
+                <h3>Grupo Almeida</h3>
+                <p class="proj-scroll__category" data-i18n="proj3Category">Site institucional</p>
+                <p class="proj-scroll__desc" data-i18n="proj3Desc">Novo site institucional para o Grupo Almeida, empresa de gestão de resíduos industriais e operação ambiental desde 1985 — identidade própria e estrutura pensada para apresentar o ecossistema da operação.</p>
+                <ul class="proj-scroll__tags">
+                  <li class="badge" data-i18n="caseBadgeSites">Sites e jornadas digitais</li>
+                  <li class="badge" data-i18n="caseBadgeUX">UX/UI</li>
+                  <li class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</li>
+                </ul>
+                <span class="showcase__eyebrow showcase__eyebrow--review" data-i18n="projStatus3">Projeto em homologação</span>
+                <div class="proj-scroll__actions">
+                  <a href="https://almeidaambiental.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj3Cta">Ver protótipo →</a>
+                </div>
+              </div>
             </div>
-            <div class="showcase__actions">
-              <a href="cases.html#ecossistema-papelaria" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
-              <a href="https://www.sartecpapelaria.com.br/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj1CtaSite">Visitar site →</a>
-            </div>
+
           </div>
-
-          <!-- Secundária: UniEdu — produto/mobile, composição própria -->
-          <div class="showcase-secondary">
-            <a
-              class="phone-preview"
-              href="https://case-app-uniedu.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n-attr="aria-label:ariaUniEduMediaLink"
-              aria-label="Abrir o protótipo do UniEdu em nova aba"
-            >
-              <div class="phone-preview__island"></div>
-              <video class="phone-preview__video" autoplay muted loop playsinline preload="metadata" poster="assets/case-uniedu-poster.webp">
-                <source src="uniedu-20s.mp4" type="video/mp4">
-              </video>
-              <span class="media-link__badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-              </span>
-            </a>
-            <span class="showcase__eyebrow showcase__eyebrow--prototype" data-i18n="projStatus2">Protótipo de produto</span>
-            <div class="showcase__info">
-              <h3>UniEdu</h3>
-              <p data-i18n="proj2Desc">Protótipo navegável de um aplicativo educacional, com identidade própria e experiência mobile desenhada para uso real.</p>
-            </div>
-            <div class="showcase__badges">
-              <span class="badge" data-i18n="caseBadgeProduto">Produto</span>
-              <span class="badge" data-i18n="caseBadgeUX">UX/UI</span>
-              <span class="badge" data-i18n="caseBadgePrototipagem">Prototipagem</span>
-              <span class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</span>
-            </div>
-            <div class="showcase__actions">
-              <a href="https://case-app-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj2Cta">Ver protótipo →</a>
-            </div>
-          </div>
-
-          <!-- Terciária: Grupo Almeida — site institucional, mesma moldura de navegador do Sartec -->
-          <div class="showcase-primary">
-            <a
-              class="browser-chrome"
-              href="https://almeidaambiental.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n-attr="aria-label:ariaAlmeidaMediaLink"
-              aria-label="Abrir o protótipo do Grupo Almeida em nova aba"
-            >
-              <div class="browser-chrome__bar">
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__dot"></span>
-              </div>
-              <div class="browser-chrome__frame">
-                <img src="assets/case-almeida-desktop.jpg" alt="" data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" />
-              </div>
-              <span class="media-link__badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-              </span>
-            </a>
-            <span class="showcase__eyebrow showcase__eyebrow--review" data-i18n="projStatus3">Projeto em homologação</span>
-            <div class="showcase__info">
-              <h3>Grupo Almeida</h3>
-              <p data-i18n="proj3Desc">Novo site institucional para o Grupo Almeida, empresa de gestão de resíduos industriais e operação ambiental desde 1985 — identidade própria e estrutura pensada para apresentar o ecossistema da operação.</p>
-            </div>
-            <div class="showcase__badges">
-              <span class="badge" data-i18n="caseBadgeSites">Sites e jornadas digitais</span>
-              <span class="badge" data-i18n="caseBadgeUX">UX/UI</span>
-              <span class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</span>
-            </div>
-            <div class="showcase__actions">
-              <a href="https://almeidaambiental.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj3Cta">Ver protótipo →</a>
-            </div>
-          </div>
-
         </div>
+      </div>
+
+      <div class="container proj-scroll__foot">
         <div class="projects-seeall">
           <a href="cases.html" class="btn btn--outline-card" data-i18n="projectsSeeAllCta">Ver todos os projetos →</a>
         </div>
@@ -291,7 +333,7 @@
     <!-- ═══ 4. COMO PENSAMOS — diferencial de diagnóstico, camada mais
          profunda depois da prova visual (funde o antigo manifesto
          "nem tudo vira sistema") ═══ -->
-    <section class="section pilot" id="como-pensamos">
+    <section class="section pilot chapter-paper" id="como-pensamos">
       <div class="container pilot__wrap">
         <div class="pilot__content">
           <span class="tag tag--amber" data-i18n="thinkingTag">Como pensamos</span>
@@ -307,7 +349,7 @@
          a sequência de grids/cards da Home. Fotografia documental gerada
          especificamente para esta composição (mesma direção de arte do
          Hero — não representa cliente ou equipe real). ═══ -->
-    <section class="section fit-split" id="para-quem">
+    <section class="section fit-split chapter-paper" id="para-quem">
       <div class="container fit-split__wrap">
         <div class="fit-split__media">
           <img src="assets/home-operacao-madura.jpg" alt="" loading="lazy" width="1680" height="1120" />
@@ -334,7 +376,7 @@
     </section>
 
     <!-- ═══ 6. COMO TRABALHAMOS (4 fases) ═══ -->
-    <section class="section pilot" id="como-funciona">
+    <section class="section pilot chapter-grid" id="como-funciona">
       <div class="container">
         <div class="pilot__wrap">
           <div class="pilot__content">
@@ -375,7 +417,7 @@
     </section>
 
     <!-- ═══ Quem está por trás (resumo editorial de Lucas) ═══ -->
-    <section class="home-founder">
+    <section class="home-founder chapter-solid">
       <div class="container home-founder__wrap">
         <div class="home-founder__media">
           <img src="assets/lucas-cabral-editorial.jpg" alt="Lucas Cabral, à frente da L A Cabral" loading="lazy" width="1200" height="1800" data-i18n-attr="alt:lucasAvatarAlt" />

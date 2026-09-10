@@ -35,7 +35,10 @@
   --t:    0.22s;
 
   --max-w: 1200px;
-  --font:  'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  /* Space Grotesk é a família principal (mais tensão geométrica/angular,
+     conversa com o símbolo LA) — Outfit fica como fallback, não é mais
+     renderizada ativamente enquanto a fonte web carrega/existe. */
+  --font:  'Space Grotesk', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
 
   --shadow-card:       0 8px 30px -12px rgba(0, 0, 0, 0.55);
   --shadow-card-hover: 0 18px 46px -14px rgba(0, 0, 0, 0.7);
@@ -132,9 +135,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .section__head--sm { max-width: 460px; }
 
 /* ── TYPOGRAPHY ───────────────────────────────── */
-h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; }
-h2 { font-size: clamp(24px, 3.2vw, 40px); font-weight: 700; line-height: 1.14; letter-spacing: -0.022em; text-wrap: balance; }
-h3 { font-size: 17px; font-weight: 600; line-height: 1.3; letter-spacing: -0.008em; }
+h1 { font-size: clamp(32px, 5vw, 58px); font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-size: clamp(24px, 3.2vw, 42px); font-weight: 600; line-height: 1.16; letter-spacing: -0.015em; text-wrap: balance; }
+h3 { font-size: 17px; font-weight: 600; line-height: 1.3; letter-spacing: -0.006em; }
 p  { text-wrap: pretty; }
 
 *:focus-visible {
@@ -148,8 +151,8 @@ p  { text-wrap: pretty; }
   display: inline-block;
   padding: 4px 13px;
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   border-radius: var(--r-pill);
   margin-bottom: 20px;
@@ -282,7 +285,7 @@ p  { text-wrap: pretty; }
   letter-spacing: -0.01em;
 }
 .brand__label        { font-size: 16px; font-weight: 500; color: var(--text); }
-.brand__label strong { font-weight: 800; color: var(--text); }
+.brand__label strong { font-weight: 700; color: var(--text); }
 
 .nav { display: flex; align-items: center; gap: 4px; }
 
@@ -633,13 +636,27 @@ a.phone-preview:focus-visible .media-link__badge {
   a.phone-preview:hover, a.phone-preview:focus-visible { transform: none; }
 }
 
-/* ── TERRITÓRIOS (Home) — três pilares, mesma linguagem visual
-   própria, não três cards iguais com ícone+texto. Primeira seção
-   off-white da Home: os tokens de texto/superfície são redefinidos
-   localmente (mesmo mecanismo já usado para --text-3 no responsivo
-   mobile, ver final do arquivo) — .tag/.btn/h2/p herdam o contraste
-   certo sem que a regra base mude para as outras páginas. */
-.territories {
+/* ── CAPÍTULOS DE BACKGROUND (Home) ────────────────────────────
+   A Home usa três materiais para separar a página em capítulos claros,
+   em vez de deixar o grid+gradiente global do body (ver body/body::before
+   no topo do arquivo) vazar por trás de toda seção "transparent" da
+   metade pra baixo da página. Escopado à Home: as páginas internas
+   continuam usando .pilot/.fit-split/.ecosystem/etc. exatamente como
+   hoje (essas classes-base não são tocadas aqui).
+
+   Material A · .chapter-paper — off-white, editorial/explicativo.
+   Generaliza o padrão que .territories já usava sozinha: fundo opaco
+   var(--paper) + override local dos tokens de texto/superfície, para
+   que .tag/.btn/h2/p herdem o contraste certo sem mudar a regra base
+   usada pelas outras páginas. Qualificado com "section" (não só
+   ".chapter-paper") de propósito: #como-pensamos e #para-quem também
+   carregam .pilot/.fit-split, e ".pilot { background: transparent }"
+   tem a mesma especificidade de classe única — sem o qualificador de
+   elemento, a ordem de declaração no arquivo decidiria quem vence, o
+   que é frágil. "section.chapter-paper" tem especificidade maior e
+   sempre vence, independente da ordem. */
+.territories,
+section.chapter-paper {
   background: var(--paper);
   --text: var(--paper-ink);
   --text-2: var(--paper-ink-2);
@@ -651,11 +668,54 @@ a.phone-preview:focus-visible .media-link__badge {
   color: var(--paper-ink);
 }
 
+/* Material B · .chapter-grid — verde profundo + grid com função
+   (estrutura/processo/sistema). Mesmo desenho de grid do body::before,
+   mas contido à própria seção — deixa de ser wallpaper global e passa a
+   significar algo específico (Projetos, Como trabalhamos). */
+/* Sem overflow:hidden de propósito — qualquer ancestral com overflow
+   diferente de visible quebra position:sticky dos descendentes (usado
+   pelo palco de Projetos dentro desta seção). O ::before abaixo já é
+   inset:0 (do tamanho exato do pai) e sua própria mask-image esmaece
+   antes da borda, então nada extrapola mesmo sem clipping. */
+section.chapter-grid {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(180deg, #132A21 0%, #0F2119 55%, #0D1B16 100%);
+}
+.chapter-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(243, 245, 244, 0.065) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 245, 244, 0.065) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 90% 75% at 50% 38%, rgba(0,0,0,0.92), rgba(0,0,0,0.3) 85%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 38%, rgba(0,0,0,0.92), rgba(0,0,0,0.3) 85%);
+}
+.chapter-grid > * { position: relative; z-index: 1; }
+
+/* Material C · .chapter-solid — verde profundo sólido, sem grid
+   (institucional/humano/transição). O CTA final e o footer (chrome
+   global, compartilhado por todas as páginas) usam o mesmo material
+   diretamente em suas próprias regras-base, um tom mais escuro cada,
+   formando o encerramento — ver .cta-final/.footer. */
+section.chapter-solid {
+  background: linear-gradient(180deg, #0F2119 0%, #0B1912 100%);
+}
+
+/* Quatro territórios com peso igual — grid, não flex, para que os quatro
+   cards fiquem sempre com a mesma largura (flex:1 com 4 itens já fazia
+   isso, mas grid deixa explícito o número de colunas por breakpoint,
+   inclusive o 2×2 intermediário pedido para tablet/notebook menor). */
 .territories-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: stretch;
   gap: 20px;
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -673,15 +733,15 @@ a.phone-preview:focus-visible .media-link__badge {
   font-size: 11px; font-weight: 700; letter-spacing: 0.09em;
   text-transform: uppercase; color: var(--green);
   margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
 }
 .territory h3 { font-size: 18px; margin-bottom: 8px; color: var(--paper-ink); }
 .territory p  { font-size: 13.5px; line-height: 1.62; color: var(--paper-ink-2); }
 
-.territory--web, .territory--product, .territory--systems { flex: 1; }
-
-/* As três ilustrações conceituais (Magnific) compartilham a mesma
-   direção de arte e proporção — nenhuma frente é tratada como
-   "principal", diferente do showcase de projetos reais abaixo. */
+/* As quatro composições (Magnific: hardware/luz + telas autorais
+   compostas por cima) compartilham a mesma direção de arte e proporção —
+   nenhuma frente é tratada como "principal", diferente do showcase de
+   projetos reais abaixo. */
 .territory__visual {
   position: relative;
   border-radius: var(--r-md);
@@ -696,20 +756,176 @@ a.phone-preview:focus-visible .media-link__badge {
 
 .territories-cta { text-align: center; margin-top: 36px; }
 
-/* ── PROJETOS (Home) — três cases reais, mesmo peso visual. Reaproveita
-   .showcase-primary/.showcase-secondary (mesma linguagem de cartão da
-   grade de cases.html) em três colunas iguais, para que nenhum projeto
-   pareça secundário por acidente. */
-.projects-showcase {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  align-items: stretch;
-  max-width: 1180px;
-  margin: 0 auto;
+/* ── PROJETOS (Home) — scrollytelling ──────────────────────────
+   Estado base (sem JS, mobile, prefers-reduced-motion): três itens
+   empilhados em ordem normal de documento — imagem, depois ficha —
+   sem sticky nem altura de trilha alguma. É o mesmo HTML do estado
+   "enhanced"; só a classe .is-enhanced (adicionada por script.js
+   quando a viewport é larga o bastante e o usuário não pediu menos
+   movimento) liga o palco preso à viewport com os três projetos
+   sobrepostos. O progresso do scroll dentro de .proj-scroll__track é
+   convertido a cada frame em opacity/transform escritos diretamente
+   pelo JS (nunca por uma transition CSS) — ver script.js. */
+.proj-scroll__head { margin-bottom: 8px; }
+
+.proj-scroll__track { position: relative; }
+
+.proj-scroll__stage { padding: 8px 0 0; }
+
+.proj-scroll__stage-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding-bottom: 8px;
 }
-.projects-showcase .showcase-primary .browser-chrome__frame { aspect-ratio: 4 / 3; }
-.projects-showcase .showcase-secondary { justify-content: center; }
+
+.proj-scroll__item {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.proj-scroll__visual-wrap { display: flex; align-items: center; justify-content: center; }
+
+.proj-scroll__frame {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.proj-scroll__frame .browser-chrome.proj-scroll__visual { width: 100%; max-width: 560px; }
+/* UniEdu — phone-preview reaproveita a moldura existente (ver ── PILOT
+   ── mais abaixo no arquivo), só um pouco menor que o padrão para caber
+   com folga na altura do frame ao lado dos browser-chrome dos outros
+   dois projetos. */
+.proj-scroll__frame--phone { --project-phone-w: 232px; }
+
+.proj-scroll__panel { display: flex; flex-direction: column; align-items: flex-start; }
+
+.proj-scroll__meta { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.proj-scroll__index {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--green-light);
+  font-variant-numeric: tabular-nums;
+}
+/* Régua de progresso — só ganha função (e aparece) no modo enhanced;
+   no estado base cada projeto já é 100% legível sem ela. */
+.proj-scroll__ruler {
+  display: none;
+  position: relative;
+  width: 64px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border-light);
+  overflow: hidden;
+}
+.proj-scroll__ruler-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.proj-scroll__panel h3 { font-size: 22px; margin-bottom: 2px; }
+
+.proj-scroll__category {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  margin-bottom: 12px;
+}
+
+.proj-scroll__desc {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.68;
+  margin-bottom: 16px;
+  max-width: 48ch;
+}
+
+.proj-scroll__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+
+.proj-scroll__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+
+.proj-scroll__foot { margin-top: 8px; }
+.proj-scroll .projects-seeall { text-align: center; margin-top: 0; }
+
+/* ══ Enhanced (desktop, sem prefers-reduced-motion) — classe ligada só
+   por JS; nada aqui depende de media query sozinha para ativar. ══ */
+.proj-scroll__track.is-enhanced { height: var(--proj-track-h, 300vh); }
+
+.proj-scroll__track.is-enhanced .proj-scroll__stage {
+  position: sticky;
+  top: 84px;
+  height: calc(100svh - 84px);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.proj-scroll__track.is-enhanced .proj-scroll__stage-inner {
+  position: relative;
+  width: 100%;
+  height: min(72vh, 600px);
+  padding-bottom: 0;
+  gap: 0;
+}
+
+.proj-scroll__track.is-enhanced .proj-scroll__item {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+  align-items: center;
+  gap: 40px;
+}
+
+.proj-scroll__track.is-enhanced .proj-scroll__visual-wrap {
+  grid-column: 2;
+  grid-row: 1;
+  height: 100%;
+}
+.proj-scroll__track.is-enhanced .proj-scroll__panel { grid-column: 1; grid-row: 1; }
+.proj-scroll__track.is-enhanced .proj-scroll__frame { height: min(56vh, 480px); }
+
+.proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* .browser-chrome/.phone-preview trazem transition:transform para o
+     hover — aqui o JS escreve opacity/transform a cada frame e precisa
+     de controle exclusivo, sem nenhuma transition suavizando por trás. */
+  transition: none;
+}
+.proj-scroll__track.is-enhanced .proj-scroll__panel {
+  transition: none;
+}
+.proj-scroll__track.is-enhanced .proj-scroll__frame .browser-chrome.proj-scroll__visual {
+  width: 100%;
+  max-width: 560px;
+}
+
+.proj-scroll__track.is-enhanced .proj-scroll__ruler { display: block; }
+
+/* prefers-reduced-motion: cinto de segurança em CSS — mesmo que algo
+   force a classe, o palco nunca vira sticky/sobreposto para quem pediu
+   menos movimento (script.js já evita ligar .is-enhanced neste caso). */
+@media (prefers-reduced-motion: reduce) {
+  .proj-scroll__track.is-enhanced { height: auto; }
+  .proj-scroll__track.is-enhanced .proj-scroll__stage { position: static; height: auto; }
+  .proj-scroll__track.is-enhanced .proj-scroll__stage-inner { position: static; height: auto; display: flex; flex-direction: column; gap: 72px; }
+  .proj-scroll__track.is-enhanced .proj-scroll__item { position: static; display: flex; flex-direction: column; gap: 28px; opacity: 1 !important; transform: none !important; }
+  .proj-scroll__track.is-enhanced .proj-scroll__panel,
+  .proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual { opacity: 1 !important; transform: none !important; }
+  .proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual { position: relative; top: auto; left: auto; }
+  .proj-scroll__track.is-enhanced .proj-scroll__ruler { display: none; }
+}
 
 /* ── CASES.HTML — grade dos três projetos ──────────────────────
    Reaproveita .showcase-primary/.showcase-secondary (mesmo cartão,
@@ -1420,6 +1636,7 @@ a.phone-preview:focus-visible .media-link__badge {
   font-weight: 700;
   font-size: 13px;
   margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
 }
 .pilot-step h3    { font-size: 16px; margin-bottom: 8px; }
 .pilot-step p      { font-size: 13px; color: var(--text-2); line-height: 1.6; }
@@ -1559,8 +1776,11 @@ a.phone-preview:focus-visible .media-link__badge {
 }
 
 /* ── CTA FINAL ────────────────────────────────── */
+/* Verde profundo sólido, mais escuro que o resto do site (Material C —
+   encerramento) — opaco de propósito, para cortar de vez o grid do
+   body::before em vez de deixá-lo vazar por trás com opacidade baixa. */
 .cta-final {
-  background: rgba(0, 0, 0, 0.16);
+  background: linear-gradient(180deg, #0A1712 0%, #081310 100%);
   position: relative;
   padding: 112px 0;
   overflow: hidden;
@@ -1598,8 +1818,10 @@ a.phone-preview:focus-visible .media-link__badge {
 }
 
 /* ── FOOTER ───────────────────────────────────── */
+/* Quase-preto opaco — último degrau do encerramento (Material C), abaixo
+   do CTA final. */
 .footer {
-  background: rgba(9, 18, 15, 0.75);
+  background: #060B09;
   border-top: 1px solid var(--border);
   padding: 48px 0 0;
 }
@@ -1817,6 +2039,7 @@ main h1:not(.hero__title) {
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--border-light);
+  font-variant-numeric: tabular-nums;
 }
 .case-narrative__item h3 { font-size: 15px; }
 .case-narrative__item p { font-size: 14px; color: var(--text-2); line-height: 1.68; }
@@ -1857,6 +2080,22 @@ main h1:not(.hero__title) {
 .fit-note {
   font-size: 13px;
   color: var(--text-3);
+}
+
+/* Em desktop amplo a coluna de texto (com 11 itens) fica bem mais alta
+   que a foto ao lado — 2 colunas equilibram a leitura sem cortar
+   nenhum item da lista. Escopado a #para-quem: é a única seção que usa
+   .fit-list hoje. */
+@media (min-width: 900px) {
+  #para-quem .fit-list {
+    display: block;
+    column-count: 2;
+    column-gap: 28px;
+  }
+  #para-quem .fit-list li {
+    break-inside: avoid;
+    margin-bottom: 12px;
+  }
 }
 
 /* ── PARA QUEM FAZEMOS SENTIDO (Home) — composição editorial: fotografia
@@ -2018,6 +2257,20 @@ main h1:not(.hero__title) {
 .fade-up:nth-child(3) { transition-delay: 0.14s; }
 .fade-up:nth-child(4) { transition-delay: 0.21s; }
 
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { transition: none; opacity: 1; transform: none; }
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — 4 TERRITÓRIOS EM 2×2 (≤ 1180px)
+   Breakpoint próprio (mais largo que o tablet geral de 1024px): com
+   quatro colunas os cards ficam apertados bem antes do resto do layout
+   precisar empilhar — cai para 2×2 mais cedo, em vez de comprimir.
+   ══════════════════════════════════════════════ */
+@media (max-width: 1180px) {
+  .territories-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; }
+}
+
 /* ══════════════════════════════════════════════
    RESPONSIVE — TABLET (≤ 1024px)
    ══════════════════════════════════════════════ */
@@ -2046,11 +2299,8 @@ main h1:not(.hero__title) {
   .real-app-card::after { left: 32px; right: 32px; }
   .real-app-card__visual { max-width: 560px; margin: 0 auto; width: 100%; }
 
-  .territories-grid    { flex-direction: column; }
-  .territory--web, .territory--product, .territory--systems { flex: none; }
-
-  .projects-showcase   { grid-template-columns: 1fr; max-width: 560px; }
   .cases-grid          { grid-template-columns: 1fr; max-width: 560px; }
+  .proj-scroll__stage-inner { gap: 56px; }
   .case-hero           { grid-template-columns: 1fr; gap: 28px; }
   .case-hero__visual   { max-width: 560px; margin: 0 auto; width: 100%; }
   .case-narrative      { grid-template-columns: 1fr; gap: 28px; padding-top: 32px; }
@@ -2169,16 +2419,18 @@ main h1:not(.hero__title) {
     border-radius: 27px;
   }
 
-  /* Territórios — pilha única, sem os pesos assimétricos do desktop */
-  .territories-grid { gap: 16px; }
+  /* Territórios — pilha única de 4 cards com peso igual */
+  .territories-grid { grid-template-columns: 1fr; max-width: 480px; gap: 16px; }
   .territory { padding: 22px 20px 24px; }
-  .territory--product .territory__visual { max-width: 128px; }
 
   /* Projetos (showcase assimétrico + grade equilibrada de cases.html) */
   .showcase-primary   { padding: 20px; }
   .showcase-secondary { padding: 22px 20px; }
   .showcase-secondary .phone-preview { width: 168px; }
   .showcase__actions { flex-direction: column; align-items: stretch; }
+  .proj-scroll__actions { flex-direction: column; align-items: stretch; }
+  .proj-scroll__stage-inner { gap: 44px; }
+  .proj-scroll__desc { max-width: none; }
   .case-hero { margin-bottom: 48px; gap: 24px; }
   .case-hero__logo { height: 30px; }
   .case-hero__desc { max-width: none; }

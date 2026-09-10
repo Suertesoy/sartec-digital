@@ -54,16 +54,18 @@ const I18N = {
     thinkingHeading: `Não começamos pela ferramenta. Começamos pelo problema.`,
     thinkingDesc: `Antes de escolher entre um site, um produto ou um sistema, entendemos o que está custando tempo, venda ou clareza. Mapeamos como a empresa funciona, como os clientes chegam e como as informações circulam — e só depois decidimos o formato certo: pode ser um redesign, um produto novo, uma automação ou, quando a operação pede, um sistema próprio.`,
 
-    // ── HOME · Territórios (sites / produtos / sistemas) ────
+    // ── HOME · Territórios (sites / produtos / sistemas / aquisição) ─
     approachTag: `O que fazemos`,
-    approachHeading: `Sites, produtos digitais e sistemas — cada um com a linguagem certa.`,
-    approachIntro: `Três territórios, um mesmo ponto de partida: entender o problema antes de escolher o formato.`,
+    approachHeading: `O formato muda conforme o problema.`,
+    approachIntro: `Diferentes caminhos, o mesmo ponto de partida: entender o problema antes de escolher o formato.`,
     territory1Title: `Sites e experiências web`,
     territory1Desc: `Sites institucionais, landing pages, redesign, arquitetura da informação, UX/UI e direção visual — a porta de entrada feita para representar o porte da empresa.`,
     territory2Title: `Produtos digitais`,
     territory2Desc: `Aplicativos, MVPs, protótipos e produtos digitais — do desenho da experiência à evolução de produtos que já existem.`,
     territory3Title: `Sistemas, automação e IA`,
     territory3Desc: `Sistemas internos, dashboards, automações, integrações e IA aplicada — quando a operação pede uma solução própria.`,
+    territory4Title: `Aquisição e conversão`,
+    territory4Desc: `Landing pages, qualificação, CRM, WhatsApp e automações conectadas — a estrutura entre o primeiro interesse e a oportunidade comercial.`,
     territoriesCta: `Ver todas as soluções →`,
 
     // ── SOLUÇÕES + COMO TRABALHAMOS · Os três territórios ───────
@@ -181,17 +183,21 @@ const I18N = {
     tagProjects: `Projetos`,
     projectsDesc: `De uma operação reorganizada de ponta a ponta a um produto digital desenhado do zero, a L A Cabral parte do problema — não do formato da entrega.`,
     projStatus1: `Projeto entregue`,
+    proj1Category: `Site institucional + ecossistema digital`,
     proj1Desc: `Redesenhamos o site, a jornada de listas escolares, o atendimento via WhatsApp, a triagem por IA e o painel interno — uma operação conectada, não páginas isoladas.`,
     proj1Cta: `Ver o case completo →`,
     projStatus2: `Protótipo de produto`,
+    proj2Category: `Produto digital · Protótipo mobile`,
     proj2Desc: `Protótipo navegável de um aplicativo educacional, com identidade própria e experiência mobile desenhada para uso real.`,
     proj2Cta: `Ver protótipo →`,
     projStatus3: `Projeto em homologação`,
+    proj3Category: `Site institucional`,
     proj3Desc: `Novo site institucional para o Grupo Almeida, empresa de gestão de resíduos industriais e operação ambiental desde 1985 — identidade própria e estrutura pensada para apresentar o ecossistema da operação.`,
     proj3Cta: `Ver protótipo →`,
     projectsSeeAllCta: `Ver todos os projetos →`,
     allProjectsTag: `Todos os projetos`,
     allProjectsHeading: `Contextos diferentes, mesmo ponto de partida.`,
+    projScrollAriaLabel: `Projetos — navegação por scroll`,
 
     homeFounderTag: `Quem está por trás`,
     homeFounderText: `À frente da L A Cabral está Lucas Cabral, UX Designer e Design Engineer, biólogo e ex gestor de negócio. Sua atuação combina design, tecnologia e experiência prática de operação para enxergar problemas além da interface e construir soluções conectadas à realidade da empresa.`,
@@ -435,16 +441,18 @@ const I18N = {
     thinkingHeading: `We don't start with the tool. We start with the problem.`,
     thinkingDesc: `Before choosing between a website, a product or a system, we understand what's costing time, sales or clarity. We map how the company works, how customers arrive and how information flows — and only then decide the right format: it could be a redesign, a new product, an automation or, when the operation calls for it, a system of its own.`,
 
-    // ── HOME · Territories (websites / products / systems) ──
+    // ── HOME · Territories (websites / products / systems / acquisition) ─
     approachTag: `What we do`,
-    approachHeading: `Websites, digital products and systems — each in its own language.`,
-    approachIntro: `Three territories, one starting point: understanding the problem before choosing the format.`,
+    approachHeading: `The format changes with the problem.`,
+    approachIntro: `Different paths, the same starting point: understanding the problem before choosing the format.`,
     territory1Title: `Websites and web experiences`,
     territory1Desc: `Institutional sites, landing pages, redesigns, information architecture, UX/UI and visual direction — the front door built to represent the company's size.`,
     territory2Title: `Digital products`,
     territory2Desc: `Apps, MVPs, prototypes and digital products — from designing the experience to evolving products that already exist.`,
     territory3Title: `Systems, automation and AI`,
     territory3Desc: `Internal systems, dashboards, automations, integrations and applied AI — when the operation calls for a solution of its own.`,
+    territory4Title: `Acquisition and conversion`,
+    territory4Desc: `Landing pages, qualification, CRM, WhatsApp and connected automation — the structure between first interest and the sales opportunity.`,
     territoriesCta: `See all solutions →`,
 
     // ── SOLUTIONS + HOW WE WORK · The three territories ─────────
@@ -558,17 +566,21 @@ const I18N = {
     tagProjects: `Projects`,
     projectsDesc: `From an operation reorganized end to end to a digital product designed from scratch, L A Cabral starts from the problem — not from the shape of the deliverable.`,
     projStatus1: `Delivered project`,
+    proj1Category: `Website + digital ecosystem`,
     proj1Desc: `We redesigned the website, the school-list journey, WhatsApp service, AI triage and the internal dashboard — one connected operation, not isolated pages.`,
     proj1Cta: `See the full case →`,
     projStatus2: `Product prototype`,
+    proj2Category: `Digital product · Mobile prototype`,
     proj2Desc: `A navigable prototype of an educational app, with its own visual identity and a mobile experience designed for real use.`,
     proj2Cta: `See prototype →`,
     projStatus3: `Project in review`,
+    proj3Category: `Institutional website`,
     proj3Desc: `A new institutional website for Grupo Almeida, an industrial waste management and environmental operations company since 1985 — its own identity and a structure designed to present the operation's ecosystem.`,
     proj3Cta: `See prototype →`,
     projectsSeeAllCta: `See all projects →`,
     allProjectsTag: `All projects`,
     allProjectsHeading: `Different contexts, the same starting point.`,
+    projScrollAriaLabel: `Projects — scroll navigation`,
 
     homeFounderTag: `Who's behind it`,
     homeFounderText: `L A Cabral is led by Lucas Cabral — UX Designer and Design Engineer, biologist and former business manager. His work combines design, technology and hands-on operational experience to see problems beyond the interface and build solutions grounded in the reality of the business.`,
@@ -1273,4 +1285,172 @@ if (pricingGrid) {
     lastMouseY = null;
   });
   window.addEventListener('scroll', handleScroll, { passive: true });
+})();
+
+// ── Projetos (Home) — scrollytelling com scrub contínuo ─────────
+// Progresso real do scroll dentro de .proj-scroll__track → um único
+// número contínuo (posição do projeto, 0..N-1) → opacity/translateY/
+// scale escritos direto via style a cada frame. Nenhuma transition CSS
+// controla essas propriedades: a posição do scroll É a timeline (para
+// se o usuário parar em 42% de uma transição, os elementos ficam
+// exatamente em 42%; rolar de volta reverte na mesma proporção).
+// Só ativa (.is-enhanced) em desktop e sem prefers-reduced-motion —
+// fora disso o HTML base (empilhado, sem JS) já é o resultado final.
+(() => {
+  const track = document.getElementById('projScrollTrack');
+  if (!track) return;
+
+  const stage = track.querySelector('.proj-scroll__stage');
+  const items = Array.from(track.querySelectorAll('.proj-scroll__item'));
+  if (!stage || items.length === 0) return;
+
+  const panels = items.map(it => it.querySelector('.proj-scroll__panel'));
+  const visuals = items.map(it => it.querySelector('.proj-scroll__visual'));
+  const rulerFills = Array.from(track.querySelectorAll('.proj-scroll__ruler-fill'));
+  const N = items.length;
+
+  // Trilha dividida em repouso/transição/repouso/transição/repouso —
+  // os repousos ocupam a maior parte, as transições são curtas.
+  const HOLD = 0.24;
+  const TRANS = 0.14;
+  const B1 = HOLD;
+  const B2 = B1 + TRANS;
+  const B3 = B2 + HOLD;
+  const B4 = B3 + TRANS;
+
+  function continuousPosition(p) {
+    if (N < 2) return 0;
+    if (p <= B1) return 0;
+    if (p <= B2) return (p - B1) / TRANS;
+    if (p <= B3) return 1;
+    if (p <= B4) return 1 + (p - B3) / TRANS;
+    return 2;
+  }
+
+  const desktopQuery = window.matchMedia('(min-width: 1025px)');
+  const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  let enhanced = false;
+  let observing = false;
+  let rafId = null;
+  let resizeRafId = null;
+  let stageHeight = 0;
+  let currentFlags = items.map(() => null);
+
+  function eligible() {
+    return desktopQuery.matches && !reduceQuery.matches;
+  }
+
+  function setInteractive(item, isCurrent) {
+    item.setAttribute('aria-hidden', String(!isCurrent));
+    item.querySelectorAll('a').forEach(a => {
+      if (isCurrent) a.removeAttribute('tabindex');
+      else a.setAttribute('tabindex', '-1');
+    });
+  }
+
+  function measure() {
+    stageHeight = stage.getBoundingClientRect().height;
+  }
+
+  function frame() {
+    rafId = null;
+
+    // Uma única leitura de layout por frame.
+    const rect = track.getBoundingClientRect();
+    const scrollable = rect.height - stageHeight;
+    const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
+    const pos = continuousPosition(p);
+
+    for (let i = 0; i < N; i++) {
+      const delta = pos - i;
+      const absDelta = Math.abs(delta);
+      const opacity = Math.max(0, 1 - absDelta);
+
+      const panel = panels[i];
+      if (panel) {
+        panel.style.opacity = String(opacity);
+        // delta > 0 (posição já passou do projeto i) → ele está saindo,
+        // sobe (translateY negativo). delta < 0 (ainda não chegou) →
+        // está entrando, começa abaixo (translateY positivo) e sobe até 0.
+        panel.style.transform = `translateY(${(-delta * 20).toFixed(2)}px)`;
+      }
+
+      const visual = visuals[i];
+      if (visual) {
+        const scale = 1 - 0.03 * Math.min(1, absDelta);
+        visual.style.opacity = String(opacity);
+        visual.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(3)})`;
+      }
+
+      const isCurrent = absDelta < 0.5;
+      if (currentFlags[i] !== isCurrent) {
+        currentFlags[i] = isCurrent;
+        setInteractive(items[i], isCurrent);
+      }
+    }
+
+    const globalProgress = N > 1 ? pos / (N - 1) : 1;
+    rulerFills.forEach(f => { f.style.transform = `scaleX(${globalProgress.toFixed(3)})`; });
+
+    if (enhanced && observing) rafId = requestAnimationFrame(frame);
+  }
+
+  function startLoop() {
+    if (!rafId) rafId = requestAnimationFrame(frame);
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      observing = entry.isIntersecting;
+      if (observing && enhanced) startLoop();
+    });
+  }, { rootMargin: '200px 0px 200px 0px' });
+
+  function resetInline() {
+    panels.forEach(p => { if (p) { p.style.opacity = ''; p.style.transform = ''; } });
+    visuals.forEach(v => { if (v) { v.style.opacity = ''; v.style.transform = ''; } });
+    rulerFills.forEach(f => { f.style.transform = ''; });
+    items.forEach(it => {
+      it.removeAttribute('aria-hidden');
+      it.querySelectorAll('a').forEach(a => a.removeAttribute('tabindex'));
+    });
+    currentFlags = items.map(() => null);
+  }
+
+  function enable() {
+    if (enhanced) return;
+    enhanced = true;
+    track.classList.add('is-enhanced');
+    measure();
+    startLoop();
+  }
+
+  function disable() {
+    if (!enhanced) return;
+    enhanced = false;
+    track.classList.remove('is-enhanced');
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    resetInline();
+  }
+
+  function sync() {
+    if (eligible()) enable(); else disable();
+    if (enhanced) measure();
+  }
+
+  window.addEventListener('resize', () => {
+    if (resizeRafId) return;
+    resizeRafId = requestAnimationFrame(() => {
+      resizeRafId = null;
+      sync();
+      if (enhanced) startLoop();
+    });
+  }, { passive: true });
+
+  desktopQuery.addEventListener('change', sync);
+  reduceQuery.addEventListener('change', sync);
+
+  io.observe(track);
+  sync();
 })();
