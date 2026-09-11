@@ -60,6 +60,13 @@
   --paper-ink-2: #55584f;
   --paper-line:  rgba(23, 24, 26, 0.12);
   --paper-line-2: rgba(23, 24, 26, 0.07);
+
+  /* Gradiente verde profundo de section.chapter-grid — também
+     reaproveitado pelas fichas do scrollytelling de Projetos (cada
+     .proj-scroll__item precisa do próprio fundo opaco, do mesmo
+     material do capítulo, para "cobrir" fisicamente a ficha anterior
+     enquanto sobe). Um valor só, duas regras. */
+  --chapter-grid-grad: linear-gradient(180deg, #132A21 0%, #0F2119 55%, #0D1B16 100%);
 }
 
 /* ── RESET ────────────────────────────────────── */
@@ -94,10 +101,17 @@ body::before {
   -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.35));
 }
 
+/* z-index:1 (não -1) de propósito — precisa pintar por cima do próprio
+   fundo+grid estático de section.chapter-grid (que hoje é opaco) e por
+   baixo do conteúdo real dela (".chapter-grid > *" é z-index:1 também;
+   empate resolvido pela ordem do DOM, e o conteúdo vem depois deste
+   canvas). Ver nota em section.chapter-grid (sem isolation) e o clip
+   por retângulos em script.js — sem esse clip, um z-index positivo
+   vazaria o trail por cima de qualquer seção clara/sólida também. */
 .grid-trails {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
   mix-blend-mode: screen;
 }
@@ -636,13 +650,15 @@ a.phone-preview:focus-visible .media-link__badge {
   a.phone-preview:hover, a.phone-preview:focus-visible { transform: none; }
 }
 
-/* ── CAPÍTULOS DE BACKGROUND (Home) ────────────────────────────
-   A Home usa três materiais para separar a página em capítulos claros,
-   em vez de deixar o grid+gradiente global do body (ver body/body::before
-   no topo do arquivo) vazar por trás de toda seção "transparent" da
-   metade pra baixo da página. Escopado à Home: as páginas internas
-   continuam usando .pilot/.fit-split/.ecosystem/etc. exatamente como
-   hoje (essas classes-base não são tocadas aqui).
+/* ── CAPÍTULOS DE BACKGROUND (site inteiro) ─────────────────────
+   Três materiais para separar cada página em capítulos claros, em vez
+   de deixar o grid+gradiente global do body (ver body/body::before no
+   topo do arquivo) vazar por trás de toda seção "transparent" e virar
+   um bloco verde contínuo. Classes genéricas, não escopadas a nenhuma
+   página — a Home foi onde nasceram, mas solucoes.html/cases.html/
+   como-trabalhamos.html/sobre.html aplicam as mesmas três classes nas
+   seções que fizerem sentido semanticamente (ver comentário em cada
+   <section> dessas páginas para o porquê da escolha).
 
    Material A · .chapter-paper — off-white, editorial/explicativo.
    Generaliza o padrão que .territories já usava sozinha: fundo opaco
@@ -665,22 +681,38 @@ section.chapter-paper {
   --border-light: var(--paper-line);
   --surface: rgba(23, 24, 26, 0.035);
   --surface-2: rgba(23, 24, 26, 0.05);
+  /* Generalizado nesta rodada: .pricing-card.is-selected (solucoes.html)
+     usa --surface-hover para o estado selecionado — sem este override
+     ela herdaria o verde escuro global (#264236), pensado só para
+     fundos escuros. */
+  --surface-hover: rgba(23, 24, 26, 0.07);
   color: var(--paper-ink);
 }
 
 /* Material B · .chapter-grid — verde profundo + grid com função
    (estrutura/processo/sistema). Mesmo desenho de grid do body::before,
    mas contido à própria seção — deixa de ser wallpaper global e passa a
-   significar algo específico (Projetos, Como trabalhamos). */
+   significar algo específico (Projetos, Como trabalhamos, eco-flow de
+   um case, metodologia). */
 /* Sem overflow:hidden de propósito — qualquer ancestral com overflow
    diferente de visible quebra position:sticky dos descendentes (usado
    pelo palco de Projetos dentro desta seção). O ::before abaixo já é
    inset:0 (do tamanho exato do pai) e sua própria mask-image esmaece
-   antes da borda, então nada extrapola mesmo sem clipping. */
+   antes da borda, então nada extrapola mesmo sem clipping.
+   Sem isolation de propósito (removido nesta rodada): isolar tornaria
+   a seção um bloco atômico de empilhamento, e o canvas.grid-trails
+   (rastro interativo, ver script.js) é um elemento externo/global —
+   ele só consegue pintar entre o fundo desta seção e o conteúdo dela
+   se ambos participarem do MESMO contexto de empilhamento do canvas.
+   Sem isolation, ::before (z-index:0) e "> *" (z-index:1) comparam
+   diretamente com o z-index:1 do canvas — o que preserva fundo < grid
+   estático < rastro < conteúdo sem quebrar nada (todo positioned+
+   z-index nesta seção já ganha seu próprio sub-contexto local via
+   z-index explícito, então remover isolation daqui não muda a ordem
+   interna entre eles, só permite o canvas se intercalar). */
 section.chapter-grid {
   position: relative;
-  isolation: isolate;
-  background: linear-gradient(180deg, #132A21 0%, #0F2119 55%, #0D1B16 100%);
+  background: var(--chapter-grid-grad);
 }
 .chapter-grid::before {
   content: "";
@@ -874,8 +906,27 @@ section.chapter-solid {
   height: min(72vh, 600px);
   padding-bottom: 0;
   gap: 0;
+  /* A janela real da ficha é esta caixa (72vh/600px), não o palco
+     sticky por fora dela (mais alto, só para centralizar verticalmente
+     enquanto gruda na viewport) — sem este overflow:hidden aqui, uma
+     ficha em translateY(100%) (ver script.js) ficaria parcialmente
+     visível nas margens acima/abaixo desta caixa dentro do palco mais
+     alto, em vez de sumir completamente "fora da parte inferior da
+     janela". Seguro: esta caixa não é ancestral de nada sticky (o
+     sticky é o próprio .proj-scroll__stage, um nível acima). */
+  overflow: hidden;
 }
 
+/* Cada .proj-scroll__item é uma ficha física completa (número, texto,
+   tags, CTA e mockup juntos) — script.js move só o item (translateY +
+   scale + opacity), nunca o painel/visual em separado, para que o
+   conjunto suba/desça como uma unidade só. Fundo opaco (mesmo
+   gradiente de section.chapter-grid, ver --chapter-grid-grad) para que
+   a ficha realmente cubra a anterior enquanto sobe — sem isso ela
+   seria transparente e o projeto de baixo continuaria visível por
+   trás, quebrando a sensação de substituição física. z-index é
+   escrito por script.js (estático, crescente por índice: quem vem
+   depois sempre cobre quem veio antes, nos dois sentidos do scroll). */
 .proj-scroll__track.is-enhanced .proj-scroll__item {
   position: absolute;
   inset: 0;
@@ -883,6 +934,11 @@ section.chapter-solid {
   grid-template-columns: minmax(0, 42%) minmax(0, 58%);
   align-items: center;
   gap: 40px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 14%),
+    var(--chapter-grid-grad);
+  will-change: transform, opacity;
+  transition: none;
 }
 
 .proj-scroll__track.is-enhanced .proj-scroll__visual-wrap {

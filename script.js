@@ -1215,6 +1215,26 @@ if (pricingGrid) {
     ctx.stroke();
   }
 
+  // O canvas é global (position:fixed, cobre a viewport inteira) e
+  // pinta com z-index:1 — acima do fundo+grid estático de qualquer
+  // section.chapter-grid, mas o mesmo elemento não pode saber, só por
+  // CSS, onde é "grid verde" e onde é capítulo claro/sólido. Por isso
+  // cada frame recorta o desenho aos retângulos das .chapter-grid
+  // atualmente visíveis: nada é desenhado fora deles, então o trail
+  // nunca vaza para superfícies off-white/sólidas nem sobre o conteúdo
+  // (que já vence o canvas via z-index/ordem do DOM). Sem isso, um
+  // canvas com z-index positivo apareceria por cima de todo o resto.
+  function getInteractiveRects() {
+    const rects = [];
+    document.querySelectorAll('section.chapter-grid').forEach(section => {
+      const r = section.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < height && r.right > 0 && r.left < width) {
+        rects.push(r);
+      }
+    });
+    return rects;
+  }
+
   function draw() {
     ctx.clearRect(0, 0, width, height);
     const now = performance.now();
@@ -1222,7 +1242,21 @@ if (pricingGrid) {
     path = path.filter(node => now - node.t < node.life);
     branches = branches.filter(b => now - b.born < b.life);
 
+    const rects = getInteractiveRects();
+    if (rects.length === 0) {
+      if (path.length > 1 || branches.length > 0) {
+        rafId = requestAnimationFrame(draw);
+      } else {
+        rafId = null;
+      }
+      return;
+    }
+
     ctx.save();
+    ctx.beginPath();
+    rects.forEach(r => ctx.rect(r.left, r.top, r.width, r.height));
+    ctx.clip();
+
     ctx.lineWidth = 1.3;
     ctx.shadowColor = 'rgba(34,197,94,0.4)';
     ctx.shadowBlur = 3;
@@ -1289,13 +1323,24 @@ if (pricingGrid) {
 
 // ── Projetos (Home) — scrollytelling com scrub contínuo ─────────
 // Progresso real do scroll dentro de .proj-scroll__track → um único
-// número contínuo (posição do projeto, 0..N-1) → opacity/translateY/
-// scale escritos direto via style a cada frame. Nenhuma transition CSS
-// controla essas propriedades: a posição do scroll É a timeline (para
-// se o usuário parar em 42% de uma transição, os elementos ficam
-// exatamente em 42%; rolar de volta reverte na mesma proporção).
+// número contínuo (posição do projeto, 0..N-1) → transform/opacity
+// escritos direto via style a cada frame. Nenhuma transition CSS
+// controla essas propriedades: a posição do scroll É a timeline (se o
+// usuário parar em 42% de uma transição, os elementos ficam exatamente
+// em 42%; rolar de volta reverte na mesma proporção).
 // Só ativa (.is-enhanced) em desktop e sem prefers-reduced-motion —
 // fora disso o HTML base (empilhado, sem JS) já é o resultado final.
+//
+// Cada .proj-scroll__item é uma ficha completa (número, texto, tags,
+// CTA e mockup juntos) que se move como UMA unidade — não texto e
+// mockup em camadas separadas. A ficha que entra sobe de
+// translateY(100%) até 0% por cima da anterior (z-index estático
+// crescente por índice: quem vem depois sempre cobre quem veio antes,
+// nos dois sentidos do scroll); a ficha que está sendo coberta recebe
+// só uma reação secundária discreta (leve translateY negativo + scale
+// levemente para baixo) — ela nunca desaparece antes de ser coberta.
+// Fade existe só como acabamento na entrada (0.92→1), nunca como
+// mecanismo principal da troca.
 (() => {
   const track = document.getElementById('projScrollTrack');
   if (!track) return;
@@ -1304,8 +1349,17 @@ if (pricingGrid) {
   const items = Array.from(track.querySelectorAll('.proj-scroll__item'));
   if (!stage || items.length === 0) return;
 
-  const panels = items.map(it => it.querySelector('.proj-scroll__panel'));
-  const visuals = items.map(it => it.querySelector('.proj-scroll__visual'));
+  // Opacity vai no CONTEÚDO (painel + coluna do visual), nunca no item
+  // inteiro: o item carrega o fundo opaco da ficha (a "capa" que cobre
+  // fisicamente a anterior), e opacity<1 nele deixaria esse fundo
+  // parcialmente transparente — a ficha de baixo vazaria por trás como
+  // um fantasma bem no momento em que ela devia estar coberta. Só
+  // transform (translateY/scale) vai no item, pra fundo e conteúdo se
+  // moverem juntos como uma unidade só.
+  const contentEls = items.map(it => [
+    it.querySelector('.proj-scroll__panel'),
+    it.querySelector('.proj-scroll__visual-wrap'),
+  ].filter(Boolean));
   const rulerFills = Array.from(track.querySelectorAll('.proj-scroll__ruler-fill'));
   const N = items.length;
 
@@ -1326,6 +1380,15 @@ if (pricingGrid) {
     if (p <= B4) return 1 + (p - B3) / TRANS;
     return 2;
   }
+
+  // Física da ficha: entra de baixo (translateY 100%→0%, % da própria
+  // altura — some sob a janela graças ao overflow:hidden do stage).
+  // A ficha coberta recebe só uma reação secundária discreta.
+  const ENTER_OFFSET = 100;
+  const RECEDE_SHIFT = 6;
+  const RECEDE_SCALE = 0.985;
+  const ENTER_OPACITY_FROM = 0.92;
+  const RECEDE_OPACITY_TO = 0.88;
 
   const desktopQuery = window.matchMedia('(min-width: 1025px)');
   const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1364,26 +1427,22 @@ if (pricingGrid) {
 
     for (let i = 0; i < N; i++) {
       const delta = pos - i;
-      const absDelta = Math.abs(delta);
-      const opacity = Math.max(0, 1 - absDelta);
+      // 0 → ainda abaixo da janela; 1 → já encaixou no lugar.
+      const enter = Math.min(1, Math.max(0, delta + 1));
+      // 0 → em repouso; 1 → totalmente coberta pela próxima ficha.
+      const recede = Math.min(1, Math.max(0, delta));
 
-      const panel = panels[i];
-      if (panel) {
-        panel.style.opacity = String(opacity);
-        // delta > 0 (posição já passou do projeto i) → ele está saindo,
-        // sobe (translateY negativo). delta < 0 (ainda não chegou) →
-        // está entrando, começa abaixo (translateY positivo) e sobe até 0.
-        panel.style.transform = `translateY(${(-delta * 20).toFixed(2)}px)`;
-      }
+      const translateY = (1 - enter) * ENTER_OFFSET - recede * RECEDE_SHIFT;
+      const scale = 1 - recede * (1 - RECEDE_SCALE);
+      const enterOpacity = ENTER_OPACITY_FROM + enter * (1 - ENTER_OPACITY_FROM);
+      const opacity = enterOpacity * (1 - recede * (1 - RECEDE_OPACITY_TO));
 
-      const visual = visuals[i];
-      if (visual) {
-        const scale = 1 - 0.03 * Math.min(1, absDelta);
-        visual.style.opacity = String(opacity);
-        visual.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(3)})`;
-      }
+      const item = items[i];
+      item.style.transform = `translateY(${translateY.toFixed(2)}%) scale(${scale.toFixed(3)})`;
+      const opacityStr = opacity.toFixed(3);
+      contentEls[i].forEach(el => { el.style.opacity = opacityStr; });
 
-      const isCurrent = absDelta < 0.5;
+      const isCurrent = Math.abs(delta) < 0.5;
       if (currentFlags[i] !== isCurrent) {
         currentFlags[i] = isCurrent;
         setInteractive(items[i], isCurrent);
@@ -1408,13 +1467,14 @@ if (pricingGrid) {
   }, { rootMargin: '200px 0px 200px 0px' });
 
   function resetInline() {
-    panels.forEach(p => { if (p) { p.style.opacity = ''; p.style.transform = ''; } });
-    visuals.forEach(v => { if (v) { v.style.opacity = ''; v.style.transform = ''; } });
-    rulerFills.forEach(f => { f.style.transform = ''; });
-    items.forEach(it => {
+    items.forEach((it, i) => {
+      it.style.transform = '';
+      it.style.zIndex = '';
       it.removeAttribute('aria-hidden');
       it.querySelectorAll('a').forEach(a => a.removeAttribute('tabindex'));
+      contentEls[i].forEach(el => { el.style.opacity = ''; });
     });
+    rulerFills.forEach(f => { f.style.transform = ''; });
     currentFlags = items.map(() => null);
   }
 
@@ -1422,6 +1482,9 @@ if (pricingGrid) {
     if (enhanced) return;
     enhanced = true;
     track.classList.add('is-enhanced');
+    // Quem vem depois sempre cobre quem veio antes, nos dois sentidos
+    // do scroll — ordem fixa, não recalculada a cada frame.
+    items.forEach((it, i) => { it.style.zIndex = String(i); });
     measure();
     startLoop();
   }
