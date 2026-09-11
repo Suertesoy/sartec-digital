@@ -1077,24 +1077,6 @@ if (pricingGrid) {
   let lastScrollY = window.scrollY;
   let rafId = null;
 
-  function sizeCanvas(el, elCtx) {
-    el.width = Math.round(width * dpr);
-    el.height = Math.round(height * dpr);
-    el.style.width = `${width}px`;
-    el.style.height = `${height}px`;
-    elCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  function resize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    sizeCanvas(canvas, ctx);
-    sizeCanvas(canvasLight, ctxLight);
-    measureOcclusionZones();
-  }
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
-
   // ── Grid Light Occlusion ────────────────────────────────────────
   // Elementos marcados com data-grid-occlude (explícito, nunca h1/p
   // genérico) definem zonas onde o RASTRO interativo precisa parar de
@@ -1103,6 +1085,8 @@ if (pricingGrid) {
   // nunca dentro do loop de desenho: guardamos a posição relativa ao
   // documento (docTop) e cada frame só faz aritmética (docTop - scrollY)
   // para achar a posição atual na viewport — sem medir DOM a cada frame.
+  // Declarado antes de resize()/sizeCanvas() porque resize() roda de
+  // forma síncrona logo abaixo e já chama measureOcclusionZones().
   const OCCLUDE_MARGIN = 18; // "margem de segurança" ao redor do texto
   const OCCLUDE_FEATHER = 22; // raio do blur do destination-out — borda suave, não corte reto
   let occlusionZones = []; // { docTop, left, width, height }
@@ -1143,6 +1127,24 @@ if (pricingGrid) {
     }
     targetCtx.restore();
   }
+
+  function sizeCanvas(el, elCtx) {
+    el.width = Math.round(width * dpr);
+    el.height = Math.round(height * dpr);
+    el.style.width = `${width}px`;
+    el.style.height = `${height}px`;
+    elCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    sizeCanvas(canvas, ctx);
+    sizeCanvas(canvasLight, ctxLight);
+    measureOcclusionZones();
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
 
   function pushNode(x, y, boost, bornOverride) {
     const born = bornOverride !== undefined ? bornOverride : performance.now();
