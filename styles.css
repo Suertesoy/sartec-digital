@@ -2651,6 +2651,7 @@ main h1:not(.hero__title) {
 }
 .fit-split__media {
   position: relative;
+  width: 100%;
   border-radius: var(--r-lg);
   overflow: hidden;
   aspect-ratio: 5 / 4;
