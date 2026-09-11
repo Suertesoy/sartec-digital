@@ -1724,13 +1724,6 @@ section.chapter-solid {
      preço soltas. */
   padding-top: 28px;
   border-top: 1px solid var(--border);
-  /* Row height tokens — cards use these to form aligned grid rows */
-  --pkg-visual-h:   150px;
-  --pkg-head-h:     165px;
-  --pkg-cta-h:       60px;
-  --pkg-includes-h: 210px;
-  --pkg-resolve-h:  150px;
-  --pkg-fit-h:      120px;
 }
 
 /* QA visual (rodada de refinamento) — o fundo transparente deixava o
@@ -1760,15 +1753,15 @@ section.chapter-solid {
   border: 1px solid var(--paper-line-2);
   border-radius: var(--r-lg);
   padding: 20px 20px 24px;
-  display: grid;
-  grid-template-rows:
-    var(--pkg-visual-h)
-    var(--pkg-head-h)
-    var(--pkg-cta-h)
-    var(--pkg-includes-h)
-    auto;
-  row-gap: 16px;
-  align-items: start;
+  /* Fluxo normal, não grid de linhas fixas: a versão anterior travava
+     .pricing-card__visual (aspect-ratio:16/9, ~225px numa coluna de
+     ~400px) dentro de uma linha fixa de 150px (--pkg-visual-h) — sem
+     overflow:hidden na track, a imagem estourava por cima do título.
+     Cada bloco (mídia/head/cta/lista/detalhes) agora ocupa sua altura
+     natural; o espaçamento entre eles vem do gap, não de bandas iguais. */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   cursor: pointer;
   position: relative;
   outline: none;
@@ -1938,12 +1931,9 @@ section.chapter-solid {
 
 .pkg-details__body {
   padding: 4px 0 8px;
-  display: grid;
-  grid-template-rows:
-    var(--pkg-resolve-h)
-    var(--pkg-fit-h)
-    auto;
-  row-gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .pkg-details__body[hidden] { display: none; }
@@ -2519,8 +2509,34 @@ main h1:not(.hero__title) {
 .case-story__chapter h3 { font-size: 20px; margin-bottom: 12px; }
 .case-story__chapter p { font-size: 15px; color: var(--text-2); line-height: 1.72; }
 
+/* Sensores invisíveis (1px) usados só para IntersectionObserver — nunca
+   visíveis, nunca clicáveis. Substituem o cálculo de progresso de scroll
+   por rAF (perfilado: sem custo de layout por frame, sem long tasks). */
+.case-story__sensors { display: none; }
+
 @media (min-width: 1025px) {
-  .case-story__track.is-enhanced { height: var(--case-story-track-h, 240vh); }
+  /* Altura reduzida de 240vh para 150vh — espaço suficiente para os 3
+     sensores ficarem bem separados, sem criar uma "sala vazia" ao redor
+     do palco fixo (QA: rodada de estabilização). */
+  .case-story__track.is-enhanced {
+    position: relative;
+    height: 150vh;
+  }
+  .case-story__track.is-enhanced .case-story__sensors {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .case-story__track.is-enhanced .case-story__sensor {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+  }
+  .case-story__track.is-enhanced .case-story__sensor[data-chapter="0"] { top: 8%; }
+  .case-story__track.is-enhanced .case-story__sensor[data-chapter="1"] { top: 46%; }
+  .case-story__track.is-enhanced .case-story__sensor[data-chapter="2"] { top: 84%; }
+
   .case-story__track.is-enhanced .case-story__stage {
     position: sticky;
     top: 104px;
@@ -2544,6 +2560,16 @@ main h1:not(.hero__title) {
     color: var(--text-3);
     transition: color var(--t) var(--ease);
     font-variant-numeric: tabular-nums;
+    background: none;
+    border: none;
+    padding: 4px 0;
+    font-family: var(--font);
+    cursor: pointer;
+  }
+  .case-story__track.is-enhanced .case-story__rail-item:focus-visible {
+    outline: 2px solid var(--green-light);
+    outline-offset: 4px;
+    border-radius: 2px;
   }
   .case-story__track.is-enhanced .case-story__rail-item em { font-style: normal; font-weight: 500; margin-left: 4px; }
   .case-story__track.is-enhanced .case-story__rail-item.is-active { color: var(--green-light); }
@@ -2560,23 +2586,26 @@ main h1:not(.hero__title) {
     background: var(--green);
     transform-origin: left center;
     transform: scaleX(0);
+    transition: transform 0.3s var(--ease);
   }
 
-  /* O palco vira a janela: altura = maior capítulo, medida de verdade
-     (mesmo método de measureMobileCardHeight em script.js), nunca um
-     valor arbitrário. Capítulos empilham na mesma posição e fazem
-     crossfade com leve translateY — nunca três ao mesmo tempo. */
-  .case-story__track.is-enhanced .case-story__panels {
-    position: relative;
-    width: 100%;
-    height: var(--case-story-panel-h, 260px);
+  /* Troca de capítulo por classe (is-active), não por interpolação de
+     scroll: só um capítulo em fluxo por vez, container cresce/encolhe
+     naturalmente com o conteúdo — sem medir/travar altura por JS. */
+  .case-story__track.is-enhanced .case-story__panels { position: relative; width: 100%; }
+  .case-story__track.is-enhanced .case-story__chapter { display: none; }
+  .case-story__track.is-enhanced .case-story__chapter.is-active {
+    display: block;
+    animation: case-story-reveal 0.4s var(--ease) both;
   }
-  .case-story__track.is-enhanced .case-story__chapter {
-    position: absolute;
-    inset: 0;
-    will-change: transform, opacity;
-    transition: none;
-  }
+}
+
+@keyframes case-story-reveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-story__track.is-enhanced .case-story__chapter.is-active { animation: none; }
 }
 
 .case-capabilities { margin-bottom: 48px; }

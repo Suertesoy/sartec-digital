@@ -36,7 +36,7 @@
     <div class="container header__wrap">
       <div class="brand-group">
         <a href="index.html" class="brand" aria-label="L A Cabral">
-          <img src="assets/la-cabral-symbol-white.png" alt="" class="brand__logo" />
+          <img src="assets/la-cabral-symbol-white.png" alt="" class="brand__logo" width="830" height="544" />
           <span class="brand__label">L A <strong>CABRAL</strong></span>
         </a>
         <span class="brand__tagline" data-i18n="brandTagline">Tecnologia que organiza operações</span>
@@ -89,7 +89,7 @@
             <span class="tag" data-i18n="ecosystemSectionTag">Case · Sartec Papelaria</span>
             <div class="case-hero__brand">
               <span class="case-hero__logo-plate">
-                <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="case-hero__logo" />
+                <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="case-hero__logo" width="1436" height="736" />
               </span>
               <span class="case-hero__divider" aria-hidden="true"></span>
               <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
@@ -126,7 +126,7 @@
                 <span class="browser-chrome__url">sartecpapelaria.com.br</span>
               </div>
               <div class="browser-chrome__frame">
-                <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" />
+                <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" decoding="async" width="1600" height="900" />
               </div>
               <span class="media-link__badge" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -146,25 +146,33 @@
              usado no resto do site (nenhum mecanismo novo). Conteúdo
              idêntico ao anterior — só a apresentação muda. ═══ -->
         <div class="case-story__track" id="caseStoryTrack">
+          <!-- Sensores invisíveis (1px), observados por IntersectionObserver
+               para trocar o capítulo ativo — nenhum cálculo de progresso de
+               scroll por frame. Ver script.js. -->
+          <div class="case-story__sensors" aria-hidden="true">
+            <span class="case-story__sensor" data-chapter="0"></span>
+            <span class="case-story__sensor" data-chapter="1"></span>
+            <span class="case-story__sensor" data-chapter="2"></span>
+          </div>
           <div class="case-story__stage">
-            <nav class="case-story__rail" aria-hidden="true">
-              <span class="case-story__rail-item" data-chapter="0">01 <em data-i18n="caseChallengeLabel">Desafio</em></span>
-              <span class="case-story__rail-item" data-chapter="1">02 <em data-i18n="caseSolutionLabel">Solução</em></span>
-              <span class="case-story__rail-item" data-chapter="2">03 <em data-i18n="caseResultLabel">Resultado</em></span>
+            <nav class="case-story__rail" role="tablist" aria-label="Capítulos do case Sartec Papelaria">
+              <button type="button" class="case-story__rail-item is-active" role="tab" data-chapter="0" id="case-story-tab-0" aria-controls="case-story-panel-0" aria-selected="true">01 <em data-i18n="caseChallengeLabel">Desafio</em></button>
+              <button type="button" class="case-story__rail-item" role="tab" data-chapter="1" id="case-story-tab-1" aria-controls="case-story-panel-1" aria-selected="false" tabindex="-1">02 <em data-i18n="caseSolutionLabel">Solução</em></button>
+              <button type="button" class="case-story__rail-item" role="tab" data-chapter="2" id="case-story-tab-2" aria-controls="case-story-panel-2" aria-selected="false" tabindex="-1">03 <em data-i18n="caseResultLabel">Resultado</em></button>
               <span class="case-story__rail-line"><span class="case-story__rail-fill"></span></span>
             </nav>
             <div class="case-story__panels">
-              <article class="case-story__chapter" data-chapter="0">
+              <article class="case-story__chapter is-active" data-chapter="0" id="case-story-panel-0" role="tabpanel" aria-labelledby="case-story-tab-0">
                 <span class="case-story__num" aria-hidden="true">01</span>
                 <h3 data-i18n="caseChallengeLabel">Desafio</h3>
                 <p data-i18n="caseSartecChallenge">Com mais de 30 anos de operação e uma rotina sazonal pesada — principalmente na época de listas escolares —, a Sartec sempre dependeu de conversas manuais no balcão e no WhatsApp. Nos picos de demanda, pedidos chegavam por canais diferentes, sem organização entre quem perguntava, quem orçava e quem separava o material, e a direção não tinha visibilidade do andamento. O gargalo não era falta de site: era a ausência de um fluxo único entre a entrada do cliente, a triagem da demanda e a organização da equipe.</p>
               </article>
-              <article class="case-story__chapter" data-chapter="1">
+              <article class="case-story__chapter" data-chapter="1" id="case-story-panel-1" role="tabpanel" aria-labelledby="case-story-tab-1">
                 <span class="case-story__num" aria-hidden="true">02</span>
                 <h3 data-i18n="caseSolutionLabel">Solução</h3>
                 <p data-i18n="caseSartecSolution">Desenhamos um ecossistema conectado: um site que apresenta a operação e direciona por lista escolar, um canal único de WhatsApp, uma camada de IA para triagem inicial e um painel interno que organiza conversas, pedidos e responsáveis — as sete partes implementadas como um fluxo único, não como entregas separadas.</p>
               </article>
-              <article class="case-story__chapter" data-chapter="2">
+              <article class="case-story__chapter" data-chapter="2" id="case-story-panel-2" role="tabpanel" aria-labelledby="case-story-tab-2">
                 <span class="case-story__num" aria-hidden="true">03</span>
                 <h3 data-i18n="caseResultLabel">Resultado</h3>
                 <p data-i18n="caseSartecResult">A equipe passou a atender por um canal único, com a triagem inicial já resolvida antes de chegar a um responsável — e a direção ganhou visão da fila de atendimento, sem precisar perguntar pessoa por pessoa.</p>
@@ -256,14 +264,14 @@
                 <span class="browser-chrome__url">sartecpapelaria.com.br</span>
               </div>
               <div class="browser-chrome__frame">
-                <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" />
+                <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" decoding="async" width="1600" height="900" />
               </div>
               <span class="media-link__badge" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
               </span>
             </a>
             <div class="showcase__head">
-              <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="showcase__logo" />
+              <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="showcase__logo" loading="lazy" decoding="async" width="1436" height="736" />
               <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
             </div>
             <div class="showcase__info">
@@ -326,7 +334,7 @@
                 <span class="browser-chrome__dot"></span>
               </div>
               <div class="browser-chrome__frame">
-                <img src="assets/case-almeida-desktop.jpg" alt="" data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" />
+                <img src="assets/case-almeida-desktop.jpg" alt="" data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" decoding="async" width="1600" height="1000" />
               </div>
               <span class="media-link__badge" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -393,7 +401,7 @@
     <div class="container footer__wrap">
       <div class="footer__left">
         <a href="index.html" class="footer__brand" aria-label="L A Cabral">
-          <img src="assets/la-cabral-signature-white.png" alt="L A Cabral" class="footer__brand-mark" />
+          <img src="assets/la-cabral-signature-white.png" alt="L A Cabral" class="footer__brand-mark" width="955" height="593" loading="lazy" decoding="async" />
         </a>
         <p class="footer__tagline" data-i18n="footerTagline">Organizamos operações com software, automação e IA — a partir do problema, não da ferramenta.</p>
         <p class="footer__authorship" data-i18n="footerAuthorship">Conduzida por Lucas Cabral.</p>

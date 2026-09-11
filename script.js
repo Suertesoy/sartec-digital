@@ -1081,21 +1081,51 @@ if (pricingGrid) {
   // Elementos marcados com data-grid-occlude (explícito, nunca h1/p
   // genérico) definem zonas onde o RASTRO interativo precisa parar de
   // aparecer — o grid estático de fundo continua. A leitura de
-  // getBoundingClientRect() só acontece aqui (load/resize/i18n change),
-  // nunca dentro do loop de desenho: guardamos a posição relativa ao
-  // documento (docTop) e cada frame só faz aritmética (docTop - scrollY)
-  // para achar a posição atual na viewport — sem medir DOM a cada frame.
+  // getBoundingClientRect() só acontece aqui (load/resize/i18n change/
+  // fonte carregada), nunca dentro do loop de desenho: guardamos a
+  // posição relativa ao documento (docTop) e cada frame só faz
+  // aritmética (docTop - scrollY) para achar a posição atual na
+  // viewport — sem medir DOM a cada frame.
   // Declarado antes de resize()/sizeCanvas() porque resize() roda de
   // forma síncrona logo abaixo e já chama measureOcclusionZones().
-  const OCCLUDE_MARGIN = 18; // "margem de segurança" ao redor do texto
-  const OCCLUDE_FEATHER = 22; // raio do blur do destination-out — borda suave, não corte reto
-  let occlusionZones = []; // { docTop, left, width, height }
+  //
+  // QA de estabilização (profiling real): ctx.filter = blur() aplicado
+  // a cada frame era o custo dominante das páginas com mais zonas
+  // (Cases/Soluções) — isolar essa única linha via A/B eliminou 100%
+  // dos long tasks medidos. A borda suave agora é pré-renderizada UMA
+  // vez por zona (aqui, junto da medição) num canvas offscreen — "carimbo"
+  // já com o blur aplicado — e cada frame só faz um drawImage() barato
+  // (composição de bitmap, sem recalcular convolução nenhuma).
+  const OCCLUDE_MARGIN = 32; // "margem de segurança" ao redor do texto (24-40px pedido)
+  const OCCLUDE_FEATHER = 22; // raio do blur do carimbo — borda suave, não corte reto
+  const STAMP_PAD = OCCLUDE_FEATHER * 2; // espaço extra no carimbo para o blur não cortar na borda
+  let occlusionZones = []; // { docTop, left, width, height, stamp, stampW, stampH }
+
+  function buildOcclusionStamp(coreW, coreH) {
+    const stampW = coreW + STAMP_PAD * 2;
+    const stampH = coreH + STAMP_PAD * 2;
+    const stamp = document.createElement('canvas');
+    stamp.width = Math.max(1, Math.round(stampW * dpr));
+    stamp.height = Math.max(1, Math.round(stampH * dpr));
+    const sctx = stamp.getContext('2d');
+    sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    sctx.filter = `blur(${OCCLUDE_FEATHER}px)`;
+    sctx.fillStyle = '#000';
+    sctx.fillRect(STAMP_PAD, STAMP_PAD, coreW, coreH);
+    return { stamp, stampW, stampH };
+  }
 
   function measureOcclusionZones() {
     const scrollY = window.scrollY;
     occlusionZones = Array.from(document.querySelectorAll('[data-grid-occlude]')).map(el => {
       const r = el.getBoundingClientRect();
-      return { docTop: r.top + scrollY, left: r.left, width: r.width, height: r.height };
+      const coreW = r.width + OCCLUDE_MARGIN * 2;
+      const coreH = r.height + OCCLUDE_MARGIN * 2;
+      const { stamp, stampW, stampH } = buildOcclusionStamp(coreW, coreH);
+      return {
+        docTop: r.top + scrollY, left: r.left, width: r.width, height: r.height,
+        stamp, stampW, stampH,
+      };
     });
   }
   measureOcclusionZones();
@@ -1103,29 +1133,49 @@ if (pricingGrid) {
   // — a própria troca de idioma já dispara um 'resize' lógico aqui.
   window.addEventListener('la:languagechange', measureOcclusionZones);
   window.addEventListener('load', measureOcclusionZones);
+  // Fonte web pode terminar de carregar (e trocar largura/quebra de
+  // linha do texto) depois do 'load' — sem isso a zona ficava com o
+  // tamanho da fonte de fallback, pequena/deslocada demais.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(measureOcclusionZones);
+  }
 
   // Aplicado depois do path/branches, ainda dentro do clip da seção
   // (ver paintSurface): "apaga" o rastro já desenhado onde ele cruza uma
-  // zona de leitura, com borda de pena via ctx.filter blur + destination-
-  // out — a mesma técnica em ambos os canvases (DARK e LIGHT), sem
-  // duplicar lógica. Zonas fora da viewport atual são puladas (barato:
-  // é só uma comparação numérica, não uma medição).
+  // zona de leitura, compondo o carimbo pré-borrado com destination-out —
+  // a mesma técnica em ambos os canvases (DARK e LIGHT), sem duplicar
+  // lógica. Zonas fora da viewport atual são puladas (barato: é só uma
+  // comparação numérica, não uma medição).
   function occludeReadingZones(targetCtx) {
     if (!occlusionZones.length) return;
     const scrollY = window.scrollY;
     targetCtx.save();
     targetCtx.globalCompositeOperation = 'destination-out';
-    targetCtx.filter = `blur(${OCCLUDE_FEATHER}px)`;
-    targetCtx.fillStyle = '#000';
     for (const z of occlusionZones) {
-      const top = z.docTop - scrollY - OCCLUDE_MARGIN;
-      const left = z.left - OCCLUDE_MARGIN;
-      const w = z.width + OCCLUDE_MARGIN * 2;
-      const h = z.height + OCCLUDE_MARGIN * 2;
-      if (left > width || left + w < 0 || top > height || top + h < 0) continue;
-      targetCtx.fillRect(left, top, w, h);
+      const coreTop = z.docTop - scrollY - OCCLUDE_MARGIN;
+      const coreLeft = z.left - OCCLUDE_MARGIN;
+      const destLeft = coreLeft - STAMP_PAD;
+      const destTop = coreTop - STAMP_PAD;
+      if (destLeft > width || destLeft + z.stampW < 0 || destTop > height || destTop + z.stampH < 0) continue;
+      targetCtx.drawImage(z.stamp, destLeft, destTop, z.stampW, z.stampH);
     }
     targetCtx.restore();
+  }
+
+  // Posição de cada section.chapter-grid, medida uma vez (load/resize/
+  // troca de idioma) e guardada relativa ao documento — ver comentário
+  // completo em getInteractiveRects(), que consome este cache fazendo só
+  // aritmética por frame. Declarado antes de resize() pelo mesmo motivo
+  // do bloco de oclusão acima: resize() chama measureChapterGridZones()
+  // de forma síncrona logo abaixo.
+  let chapterGridZones = []; // { docTop, left, width, height, surface }
+
+  function measureChapterGridZones() {
+    const scrollY = window.scrollY;
+    chapterGridZones = Array.from(document.querySelectorAll('section.chapter-grid')).map(section => {
+      const r = section.getBoundingClientRect();
+      return { docTop: r.top + scrollY, left: r.left, width: r.width, height: r.height, surface: section.dataset.surface };
+    });
   }
 
   function sizeCanvas(el, elCtx) {
@@ -1142,9 +1192,12 @@ if (pricingGrid) {
     sizeCanvas(canvas, ctx);
     sizeCanvas(canvasLight, ctxLight);
     measureOcclusionZones();
+    measureChapterGridZones();
   }
   resize();
   window.addEventListener('resize', resize, { passive: true });
+  window.addEventListener('la:languagechange', measureChapterGridZones);
+  window.addEventListener('load', measureChapterGridZones);
 
   function pushNode(x, y, boost, bornOverride) {
     const born = bornOverride !== undefined ? bornOverride : performance.now();
@@ -1323,15 +1376,26 @@ if (pricingGrid) {
   // para superfícies sólidas/paper sem grid nem sobre o conteúdo (que já
   // vence o canvas via z-index/ordem do DOM). Sem isso, um canvas com
   // z-index positivo apareceria por cima de todo o resto.
+  //
+  // QA de estabilização (profiling real): esta função fazia
+  // querySelectorAll + getBoundingClientRect em toda section.chapter-grid
+  // da página A CADA FRAME (~250+ leituras de layout por segundo medidas
+  // na Home) — mesmo padrão de custo já resolvido no Grid Light
+  // Occlusion. Mesma solução: a posição de cada section é medida uma vez
+  // (load/resize/troca de idioma, ver measureChapterGridZones, declarada
+  // acima junto do resto do estado medido só em load/resize) e guardada
+  // relativa ao documento; cada frame só faz aritmética (docTop -
+  // scrollY), igual à oclusão.
   function getInteractiveRects() {
+    const scrollY = window.scrollY;
     const darkRects = [];
     const lightRects = [];
-    document.querySelectorAll('section.chapter-grid').forEach(section => {
-      const r = section.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < height && r.right > 0 && r.left < width) {
-        (section.dataset.surface === 'light' ? lightRects : darkRects).push(r);
+    for (const z of chapterGridZones) {
+      const top = z.docTop - scrollY;
+      if (top + z.height > 0 && top < height && z.left + z.width > 0 && z.left < width) {
+        (z.surface === 'light' ? lightRects : darkRects).push({ top, left: z.left, width: z.width, height: z.height });
       }
-    });
+    }
     return { darkRects, lightRects };
   }
 
@@ -1845,146 +1909,109 @@ function stEnterRecede(pos, i) {
 })();
 
 // ── Case Story Rail (cases.html, case Sartec) — desktop só ────────
-// Desafio/Solução/Resultado em narrativa de scroll: mesma física
-// compartilhada (stScrollPosition/stEnterRecede), mas os capítulos não
-// "cobrem" uns aos outros como fichas opacas — fazem crossfade no
-// mesmo lugar (presence = enter·(1-recede)), com um leve translateY de
-// entrada/saída (20–40px pedido), não a distância "fora da tela" dos
-// outros dois motores. Só liga no desktop (≥1025px): no mobile os três
-// capítulos já são painéis sólidos em fluxo normal com reveal via
-// .fade-up (ver lista mais acima) — nenhum JS extra precisa tocar neles.
+// QA de estabilização: a versão anterior calculava um progresso de
+// scroll contínuo por rAF (getBoundingClientRect a cada frame, mesmo
+// parada) para decidir o capítulo ativo — profiling real mostrou que
+// o custo dominante desta página nunca foi esse rAF, e sim o blur do
+// Grid Light Occlusion (ver occludeReadingZones em script.js), mas a
+// arquitetura em si também não permitia tabs clicáveis nem controle
+// direto do usuário. Substituída por: sticky (CSS) + 3 sensores de
+// 1px observados por um único IntersectionObserver — troca de
+// capítulo é um evento discreto (nenhum cálculo por frame), e as
+// abas 01/02/03 agora são <button role="tab"> reais, clicáveis e
+// navegáveis por teclado. Só liga no desktop (≥1025px): no mobile os
+// três capítulos já são painéis sólidos em fluxo normal com reveal
+// via .fade-up (ver lista mais acima) — nenhum JS extra precisa
+// tocar neles.
 (() => {
   const track = document.getElementById('caseStoryTrack');
   if (!track) return;
 
-  const stage = track.querySelector('.case-story__stage');
-  const panels = track.querySelector('.case-story__panels');
   const chapters = Array.from(track.querySelectorAll('.case-story__chapter'));
   const railItems = Array.from(track.querySelectorAll('.case-story__rail-item'));
   const railFill = track.querySelector('.case-story__rail-fill');
-  if (!stage || !panels || chapters.length === 0) return;
+  const sensors = Array.from(track.querySelectorAll('.case-story__sensor'));
+  if (chapters.length === 0) return;
 
   const N = chapters.length;
-  const HOLD = 0.3;
-  const TRANS = 0.16;
-  const ENTER_SHIFT_PX = 28; // "texto sobe 20-40px" pedido — mesmo valor pra entrada e saída
-
   const desktopQuery = window.matchMedia('(min-width: 1025px)');
+  // Mesmo critério dos outros dois motores (Projetos/Territórios): sticky
+  // (o palco fica fixo enquanto o resto da página rola por baixo dele) é
+  // o tipo de movimento que prefers-reduced-motion pede para desligar —
+  // sob reduced-motion cai no mesmo fallback do mobile (3 painéis sólidos
+  // em fluxo normal, sem JS tocando neles).
   const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   let enhanced = false;
-  let observing = false;
-  let rafId = null;
-  let resizeRafId = null;
-  let stageHeight = 0;
-  let activeIndex = -1;
+  let io = null;
+  let activeIndex = 0;
 
-  function eligible() {
-    return desktopQuery.matches && !reduceQuery.matches;
-  }
-
-  // Altura do palco = maior capítulo, medida de verdade (mesmo método
-  // usado nos outros dois motores) — nunca um valor arbitrário.
-  function measurePanelHeight() {
-    let maxH = 0;
-    chapters.forEach(ch => {
-      const h = ch.getBoundingClientRect().height;
-      if (h > maxH) maxH = h;
+  function setActive(i) {
+    activeIndex = i;
+    chapters.forEach((ch, idx) => {
+      ch.classList.toggle('is-active', idx === i);
     });
-    if (maxH > 0) panels.style.setProperty('--case-story-panel-h', `${Math.round(maxH)}px`);
-  }
-
-  function measure() {
-    measurePanelHeight();
-    stageHeight = stage.getBoundingClientRect().height;
-  }
-
-  function frame() {
-    rafId = null;
-    const rect = track.getBoundingClientRect();
-    const scrollable = rect.height - stageHeight;
-    const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
-    const pos = stScrollPosition(p, N, HOLD, TRANS);
-
-    for (let i = 0; i < N; i++) {
-      const { enter, recede, isCurrent } = stEnterRecede(pos, i);
-      const presence = enter * (1 - recede);
-      const translateY = (1 - enter) * ENTER_SHIFT_PX - recede * ENTER_SHIFT_PX;
-
-      const chapter = chapters[i];
-      chapter.style.opacity = presence.toFixed(3);
-      chapter.style.transform = `translateY(${translateY.toFixed(1)}px)`;
-      chapter.style.pointerEvents = presence > 0.5 ? 'auto' : 'none';
-      chapter.setAttribute('aria-hidden', String(!isCurrent));
+    railItems.forEach((btn, idx) => {
+      const isActive = idx === i;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+      btn.tabIndex = isActive ? 0 : -1;
+    });
+    if (railFill) {
+      const progress = N > 1 ? i / (N - 1) : 1;
+      railFill.style.transform = `scaleX(${progress})`;
     }
-
-    const roundedPos = Math.round(pos);
-    if (roundedPos !== activeIndex) {
-      activeIndex = roundedPos;
-      railItems.forEach((el, i) => el.classList.toggle('is-active', i === activeIndex));
-    }
-    const globalProgress = N > 1 ? pos / (N - 1) : 1;
-    if (railFill) railFill.style.transform = `scaleX(${Math.min(1, Math.max(0, globalProgress)).toFixed(3)})`;
-
-    if (enhanced && observing) rafId = requestAnimationFrame(frame);
   }
 
-  function startLoop() {
-    if (!rafId) rafId = requestAnimationFrame(frame);
-  }
-
-  const io = new IntersectionObserver(entries => {
+  function onIntersect(entries) {
     entries.forEach(entry => {
-      observing = entry.isIntersecting;
-      if (observing && enhanced) startLoop();
+      if (entry.isIntersecting) {
+        setActive(Number(entry.target.dataset.chapter));
+      }
     });
-  }, { rootMargin: '200px 0px 200px 0px' });
-
-  function resetInline() {
-    chapters.forEach(ch => {
-      ch.style.opacity = '';
-      ch.style.transform = '';
-      ch.style.pointerEvents = '';
-      ch.removeAttribute('aria-hidden');
-    });
-    railItems.forEach(el => el.classList.remove('is-active'));
-    if (railFill) railFill.style.transform = '';
-    activeIndex = -1;
   }
 
   function enable() {
     if (enhanced) return;
     enhanced = true;
     track.classList.add('is-enhanced');
-    measure();
-    startLoop();
+    setActive(activeIndex);
+    if (sensors.length && !io) {
+      io = new IntersectionObserver(onIntersect, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      sensors.forEach(s => io.observe(s));
+    }
   }
 
   function disable() {
     if (!enhanced) return;
     enhanced = false;
     track.classList.remove('is-enhanced');
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-    resetInline();
+    if (io) { io.disconnect(); io = null; }
+    // Fora do modo enhanced, .is-active não tem efeito visual (o CSS que
+    // esconde capítulos só existe dentro de .is-enhanced), mas limpamos
+    // os atributos ARIA para não descrever um estado de abas inexistente.
+    railItems.forEach(btn => { btn.removeAttribute('aria-selected'); btn.removeAttribute('tabindex'); });
+  }
+
+  function eligible() {
+    return desktopQuery.matches && !reduceQuery.matches;
   }
 
   function sync() {
     if (eligible()) enable(); else disable();
-    if (enhanced) measure();
   }
 
-  window.addEventListener('resize', () => {
-    if (resizeRafId) return;
-    resizeRafId = requestAnimationFrame(() => {
-      resizeRafId = null;
-      sync();
-      if (enhanced) startLoop();
+  railItems.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      setActive(i);
+      const sensor = sensors[i];
+      if (sensor && eligible()) {
+        sensor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     });
-  }, { passive: true });
+  });
 
   desktopQuery.addEventListener('change', sync);
   reduceQuery.addEventListener('change', sync);
-
-  io.observe(track);
   sync();
 })();
