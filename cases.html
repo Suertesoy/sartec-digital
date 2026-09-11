@@ -63,10 +63,13 @@
   </header>
 
   <main>
-    <!-- ═══ Intro — off-white: abertura editorial da página ═══ -->
-    <section class="section page-intro chapter-paper" id="cases-page">
+    <!-- ═══ Intro — QA visual: virou DARK+grid+rastro (era off-white
+         chapado, "não participava da assinatura visual" da Home). Mesma
+         identidade do Hero/território escuro em vez de uma página que
+         começa "fora do sistema". ═══ -->
+    <section class="section page-intro chapter-grid" id="cases-page">
       <div class="container">
-        <header class="section__head">
+        <header class="section__head" data-grid-occlude>
           <span class="tag" data-i18n="tagProjects">Projetos</span>
           <h1 data-i18n="casesPageHeading">Projetos que mostram como pensamos.</h1>
           <p data-i18n="projectsDesc">De uma operação reorganizada de ponta a ponta a um produto digital desenhado do zero, a L A Cabral parte do problema — não do formato da entrega.</p>
@@ -82,10 +85,12 @@
       <div class="container">
 
         <div class="case-hero">
-          <div class="case-hero__text">
+          <div class="case-hero__text" data-grid-occlude>
             <span class="tag" data-i18n="ecosystemSectionTag">Case · Sartec Papelaria</span>
             <div class="case-hero__brand">
-              <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="case-hero__logo" />
+              <span class="case-hero__logo-plate">
+                <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="case-hero__logo" />
+              </span>
               <span class="case-hero__divider" aria-hidden="true"></span>
               <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
             </div>
@@ -130,21 +135,41 @@
           </div>
         </div>
 
-        <div class="case-narrative">
-          <div class="case-narrative__item">
-            <span class="case-narrative__num" aria-hidden="true">01</span>
-            <h3 data-i18n="caseChallengeLabel">Desafio</h3>
-            <p data-i18n="caseSartecChallenge">Com mais de 30 anos de operação e uma rotina sazonal pesada — principalmente na época de listas escolares —, a Sartec sempre dependeu de conversas manuais no balcão e no WhatsApp. Nos picos de demanda, pedidos chegavam por canais diferentes, sem organização entre quem perguntava, quem orçava e quem separava o material, e a direção não tinha visibilidade do andamento. O gargalo não era falta de site: era a ausência de um fluxo único entre a entrada do cliente, a triagem da demanda e a organização da equipe.</p>
-          </div>
-          <div class="case-narrative__item">
-            <span class="case-narrative__num" aria-hidden="true">02</span>
-            <h3 data-i18n="caseSolutionLabel">Solução</h3>
-            <p data-i18n="caseSartecSolution">Desenhamos um ecossistema conectado: um site que apresenta a operação e direciona por lista escolar, um canal único de WhatsApp, uma camada de IA para triagem inicial e um painel interno que organiza conversas, pedidos e responsáveis — as sete partes implementadas como um fluxo único, não como entregas separadas.</p>
-          </div>
-          <div class="case-narrative__item">
-            <span class="case-narrative__num" aria-hidden="true">03</span>
-            <h3 data-i18n="caseResultLabel">Resultado</h3>
-            <p data-i18n="caseSartecResult">A equipe passou a atender por um canal único, com a triagem inicial já resolvida antes de chegar a um responsável — e a direção ganhou visão da fila de atendimento, sem precisar perguntar pessoa por pessoa.</p>
+        <!-- ═══ Case Story Rail (QA visual) — Desafio/Solução/Resultado
+             viram narrativa de scroll no desktop (rail + palco sticky com
+             UMA superfície de leitura sólida, capítulos em crossfade+leve
+             deslocamento — mesma física de stScrollPosition/stEnterRecede
+             já usada em Projetos/Territórios, sem duplicar a matemática).
+             Sem JS, mobile ou reduced-motion: os três capítulos ficam em
+             fluxo normal, cada um seu próprio painel sólido, com reveal
+             progressivo via o mesmo IntersectionObserver de .fade-up já
+             usado no resto do site (nenhum mecanismo novo). Conteúdo
+             idêntico ao anterior — só a apresentação muda. ═══ -->
+        <div class="case-story__track" id="caseStoryTrack">
+          <div class="case-story__stage">
+            <nav class="case-story__rail" aria-hidden="true">
+              <span class="case-story__rail-item" data-chapter="0">01 <em data-i18n="caseChallengeLabel">Desafio</em></span>
+              <span class="case-story__rail-item" data-chapter="1">02 <em data-i18n="caseSolutionLabel">Solução</em></span>
+              <span class="case-story__rail-item" data-chapter="2">03 <em data-i18n="caseResultLabel">Resultado</em></span>
+              <span class="case-story__rail-line"><span class="case-story__rail-fill"></span></span>
+            </nav>
+            <div class="case-story__panels">
+              <article class="case-story__chapter" data-chapter="0">
+                <span class="case-story__num" aria-hidden="true">01</span>
+                <h3 data-i18n="caseChallengeLabel">Desafio</h3>
+                <p data-i18n="caseSartecChallenge">Com mais de 30 anos de operação e uma rotina sazonal pesada — principalmente na época de listas escolares —, a Sartec sempre dependeu de conversas manuais no balcão e no WhatsApp. Nos picos de demanda, pedidos chegavam por canais diferentes, sem organização entre quem perguntava, quem orçava e quem separava o material, e a direção não tinha visibilidade do andamento. O gargalo não era falta de site: era a ausência de um fluxo único entre a entrada do cliente, a triagem da demanda e a organização da equipe.</p>
+              </article>
+              <article class="case-story__chapter" data-chapter="1">
+                <span class="case-story__num" aria-hidden="true">02</span>
+                <h3 data-i18n="caseSolutionLabel">Solução</h3>
+                <p data-i18n="caseSartecSolution">Desenhamos um ecossistema conectado: um site que apresenta a operação e direciona por lista escolar, um canal único de WhatsApp, uma camada de IA para triagem inicial e um painel interno que organiza conversas, pedidos e responsáveis — as sete partes implementadas como um fluxo único, não como entregas separadas.</p>
+              </article>
+              <article class="case-story__chapter" data-chapter="2">
+                <span class="case-story__num" aria-hidden="true">03</span>
+                <h3 data-i18n="caseResultLabel">Resultado</h3>
+                <p data-i18n="caseSartecResult">A equipe passou a atender por um canal único, com a triagem inicial já resolvida antes de chegar a um responsável — e a direção ganhou visão da fila de atendimento, sem precisar perguntar pessoa por pessoa.</p>
+              </article>
+            </div>
           </div>
         </div>
 

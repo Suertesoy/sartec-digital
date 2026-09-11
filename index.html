@@ -114,57 +114,72 @@
          a linguagem certa (não três cards iguais) ═══ -->
     <section class="section territories chapter-grid" id="territorios" data-surface="light">
       <div class="container">
-        <header class="section__head">
+        <header class="section__head" data-grid-occlude>
           <span class="tag" data-i18n="approachTag">O que fazemos</span>
           <h2 data-i18n="approachHeading">Sites, produtos digitais e sistemas — cada um com a linguagem certa.</h2>
           <p data-i18n="approachIntro">Três territórios, um mesmo ponto de partida: entender o problema antes de escolher o formato.</p>
         </header>
 
-        <!-- QA visual (correção pontual): o grid ambiente não deve atravessar
-             o módulo denso (imagem + título + descrição) — só o número
-             respira direto no grid. .territory__plate é a "placa editorial"
-             sólida que fecha o resto do conteúdo por cima do ambiente. -->
-        <div class="territories-grid">
-          <article class="territory territory--web">
-            <span class="territory__num">01</span>
-            <div class="territory__plate">
-              <div class="territory__visual">
-                <img src="assets/capability-sites.jpg" alt="" loading="lazy" width="1000" height="750" />
-              </div>
-              <h3 data-i18n="territory1Title">Sites e experiências web</h3>
-              <p data-i18n="territory1Desc">Sites institucionais, landing pages, redesign, arquitetura da informação, UX/UI e direção visual — a porta de entrada feita para representar o porte da empresa.</p>
+        <!-- QA visual (rodada de refinamento): grid ambiente → .territory
+             (divisor de coluna) → .territory__card (container editorial
+             sólido) → número + .territory__plate (placa interna). No
+             mobile, script.js liga .territories-scroll__track.is-enhanced
+             e os quatro territórios viram scrollytelling (mesma física dos
+             Projetos, ver stScrollPosition/stEnterRecede) — no desktop
+             estes wrappers não existem para o layout (display:contents). -->
+        <div class="territories-scroll__track" id="territoriesScrollTrack">
+          <div class="territories-scroll__stage">
+            <div class="territories-grid">
+              <article class="territory territory--web">
+                <div class="territory__card">
+                  <span class="territory__num">01</span>
+                  <div class="territory__plate">
+                    <div class="territory__visual">
+                      <img src="assets/capability-sites.jpg" alt="" loading="lazy" width="1000" height="750" />
+                    </div>
+                    <h3 data-i18n="territory1Title">Sites e experiências web</h3>
+                    <p data-i18n="territory1Desc">Sites institucionais, landing pages, redesign, arquitetura da informação, UX/UI e direção visual — a porta de entrada feita para representar o porte da empresa.</p>
+                  </div>
+                </div>
+              </article>
+              <article class="territory territory--product">
+                <div class="territory__card">
+                  <span class="territory__num">02</span>
+                  <div class="territory__plate">
+                    <div class="territory__visual">
+                      <img src="assets/capability-produto.jpg" alt="" loading="lazy" width="1000" height="750" />
+                    </div>
+                    <h3 data-i18n="territory2Title">Produtos digitais</h3>
+                    <p data-i18n="territory2Desc">Aplicativos, MVPs, protótipos e produtos digitais — do desenho da experiência à evolução de produtos que já existem.</p>
+                  </div>
+                </div>
+              </article>
+              <article class="territory territory--systems">
+                <div class="territory__card">
+                  <span class="territory__num">03</span>
+                  <div class="territory__plate">
+                    <div class="territory__visual">
+                      <img src="assets/capability-sistemas.jpg" alt="" loading="lazy" width="1000" height="750" />
+                    </div>
+                    <h3 data-i18n="territory3Title">Sistemas, automação e IA</h3>
+                    <p data-i18n="territory3Desc">Sistemas internos, dashboards, automações, integrações e IA aplicada — quando a operação pede uma solução própria.</p>
+                  </div>
+                </div>
+              </article>
+              <article class="territory territory--acquisition">
+                <div class="territory__card">
+                  <span class="territory__num">04</span>
+                  <div class="territory__plate">
+                    <div class="territory__visual">
+                      <img src="assets/capability-aquisicao.jpg" alt="" loading="lazy" width="1000" height="750" />
+                    </div>
+                    <h3 data-i18n="territory4Title">Aquisição e conversão</h3>
+                    <p data-i18n="territory4Desc">Landing pages, qualificação, CRM, WhatsApp e automações conectadas — a estrutura entre o primeiro interesse e a oportunidade comercial.</p>
+                  </div>
+                </div>
+              </article>
             </div>
-          </article>
-          <article class="territory territory--product">
-            <span class="territory__num">02</span>
-            <div class="territory__plate">
-              <div class="territory__visual">
-                <img src="assets/capability-produto.jpg" alt="" loading="lazy" width="1000" height="750" />
-              </div>
-              <h3 data-i18n="territory2Title">Produtos digitais</h3>
-              <p data-i18n="territory2Desc">Aplicativos, MVPs, protótipos e produtos digitais — do desenho da experiência à evolução de produtos que já existem.</p>
-            </div>
-          </article>
-          <article class="territory territory--systems">
-            <span class="territory__num">03</span>
-            <div class="territory__plate">
-              <div class="territory__visual">
-                <img src="assets/capability-sistemas.jpg" alt="" loading="lazy" width="1000" height="750" />
-              </div>
-              <h3 data-i18n="territory3Title">Sistemas, automação e IA</h3>
-              <p data-i18n="territory3Desc">Sistemas internos, dashboards, automações, integrações e IA aplicada — quando a operação pede uma solução própria.</p>
-            </div>
-          </article>
-          <article class="territory territory--acquisition">
-            <span class="territory__num">04</span>
-            <div class="territory__plate">
-              <div class="territory__visual">
-                <img src="assets/capability-aquisicao.jpg" alt="" loading="lazy" width="1000" height="750" />
-              </div>
-              <h3 data-i18n="territory4Title">Aquisição e conversão</h3>
-              <p data-i18n="territory4Desc">Landing pages, qualificação, CRM, WhatsApp e automações conectadas — a estrutura entre o primeiro interesse e a oportunidade comercial.</p>
-            </div>
-          </article>
+          </div>
         </div>
 
         <div class="territories-cta">
@@ -348,7 +363,7 @@
          "nem tudo vira sistema") ═══ -->
     <section class="section pilot chapter-grid" id="como-pensamos" data-surface="light" data-paper="secondary">
       <div class="container pilot__wrap">
-        <div class="pilot__content">
+        <div class="pilot__content" data-grid-occlude>
           <span class="tag tag--amber" data-i18n="thinkingTag">Como pensamos</span>
           <h2 data-i18n="thinkingHeading">Não começamos pela ferramenta. Começamos pelo problema.</h2>
           <p data-i18n="thinkingDesc">Antes de escolher entre um site, um produto ou um sistema, entendemos o que está custando tempo, venda ou clareza. Mapeamos como a empresa funciona, como os clientes chegam e como as informações circulam — e só depois decidimos o formato certo: pode ser um redesign, um produto novo, uma automação ou, quando a operação pede, um sistema próprio.</p>
@@ -392,7 +407,7 @@
     <section class="section pilot chapter-grid" id="como-funciona">
       <div class="container">
         <div class="pilot__wrap">
-          <div class="pilot__content">
+          <div class="pilot__content" data-grid-occlude>
             <span class="tag tag--amber" data-i18n="tagMethod">Método de trabalho</span>
             <h2 data-i18n="howHeading">Como trabalhamos.</h2>
             <p data-i18n="homeHowSubtitle">Quatro fases, a partir do diagnóstico — não da ferramenta.</p>

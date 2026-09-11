@@ -827,6 +827,10 @@ function applyTranslations(lang) {
     const inner = item.querySelector('.faq-a__inner');
     if (panel && inner) panel.style.height = inner.offsetHeight + 'px';
   });
+
+  // PT/EN pode quebrar linha diferente — avisa quem precisa remedir
+  // geometria de texto (Grid Light Occlusion) sem acoplar os dois módulos.
+  window.dispatchEvent(new Event('la:languagechange'));
 }
 
 function getCurrentLang() {
@@ -932,7 +936,13 @@ const observer = new IntersectionObserver(
   { threshold: 0.08, rootMargin: '0px 0px -28px 0px' }
 );
 
-['.ba-row', '.eco-card', '.origin-card', '.pricing-card', '.pilot-step', '.territory', '.showcase-primary', '.showcase-secondary', '.commitment-item'].forEach(sel => {
+// .territory saiu desta lista: agora tem seu próprio motor de entrada no
+// mobile (scrollytelling, ver mais abaixo) — a classe .fade-up genérica
+// competiria com ele (os dois mexeriam na mesma opacidade/transform).
+// .case-story__chapter entrou: no mobile ele nunca é tocado por JS
+// (o Case Story Rail só liga no desktop, ≥1025px), então o reveal
+// genérico é seguro ali e evita um motor novo só para isso.
+['.ba-row', '.eco-card', '.origin-card', '.pricing-card', '.pilot-step', '.showcase-primary', '.showcase-secondary', '.commitment-item', '.case-story__chapter', '.eco-flow__node'].forEach(sel => {
   document.querySelectorAll(sel).forEach(el => {
     el.classList.add('fade-up');
     observer.observe(el);
@@ -1080,9 +1090,59 @@ if (pricingGrid) {
     height = window.innerHeight;
     sizeCanvas(canvas, ctx);
     sizeCanvas(canvasLight, ctxLight);
+    measureOcclusionZones();
   }
   resize();
   window.addEventListener('resize', resize, { passive: true });
+
+  // ── Grid Light Occlusion ────────────────────────────────────────
+  // Elementos marcados com data-grid-occlude (explícito, nunca h1/p
+  // genérico) definem zonas onde o RASTRO interativo precisa parar de
+  // aparecer — o grid estático de fundo continua. A leitura de
+  // getBoundingClientRect() só acontece aqui (load/resize/i18n change),
+  // nunca dentro do loop de desenho: guardamos a posição relativa ao
+  // documento (docTop) e cada frame só faz aritmética (docTop - scrollY)
+  // para achar a posição atual na viewport — sem medir DOM a cada frame.
+  const OCCLUDE_MARGIN = 18; // "margem de segurança" ao redor do texto
+  const OCCLUDE_FEATHER = 22; // raio do blur do destination-out — borda suave, não corte reto
+  let occlusionZones = []; // { docTop, left, width, height }
+
+  function measureOcclusionZones() {
+    const scrollY = window.scrollY;
+    occlusionZones = Array.from(document.querySelectorAll('[data-grid-occlude]')).map(el => {
+      const r = el.getBoundingClientRect();
+      return { docTop: r.top + scrollY, left: r.left, width: r.width, height: r.height };
+    });
+  }
+  measureOcclusionZones();
+  // Texto pode mudar de altura ao trocar PT/EN (quebra de linha diferente)
+  // — a própria troca de idioma já dispara um 'resize' lógico aqui.
+  window.addEventListener('la:languagechange', measureOcclusionZones);
+  window.addEventListener('load', measureOcclusionZones);
+
+  // Aplicado depois do path/branches, ainda dentro do clip da seção
+  // (ver paintSurface): "apaga" o rastro já desenhado onde ele cruza uma
+  // zona de leitura, com borda de pena via ctx.filter blur + destination-
+  // out — a mesma técnica em ambos os canvases (DARK e LIGHT), sem
+  // duplicar lógica. Zonas fora da viewport atual são puladas (barato:
+  // é só uma comparação numérica, não uma medição).
+  function occludeReadingZones(targetCtx) {
+    if (!occlusionZones.length) return;
+    const scrollY = window.scrollY;
+    targetCtx.save();
+    targetCtx.globalCompositeOperation = 'destination-out';
+    targetCtx.filter = `blur(${OCCLUDE_FEATHER}px)`;
+    targetCtx.fillStyle = '#000';
+    for (const z of occlusionZones) {
+      const top = z.docTop - scrollY - OCCLUDE_MARGIN;
+      const left = z.left - OCCLUDE_MARGIN;
+      const w = z.width + OCCLUDE_MARGIN * 2;
+      const h = z.height + OCCLUDE_MARGIN * 2;
+      if (left > width || left + w < 0 || top > height || top + h < 0) continue;
+      targetCtx.fillRect(left, top, w, h);
+    }
+    targetCtx.restore();
+  }
 
   function pushNode(x, y, boost, bornOverride) {
     const born = bornOverride !== undefined ? bornOverride : performance.now();
@@ -1322,6 +1382,8 @@ if (pricingGrid) {
       }
     }
 
+    occludeReadingZones(targetCtx);
+
     targetCtx.restore();
   }
 
@@ -1380,6 +1442,34 @@ if (pricingGrid) {
 // mobile ganha a mesma física de scrub, só com layout de card empilhado
 // (ver CSS, bloco "Mobile/tablet") em vez do grid lado a lado.
 //
+// Física compartilhada com o scrollytelling mobile de "O que fazemos"
+// (ver mais abaixo) — mesmas fórmulas, sem duplicar: uma trilha
+// repouso/transição vira uma posição contínua (0..N-1), que vira
+// enter/recede por item. Generalizada para N arbitrário (o código
+// original tinha B1..B4 fixos, corretos só para N=3 — item 4 nunca
+// seria alcançado); para N=3 com HOLD=0.24/TRANS=0.14 o resultado é
+// idêntico ao original (a soma 3·HOLD+2·TRANS já fechava em 1.0).
+function stScrollPosition(p, N, HOLD, TRANS) {
+  if (N < 2) return 0;
+  const total = N * HOLD + (N - 1) * TRANS;
+  const t = Math.max(0, Math.min(1, p)) * total;
+  for (let i = 0; i < N - 1; i++) {
+    const holdEnd = i * (HOLD + TRANS) + HOLD;
+    const transEnd = holdEnd + TRANS;
+    if (t <= holdEnd) return i;
+    if (t <= transEnd) return i + (t - holdEnd) / TRANS;
+  }
+  return N - 1;
+}
+function stEnterRecede(pos, i) {
+  const delta = pos - i;
+  return {
+    enter: Math.min(1, Math.max(0, delta + 1)),
+    recede: Math.min(1, Math.max(0, delta)),
+    isCurrent: Math.abs(delta) < 0.5,
+  };
+}
+//
 // Cada .proj-scroll__item é uma ficha completa (número, texto, tags,
 // CTA e mockup juntos) que se move como UMA unidade — não texto e
 // mockup em camadas separadas. A ficha que entra sobe de
@@ -1421,25 +1511,18 @@ if (pricingGrid) {
   // os repousos ocupam a maior parte, as transições são curtas.
   const HOLD = 0.24;
   const TRANS = 0.14;
-  const B1 = HOLD;
-  const B2 = B1 + TRANS;
-  const B3 = B2 + HOLD;
-  const B4 = B3 + TRANS;
 
-  function continuousPosition(p) {
-    if (N < 2) return 0;
-    if (p <= B1) return 0;
-    if (p <= B2) return (p - B1) / TRANS;
-    if (p <= B3) return 1;
-    if (p <= B4) return 1 + (p - B3) / TRANS;
-    return 2;
-  }
-
-  // Física da ficha: entra de baixo (translateY 100%→0%, % da própria
-  // altura — some sob a janela graças ao overflow:hidden do stage).
-  // A ficha coberta recebe só uma reação secundária discreta.
-  const ENTER_OFFSET = 100;
-  const RECEDE_SHIFT = 6;
+  // QA visual (correção pontual) — a distância de entrada NÃO pode ser
+  // "100% da altura do próprio card": quando o card tem altura diferente
+  // da janela real (stage-inner, ver containerHeight), ele não anda o
+  // suficiente para sair completamente da área visível antes de "iniciar"
+  // a entrada — ficava parcialmente visível esperando a vez. A distância
+  // agora é em PIXELS, baseada na altura real do palco (containerHeight)
+  // + uma margem de segurança, então o topo do card sempre para, no
+  // repouso "abaixo", pelo menos SAFETY_GAP px depois da borda inferior
+  // real da janela — nunca dentro dela, não importa a altura do card.
+  const SAFETY_GAP = 32;
+  const RECEDE_SHIFT_PX = 22;
   const RECEDE_SCALE = 0.985;
   const ENTER_OPACITY_FROM_DESKTOP = 0.92;
   const ENTER_OPACITY_FROM_MOBILE = 1;
@@ -1453,6 +1536,7 @@ if (pricingGrid) {
   let rafId = null;
   let resizeRafId = null;
   let stageHeight = 0;
+  let containerHeight = 0;
   let currentFlags = items.map(() => null);
 
   function eligible() {
@@ -1488,6 +1572,10 @@ if (pricingGrid) {
   function measure() {
     stageHeight = stage.getBoundingClientRect().height;
     if (!desktopQuery.matches) measureMobileCardHeight();
+    // Depois de measureMobileCardHeight() (que já pode ter escrito uma
+    // nova altura no mobile) para refletir o valor atual em qualquer
+    // largura — no desktop já é o min(72vh,600px) fixo do CSS.
+    containerHeight = stageInner.getBoundingClientRect().height;
   }
 
   function frame() {
@@ -1497,27 +1585,23 @@ if (pricingGrid) {
     const rect = track.getBoundingClientRect();
     const scrollable = rect.height - stageHeight;
     const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
-    const pos = continuousPosition(p);
+    const pos = stScrollPosition(p, N, HOLD, TRANS);
     const enterOpacityFrom = desktopQuery.matches ? ENTER_OPACITY_FROM_DESKTOP : ENTER_OPACITY_FROM_MOBILE;
+    const offstage = containerHeight + SAFETY_GAP;
 
     for (let i = 0; i < N; i++) {
-      const delta = pos - i;
-      // 0 → ainda abaixo da janela; 1 → já encaixou no lugar.
-      const enter = Math.min(1, Math.max(0, delta + 1));
-      // 0 → em repouso; 1 → totalmente coberta pela próxima ficha.
-      const recede = Math.min(1, Math.max(0, delta));
+      const { enter, recede, isCurrent } = stEnterRecede(pos, i);
 
-      const translateY = (1 - enter) * ENTER_OFFSET - recede * RECEDE_SHIFT;
+      const translateY = (1 - enter) * offstage - recede * RECEDE_SHIFT_PX;
       const scale = 1 - recede * (1 - RECEDE_SCALE);
       const enterOpacity = enterOpacityFrom + enter * (1 - enterOpacityFrom);
       const opacity = enterOpacity * (1 - recede * (1 - RECEDE_OPACITY_TO));
 
       const item = items[i];
-      item.style.transform = `translateY(${translateY.toFixed(2)}%) scale(${scale.toFixed(3)})`;
+      item.style.transform = `translateY(${translateY.toFixed(1)}px) scale(${scale.toFixed(3)})`;
       const opacityStr = opacity.toFixed(3);
       contentEls[i].forEach(el => { el.style.opacity = opacityStr; });
 
-      const isCurrent = Math.abs(delta) < 0.5;
       if (currentFlags[i] !== isCurrent) {
         currentFlags[i] = isCurrent;
         setInteractive(items[i], isCurrent);
@@ -1560,6 +1644,316 @@ if (pricingGrid) {
     // Quem vem depois sempre cobre quem veio antes, nos dois sentidos
     // do scroll — ordem fixa, não recalculada a cada frame.
     items.forEach((it, i) => { it.style.zIndex = String(i); });
+    measure();
+    startLoop();
+  }
+
+  function disable() {
+    if (!enhanced) return;
+    enhanced = false;
+    track.classList.remove('is-enhanced');
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    resetInline();
+  }
+
+  function sync() {
+    if (eligible()) enable(); else disable();
+    if (enhanced) measure();
+  }
+
+  window.addEventListener('resize', () => {
+    if (resizeRafId) return;
+    resizeRafId = requestAnimationFrame(() => {
+      resizeRafId = null;
+      sync();
+      if (enhanced) startLoop();
+    });
+  }, { passive: true });
+
+  desktopQuery.addEventListener('change', sync);
+  reduceQuery.addEventListener('change', sync);
+
+  io.observe(track);
+  sync();
+})();
+
+// ── "O que fazemos" (Home) — scrollytelling mobile só ─────────────
+// Mesma física dos Projetos acima (stScrollPosition/stEnterRecede
+// compartilhadas, sem duplicar a matemática), mas só liga abaixo de
+// 1025px: no desktop os quatro territórios continuam lado a lado, e os
+// wrappers .territories-scroll__track/__stage nem existem para o layout
+// (display:contents, ver CSS) até esta classe ligar. Item = .territory
+// (fundo opaco fica nele, ver CSS is-enhanced); conteúdo que recebe
+// fade no recede = .territory__card (a casca interna, transparente
+// neste modo — só o item por trás tem cor, então opacity<1 no card
+// nunca "vaza" nada por trás dele).
+(() => {
+  const track = document.getElementById('territoriesScrollTrack');
+  if (!track) return;
+
+  const stage = track.querySelector('.territories-scroll__stage');
+  const stageInner = track.querySelector('.territories-grid');
+  const items = Array.from(track.querySelectorAll('.territory'));
+  if (!stage || !stageInner || items.length === 0) return;
+
+  const cards = items.map(it => it.querySelector('.territory__card'));
+  const N = items.length;
+
+  const HOLD = 0.26;
+  const TRANS = 0.16;
+  const SAFETY_GAP = 32;
+  const RECEDE_SHIFT_PX = 18;
+  const RECEDE_SCALE = 0.985;
+  // Entra 100% opaco desde o início do slide (mesmo motivo do mobile dos
+  // Projetos): translúcido por cima do território anterior, ainda
+  // parado por baixo, lia como "nascer de dentro" dele.
+  const ENTER_OPACITY_FROM = 1;
+  const RECEDE_OPACITY_TO = 0.88;
+
+  const mobileQuery = window.matchMedia('(max-width: 1024px)');
+  const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  let enhanced = false;
+  let observing = false;
+  let rafId = null;
+  let resizeRafId = null;
+  let stageHeight = 0;
+  let containerHeight = 0;
+  let currentFlags = items.map(() => null);
+
+  function eligible() {
+    return mobileQuery.matches && !reduceQuery.matches;
+  }
+
+  function setInteractive(item, isCurrent) {
+    item.setAttribute('aria-hidden', String(!isCurrent));
+    item.querySelectorAll('a').forEach(a => {
+      if (isCurrent) a.removeAttribute('tabindex');
+      else a.setAttribute('tabindex', '-1');
+    });
+  }
+
+  // Altura real do maior território (não um valor arbitrário) — mesmo
+  // método de measureMobileCardHeight() acima: cada .territory é
+  // position:absolute sem "bottom"/height definidos, então a altura
+  // renderizada já é a de conteúdo.
+  function measureCardHeight() {
+    let maxH = 0;
+    items.forEach(it => {
+      const h = it.getBoundingClientRect().height;
+      if (h > maxH) maxH = h;
+    });
+    const cap = stageHeight || maxH;
+    stageInner.style.setProperty('--terr-mobile-card-h', `${Math.round(Math.min(maxH, cap))}px`);
+  }
+
+  function measure() {
+    stageHeight = stage.getBoundingClientRect().height;
+    measureCardHeight();
+    containerHeight = stageInner.getBoundingClientRect().height;
+  }
+
+  function frame() {
+    rafId = null;
+    const rect = track.getBoundingClientRect();
+    const scrollable = rect.height - stageHeight;
+    const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
+    const pos = stScrollPosition(p, N, HOLD, TRANS);
+    const offstage = containerHeight + SAFETY_GAP;
+
+    for (let i = 0; i < N; i++) {
+      const { enter, recede, isCurrent } = stEnterRecede(pos, i);
+
+      const translateY = (1 - enter) * offstage - recede * RECEDE_SHIFT_PX;
+      const scale = 1 - recede * (1 - RECEDE_SCALE);
+      const enterOpacity = ENTER_OPACITY_FROM + enter * (1 - ENTER_OPACITY_FROM);
+      const opacity = enterOpacity * (1 - recede * (1 - RECEDE_OPACITY_TO));
+
+      const item = items[i];
+      item.style.transform = `translateY(${translateY.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+      if (cards[i]) cards[i].style.opacity = opacity.toFixed(3);
+
+      if (currentFlags[i] !== isCurrent) {
+        currentFlags[i] = isCurrent;
+        setInteractive(item, isCurrent);
+      }
+    }
+
+    if (enhanced && observing) rafId = requestAnimationFrame(frame);
+  }
+
+  function startLoop() {
+    if (!rafId) rafId = requestAnimationFrame(frame);
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      observing = entry.isIntersecting;
+      if (observing && enhanced) startLoop();
+    });
+  }, { rootMargin: '200px 0px 200px 0px' });
+
+  function resetInline() {
+    items.forEach((it, i) => {
+      it.style.transform = '';
+      it.style.zIndex = '';
+      it.removeAttribute('aria-hidden');
+      it.querySelectorAll('a').forEach(a => a.removeAttribute('tabindex'));
+      if (cards[i]) cards[i].style.opacity = '';
+    });
+    currentFlags = items.map(() => null);
+  }
+
+  function enable() {
+    if (enhanced) return;
+    enhanced = true;
+    track.classList.add('is-enhanced');
+    items.forEach((it, i) => { it.style.zIndex = String(i); });
+    measure();
+    startLoop();
+  }
+
+  function disable() {
+    if (!enhanced) return;
+    enhanced = false;
+    track.classList.remove('is-enhanced');
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    resetInline();
+  }
+
+  function sync() {
+    if (eligible()) enable(); else disable();
+    if (enhanced) measure();
+  }
+
+  window.addEventListener('resize', () => {
+    if (resizeRafId) return;
+    resizeRafId = requestAnimationFrame(() => {
+      resizeRafId = null;
+      sync();
+      if (enhanced) startLoop();
+    });
+  }, { passive: true });
+
+  mobileQuery.addEventListener('change', sync);
+  reduceQuery.addEventListener('change', sync);
+
+  io.observe(track);
+  sync();
+})();
+
+// ── Case Story Rail (cases.html, case Sartec) — desktop só ────────
+// Desafio/Solução/Resultado em narrativa de scroll: mesma física
+// compartilhada (stScrollPosition/stEnterRecede), mas os capítulos não
+// "cobrem" uns aos outros como fichas opacas — fazem crossfade no
+// mesmo lugar (presence = enter·(1-recede)), com um leve translateY de
+// entrada/saída (20–40px pedido), não a distância "fora da tela" dos
+// outros dois motores. Só liga no desktop (≥1025px): no mobile os três
+// capítulos já são painéis sólidos em fluxo normal com reveal via
+// .fade-up (ver lista mais acima) — nenhum JS extra precisa tocar neles.
+(() => {
+  const track = document.getElementById('caseStoryTrack');
+  if (!track) return;
+
+  const stage = track.querySelector('.case-story__stage');
+  const panels = track.querySelector('.case-story__panels');
+  const chapters = Array.from(track.querySelectorAll('.case-story__chapter'));
+  const railItems = Array.from(track.querySelectorAll('.case-story__rail-item'));
+  const railFill = track.querySelector('.case-story__rail-fill');
+  if (!stage || !panels || chapters.length === 0) return;
+
+  const N = chapters.length;
+  const HOLD = 0.3;
+  const TRANS = 0.16;
+  const ENTER_SHIFT_PX = 28; // "texto sobe 20-40px" pedido — mesmo valor pra entrada e saída
+
+  const desktopQuery = window.matchMedia('(min-width: 1025px)');
+  const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  let enhanced = false;
+  let observing = false;
+  let rafId = null;
+  let resizeRafId = null;
+  let stageHeight = 0;
+  let activeIndex = -1;
+
+  function eligible() {
+    return desktopQuery.matches && !reduceQuery.matches;
+  }
+
+  // Altura do palco = maior capítulo, medida de verdade (mesmo método
+  // usado nos outros dois motores) — nunca um valor arbitrário.
+  function measurePanelHeight() {
+    let maxH = 0;
+    chapters.forEach(ch => {
+      const h = ch.getBoundingClientRect().height;
+      if (h > maxH) maxH = h;
+    });
+    if (maxH > 0) panels.style.setProperty('--case-story-panel-h', `${Math.round(maxH)}px`);
+  }
+
+  function measure() {
+    measurePanelHeight();
+    stageHeight = stage.getBoundingClientRect().height;
+  }
+
+  function frame() {
+    rafId = null;
+    const rect = track.getBoundingClientRect();
+    const scrollable = rect.height - stageHeight;
+    const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
+    const pos = stScrollPosition(p, N, HOLD, TRANS);
+
+    for (let i = 0; i < N; i++) {
+      const { enter, recede, isCurrent } = stEnterRecede(pos, i);
+      const presence = enter * (1 - recede);
+      const translateY = (1 - enter) * ENTER_SHIFT_PX - recede * ENTER_SHIFT_PX;
+
+      const chapter = chapters[i];
+      chapter.style.opacity = presence.toFixed(3);
+      chapter.style.transform = `translateY(${translateY.toFixed(1)}px)`;
+      chapter.style.pointerEvents = presence > 0.5 ? 'auto' : 'none';
+      chapter.setAttribute('aria-hidden', String(!isCurrent));
+    }
+
+    const roundedPos = Math.round(pos);
+    if (roundedPos !== activeIndex) {
+      activeIndex = roundedPos;
+      railItems.forEach((el, i) => el.classList.toggle('is-active', i === activeIndex));
+    }
+    const globalProgress = N > 1 ? pos / (N - 1) : 1;
+    if (railFill) railFill.style.transform = `scaleX(${Math.min(1, Math.max(0, globalProgress)).toFixed(3)})`;
+
+    if (enhanced && observing) rafId = requestAnimationFrame(frame);
+  }
+
+  function startLoop() {
+    if (!rafId) rafId = requestAnimationFrame(frame);
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      observing = entry.isIntersecting;
+      if (observing && enhanced) startLoop();
+    });
+  }, { rootMargin: '200px 0px 200px 0px' });
+
+  function resetInline() {
+    chapters.forEach(ch => {
+      ch.style.opacity = '';
+      ch.style.transform = '';
+      ch.style.pointerEvents = '';
+      ch.removeAttribute('aria-hidden');
+    });
+    railItems.forEach(el => el.classList.remove('is-active'));
+    if (railFill) railFill.style.transform = '';
+    activeIndex = -1;
+  }
+
+  function enable() {
+    if (enhanced) return;
+    enhanced = true;
+    track.classList.add('is-enhanced');
     measure();
     startLoop();
   }
