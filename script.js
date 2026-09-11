@@ -316,16 +316,21 @@ const I18N = {
     contractingHeading: `Como funciona o início de um projeto`,
     pricingDesc: `Cada projeto começa com uma conversa sem compromisso. O escopo é definido depois de entendermos sua operação — não antes.`,
 
+    contractingGroup1: `Antes de começar`,
     contracting1Title: `Diagnóstico gratuito`,
     contracting1Desc: `Começamos com uma conversa sem compromisso para entender sua operação e indicar o melhor caminho.`,
     contracting2Title: `Escopo definido junto`,
     contracting2Desc: `O que entra no projeto é alinhado com você antes de qualquer proposta.`,
     contracting3Title: `Proposta personalizada`,
     contracting3Desc: `Cada proposta é montada conforme o escopo, a complexidade e as necessidades específicas do projeto.`,
+
+    contractingGroup2: `Durante o projeto`,
     contracting4Title: `Implementação com escopo fechado`,
     contracting4Desc: `Cobre o desenho e a construção da solução até a primeira entrega, dentro do escopo combinado.`,
     contracting5Title: `Mensalidade quando há operação contínua`,
     contracting5Desc: `Projetos com automações, painéis ou infraestrutura ativa contam com uma mensalidade para manter a operação funcionando.`,
+
+    contractingGroup3: `Depois da entrega`,
     contracting6Title: `Escopo fechado ou acompanhamento contínuo`,
     contracting6Desc: `Alguns projetos terminam na entrega. Outros contam com acompanhamento e evolução contratados à parte.`,
     contracting7Title: `Treinamento quando aplicável`,
@@ -699,16 +704,21 @@ const I18N = {
     contractingHeading: `How a project gets started`,
     pricingDesc: `Every project starts with a no-commitment conversation. Scope is defined after we understand your operation — not before.`,
 
+    contractingGroup1: `Before we start`,
     contracting1Title: `Free diagnosis`,
     contracting1Desc: `We start with a no-commitment conversation to understand your operation and point you to the best path.`,
     contracting2Title: `Scope defined together`,
     contracting2Desc: `What's included in the project is aligned with you before any proposal.`,
     contracting3Title: `Personalized proposal`,
     contracting3Desc: `Each proposal is built according to the scope, complexity and specific needs of the project.`,
+
+    contractingGroup2: `During the project`,
     contracting4Title: `Implementation with a closed scope`,
     contracting4Desc: `Covers the design and build work up to the first delivery, within the agreed scope.`,
     contracting5Title: `Monthly fee for ongoing operation`,
     contracting5Desc: `Projects with automation, dashboards or active infrastructure include a monthly fee to keep the operation running.`,
+
+    contractingGroup3: `After delivery`,
     contracting6Title: `Closed scope or ongoing support`,
     contracting6Desc: `Some projects end at delivery. Others include ongoing support and evolution contracted separately.`,
     contracting7Title: `Training when applicable`,
@@ -922,7 +932,7 @@ const observer = new IntersectionObserver(
   { threshold: 0.08, rootMargin: '0px 0px -28px 0px' }
 );
 
-['.ba-row', '.eco-card', '.origin-card', '.pricing-card', '.pilot-step', '.territory', '.showcase-primary', '.showcase-secondary'].forEach(sel => {
+['.ba-row', '.eco-card', '.origin-card', '.pricing-card', '.pilot-step', '.territory', '.showcase-primary', '.showcase-secondary', '.commitment-item'].forEach(sel => {
   document.querySelectorAll(sel).forEach(el => {
     el.classList.add('fade-up');
     observer.observe(el);
@@ -1203,11 +1213,19 @@ if (pricingGrid) {
     startLoop();
   }
 
-  function drawSegment(x1, y1, x2, y2, alphaFrom, alphaTo) {
+  // DARK: fundo absorve luz, o cursor revela branco/luz suave (fade-out
+  // pálido perto do ponteiro). LIGHT: fundo reflete luz, o cursor revela
+  // o verde da marca — inversão semântica, não matemática (ver nota em
+  // "Material B" no CSS). Mesma geometria/física de path e branches para
+  // os dois; só a paleta muda por retângulo (ver paintSurface abaixo).
+  const PALETTE_DARK = { from: '74,222,128', to: '190,242,210', shadow: 'rgba(34,197,94,0.4)', blur: 3, scale: 1 };
+  const PALETTE_LIGHT = { from: '21,128,61', to: '34,197,94', shadow: 'rgba(21,128,61,0.22)', blur: 2, scale: 0.8 };
+
+  function drawSegment(x1, y1, x2, y2, alphaFrom, alphaTo, palette) {
     if (x1 === x2 && y1 === y2) return;
     const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
-    gradient.addColorStop(0, `rgba(74,222,128,${alphaFrom})`);
-    gradient.addColorStop(1, `rgba(190,242,210,${alphaTo})`);
+    gradient.addColorStop(0, `rgba(${palette.from},${alphaFrom})`);
+    gradient.addColorStop(1, `rgba(${palette.to},${alphaTo})`);
     ctx.strokeStyle = gradient;
     ctx.beginPath();
     ctx.moveTo(x1, y1);
@@ -1218,39 +1236,27 @@ if (pricingGrid) {
   // O canvas é global (position:fixed, cobre a viewport inteira) e
   // pinta com z-index:1 — acima do fundo+grid estático de qualquer
   // section.chapter-grid, mas o mesmo elemento não pode saber, só por
-  // CSS, onde é "grid verde" e onde é capítulo claro/sólido. Por isso
-  // cada frame recorta o desenho aos retângulos das .chapter-grid
-  // atualmente visíveis: nada é desenhado fora deles, então o trail
-  // nunca vaza para superfícies off-white/sólidas nem sobre o conteúdo
-  // (que já vence o canvas via z-index/ordem do DOM). Sem isso, um
-  // canvas com z-index positivo apareceria por cima de todo o resto.
+  // CSS, onde é "grid verde/dark" e onde é "grid claro/light" ou
+  // capítulo sólido. Por isso cada frame recorta o desenho aos
+  // retângulos das .chapter-grid atualmente visíveis, separados por
+  // data-surface: nada é desenhado fora deles, então o trail nunca vaza
+  // para superfícies sólidas/paper sem grid nem sobre o conteúdo (que já
+  // vence o canvas via z-index/ordem do DOM). Sem isso, um canvas com
+  // z-index positivo apareceria por cima de todo o resto.
   function getInteractiveRects() {
-    const rects = [];
+    const darkRects = [];
+    const lightRects = [];
     document.querySelectorAll('section.chapter-grid').forEach(section => {
       const r = section.getBoundingClientRect();
       if (r.bottom > 0 && r.top < height && r.right > 0 && r.left < width) {
-        rects.push(r);
+        (section.dataset.surface === 'light' ? lightRects : darkRects).push(r);
       }
     });
-    return rects;
+    return { darkRects, lightRects };
   }
 
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
+  function paintSurface(rects, palette) {
     const now = performance.now();
-
-    path = path.filter(node => now - node.t < node.life);
-    branches = branches.filter(b => now - b.born < b.life);
-
-    const rects = getInteractiveRects();
-    if (rects.length === 0) {
-      if (path.length > 1 || branches.length > 0) {
-        rafId = requestAnimationFrame(draw);
-      } else {
-        rafId = null;
-      }
-      return;
-    }
 
     ctx.save();
     ctx.beginPath();
@@ -1258,8 +1264,8 @@ if (pricingGrid) {
     ctx.clip();
 
     ctx.lineWidth = 1.3;
-    ctx.shadowColor = 'rgba(34,197,94,0.4)';
-    ctx.shadowBlur = 3;
+    ctx.shadowColor = palette.shadow;
+    ctx.shadowBlur = palette.blur;
 
     for (let i = 0; i < path.length - 1; i++) {
       const a = path[i];
@@ -1278,27 +1284,48 @@ if (pricingGrid) {
       if (ageA > a.life && ageB > b.life) continue;
 
       const boost = (a.boost + b.boost) / 2;
-      const fadeA = Math.max(0, 1 - ageA / a.life) * 0.16 * boost;
-      const fadeB = Math.max(0, 1 - ageB / b.life) * 0.4 * boost;
+      const fadeA = Math.max(0, 1 - ageA / a.life) * 0.16 * boost * palette.scale;
+      const fadeB = Math.max(0, 1 - ageB / b.life) * 0.4 * boost * palette.scale;
       if (fadeA <= 0.01 && fadeB <= 0.01) continue;
 
-      drawSegment(a.x, a.y, b.x, b.y, fadeA, fadeB);
+      drawSegment(a.x, a.y, b.x, b.y, fadeA, fadeB, palette);
     }
 
     for (const br of branches) {
       const age = now - br.born;
       const t = age / br.life;
-      const alpha = Math.sin(Math.PI * t) * br.peak;
+      const alpha = Math.sin(Math.PI * t) * br.peak * palette.scale;
       if (alpha <= 0.01) continue;
 
       if (br.axis === 'h') {
-        drawSegment(br.p1, br.fixed, br.p2, br.fixed, alpha * 0.7, alpha);
+        drawSegment(br.p1, br.fixed, br.p2, br.fixed, alpha * 0.7, alpha, palette);
       } else {
-        drawSegment(br.fixed, br.p1, br.fixed, br.p2, alpha * 0.7, alpha);
+        drawSegment(br.fixed, br.p1, br.fixed, br.p2, alpha * 0.7, alpha, palette);
       }
     }
 
     ctx.restore();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    const now = performance.now();
+
+    path = path.filter(node => now - node.t < node.life);
+    branches = branches.filter(b => now - b.born < b.life);
+
+    const { darkRects, lightRects } = getInteractiveRects();
+    if (darkRects.length === 0 && lightRects.length === 0) {
+      if (path.length > 1 || branches.length > 0) {
+        rafId = requestAnimationFrame(draw);
+      } else {
+        rafId = null;
+      }
+      return;
+    }
+
+    if (darkRects.length) paintSurface(darkRects, PALETTE_DARK);
+    if (lightRects.length) paintSurface(lightRects, PALETTE_LIGHT);
 
     if (path.length > 1 || branches.length > 0) {
       rafId = requestAnimationFrame(draw);
