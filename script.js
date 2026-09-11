@@ -1017,15 +1017,23 @@ if (pricingGrid) {
 })();
 
 // ── Global grid energy trail effect ─────────────────────────────
+// Dois canvases globais (não um por seção/card): .grid-trails (DARK,
+// mix-blend-mode:screen, inalterado) e .grid-trails-light (LIGHT,
+// mix-blend-mode:multiply — ver comentário em styles.css sobre por que
+// um único blend mode não serve os dois fundos). Mesmo path/branches,
+// mesmos listeners, mesmo loop de rAF — só o passe final de desenho
+// escreve no contexto certo por retângulo.
 (() => {
   const canvas = document.querySelector('.grid-trails');
-  if (!canvas) return;
+  const canvasLight = document.querySelector('.grid-trails-light');
+  if (!canvas || !canvasLight) return;
 
   const canUsePointerEffect = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!canUsePointerEffect || reduceMotion) return;
 
   const ctx = canvas.getContext('2d');
+  const ctxLight = canvasLight.getContext('2d');
   const GRID = 72;
   const PRIMARY_LIFE_MIN = 950;
   const PRIMARY_LIFE_MAX = 1400;
@@ -1059,14 +1067,19 @@ if (pricingGrid) {
   let lastScrollY = window.scrollY;
   let rafId = null;
 
+  function sizeCanvas(el, elCtx) {
+    el.width = Math.round(width * dpr);
+    el.height = Math.round(height * dpr);
+    el.style.width = `${width}px`;
+    el.style.height = `${height}px`;
+    elCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
   function resize() {
     width = window.innerWidth;
     height = window.innerHeight;
-    canvas.width = Math.round(width * dpr);
-    canvas.height = Math.round(height * dpr);
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    sizeCanvas(canvas, ctx);
+    sizeCanvas(canvasLight, ctxLight);
   }
   resize();
   window.addEventListener('resize', resize, { passive: true });
@@ -1214,27 +1227,32 @@ if (pricingGrid) {
   }
 
   // DARK: fundo absorve luz, o cursor revela branco/luz suave (fade-out
-  // pálido perto do ponteiro). LIGHT: fundo reflete luz, o cursor revela
-  // o verde da marca — inversão semântica, não matemática (ver nota em
-  // "Material B" no CSS). Mesma geometria/física de path e branches para
-  // os dois; só a paleta muda por retângulo (ver paintSurface abaixo).
+  // pálido perto do ponteiro), pintado em .grid-trails (mix-blend-mode:
+  // screen). LIGHT: fundo reflete luz, o cursor revela o verde da marca,
+  // pintado em .grid-trails-light (mix-blend-mode:multiply) — inversão
+  // semântica, não matemática (ver nota em "Material B" no CSS). Mesma
+  // geometria/física de path e branches para os dois; paleta + canvas de
+  // destino mudam por retângulo (ver paintSurface abaixo). Alphas do
+  // LIGHT recalibrados para o novo blend: "multiply" precisa de mais
+  // alpha que "screen" para o mesmo grau de presença perceptível, porque
+  // ele mistura com a cor de fundo em vez de somar luz.
   const PALETTE_DARK = { from: '74,222,128', to: '190,242,210', shadow: 'rgba(34,197,94,0.4)', blur: 3, scale: 1 };
-  const PALETTE_LIGHT = { from: '21,128,61', to: '34,197,94', shadow: 'rgba(21,128,61,0.22)', blur: 2, scale: 0.8 };
+  const PALETTE_LIGHT = { from: '13,110,60', to: '22,163,74', shadow: 'rgba(13,110,60,0.3)', blur: 1, scale: 1.5 };
 
-  function drawSegment(x1, y1, x2, y2, alphaFrom, alphaTo, palette) {
+  function drawSegment(targetCtx, x1, y1, x2, y2, alphaFrom, alphaTo, palette) {
     if (x1 === x2 && y1 === y2) return;
-    const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+    const gradient = targetCtx.createLinearGradient(x1, y1, x2, y2);
     gradient.addColorStop(0, `rgba(${palette.from},${alphaFrom})`);
     gradient.addColorStop(1, `rgba(${palette.to},${alphaTo})`);
-    ctx.strokeStyle = gradient;
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
+    targetCtx.strokeStyle = gradient;
+    targetCtx.beginPath();
+    targetCtx.moveTo(x1, y1);
+    targetCtx.lineTo(x2, y2);
+    targetCtx.stroke();
   }
 
-  // O canvas é global (position:fixed, cobre a viewport inteira) e
-  // pinta com z-index:1 — acima do fundo+grid estático de qualquer
+  // Os canvases são globais (position:fixed, cobrem a viewport inteira) e
+  // pintam com z-index:1 — acima do fundo+grid estático de qualquer
   // section.chapter-grid, mas o mesmo elemento não pode saber, só por
   // CSS, onde é "grid verde/dark" e onde é "grid claro/light" ou
   // capítulo sólido. Por isso cada frame recorta o desenho aos
@@ -1255,17 +1273,17 @@ if (pricingGrid) {
     return { darkRects, lightRects };
   }
 
-  function paintSurface(rects, palette) {
+  function paintSurface(targetCtx, rects, palette) {
     const now = performance.now();
 
-    ctx.save();
-    ctx.beginPath();
-    rects.forEach(r => ctx.rect(r.left, r.top, r.width, r.height));
-    ctx.clip();
+    targetCtx.save();
+    targetCtx.beginPath();
+    rects.forEach(r => targetCtx.rect(r.left, r.top, r.width, r.height));
+    targetCtx.clip();
 
-    ctx.lineWidth = 1.3;
-    ctx.shadowColor = palette.shadow;
-    ctx.shadowBlur = palette.blur;
+    targetCtx.lineWidth = 1.3;
+    targetCtx.shadowColor = palette.shadow;
+    targetCtx.shadowBlur = palette.blur;
 
     for (let i = 0; i < path.length - 1; i++) {
       const a = path[i];
@@ -1284,31 +1302,32 @@ if (pricingGrid) {
       if (ageA > a.life && ageB > b.life) continue;
 
       const boost = (a.boost + b.boost) / 2;
-      const fadeA = Math.max(0, 1 - ageA / a.life) * 0.16 * boost * palette.scale;
-      const fadeB = Math.max(0, 1 - ageB / b.life) * 0.4 * boost * palette.scale;
+      const fadeA = Math.min(1, Math.max(0, 1 - ageA / a.life) * 0.16 * boost * palette.scale);
+      const fadeB = Math.min(1, Math.max(0, 1 - ageB / b.life) * 0.4 * boost * palette.scale);
       if (fadeA <= 0.01 && fadeB <= 0.01) continue;
 
-      drawSegment(a.x, a.y, b.x, b.y, fadeA, fadeB, palette);
+      drawSegment(targetCtx, a.x, a.y, b.x, b.y, fadeA, fadeB, palette);
     }
 
     for (const br of branches) {
       const age = now - br.born;
       const t = age / br.life;
-      const alpha = Math.sin(Math.PI * t) * br.peak * palette.scale;
+      const alpha = Math.min(1, Math.sin(Math.PI * t) * br.peak * palette.scale);
       if (alpha <= 0.01) continue;
 
       if (br.axis === 'h') {
-        drawSegment(br.p1, br.fixed, br.p2, br.fixed, alpha * 0.7, alpha, palette);
+        drawSegment(targetCtx, br.p1, br.fixed, br.p2, br.fixed, alpha * 0.7, alpha, palette);
       } else {
-        drawSegment(br.fixed, br.p1, br.fixed, br.p2, alpha * 0.7, alpha, palette);
+        drawSegment(targetCtx, br.fixed, br.p1, br.fixed, br.p2, alpha * 0.7, alpha, palette);
       }
     }
 
-    ctx.restore();
+    targetCtx.restore();
   }
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
+    ctxLight.clearRect(0, 0, width, height);
     const now = performance.now();
 
     path = path.filter(node => now - node.t < node.life);
@@ -1324,8 +1343,8 @@ if (pricingGrid) {
       return;
     }
 
-    if (darkRects.length) paintSurface(darkRects, PALETTE_DARK);
-    if (lightRects.length) paintSurface(lightRects, PALETTE_LIGHT);
+    if (darkRects.length) paintSurface(ctx, darkRects, PALETTE_DARK);
+    if (lightRects.length) paintSurface(ctxLight, lightRects, PALETTE_LIGHT);
 
     if (path.length > 1 || branches.length > 0) {
       rafId = requestAnimationFrame(draw);
@@ -1355,8 +1374,11 @@ if (pricingGrid) {
 // controla essas propriedades: a posição do scroll É a timeline (se o
 // usuário parar em 42% de uma transição, os elementos ficam exatamente
 // em 42%; rolar de volta reverte na mesma proporção).
-// Só ativa (.is-enhanced) em desktop e sem prefers-reduced-motion —
-// fora disso o HTML base (empilhado, sem JS) já é o resultado final.
+// Ativa (.is-enhanced) em qualquer largura, sem prefers-reduced-motion —
+// só sem JS (ou com reduced-motion) o HTML base (empilhado) é o
+// resultado final. QA visual: deixou de ser exclusivo de desktop — o
+// mobile ganha a mesma física de scrub, só com layout de card empilhado
+// (ver CSS, bloco "Mobile/tablet") em vez do grid lado a lado.
 //
 // Cada .proj-scroll__item é uma ficha completa (número, texto, tags,
 // CTA e mockup juntos) que se move como UMA unidade — não texto e
@@ -1366,15 +1388,20 @@ if (pricingGrid) {
 // nos dois sentidos do scroll); a ficha que está sendo coberta recebe
 // só uma reação secundária discreta (leve translateY negativo + scale
 // levemente para baixo) — ela nunca desaparece antes de ser coberta.
-// Fade existe só como acabamento na entrada (0.92→1), nunca como
-// mecanismo principal da troca.
+// Fade na entrada existe só no desktop (0.92→1), como acabamento — no
+// mobile a ficha entra 100% opaca desde o início do slide (ver
+// ENTER_OPACITY_FROM_MOBILE): translúcida por cima da ficha anterior
+// (ainda visível, parada, por baixo) dava a sensação de "nascer de
+// dentro" dela, que a rodada pediu para eliminar especificamente no
+// mobile — o desktop preserva a física original, intocada.
 (() => {
   const track = document.getElementById('projScrollTrack');
   if (!track) return;
 
   const stage = track.querySelector('.proj-scroll__stage');
+  const stageInner = track.querySelector('.proj-scroll__stage-inner');
   const items = Array.from(track.querySelectorAll('.proj-scroll__item'));
-  if (!stage || items.length === 0) return;
+  if (!stage || !stageInner || items.length === 0) return;
 
   // Opacity vai no CONTEÚDO (painel + coluna do visual), nunca no item
   // inteiro: o item carrega o fundo opaco da ficha (a "capa" que cobre
@@ -1414,7 +1441,8 @@ if (pricingGrid) {
   const ENTER_OFFSET = 100;
   const RECEDE_SHIFT = 6;
   const RECEDE_SCALE = 0.985;
-  const ENTER_OPACITY_FROM = 0.92;
+  const ENTER_OPACITY_FROM_DESKTOP = 0.92;
+  const ENTER_OPACITY_FROM_MOBILE = 1;
   const RECEDE_OPACITY_TO = 0.88;
 
   const desktopQuery = window.matchMedia('(min-width: 1025px)');
@@ -1428,7 +1456,7 @@ if (pricingGrid) {
   let currentFlags = items.map(() => null);
 
   function eligible() {
-    return desktopQuery.matches && !reduceQuery.matches;
+    return !reduceQuery.matches;
   }
 
   function setInteractive(item, isCurrent) {
@@ -1439,8 +1467,27 @@ if (pricingGrid) {
     });
   }
 
+  // Mobile: a altura do card não é um valor arbitrário — é o maior
+  // conteúdo natural entre os três projetos, medido de verdade (cada
+  // .proj-scroll__item é position:absolute mas sem "bottom"/height
+  // definidos, então a altura renderizada já é a altura de conteúdo,
+  // mesmo posicionado). Escrita em --proj-mobile-card-h (CSS lê com
+  // fallback) e limitada à altura do palco, para nunca pedir mais
+  // espaço do que a viewport tem disponível. Desktop não precisa disso:
+  // a moldura já é dimensionada em vh/px fixos (ver CSS).
+  function measureMobileCardHeight() {
+    let maxH = 0;
+    items.forEach(it => {
+      const h = it.getBoundingClientRect().height;
+      if (h > maxH) maxH = h;
+    });
+    const cap = stageHeight || maxH;
+    stageInner.style.setProperty('--proj-mobile-card-h', `${Math.round(Math.min(maxH, cap))}px`);
+  }
+
   function measure() {
     stageHeight = stage.getBoundingClientRect().height;
+    if (!desktopQuery.matches) measureMobileCardHeight();
   }
 
   function frame() {
@@ -1451,6 +1498,7 @@ if (pricingGrid) {
     const scrollable = rect.height - stageHeight;
     const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
     const pos = continuousPosition(p);
+    const enterOpacityFrom = desktopQuery.matches ? ENTER_OPACITY_FROM_DESKTOP : ENTER_OPACITY_FROM_MOBILE;
 
     for (let i = 0; i < N; i++) {
       const delta = pos - i;
@@ -1461,7 +1509,7 @@ if (pricingGrid) {
 
       const translateY = (1 - enter) * ENTER_OFFSET - recede * RECEDE_SHIFT;
       const scale = 1 - recede * (1 - RECEDE_SCALE);
-      const enterOpacity = ENTER_OPACITY_FROM + enter * (1 - ENTER_OPACITY_FROM);
+      const enterOpacity = enterOpacityFrom + enter * (1 - enterOpacityFrom);
       const opacity = enterOpacity * (1 - recede * (1 - RECEDE_OPACITY_TO));
 
       const item = items[i];

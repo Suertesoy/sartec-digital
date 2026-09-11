@@ -2,6 +2,18 @@
    L A CABRAL — Site institucional
    ═══════════════════════════════════════════════ */
 
+/* Registro de tipo para a luz de contorno dos cards de projeto (ver
+   .proj-scroll__item::after) — sem @property, um custom property animado
+   não interpola (o navegador não sabe que é um ângulo), a "volta" pulava
+   em vez de girar suavemente. Sem suporte (navegador antigo): o círculo
+   fica parado no ângulo inicial, que já é a borda estática pedida para
+   prefers-reduced-motion — degradação aceitável, não um efeito quebrado. */
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 /* ── TOKENS ───────────────────────────────────── */
 :root {
   --bg:            #0D1B16;
@@ -75,6 +87,17 @@
   --paper-line:  rgba(23, 24, 26, 0.12);
   --paper-line-2: rgba(23, 24, 26, 0.07);
 
+  /* QA visual — dois materiais claros para que territórios LIGHT vizinhos
+     leiam como capítulos diferentes sem depender de comparar pixels.
+     --paper-primary é o --paper de sempre (off-white limpo, registro
+     "índice"); --paper-secondary é stone/linho — mais quente e um pouco
+     mais escuro (registro "manifesto/reflexivo"). Consumidos por
+     section.chapter-grid[data-surface="light"][data-paper="secondary"]
+     (ver Material B). Não é gradiente por seção — a própria cor sustenta
+     a diferença; o gradiente interno de cada uma só dá profundidade. */
+  --chapter-grid-grad-light-secondary: linear-gradient(180deg, #ECE6D8 0%, #E8E2D2 55%, #E3DDCB 100%);
+  --plate: #FCFBF7; /* "placa editorial" — superfície sólida sobre módulos densos, ver .territory__plate */
+
   /* Gradiente verde profundo de section.chapter-grid — também
      reaproveitado pelas fichas do scrollytelling de Projetos (cada
      .proj-scroll__item precisa do próprio fundo opaco, do mesmo
@@ -136,14 +159,34 @@ body::before {
   mix-blend-mode: screen;
 }
 
+/* QA visual (correção pontual) — causa raiz da interação LIGHT quase
+   invisível: mix-blend-mode:screen só tem efeito visível contra um fundo
+   ESCURO (screen(bg,fg) = 1-(1-bg)(1-fg) — quando bg já está perto de 1,
+   como o território LIGHT, (1-bg) é minúsculo e a fórmula mal se move,
+   não importa a cor/alpha escolhida — é um teto matemático, não falta de
+   opacidade). Não existe forma de um único elemento com um único
+   mix-blend-mode servir bem os dois fundos ao mesmo tempo, então o
+   rastro LIGHT ganha um segundo canvas global (não por card/seção —
+   script.js continua com um só conjunto de listeners/rAF, só desenha em
+   dois contextos) com mix-blend-mode:multiply, que é o inverso correto:
+   sempre escurece um fundo claro em direção à cor (tinta verde sobre o
+   papel), do mesmo jeito que "screen" sempre clareia um fundo escuro. */
+.grid-trails-light {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
 @media (hover: none), (pointer: coarse) {
-  .grid-trails {
+  .grid-trails, .grid-trails-light {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .grid-trails {
+  .grid-trails, .grid-trails-light {
     display: none;
   }
 }
@@ -756,20 +799,28 @@ section.chapter-grid {
 .chapter-grid > * { position: relative; z-index: 1; }
 
 /* Material B · manifestação LIGHT — mesmo mecanismo (gradiente de fundo +
-   grid estático via ::before + canvas.grid-trails clicado por cima),
-   token/cor invertidos semanticamente, não matematicamente: no escuro o
-   fundo absorve luz e o cursor revela branco/luz suave (ver PALETTE_DARK
-   em script.js); aqui o fundo reflete luz e o cursor revela o verde da
-   marca (PALETTE_LIGHT). getInteractiveRects() em script.js já separa os
-   retângulos por data-surface para pintar cada um com sua paleta —
-   nenhum canvas novo, nenhum listener novo. */
+   grid estático via ::before + canvas.grid-trails-light clicado por
+   cima, ver .grid-trails-light acima), token/cor invertidos
+   semanticamente, não matematicamente: no escuro o fundo absorve luz e o
+   cursor revela branco/luz suave (ver PALETTE_DARK em script.js); aqui o
+   fundo reflete luz e o cursor revela o verde da marca (PALETTE_LIGHT).
+   getInteractiveRects() em script.js já separa os retângulos por
+   data-surface para pintar cada um, num canvas próprio (ver nota em
+   .grid-trails-light) — nenhum listener novo, nenhum canvas por seção. */
 section.chapter-grid[data-surface="light"] {
   background: var(--chapter-grid-grad-light);
 }
+section.chapter-grid[data-surface="light"][data-paper="secondary"] {
+  background: var(--chapter-grid-grad-light-secondary);
+}
 section.chapter-grid[data-surface="light"]::before {
+  /* QA visual: 0.06 quase sumia dependendo do monitor — subiu para 0.1,
+     ainda abaixo do equivalente DARK (0.065 sobre fundo bem mais escuro
+     já lê mais forte por contraste), mas perceptível como estrutura
+     ambiental sem virar papel milimetrado. */
   background-image:
-    linear-gradient(rgba(23, 24, 26, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 24, 26, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(23, 24, 26, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 24, 26, 0.1) 1px, transparent 1px);
 }
 
 /* Material C · .chapter-solid — verde profundo sólido, sem grid
@@ -804,24 +855,36 @@ section.chapter-solid {
 
 .territory {
   position: relative;
-  padding: 30px 26px 8px;
+  padding: 30px 26px 24px;
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--border);
 }
 .territory:first-child { border-left: none; }
 
-/* Numeração discreta com função de índice — precede a imagem, não o
-   título, para ler como marcador de seção ("01 — ") e não como enfeite
-   dentro do card. */
+/* Numeração discreta com função de índice — respira direto no grid
+   ambiente (não é filha de .territory__plate), lê como marcador de
+   seção ("01 — "), não como enfeite dentro de uma caixa. */
 .territory__num {
-  order: -1;
   font-size: 26px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--green);
   margin-bottom: 14px;
   font-variant-numeric: tabular-nums;
+}
+
+/* "Placa editorial" (QA visual — correção pontual): bloqueia o grid
+   ambiente atrás do módulo denso (imagem + título + descrição). Não é
+   volta ao card antigo — sem sombra, sem elevação/hover, radius coerente
+   com o resto do sistema, --plate quase-branco (não branco puro nem
+   igual a --paper, para ler como objeto colocado sobre o ambiente). */
+.territory__plate {
+  flex: 1;
+  background: var(--plate);
+  border: 1px solid var(--paper-line-2);
+  border-radius: var(--r-lg);
+  padding: 16px 16px 20px;
 }
 .territory h3 { font-size: 18px; margin-bottom: 8px; color: var(--paper-ink); }
 .territory p  { font-size: 13.5px; line-height: 1.62; color: var(--paper-ink-2); }
@@ -942,14 +1005,20 @@ section.chapter-solid {
 .proj-scroll__foot { margin-top: 8px; }
 .proj-scroll .projects-seeall { text-align: center; margin-top: 0; }
 
-/* ══ Enhanced (desktop, sem prefers-reduced-motion) — classe ligada só
-   por JS; nada aqui depende de media query sozinha para ativar. ══ */
+/* ══ Enhanced (scrub por scroll, sem prefers-reduced-motion) — classe
+   ligada só por JS. QA visual: deixou de ser exclusivo de desktop —
+   script.js agora liga em qualquer largura (ver eligible() em
+   script.js); o que muda por breakpoint é só o layout interno do card
+   (grid lado a lado no desktop, pilha vertical no mobile — blocos
+   "desktop" e "mobile" mais abaixo). Base aqui é o que os dois modos
+   compartilham: posição, fundo opaco, cantos arredondados e a luz de
+   contorno. ══ */
 .proj-scroll__track.is-enhanced { height: var(--proj-track-h, 300vh); }
 
 .proj-scroll__track.is-enhanced .proj-scroll__stage {
   position: sticky;
-  top: 84px;
-  height: calc(100svh - 84px);
+  top: 76px;
+  height: calc(100svh - 76px);
   display: flex;
   align-items: center;
   padding: 0;
@@ -959,18 +1028,20 @@ section.chapter-solid {
 .proj-scroll__track.is-enhanced .proj-scroll__stage-inner {
   position: relative;
   width: 100%;
-  height: min(72vh, 600px);
   padding-bottom: 0;
   gap: 0;
-  /* A janela real da ficha é esta caixa (72vh/600px), não o palco
-     sticky por fora dela (mais alto, só para centralizar verticalmente
-     enquanto gruda na viewport) — sem este overflow:hidden aqui, uma
-     ficha em translateY(100%) (ver script.js) ficaria parcialmente
-     visível nas margens acima/abaixo desta caixa dentro do palco mais
-     alto, em vez de sumir completamente "fora da parte inferior da
-     janela". Seguro: esta caixa não é ancestral de nada sticky (o
-     sticky é o próprio .proj-scroll__stage, um nível acima). */
+  /* A janela real da ficha é esta caixa, não o palco sticky por fora
+     dela (mais alto, só para centralizar verticalmente enquanto gruda
+     na viewport) — sem este overflow:hidden aqui, uma ficha em
+     translateY(100%) (ver script.js) ficaria parcialmente visível nas
+     margens acima/abaixo desta caixa dentro do palco mais alto, em vez
+     de sumir completamente "fora da parte inferior da janela". Seguro:
+     esta caixa não é ancestral de nada sticky (o sticky é o próprio
+     .proj-scroll__stage, um nível acima). Altura mobile é escrita por
+     script.js em --proj-mobile-card-h (ver measure()); o valor abaixo é
+     só o fallback antes do primeiro cálculo/sem JS. */
   overflow: hidden;
+  height: var(--proj-mobile-card-h, 560px);
 }
 
 /* Cada .proj-scroll__item é uma ficha física completa (número, texto,
@@ -982,70 +1053,170 @@ section.chapter-solid {
    seria transparente e o projeto de baixo continuaria visível por
    trás, quebrando a sensação de substituição física. z-index é
    escrito por script.js (estático, crescente por índice: quem vem
-   depois sempre cobre quem veio antes, nos dois sentidos do scroll). */
-/* Gutter interno da ficha (Verificação DARK/LIGHT — correção pontual):
-   o item preenche a ficha inteira (inset:0) e as colunas nasciam coladas
-   na borda do próprio painel (sem padding nenhum) — o texto de Sartec/
-   UniEdu/Almeida encostava na borda esquerda do painel escuro. Um valor
-   só aqui, compartilhado pelos três projetos (nenhum ajuste individual
-   por case). Horizontal em clamp() porque .is-enhanced só liga a partir
-   de 1025px (ver desktopQuery em script.js) — a largura de viewport
-   nesse modo varia bastante, e um valor fixo ou ficaria apertado perto
-   de 1025px ou exagerado em telas muito largas. Vertical fixo: a altura
-   do palco já é orçada em min(72vh,600px) com a moldura em min(56vh,480px)
-   dentro dela — a folga entre as duas é o suficiente para este respiro
-   sem espremer a moldura. */
+   depois sempre cobre quem veio antes, nos dois sentidos do scroll).
+   QA visual: ganhou border-radius + overflow:hidden ("card/painel
+   completo", não retângulo recortado) — radius bem maior que --r-lg
+   porque o componente é enorme (quase a tela toda), um radius normal
+   somaria quase reto visualmente. */
 .proj-scroll__track.is-enhanced .proj-scroll__item {
   position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 42%) minmax(0, 58%);
-  align-items: center;
-  gap: 40px;
-  padding: 32px clamp(32px, 4vw, 64px);
+  top: 0;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 14%),
     var(--chapter-grid-grad);
+  border-radius: 28px;
+  overflow: hidden;
   will-change: transform, opacity;
   transition: none;
 }
 
-.proj-scroll__track.is-enhanced .proj-scroll__visual-wrap {
-  grid-column: 2;
-  grid-row: 1;
-  height: 100%;
-}
-.proj-scroll__track.is-enhanced .proj-scroll__panel { grid-column: 1; grid-row: 1; }
-.proj-scroll__track.is-enhanced .proj-scroll__frame { height: min(56vh, 480px); }
-
-.proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual {
+/* Luz percorrendo o contorno — assinatura extremamente sutil,
+   compartilhada pelos três projetos e pelos dois modos (um ::after só,
+   aqui, não duplicado por card). conic-gradient + mask-composite:exclude
+   formam um anel fino (~1.5px) que acompanha o border-radius com
+   perfeição via border-radius:inherit. 78% do anel fica quase invisível
+   (alpha 0.07) — só um trecho pequeno, mais claro, percorre o perímetro
+   devagar (18s, linear, sem pulsar, sem iluminar o interior). É
+   acabamento do objeto, não glow — por isso muito mais localizado que o
+   grid ambiente da seção (ver .grid-trails), que continua sendo a única
+   fonte de "energia" maior. pointer-events:none: nunca captura clique. */
+.proj-scroll__track.is-enhanced .proj-scroll__item::after {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    rgba(34, 197, 94, 0.07) 0%,
+    rgba(34, 197, 94, 0.07) 78%,
+    rgba(134, 239, 172, 0.95) 88%,
+    rgba(34, 197, 94, 0.07) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: proj-card-glow 18s linear infinite;
+}
+
+@keyframes proj-card-glow {
+  to { --border-angle: 360deg; }
+}
+
+.proj-scroll__track.is-enhanced .proj-scroll__panel {
+  transition: none;
+}
+.proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual {
   /* .browser-chrome/.phone-preview trazem transition:transform para o
      hover — aqui o JS escreve opacity/transform a cada frame e precisa
      de controle exclusivo, sem nenhuma transition suavizando por trás. */
   transition: none;
 }
-.proj-scroll__track.is-enhanced .proj-scroll__panel {
-  transition: none;
-}
-.proj-scroll__track.is-enhanced .proj-scroll__frame .browser-chrome.proj-scroll__visual {
-  width: 100%;
-  max-width: 560px;
-}
 
 .proj-scroll__track.is-enhanced .proj-scroll__ruler { display: block; }
 
+/* ── Desktop (≥1025px): layout lado a lado, física original preservada
+   integralmente — só radius/overflow/luz (acima) e top do stage (76px→
+   84px, cabeçalho desktop) mudam nesta rodada. ── */
+@media (min-width: 1025px) {
+  .proj-scroll__track.is-enhanced .proj-scroll__stage { top: 84px; height: calc(100svh - 84px); }
+  .proj-scroll__track.is-enhanced .proj-scroll__stage-inner { height: min(72vh, 600px); }
+
+  /* Gutter interno da ficha (rodada anterior): o texto de Sartec/UniEdu/
+     Almeida encostava na borda esquerda do painel. clamp() porque a
+     largura de viewport no modo desktop varia bastante. */
+  .proj-scroll__track.is-enhanced .proj-scroll__item {
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+    align-items: center;
+    gap: 40px;
+    padding: 32px clamp(32px, 4vw, 64px);
+  }
+  .proj-scroll__track.is-enhanced .proj-scroll__visual-wrap {
+    grid-column: 2;
+    grid-row: 1;
+    height: 100%;
+  }
+  .proj-scroll__track.is-enhanced .proj-scroll__panel { grid-column: 1; grid-row: 1; }
+  .proj-scroll__track.is-enhanced .proj-scroll__frame { height: min(56vh, 480px); }
+  .proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .proj-scroll__track.is-enhanced .proj-scroll__frame .browser-chrome.proj-scroll__visual {
+    width: 100%;
+    max-width: 560px;
+  }
+}
+
+/* ── Mobile/tablet (≤1024px): scrollytelling novo — mesma física de
+   scrub (script.js), card único empilhado (índice/título/descrição/
+   tags/status/CTA em cima do visual, mesma ordem do DOM/fallback base)
+   em vez do grid lado a lado. Altura do card não é arbitrária: é o
+   maior entre os três projetos, medido de verdade por script.js
+   (measure()) e escrito em --proj-mobile-card-h — nada é cortado para
+   caber numa altura fixa. ENTER_OPACITY_FROM=1 no JS para este modo
+   (ver script.js): o card entra 100% opaco desde o início do slide, por
+   isso nunca parece "nascer de dentro" do card anterior (que fica
+   embaixo, encoberto por um objeto opaco, não por um véu translúcido). */
+@media (max-width: 1024px) {
+  .proj-scroll__track.is-enhanced .proj-scroll__item {
+    padding: 22px 20px 20px;
+    gap: 16px;
+  }
+  .proj-scroll__track.is-enhanced .proj-scroll__visual-wrap {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Moldura compacta do mockup — o valor mínimo do clamp já é grande o
+     bastante para caber o browser-chrome (barra fixa + frame 4:3) e o
+     phone-preview (9:16) sem distorcer nenhum dos dois, ver overrides
+     logo abaixo. */
+  .proj-scroll__track.is-enhanced .proj-scroll__frame { height: clamp(175px, 25dvh, 210px); }
+  .proj-scroll__track.is-enhanced .proj-scroll__panel { flex: 1 1 auto; min-height: 0; }
+  .proj-scroll__track.is-enhanced .proj-scroll__desc { max-width: none; }
+  .proj-scroll__track.is-enhanced .proj-scroll__actions { flex-direction: column; align-items: stretch; }
+
+  /* Sartec/Almeida (browser-chrome): a regra desktop (width:100%;
+     max-width:560px) só existe dentro do @media(min-width:1025px) — sem
+     um valor próprio aqui o componente ficaria sem largura definida
+     neste breakpoint. 170px cabe com folga mesmo no piso do clamp
+     acima (barra ~40px + frame 4:3 a 170px ≈ 167px de altura). */
+  .proj-scroll__track.is-enhanced .proj-scroll__frame .browser-chrome.proj-scroll__visual {
+    width: 170px;
+  }
+  /* UniEdu (phone-preview): tem um único aspect-ratio (9/16) para o
+     componente inteiro, então basta amarrar a altura à moldura e deixar
+     a largura ser calculada — sempre cabe exatamente, em qualquer altura
+     do clamp acima, sem precisar coordenar dois números à mão. */
+  .proj-scroll__track.is-enhanced .proj-scroll__frame .phone-preview.proj-scroll__visual {
+    width: auto;
+    height: 100%;
+  }
+}
+
 /* prefers-reduced-motion: cinto de segurança em CSS — mesmo que algo
    force a classe, o palco nunca vira sticky/sobreposto para quem pediu
-   menos movimento (script.js já evita ligar .is-enhanced neste caso). */
+   menos movimento (script.js já evita ligar .is-enhanced neste caso). A
+   luz de contorno vira estática (sem animation) em vez de sumir — só a
+   borda base extremamente discreta permanece, conforme pedido. */
 @media (prefers-reduced-motion: reduce) {
   .proj-scroll__track.is-enhanced { height: auto; }
   .proj-scroll__track.is-enhanced .proj-scroll__stage { position: static; height: auto; }
   .proj-scroll__track.is-enhanced .proj-scroll__stage-inner { position: static; height: auto; display: flex; flex-direction: column; gap: 72px; }
-  .proj-scroll__track.is-enhanced .proj-scroll__item { position: static; display: flex; flex-direction: column; gap: 28px; opacity: 1 !important; transform: none !important; }
+  .proj-scroll__track.is-enhanced .proj-scroll__item { position: static; display: flex; flex-direction: column; gap: 28px; opacity: 1 !important; transform: none !important; border-radius: 20px; }
+  .proj-scroll__track.is-enhanced .proj-scroll__item::after { animation: none; }
   .proj-scroll__track.is-enhanced .proj-scroll__panel,
   .proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual { opacity: 1 !important; transform: none !important; }
   .proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual { position: relative; top: auto; left: auto; }
@@ -1972,61 +2143,78 @@ section.chapter-solid {
 /* ── FOOTER ───────────────────────────────────── */
 /* Quase-preto opaco — último degrau do encerramento (Material C), abaixo
    do CTA final. */
+/* QA visual (correção pontual) — o footer ocupava ~460px+ e lia como
+   mais uma seção, não um rodapé. Reorganizado em 3 colunas (marca /
+   dados institucionais / navegação) para usar a largura em vez da
+   altura, com uma linha legal única e compacta por baixo — mesma
+   informação, nada removido, densidade menor. Referência de percepção
+   (não requisito rígido): ~220–300px em vez de 450px+. */
 .footer {
   background: #060B09;
   border-top: 1px solid var(--border);
-  padding: 48px 0 0;
+  padding: 40px 0 0;
 }
 .footer__wrap {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 32px;
-  padding-bottom: 36px;
+  padding-bottom: 28px;
   border-bottom: 1px solid var(--border);
 }
-.footer__left { display: flex; flex-direction: column; gap: 10px; }
+.footer__left { display: flex; flex-direction: column; gap: 8px; flex: 1 1 240px; }
 
 /* Marca de encerramento — símbolo + wordmark num único asset (sem o
-   descritor "Soluções Digitais"), em escala maior que o header, para dar
-   presença de marca ao fechar a página. */
-.footer__brand { display: inline-block; margin-bottom: 6px; }
-.footer__brand-mark { height: 92px; width: auto; display: block; }
+   descritor "Soluções Digitais"). Ainda um pouco maior que o header
+   (52px vs 40px) para manter presença de marca ao fechar a página, mas
+   longe dos 92px originais — essa única mudança já devolvia boa parte
+   da altura excessiva do footer. */
+.footer__brand { display: inline-block; margin-bottom: 4px; }
+.footer__brand-mark { height: 52px; width: auto; display: block; }
 
 .footer__tagline { font-size: 13px; color: var(--text-3); max-width: 300px; line-height: 1.55; }
 
+/* Vira coluna própria (irmã de .footer__left/.footer__nav), não mais
+   bloco anexado embaixo da marca — por isso sem border-top/padding-top
+   próprios aqui; a régua horizontal de baixo (.footer__legal) já fecha
+   o bloco de cima inteiro. */
 .footer__contact {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-top: 4px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
+  gap: 3px;
+  flex: 0 1 220px;
 }
 .footer__contact p { font-size: 12px; color: var(--text-3); line-height: 1.5; }
 .footer__contact strong { color: var(--text-2); font-weight: 600; }
 .footer__contact a { color: var(--text-3); transition: color var(--t); }
 .footer__contact a:hover { color: var(--text-2); }
 
+/* Lista vertical (era wrap horizontal de pills) — cabe melhor como
+   terceira coluna estreita; om hover mais discreto, sem pill inteira. */
 .footer__nav {
-  display: flex; gap: 4px;
-  align-items: center; flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 }
 .footer__nav a {
-  padding: 6px 12px;
+  padding: 4px 8px;
+  margin-left: -8px;
   font-size: 13px; color: var(--text-3);
-  border-radius: var(--r-pill);
+  border-radius: var(--r-sm);
   transition: color var(--t), background var(--t);
 }
 .footer__nav a:hover { color: var(--text-2); background: rgba(255,255,255,0.04); }
 
-.footer__disclaimer { padding: 18px 0; border-top: 1px solid var(--border); }
-.footer__disclaimer p {
-  font-size: 11px; color: var(--text-3); line-height: 1.65; opacity: 0.7; max-width: 860px;
+/* Linha legal única e compacta (era .footer__disclaimer + .footer__bottom
+   em dois blocos separados, cada um com a própria régua/padding) —
+   mesmo texto, uma régua só, gap enxuto entre as duas linhas. */
+.footer__legal { padding: 14px 0 18px; }
+.footer__disclaimer {
+  font-size: 11px; color: var(--text-3); line-height: 1.6; opacity: 0.7; max-width: 860px; margin-bottom: 6px;
 }
-
-.footer__bottom { padding: 14px 0 20px; text-align: center; }
-.footer__bottom p { font-size: 11px; color: var(--text-3); opacity: 0.4; }
+.footer__bottom { font-size: 11px; color: var(--text-3); opacity: 0.4; }
 
 /* ── WHATSAPP FLOAT ───────────────────────────── */
 .wa-float {
@@ -2819,12 +3007,19 @@ main h1:not(.hero__title) {
     border-top: 1px solid var(--border);
     padding-top: 14px;
   }
+  /* Base desktop virou coluna vertical (ver regra sem media query) — aqui
+     volta a ser a fileira de pills centralizada que o mobile já tinha. */
   .footer__nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
     width: 100%;
+    gap: 4px;
   }
-  .footer__disclaimer p {
-    margin: 0 auto;
+  .footer__nav a { padding: 6px 12px; margin-left: 0; border-radius: var(--r-pill); }
+  .footer__disclaimer {
+    margin: 0 auto 6px;
     text-align: center;
   }
 

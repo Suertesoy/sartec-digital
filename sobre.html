@@ -29,6 +29,7 @@
 <body>
 
   <canvas class="grid-trails" aria-hidden="true"></canvas>
+  <canvas class="grid-trails-light" aria-hidden="true"></canvas>
 
   <!-- ═══ HEADER (manter em sincronia com todas as outras páginas) ═══ -->
   <header class="header" id="header">
@@ -66,7 +67,7 @@
     <!-- ═══ Origem do método — off-white: página mais humana do site,
          favorece superfícies editoriais (ver diretriz de capítulos
          para Sobre) ═══ -->
-    <section class="section origin-section page-intro chapter-grid" id="origem" data-surface="light">
+    <section class="section origin-section page-intro chapter-grid" id="origem" data-surface="light" data-paper="secondary">
       <div class="container">
         <header class="section__head">
           <span class="tag" data-i18n="tagOrigin">Origem do método</span>
@@ -235,16 +236,16 @@
         </a>
         <p class="footer__tagline" data-i18n="footerTagline">Organizamos operações com software, automação e IA — a partir do problema, não da ferramenta.</p>
         <p class="footer__authorship" data-i18n="footerAuthorship">Conduzida por Lucas Cabral.</p>
-        <div class="footer__contact">
-          <p><strong>L A CABRAL LTDA</strong></p>
-          <p>CNPJ: 68.528.047/0001-66</p>
-          <p>Florianópolis / SC</p>
-          <p>
-            <a href="tel:+5512997863832">(12) 99786-3832</a>
-            &nbsp;·&nbsp;
-            <a href="mailto:lac.lucascabral@gmail.com">lac.lucascabral@gmail.com</a>
-          </p>
-        </div>
+      </div>
+      <div class="footer__contact">
+        <p><strong>L A CABRAL LTDA</strong></p>
+        <p>CNPJ: 68.528.047/0001-66</p>
+        <p>Florianópolis / SC</p>
+        <p>
+          <a href="tel:+5512997863832">(12) 99786-3832</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:lac.lucascabral@gmail.com">lac.lucascabral@gmail.com</a>
+        </p>
       </div>
       <nav class="footer__nav" aria-label="Links rápidos" data-i18n-attr="aria-label:ariaFooterNav">
         <a href="solucoes.html" data-i18n="navSolutions">Soluções</a>
@@ -254,11 +255,9 @@
         <a href="#contato" data-i18n="navContact">Contato</a>
       </nav>
     </div>
-    <div class="container footer__disclaimer">
-      <p data-i18n="footerDisclaimer">Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.</p>
-    </div>
-    <div class="container footer__bottom">
-      <p data-i18n-html="footerBottom">© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados</p>
+    <div class="container footer__legal">
+      <p class="footer__disclaimer" data-i18n="footerDisclaimer">Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.</p>
+      <p class="footer__bottom" data-i18n-html="footerBottom">© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados</p>
     </div>
   </footer>
 

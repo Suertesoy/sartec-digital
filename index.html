@@ -33,6 +33,7 @@
 <body>
 
   <canvas class="grid-trails" aria-hidden="true"></canvas>
+  <canvas class="grid-trails-light" aria-hidden="true"></canvas>
 
   <!-- ═══ HEADER (manter em sincronia com todas as outras páginas) ═══ -->
   <header class="header" id="header">
@@ -119,38 +120,50 @@
           <p data-i18n="approachIntro">Três territórios, um mesmo ponto de partida: entender o problema antes de escolher o formato.</p>
         </header>
 
+        <!-- QA visual (correção pontual): o grid ambiente não deve atravessar
+             o módulo denso (imagem + título + descrição) — só o número
+             respira direto no grid. .territory__plate é a "placa editorial"
+             sólida que fecha o resto do conteúdo por cima do ambiente. -->
         <div class="territories-grid">
           <article class="territory territory--web">
-            <div class="territory__visual">
-              <img src="assets/capability-sites.jpg" alt="" loading="lazy" width="1000" height="750" />
-            </div>
             <span class="territory__num">01</span>
-            <h3 data-i18n="territory1Title">Sites e experiências web</h3>
-            <p data-i18n="territory1Desc">Sites institucionais, landing pages, redesign, arquitetura da informação, UX/UI e direção visual — a porta de entrada feita para representar o porte da empresa.</p>
+            <div class="territory__plate">
+              <div class="territory__visual">
+                <img src="assets/capability-sites.jpg" alt="" loading="lazy" width="1000" height="750" />
+              </div>
+              <h3 data-i18n="territory1Title">Sites e experiências web</h3>
+              <p data-i18n="territory1Desc">Sites institucionais, landing pages, redesign, arquitetura da informação, UX/UI e direção visual — a porta de entrada feita para representar o porte da empresa.</p>
+            </div>
           </article>
           <article class="territory territory--product">
-            <div class="territory__visual">
-              <img src="assets/capability-produto.jpg" alt="" loading="lazy" width="1000" height="750" />
-            </div>
             <span class="territory__num">02</span>
-            <h3 data-i18n="territory2Title">Produtos digitais</h3>
-            <p data-i18n="territory2Desc">Aplicativos, MVPs, protótipos e produtos digitais — do desenho da experiência à evolução de produtos que já existem.</p>
+            <div class="territory__plate">
+              <div class="territory__visual">
+                <img src="assets/capability-produto.jpg" alt="" loading="lazy" width="1000" height="750" />
+              </div>
+              <h3 data-i18n="territory2Title">Produtos digitais</h3>
+              <p data-i18n="territory2Desc">Aplicativos, MVPs, protótipos e produtos digitais — do desenho da experiência à evolução de produtos que já existem.</p>
+            </div>
           </article>
           <article class="territory territory--systems">
-            <div class="territory__visual">
-              <img src="assets/capability-sistemas.jpg" alt="" loading="lazy" width="1000" height="750" />
-            </div>
             <span class="territory__num">03</span>
-            <h3 data-i18n="territory3Title">Sistemas, automação e IA</h3>
-            <p data-i18n="territory3Desc">Sistemas internos, dashboards, automações, integrações e IA aplicada — quando a operação pede uma solução própria.</p>
+            <div class="territory__plate">
+              <div class="territory__visual">
+                <img src="assets/capability-sistemas.jpg" alt="" loading="lazy" width="1000" height="750" />
+              </div>
+              <h3 data-i18n="territory3Title">Sistemas, automação e IA</h3>
+              <p data-i18n="territory3Desc">Sistemas internos, dashboards, automações, integrações e IA aplicada — quando a operação pede uma solução própria.</p>
+            </div>
           </article>
           <article class="territory territory--acquisition">
-            <div class="territory__visual">
-              <img src="assets/capability-aquisicao.jpg" alt="" loading="lazy" width="1000" height="750" />
-            </div>
             <span class="territory__num">04</span>
-            <h3 data-i18n="territory4Title">Aquisição e conversão</h3>
-            <p data-i18n="territory4Desc">Landing pages, qualificação, CRM, WhatsApp e automações conectadas — a estrutura entre o primeiro interesse e a oportunidade comercial.</p>
+            <div class="territory__plate">
+              <div class="territory__visual">
+                <img src="assets/capability-aquisicao.jpg" alt="" loading="lazy" width="1000" height="750" />
+              </div>
+              <h3 data-i18n="territory4Title">Aquisição e conversão</h3>
+              <p data-i18n="territory4Desc">Landing pages, qualificação, CRM, WhatsApp e automações conectadas — a estrutura entre o primeiro interesse e a oportunidade comercial.</p>
+            </div>
           </article>
         </div>
 
@@ -333,7 +346,7 @@
     <!-- ═══ 4. COMO PENSAMOS — diferencial de diagnóstico, camada mais
          profunda depois da prova visual (funde o antigo manifesto
          "nem tudo vira sistema") ═══ -->
-    <section class="section pilot chapter-grid" id="como-pensamos" data-surface="light">
+    <section class="section pilot chapter-grid" id="como-pensamos" data-surface="light" data-paper="secondary">
       <div class="container pilot__wrap">
         <div class="pilot__content">
           <span class="tag tag--amber" data-i18n="thinkingTag">Como pensamos</span>
@@ -472,16 +485,16 @@
         </a>
         <p class="footer__tagline" data-i18n="footerTagline">Organizamos operações com software, automação e IA — a partir do problema, não da ferramenta.</p>
         <p class="footer__authorship" data-i18n="footerAuthorship">Conduzida por Lucas Cabral.</p>
-        <div class="footer__contact">
-          <p><strong>L A CABRAL LTDA</strong></p>
-          <p>CNPJ: 68.528.047/0001-66</p>
-          <p>Florianópolis / SC</p>
-          <p>
-            <a href="tel:+5512997863832">(12) 99786-3832</a>
-            &nbsp;·&nbsp;
-            <a href="mailto:lac.lucascabral@gmail.com">lac.lucascabral@gmail.com</a>
-          </p>
-        </div>
+      </div>
+      <div class="footer__contact">
+        <p><strong>L A CABRAL LTDA</strong></p>
+        <p>CNPJ: 68.528.047/0001-66</p>
+        <p>Florianópolis / SC</p>
+        <p>
+          <a href="tel:+5512997863832">(12) 99786-3832</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:lac.lucascabral@gmail.com">lac.lucascabral@gmail.com</a>
+        </p>
       </div>
       <nav class="footer__nav" aria-label="Links rápidos" data-i18n-attr="aria-label:ariaFooterNav">
         <a href="solucoes.html" data-i18n="navSolutions">Soluções</a>
@@ -491,11 +504,9 @@
         <a href="#contato" data-i18n="navContact">Contato</a>
       </nav>
     </div>
-    <div class="container footer__disclaimer">
-      <p data-i18n="footerDisclaimer">Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.</p>
-    </div>
-    <div class="container footer__bottom">
-      <p data-i18n-html="footerBottom">© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados</p>
+    <div class="container footer__legal">
+      <p class="footer__disclaimer" data-i18n="footerDisclaimer">Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.</p>
+      <p class="footer__bottom" data-i18n-html="footerBottom">© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados</p>
     </div>
   </footer>
 
