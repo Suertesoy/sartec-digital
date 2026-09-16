@@ -1,4 +1,10 @@
 {
   "buildCommand": "npm run build:css",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/api/funnel/v1/:path*",
+      "destination": "https://la-cabral-funnel-core-git-checkpoint-19e9a1-suertesoys-projects.vercel.app/api/funnel/v1/:path*"
+    }
+  ]
 }
