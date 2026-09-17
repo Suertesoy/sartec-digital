@@ -23,6 +23,21 @@
 
 .diag-panel[hidden] { display: none; }
 
+/* Presente só para leitores de tela navegarem por heading level-1 em toda
+   etapa do fluxo — a pergunta usa <legend> (não <h1>) porque é isso que
+   associa o título ao fieldset de opções para tecnologia assistiva. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ── loading / fatal ──────────────────────────── */
 .diag-loading {
   display: flex;

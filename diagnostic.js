@@ -632,6 +632,7 @@
 
     const copy = QUESTION_COPY[question.id][lang] || QUESTION_COPY[question.id].pt;
     $('diagQuestionTitle').textContent = copy.title;
+    $('diagQuestionH1').textContent = copy.title;
     $('diagQuestionHelp').textContent = copy.help || '';
     $('diagQuestionHelp').hidden = !copy.help;
 
@@ -928,6 +929,7 @@
       const question = registry.questions[step];
       const copy = QUESTION_COPY[question.id][lang] || QUESTION_COPY[question.id].pt;
       $('diagQuestionTitle').textContent = copy.title;
+    $('diagQuestionH1').textContent = copy.title;
       $('diagQuestionHelp').textContent = copy.help || '';
       $('diagQuestionHelp').hidden = !copy.help;
       $('diagProgressLabel').textContent = t('progressLabel', { current: step + 1, total: registry.questions.length });
