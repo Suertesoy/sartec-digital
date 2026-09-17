@@ -977,7 +977,7 @@
     }
 
     // Sessão de visitante (best-effort, não bloqueia a experiência caso falhe).
-    apiPost('/session', {
+    const sessionRequest = apiPost('/session', {
       contractVersion: registry.contractVersion,
       landingUrl: window.location.href,
       referrer: document.referrer || null,
@@ -992,12 +992,18 @@
       persistDraft();
     }
 
-    sendEvent('diagnostic_viewed');
-
     if (draft.currentStep === 'intro') renderIntro();
     else if (draft.currentStep === 'identity') renderIdentity();
     else if (typeof draft.currentStep === 'number' && registry.questions[draft.currentStep]) renderQuestion(draft.currentStep);
     else renderIntro();
+
+    // Numa visita nova (sem cookie prévio), o cookie da Visitor Session só
+    // existe depois que a resposta de /session chega — se diagnostic_viewed
+    // saísse em paralelo (como antes), chegaria ao servidor bem antes do
+    // cookie existir e nunca seria atribuído a nenhuma sessão. Esperar o
+    // settle (sucesso ou falha) do /session best-effort resolve isso sem
+    // atrasar a renderização acima.
+    sessionRequest.then(() => sendEvent('diagnostic_viewed'));
   }
 
   if (document.readyState === 'loading') {
