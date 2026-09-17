@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://lacabral.vercel.app/diagnostico" />
+  <meta name="description" content="Responda 11 perguntas sobre sua operação e receba uma orientação inicial sobre onde vale mais a pena organizar primeiro." data-i18n-attr="content:metaDescription" />
+  <link rel="icon" href="/assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <title data-i18n="docTitle">Diagnóstico — L A Cabral</title>
+  <link rel="stylesheet" href="assets/css/tailwind.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=2.0" />
+  <link rel="stylesheet" href="diagnostic.css?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══ HEADER reduzido — sem navegação institucional completa,
+       para não distrair do fluxo do diagnóstico. Logo volta pra Home. ═══ -->
+  <header class="header" id="header">
+    <div class="container header__wrap">
+      <div class="brand-group">
+        <a href="index.html" class="brand" aria-label="L A Cabral">
+          <img src="assets/la-cabral-symbol-white.png" alt="" class="brand__logo" width="830" height="544" />
+          <span class="brand__label">L A <strong>CABRAL</strong></span>
+        </a>
+      </div>
+      <div class="lang-switch" id="langSwitch" role="group" aria-label="Idioma do site">
+        <button type="button" class="lang-switch__btn is-active" id="langBtnPt" data-lang="pt" aria-pressed="true" aria-label="Mudar para português">
+          <span class="lang-switch__flag" aria-hidden="true">🇧🇷</span>
+        </button>
+        <button type="button" class="lang-switch__btn" id="langBtnEn" data-lang="en" aria-pressed="false" aria-label="Switch to English">
+          <span class="lang-switch__flag" aria-hidden="true">🇺🇸</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="diag" id="diagMain">
+    <div class="container diag__shell">
+
+      <!-- Carregando -->
+      <section id="diagLoading" class="diag-panel diag-loading" role="status" aria-live="polite">
+        <p data-i18n="loadingText">Carregando diagnóstico…</p>
+      </section>
+
+      <!-- Erro fatal (Registry indisponível ou erro de configuração) -->
+      <section id="diagFatalError" class="diag-panel diag-fatal" hidden>
+        <h1 id="diagFatalTitle" data-i18n="fatalTitle">Não foi possível carregar o diagnóstico agora.</h1>
+        <p id="diagFatalMessage" data-i18n="fatalMessage">Isso pode ser uma instabilidade momentânea. Tente recarregar a página em alguns instantes ou fale com a gente diretamente.</p>
+        <div class="diag-fatal__actions">
+          <button type="button" class="btn btn--primary" id="diagFatalRetry" data-i18n="fatalRetry">Tentar novamente</button>
+          <a href="https://wa.me/5512997863832" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="fatalWhatsapp">Falar no WhatsApp</a>
+          <a href="index.html" class="btn btn--ghost" data-i18n="fatalHome">Voltar para a Home</a>
+        </div>
+      </section>
+
+      <!-- Intro -->
+      <section id="diagIntro" class="diag-panel diag-intro" hidden>
+        <span class="tag" data-i18n="introTag">Diagnóstico rápido</span>
+        <h1 id="diagIntroTitle" data-i18n="introTitle">Entenda onde sua operação está perdendo tempo, vendas ou clareza.</h1>
+        <p data-i18n="introBody">Em poucos minutos, respondendo algumas perguntas sobre como sua empresa atende, vende e se organiza hoje, você recebe uma orientação inicial sobre qual área merece atenção primeiro.</p>
+        <ul class="diag-intro__points">
+          <li><span class="check" aria-hidden="true">✓</span><span data-i18n="introPoint1">Entender onde a operação está perdendo eficiência</span></li>
+          <li><span class="check" aria-hidden="true">✓</span><span data-i18n="introPoint2">Responder algumas perguntas objetivas sobre o dia a dia do negócio</span></li>
+          <li><span class="check" aria-hidden="true">✓</span><span data-i18n="introPoint3">Receber uma orientação sobre por onde começar</span></li>
+        </ul>
+        <p class="diag-intro__note" data-i18n="introNote">Não é um teste com nota nem um resultado definitivo — é um ponto de partida para a conversa.</p>
+        <button type="button" class="btn btn--primary btn--lg" id="diagStartBtn" data-i18n="startBtn">Começar diagnóstico</button>
+      </section>
+
+      <!-- Pergunta (template único, preenchido via JS a partir do Registry) -->
+      <section id="diagQuestion" class="diag-panel diag-question" hidden>
+        <div class="diag-progress" id="diagProgressBar" role="progressbar" aria-valuemin="1" aria-valuemax="11" aria-valuenow="1" aria-label="Progresso do diagnóstico">
+          <div class="diag-progress__bar"><div class="diag-progress__fill" id="diagProgressFill"></div></div>
+          <p class="diag-progress__label" id="diagProgressLabel" aria-live="polite">Pergunta 1 de 11</p>
+        </div>
+        <fieldset class="diag-question__fieldset">
+          <legend class="diag-question__legend" id="diagQuestionTitle"></legend>
+          <p class="diag-question__help" id="diagQuestionHelp" hidden></p>
+          <div class="diag-options" id="diagOptions"></div>
+        </fieldset>
+        <p class="diag-options-hint" id="diagOptionsHint" data-i18n="selectAtLeastOne" hidden>Selecione ao menos uma opção para continuar.</p>
+        <div class="diag-nav">
+          <button type="button" class="btn btn--ghost" id="diagBackBtn" data-i18n="backBtn">← Voltar</button>
+          <button type="button" class="btn btn--primary" id="diagNextBtn" data-i18n="nextBtn" disabled>Continuar</button>
+        </div>
+      </section>
+
+      <!-- Identidade -->
+      <section id="diagIdentity" class="diag-panel diag-identity" hidden>
+        <span class="tag" data-i18n="identityTag">Quase lá</span>
+        <h1 id="diagIdentityTitle" data-i18n="identityTitle">Para onde enviamos sua orientação?</h1>
+        <p data-i18n="identityBody">Só precisamos de alguns dados para te mostrar o resultado e, se fizer sentido, continuar a conversa.</p>
+
+        <form id="diagIdentityForm" novalidate>
+          <div class="diag-field">
+            <label for="diagName" data-i18n="nameLabel">Nome</label>
+            <input type="text" id="diagName" name="name" autocomplete="name" aria-describedby="diagNameError" />
+            <p class="diag-field__error" id="diagNameError" role="alert" hidden></p>
+          </div>
+          <div class="diag-field">
+            <label for="diagEmail" data-i18n="emailLabel">Email</label>
+            <input type="email" id="diagEmail" name="email" autocomplete="email" aria-describedby="diagEmailError" />
+            <p class="diag-field__error" id="diagEmailError" role="alert" hidden></p>
+          </div>
+          <div class="diag-field">
+            <label for="diagWhatsapp" data-i18n="whatsappLabel">WhatsApp</label>
+            <input type="tel" id="diagWhatsapp" name="whatsapp" autocomplete="tel" aria-describedby="diagWhatsappHint diagWhatsappError" />
+            <p class="diag-field__hint" id="diagWhatsappHint" data-i18n="whatsappHint">Com DDD. Ex.: (11) 91234-5678</p>
+            <p class="diag-field__error" id="diagWhatsappError" role="alert" hidden></p>
+          </div>
+          <div class="diag-field">
+            <label for="diagCompany" data-i18n="companyLabel">Empresa (opcional)</label>
+            <input type="text" id="diagCompany" name="company" autocomplete="organization" />
+          </div>
+
+          <div class="diag-submit-error" id="diagSubmitError" role="alert" hidden>
+            <p id="diagSubmitErrorMessage"></p>
+            <button type="button" class="btn btn--ghost" id="diagSubmitErrorAction" hidden></button>
+          </div>
+
+          <div class="diag-nav">
+            <button type="button" class="btn btn--ghost" id="diagIdentityBackBtn" data-i18n="identityBackBtn">← Voltar às perguntas</button>
+            <button type="submit" class="btn btn--primary" id="diagSubmitBtn" data-i18n="submitBtn">Ver meu resultado</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Resultado -->
+      <section id="diagResult" class="diag-panel diag-result" hidden>
+        <span class="tag" data-i18n="resultTag">Resultado</span>
+        <h1 id="diagResultTitle"></h1>
+        <p id="diagResultBody"></p>
+        <p class="diag-result__next" id="diagResultNext" hidden></p>
+        <div class="diag-result__actions">
+          <a href="#" class="btn btn--primary btn--lg" id="diagResultWaBtn" target="_blank" rel="noopener noreferrer" data-i18n="resultWaBtn">Conversar sobre isso no WhatsApp</a>
+          <a href="index.html" class="btn btn--ghost" data-i18n="resultHomeBtn">Voltar para a Home</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="diag-footer">
+    <div class="container">
+      <p data-i18n="footerText">L A CABRAL LTDA · Diagnóstico gratuito, sem compromisso.</p>
+    </div>
+  </footer>
+
+  <script src="diagnostic.js?v=1"></script>
+</body>
+</html>
