@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/api/funnel/v1/:path*",
-      "destination": "https://la-cabral-funnel-core-5n2jfl143-suertesoys-projects.vercel.app/api/funnel/v1/:path*"
+      "destination": "https://la-cabral-funnel-core-git-checkpoint-19e9a1-suertesoys-projects.vercel.app/api/funnel/v1/:path*"
     },
     {
       "source": "/diagnostico",
