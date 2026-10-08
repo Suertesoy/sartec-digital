@@ -325,6 +325,10 @@
   let lastSubmitPayload = null;
   let submitting = false;
   let fatalIsConfigError = false;
+  // Readiness da Visitor Session: nenhum /events sai antes de o POST /session
+  // ter resolvido (ok ou falha tratada) — o cookie só existe depois disso.
+  // Começa resolvida para que sendEvent nunca dependa da ordem do init.
+  let sessionReady = Promise.resolve();
 
   // ── DOM refs ─────────────────────────────────────────────────────
   const $ = (id) => document.getElementById(id);
@@ -447,16 +451,20 @@
   function sendEvent(eventType, extra) {
     // Best-effort: nunca bloqueia nem interrompe a experiência.
     if (!draft) return;
-    const body = Object.assign({ eventType, eventId: uuid(), submissionId: draft.submissionId }, extra || {});
-    try {
-      fetch(`${API_BASE}/events`, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-        keepalive: true,
-      }).catch(() => {});
-    } catch (_) { /* no-op */ }
+    // Payload fixado agora (eventId/submissionId do momento do evento); só o
+    // envio espera a sessão. sessionReady nunca rejeita (ver init).
+    const body = JSON.stringify(Object.assign({ eventType, eventId: uuid(), submissionId: draft.submissionId }, extra || {}));
+    sessionReady.then(() => {
+      try {
+        fetch(`${API_BASE}/events`, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+          keepalive: true,
+        }).catch(() => {});
+      } catch (_) { /* no-op */ }
+    });
   }
 
   // ── validação de cobertura do Registry contra a copy do site ──────
@@ -979,11 +987,11 @@
     }
 
     // Sessão de visitante (best-effort, não bloqueia a experiência caso falhe).
-    const sessionRequest = apiPost('/session', {
+    sessionReady = apiPost('/session', {
       contractVersion: registry.contractVersion,
       landingUrl: window.location.href,
       referrer: document.referrer || null,
-    }).catch(() => {});
+    }).then(() => {}, () => {});
 
     const stored = loadDraftFromStorage();
     if (stored && stored.questionnaireVersion === registry.questionnaireVersion) {
@@ -999,13 +1007,9 @@
     else if (typeof draft.currentStep === 'number' && registry.questions[draft.currentStep]) renderQuestion(draft.currentStep);
     else renderIntro();
 
-    // Numa visita nova (sem cookie prévio), o cookie da Visitor Session só
-    // existe depois que a resposta de /session chega — se diagnostic_viewed
-    // saísse em paralelo (como antes), chegaria ao servidor bem antes do
-    // cookie existir e nunca seria atribuído a nenhuma sessão. Esperar o
-    // settle (sucesso ou falha) do /session best-effort resolve isso sem
-    // atrasar a renderização acima.
-    sessionRequest.then(() => sendEvent('diagnostic_viewed'));
+    // sendEvent já espera sessionReady: diagnostic_viewed (e qualquer evento
+    // disparado pela renderização acima) só sai depois do /session.
+    sendEvent('diagnostic_viewed');
   }
 
   if (document.readyState === 'loading') {
