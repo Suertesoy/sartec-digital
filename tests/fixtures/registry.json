@@ -1,0 +1,286 @@
+{
+  "contractVersion": "1",
+  "questionnaireVersion": "1.0",
+  "questions": [
+    {
+      "id": "acquisition_sources",
+      "order": 1,
+      "answerType": "multi_select",
+      "options": [
+        {
+          "id": "referral"
+        },
+        {
+          "id": "google_search"
+        },
+        {
+          "id": "social_media"
+        },
+        {
+          "id": "paid_ads"
+        },
+        {
+          "id": "outbound_prospecting"
+        },
+        {
+          "id": "partners"
+        },
+        {
+          "id": "other"
+        },
+        {
+          "id": "no_clear_or_consistent_source",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "id": "presence_representation",
+      "order": 2,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "represents_well_and_facilitates_contact"
+        },
+        {
+          "id": "works_but_could_represent_better"
+        },
+        {
+          "id": "outdated_or_limited"
+        },
+        {
+          "id": "no_structured_digital_presence"
+        },
+        {
+          "id": "unsure"
+        }
+      ]
+    },
+    {
+      "id": "contact_entry_process",
+      "order": 3,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "organized_channel_with_owner"
+        },
+        {
+          "id": "whatsapp_manual_distribution"
+        },
+        {
+          "id": "multiple_channels"
+        },
+        {
+          "id": "direct_to_specific_person"
+        },
+        {
+          "id": "depends_on_day_or_recipient"
+        },
+        {
+          "id": "no_defined_process"
+        }
+      ]
+    },
+    {
+      "id": "response_time",
+      "order": 4,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "almost_immediate"
+        },
+        {
+          "id": "within_30_minutes"
+        },
+        {
+          "id": "between_30_minutes_and_2_hours"
+        },
+        {
+          "id": "within_few_hours"
+        },
+        {
+          "id": "sometimes_next_day"
+        },
+        {
+          "id": "not_tracked"
+        }
+      ]
+    },
+    {
+      "id": "followup_process",
+      "order": 5,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "defined_followup_process"
+        },
+        {
+          "id": "person_dependent_followup"
+        },
+        {
+          "id": "followup_when_remembered_or_time_available"
+        },
+        {
+          "id": "conversation_usually_stalls"
+        },
+        {
+          "id": "cannot_identify_contacts_needing_followup"
+        }
+      ]
+    },
+    {
+      "id": "pipeline_visibility",
+      "order": 6,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "clear_pipeline_visibility"
+        },
+        {
+          "id": "spreadsheet_or_manual_control"
+        },
+        {
+          "id": "approximate_visibility"
+        },
+        {
+          "id": "scattered_across_people_or_tools"
+        },
+        {
+          "id": "no_clear_visibility"
+        }
+      ]
+    },
+    {
+      "id": "operational_symptoms",
+      "order": 7,
+      "answerType": "multi_select",
+      "options": [
+        {
+          "id": "repetitive_admin_tasks"
+        },
+        {
+          "id": "manual_information_copying"
+        },
+        {
+          "id": "parallel_spreadsheets"
+        },
+        {
+          "id": "whatsapp_important_to_operation"
+        },
+        {
+          "id": "disconnected_tools"
+        },
+        {
+          "id": "person_dependent_processes"
+        },
+        {
+          "id": "difficulty_tracking_indicators"
+        },
+        {
+          "id": "rework_due_to_missing_context"
+        },
+        {
+          "id": "none_relevant",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "id": "perceived_problem",
+      "order": 8,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "insufficient_opportunities"
+        },
+        {
+          "id": "presence_underrepresents_business"
+        },
+        {
+          "id": "contact_handling_needs_organization"
+        },
+        {
+          "id": "opportunities_get_lost"
+        },
+        {
+          "id": "internal_processes_consume_too_much_time"
+        },
+        {
+          "id": "lack_of_visibility"
+        },
+        {
+          "id": "unsure_primary_problem"
+        }
+      ]
+    },
+    {
+      "id": "monthly_leads",
+      "order": 9,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "up_to_10"
+        },
+        {
+          "id": "11_to_30"
+        },
+        {
+          "id": "31_to_100"
+        },
+        {
+          "id": "101_to_300"
+        },
+        {
+          "id": "over_300"
+        },
+        {
+          "id": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "timing",
+      "order": 10,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "now"
+        },
+        {
+          "id": "next_weeks"
+        },
+        {
+          "id": "one_to_three_months"
+        },
+        {
+          "id": "later"
+        },
+        {
+          "id": "exploring"
+        }
+      ]
+    },
+    {
+      "id": "authority",
+      "order": 11,
+      "answerType": "single_select",
+      "options": [
+        {
+          "id": "sole_decider"
+        },
+        {
+          "id": "co_decider"
+        },
+        {
+          "id": "influencer"
+        },
+        {
+          "id": "researching_for_someone"
+        },
+        {
+          "id": "exploring"
+        }
+      ]
+    }
+  ]
+}
