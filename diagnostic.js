@@ -76,7 +76,7 @@
     },
     en: {
       docTitle: 'Diagnostic — L A Cabral',
-      metaDescription: 'Answer 11 questions about your operation and get an initial pointer on where it is worth organizing first.',
+      metaDescription: 'Answer 11 questions about your operation and get an initial guidance on where it is worth organizing first.',
 
       loadingText: 'Loading diagnostic…',
 
@@ -89,10 +89,10 @@
 
       introTag: 'Quick diagnostic',
       introTitle: 'Understand where your operation is losing time, sales or clarity.',
-      introBody: "In a few minutes, by answering some questions about how your company serves, sells and organizes itself today, you'll get an initial pointer on which area deserves attention first.",
+      introBody: "In a few minutes, by answering some questions about how your company serves, sells and organizes itself today, you'll get an initial guidance on which area deserves attention first.",
       introPoint1: 'Understand where the operation is losing efficiency',
       introPoint2: 'Answer a few objective questions about the day-to-day of the business',
-      introPoint3: 'Get a pointer on where to start',
+      introPoint3: 'Get guidance on where to start',
       introNote: "It's not a graded test or a definitive result — it's a starting point for the conversation.",
       startBtn: 'Start diagnostic',
 
@@ -102,7 +102,7 @@
       selectAtLeastOne: 'Select at least one option to continue.',
 
       identityTag: 'Almost there',
-      identityTitle: 'Where should we send your pointer?',
+      identityTitle: 'Where should we send your guidance?',
       identityBody: "We just need a few details to show you the result and, if it makes sense, continue the conversation.",
       nameLabel: 'Name',
       emailLabel: 'Email',
