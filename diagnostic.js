@@ -26,9 +26,9 @@
       fatalHome: 'Voltar para a Home',
       fatalWhatsapp: 'Falar no WhatsApp',
 
-      introTag: 'Diagnóstico rápido',
+      introTag: 'Diagnóstico guiado',
       introTitle: 'Entenda onde sua operação está perdendo tempo, vendas ou clareza.',
-      introBody: 'Em poucos minutos, respondendo algumas perguntas sobre como sua empresa atende, vende e se organiza hoje, você recebe uma orientação inicial sobre qual área merece atenção primeiro.',
+      introBody: 'Respondendo a perguntas sobre como sua empresa atende, vende e se organiza hoje, você recebe uma orientação inicial sobre qual área merece atenção primeiro.',
       introPoint1: 'Entender onde a operação está perdendo eficiência',
       introPoint2: 'Responder algumas perguntas objetivas sobre o dia a dia do negócio',
       introPoint3: 'Receber uma orientação sobre por onde começar',
@@ -87,9 +87,9 @@
       fatalHome: 'Back to Home',
       fatalWhatsapp: 'Talk on WhatsApp',
 
-      introTag: 'Quick diagnostic',
+      introTag: 'Guided diagnostic',
       introTitle: 'Understand where your operation is losing time, sales or clarity.',
-      introBody: "In a few minutes, by answering some questions about how your company serves, sells and organizes itself today, you'll get an initial guidance on which area deserves attention first.",
+      introBody: "By answering questions about how your company serves, sells and organizes itself today, you'll get initial guidance on which area deserves attention first.",
       introPoint1: 'Understand where the operation is losing efficiency',
       introPoint2: 'Answer a few objective questions about the day-to-day of the business',
       introPoint3: 'Get guidance on where to start',
