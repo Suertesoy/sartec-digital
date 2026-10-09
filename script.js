@@ -42,11 +42,10 @@ const I18N = {
 
     // ── HOME · Hero ──────────────────────────────────────────
     heroTag: `Design e tecnologia para empresas`,
-    heroTitle: `Sua empresa evoluiu. Seus processos também precisam evoluir.`,
-    heroDesc: `Transformamos problemas de negócio em experiências digitais, sistemas e soluções sob medida. Entendemos como sua empresa funciona, identificamos oportunidades de melhoria e desenvolvemos a tecnologia necessária para colocá-las em prática.`,
+    heroTitle: `Tecnologia para o próximo passo da sua empresa.`,
+    heroDesc: `Criamos sites, produtos digitais e sistemas que resolvem problemas de negócio.`,
     heroBtnPrimary: `Fazer meu diagnóstico`,
     heroBtnGhost: `Conhecer nossos projetos`,
-    heroMicro: `Descubra onde sua empresa pode melhorar. Comece com um diagnóstico guiado.`,
 
     // ── HOME · Nossa forma de pensar ─────────────────────────
     thinkingTag: `Como pensamos`,
@@ -455,8 +454,8 @@ const I18N = {
     pescaStory3Title: `Operação orientada à ação`,
     pescaStory3Text: `O painel foi desenhado para a equipe executar pedidos, não apenas olhar números. Ele prioriza as ações do momento e mantém eventos e histórico consistentes, inclusive nas exceções — como a reversão controlada de um cancelamento.`,
     pescaVisualTag: `Identidade visual`,
-    pescaVisualQuote: `“A interface é escura, mas a comida não.”`,
-    pescaVisualText: `A direção visual amadureceu para um Dark Premium: interface em grafite e preto quente, com o dourado da marca como único acento — para que a fotografia gastronômica, clara e luminosa, seja a protagonista da compra.`,
+    pescaVisualHeading: `Uma identidade que valoriza o produto.`,
+    pescaVisualText: `A direção Dark Premium combina tons escuros, detalhes dourados e fotografia gastronômica iluminada para destacar os alimentos e criar uma experiência de compra consistente com a marca.`,
     pescaGalleryHeading: `A loja em uso`,
     pescaShot1: `Início`,
     pescaShot1Alt: `Tela inicial da loja do Pesca Delivery, com os caminhos Do mar e Poke.`,
@@ -590,11 +589,10 @@ const I18N = {
 
     // ── HOME · Hero ──────────────────────────────────────────
     heroTag: `Design and technology for companies`,
-    heroTitle: `Your company has grown. Your processes need to grow with it.`,
-    heroDesc: `We turn business problems into digital experiences, systems and custom solutions. We learn how your company works, identify where it can improve and build the technology needed to make it happen.`,
+    heroTitle: `Technology for your company's next step.`,
+    heroDesc: `We build websites, digital products and systems that solve business problems.`,
     heroBtnPrimary: `Take my diagnostic`,
     heroBtnGhost: `See our projects`,
-    heroMicro: `Find out where your company can improve. Start with a guided diagnostic.`,
 
     // ── HOME · Our way of thinking ────────────────────────────
     thinkingTag: `How we think`,
@@ -999,8 +997,8 @@ const I18N = {
     pescaStory3Title: `Operations built around action`,
     pescaStory3Text: `The dashboard was designed so the team can carry out orders, not just look at numbers. It prioritizes the actions of the moment and keeps events and history consistent, including in exceptions — such as the controlled reversal of a cancellation.`,
     pescaVisualTag: `Visual identity`,
-    pescaVisualQuote: `“The interface is dark, but the food is not.”`,
-    pescaVisualText: `The visual direction matured into a Dark Premium: a graphite and warm-black interface with the brand gold as its only accent — so the bright, luminous food photography leads the purchase.`,
+    pescaVisualHeading: `An identity that showcases the product.`,
+    pescaVisualText: `The Dark Premium direction pairs dark tones, gold details and brightly lit food photography to showcase the dishes and create a shopping experience consistent with the brand.`,
     pescaGalleryHeading: `The store in use`,
     pescaShot1: `Home`,
     pescaShot1Alt: `Pesca Delivery store home screen, with the Seafood and Poke paths.`,
