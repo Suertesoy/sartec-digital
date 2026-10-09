@@ -28,7 +28,7 @@ const ALLOWED = {
   whatsapp_clicked: ['language', 'recommendation_path', 'outcome_mode'],
 };
 
-let server, base, browser;
+let server, base, localBase, browser;
 
 before(async () => {
   server = http.createServer((req, res) => {
@@ -43,8 +43,11 @@ before(async () => {
     });
   }).listen(0, '127.0.0.1');
   await new Promise((r) => server.once('listening', r));
-  base = `http://127.0.0.1:${server.address().port}`;
-  browser = await chromium.launch({ channel: process.env.PW_CHANNEL || 'chrome', headless: true });
+  const port = server.address().port;
+  // analytics.js não inicializa em localhost/127.0.0.1; os testes usam um hostname "real" mapeado para o servidor local.
+  base = `http://lacabral.test:${port}`;
+  localBase = `http://127.0.0.1:${port}`;
+  browser = await chromium.launch({ channel: process.env.PW_CHANNEL || 'chrome', headless: true, args: ['--host-resolver-rules=MAP lacabral.test 127.0.0.1'] });
 });
 
 after(async () => {
@@ -251,4 +254,24 @@ test('todas as páginas públicas carregam analytics.js no <head>, antes dos dem
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/^\s*\/\/.*$/gm, '');
   assert.ok(!/posthog\.identify\(/.test(js), 'analytics.js não deve chamar identify()');
+});
+
+test('ambiente local (127.0.0.1, localhost) e file: não inicializam o PostHog; hostname real inicializa', async () => {
+  const ctx = await browser.newContext();
+  await ctx.route(/posthog\.com/, (r) => r.abort('failed'));
+  const probe = async (url) => {
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(String(e)));
+    await page.goto(url, { waitUntil: 'domcontentloaded' });
+    const state = await page.evaluate(() => (window.posthog ? { inits: window.posthog._i.length } : null));
+    await page.close();
+    assert.deepEqual(errors, [], url);
+    return state;
+  };
+  assert.equal(await probe(`${localBase}/index.html`), null, '127.0.0.1 não deve inicializar');
+  assert.equal(await probe(`http://localhost:${new URL(localBase).port}/index.html`), null, 'localhost não deve inicializar');
+  assert.equal(await probe('file:///' + path.join(ROOT, 'index.html').split(path.sep).join('/')), null, 'file: não deve inicializar');
+  assert.deepEqual(await probe(`${base}/index.html`), { inits: 1 }, 'hostname real deve inicializar');
+  await ctx.close();
 });
