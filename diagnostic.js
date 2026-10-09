@@ -448,9 +448,58 @@
     return { ok: res.ok, status: res.status, json };
   }
 
+  // ── PostHog (best-effort, só comportamento) ──────────────────────
+  // Allowlist explícita por evento. Nada além disto sai para o PostHog: sem
+  // nome/e-mail/telefone, sem IDs do Core (eventId, submissionId, sessão),
+  // sem metadata, score, tier ou qualification.
+  const PH_ALLOWED_PROPS = {
+    diagnostic_viewed: ['language'],
+    diagnostic_started: ['language'],
+    question_viewed: ['language', 'question_id', 'question_order', 'question_count'],
+    question_answered: ['language', 'question_id', 'question_order', 'question_count'],
+    identity_viewed: ['language'],
+    diagnostic_completed: ['language', 'recommendation_path', 'outcome_mode', 'answer_count'],
+    result_viewed: ['language', 'recommendation_path', 'outcome_mode'],
+    whatsapp_clicked: ['language', 'recommendation_path', 'outcome_mode'],
+  };
+  // Valores aceitos: números ou identificadores curtos (a-z, 0-9, _ . -).
+  const PH_SAFE_STRING = /^[A-Za-z0-9_.-]{1,64}$/;
+
+  function capturePostHogEvent(name, props) {
+    try {
+      const ph = window.posthog;
+      const allowed = PH_ALLOWED_PROPS[name];
+      if (!ph || typeof ph.capture !== 'function' || !allowed) return;
+      const safe = {};
+      allowed.forEach((key) => {
+        const v = props && props[key];
+        if (typeof v === 'number' && isFinite(v)) safe[key] = v;
+        else if (typeof v === 'string' && PH_SAFE_STRING.test(v)) safe[key] = v;
+      });
+      ph.capture(name, safe);
+    } catch (_) { /* PostHog nunca interrompe a experiência */ }
+  }
+
+  function postHogProps(eventType, extra) {
+    const props = { language: lang };
+    try {
+      if (extra && extra.questionId) {
+        props.question_id = extra.questionId;
+        props.question_order = registry.questions.findIndex((q) => q.id === extra.questionId) + 1;
+        props.question_count = registry.questions.length;
+      }
+      if (lastResult && (eventType === 'result_viewed' || eventType === 'whatsapp_clicked')) {
+        props.recommendation_path = lastResult.recommendationPath;
+        props.outcome_mode = lastResult.outcomeMode;
+      }
+    } catch (_) { /* props opcionais */ }
+    return props;
+  }
+
   function sendEvent(eventType, extra) {
     // Best-effort: nunca bloqueia nem interrompe a experiência.
     if (!draft) return;
+    capturePostHogEvent(eventType, postHogProps(eventType, extra));
     // Payload fixado agora (eventId/submissionId do momento do evento); só o
     // envio espera a sessão. sessionReady nunca rejeita (ver init).
     const body = JSON.stringify(Object.assign({ eventType, eventId: uuid(), submissionId: draft.submissionId }, extra || {}));
@@ -848,6 +897,13 @@
       // Limpa o draft de respostas — o submissionId segue só em memória,
       // pelo tempo necessário para os eventos da tela de resultado.
       clearDraftStorage();
+      // Espelho PostHog do desfecho do submit (o Core emite o seu por conta própria).
+      capturePostHogEvent('diagnostic_completed', {
+        language: lang,
+        recommendation_path: recommendationPath,
+        outcome_mode: outcomeMode,
+        answer_count: lastSubmitPayload ? Object.keys(lastSubmitPayload.answers).length : undefined,
+      });
       renderResult(recommendationPath, outcomeMode);
       return;
     }
