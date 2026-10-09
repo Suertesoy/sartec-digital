@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A L A Cabral cria sites, produtos digitais e sistemas a partir de problemas de negócio — direção visual, produto e tecnologia de ponta a ponta." data-i18n-attr="content:metaDescription" />
+  <meta name="description" content="A L A Cabral transforma problemas de negócio em experiências digitais, sistemas e soluções sob medida — do diagnóstico ao desenvolvimento." data-i18n-attr="content:metaDescription" />
   <meta property="og:title" content="L A Cabral — Design e tecnologia para negócios" data-i18n-attr="content:metaOgTitle" />
-  <meta property="og:description" content="Sites, produtos digitais e sistemas construídos a partir de problemas de negócio." data-i18n-attr="content:metaOgDescription" />
+  <meta property="og:description" content="Experiências digitais, sistemas e soluções sob medida para problemas de negócio." data-i18n-attr="content:metaOgDescription" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lacabral.vercel.app/" />
   <meta property="og:image" content="https://lacabral.vercel.app/assets/og-la-cabral.png?v=5" />
@@ -15,13 +15,13 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="L A Cabral — Design e tecnologia para negócios" data-i18n-attr="content:metaOgTitle" />
-  <meta name="twitter:description" content="Sites, produtos digitais e sistemas construídos a partir de problemas de negócio." data-i18n-attr="content:metaOgDescription" />
+  <meta name="twitter:description" content="Experiências digitais, sistemas e soluções sob medida para problemas de negócio." data-i18n-attr="content:metaOgDescription" />
   <meta name="twitter:image" content="https://lacabral.vercel.app/assets/og-la-cabral.png?v=5" />
   <link rel="icon" href="/assets/favicon-32.png" type="image/png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <title data-i18n="docTitle">L A Cabral — Design e tecnologia para negócios</title>
   <link rel="stylesheet" href="assets/css/tailwind.css?v=1" />
-  <link rel="stylesheet" href="styles.css?v=2.0" />
+  <link rel="stylesheet" href="styles.css?v=2.1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -43,7 +43,7 @@
           <img src="assets/la-cabral-symbol-white.png" alt="" class="brand__logo" width="830" height="544" />
           <span class="brand__label">L A <strong>CABRAL</strong></span>
         </a>
-        <span class="brand__tagline" data-i18n="brandTagline">Tecnologia que organiza operações</span>
+        <span class="brand__tagline" data-i18n="brandTagline">Design e tecnologia para negócios</span>
       </div>
       <nav class="nav" id="nav" aria-label="Navegação principal" data-i18n-attr="aria-label:ariaMainNav">
         <a href="solucoes.html" class="nav__link" data-i18n="navSolutions">Soluções</a>
@@ -68,11 +68,11 @@
 
   <main>
 
-    <!-- ═══ 1. HERO — a marca e o contexto humano da L A Cabral primeiro;
-         os projetos reais (Sartec Papelaria, UniEdu, Grupo Almeida) entram
-         depois, na seção Projetos, como prova. Fundo fotográfico editorial gerado
-         especificamente para esta composição (direção de arte
-         institucional — não representa cliente, case ou equipe real). ═══ -->
+    <!-- ═══ 1. HERO — promessa de evolução + dois caminhos: diagnóstico
+         guiado (CTA principal, Funnel Core em /diagnostico) e projetos
+         (prova). Fundo fotográfico editorial gerado especificamente para
+         esta composição (direção de arte institucional — não representa
+         cliente, case ou equipe real). ═══ -->
     <section class="hero" id="hero">
       <div class="hero__media" aria-hidden="true">
         <picture>
@@ -93,31 +93,58 @@
 
       <div class="container hero__inner">
         <div class="hero__content">
-          <span class="tag" data-i18n="heroTag">Sites, produtos digitais e sistemas</span>
-          <h1 class="hero__title" data-i18n="heroTitle">
-            Sites, produtos digitais e sistemas construídos a partir de problemas de negócio.
-          </h1>
-          <p class="hero__desc" data-i18n="heroDesc">
-            Entendemos como sua empresa funciona antes de decidir se a resposta é um redesign, um produto digital ou um sistema interno — e cuidamos da direção visual, da experiência e da implementação, do início ao fim.
-          </p>
+          <span class="tag" data-i18n="heroTag">Design e tecnologia para empresas</span>
+          <h1 class="hero__title" data-i18n="heroTitle">Sua empresa evoluiu. Seus processos também precisam evoluir.</h1>
+          <p class="hero__desc" data-i18n="heroDesc">Transformamos problemas de negócio em experiências digitais, sistemas e soluções sob medida. Entendemos como sua empresa funciona, identificamos oportunidades de melhoria e desenvolvemos a tecnologia necessária para colocá-las em prática.</p>
           <div class="hero__actions">
-            <a href="#contato"   class="btn btn--primary" data-i18n="heroBtnPrimary">Falar sobre um projeto</a>
-            <a href="#projetos"  class="btn btn--ghost" data-i18n="heroBtnGhost">Ver projetos</a>
+            <a href="/diagnostico" class="btn btn--primary" data-i18n="heroBtnPrimary">Fazer meu diagnóstico</a>
+            <a href="#projetos"    class="btn btn--ghost" data-i18n="heroBtnGhost">Conhecer nossos projetos</a>
           </div>
 
-          <p class="hero__micro" data-i18n="heroMicro">Conversa direta com quem conduz a L A Cabral — sem formulário, sem intermediário.</p>
+          <p class="hero__micro" data-i18n="heroMicro">Descubra onde sua empresa pode melhorar. Comece com um diagnóstico guiado.</p>
         </div>
       </div>
     </section>
 
-    <!-- ═══ 2. TERRITÓRIOS — sites, produtos e sistemas, cada um com
-         a linguagem certa (não três cards iguais) ═══ -->
+    <!-- ═══ 2. RECONHECIMENTO — a antiga "Quando entramos", agora logo
+         depois do Hero: o empresário se reconhece antes de ver o que
+         fazemos. Composição editorial: a fotografia quebra a sequência
+         de grids/cards da Home (fotografia documental gerada
+         especificamente para esta composição — não representa cliente ou
+         equipe real). Papel secundário (pedra) para não colar com o
+         território claro logo abaixo. ═══ -->
+    <section class="section fit-split chapter-grid" id="para-quem" data-surface="light" data-paper="secondary">
+      <div class="container fit-split__wrap">
+        <div class="fit-split__media">
+          <img src="assets/home-operacao-madura.jpg" alt="" loading="lazy" width="1680" height="1120" />
+        </div>
+        <div class="fit-split__content">
+          <span class="tag" data-i18n="fitTag">Quando faz sentido</span>
+          <h2 data-i18n="fitHeading">Sua empresa funciona. Mas alguns processos já não acompanham o crescimento.</h2>
+          <p class="fit-desc" data-i18n="fitDesc">Pedidos chegando por diferentes canais, informações espalhadas, tarefas repetitivas e ferramentas que não se conectam. São sinais de que a operação pode precisar de uma estrutura melhor.</p>
+          <ul class="fit-list">
+            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit0">WhatsApp funcionando como o principal sistema de pedidos e atendimento</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit1">Planilhas paralelas fazendo o papel de sistema</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit2">Contatos que chegam sem contexto ou ficam sem retorno</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit3">Falta de indicadores para acompanhar a operação</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit4">Processos que dependem do conhecimento de pessoas específicas</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit5">Equipe ou unidades crescendo mais rápido que os processos</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit6">Site ou produto digital que já não representa o tamanho da empresa</span></li>
+          </ul>
+          <p class="fit-note" data-i18n="fitNote">Clínicas, escolas, indústrias, comércios e prestadores de serviço são alguns exemplos. O ponto em comum é uma operação ativa que já começou a exigir mais clareza, integração e controle.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3. CAPACIDADES — quatro territórios, cada um com a linguagem
+         certa (não quatro cards iguais). Utilidade primeiro, exemplos de
+         tecnologia depois. ═══ -->
     <section class="section territories chapter-grid" id="territorios" data-surface="light">
       <div class="container">
         <header class="section__head" data-grid-occlude>
           <span class="tag" data-i18n="approachTag">O que fazemos</span>
-          <h2 data-i18n="approachHeading">Sites, produtos digitais e sistemas — cada um com a linguagem certa.</h2>
-          <p data-i18n="approachIntro">Três territórios, um mesmo ponto de partida: entender o problema antes de escolher o formato.</p>
+          <h2 data-i18n="approachHeading">Cada negócio tem seus desafios. A solução precisa fazer sentido para eles.</h2>
+          <p data-i18n="approachIntro">Quatro frentes de atuação, combinadas conforme a necessidade de cada projeto.</p>
         </header>
 
         <!-- QA visual (rodada de refinamento): grid ambiente → .territory
@@ -138,7 +165,7 @@
                       <img src="assets/capability-sites.jpg" alt="" loading="lazy" width="1000" height="750" />
                     </div>
                     <h3 data-i18n="territory1Title">Sites e experiências web</h3>
-                    <p data-i18n="territory1Desc">Sites institucionais, landing pages, redesign, arquitetura da informação, UX/UI e direção visual — a porta de entrada feita para representar o porte da empresa.</p>
+                    <p data-i18n="territory1Desc">Para quem precisa que a empresa seja bem apresentada e fácil de contatar ou de comprar. Sites institucionais, landing pages, redesign, experiências de venda, UX/UI e direção visual.</p>
                   </div>
                 </div>
               </article>
@@ -150,7 +177,7 @@
                       <img src="assets/capability-produto.jpg" alt="" loading="lazy" width="1000" height="750" />
                     </div>
                     <h3 data-i18n="territory2Title">Produtos digitais</h3>
-                    <p data-i18n="territory2Desc">Aplicativos, MVPs, protótipos e produtos digitais — do desenho da experiência à evolução de produtos que já existem.</p>
+                    <p data-i18n="territory2Desc">Para transformar uma ideia ou uma necessidade em um produto que as pessoas entendam e queiram usar. Pesquisa, concepção de aplicativos, protótipos navegáveis, MVPs e evolução de produtos existentes.</p>
                   </div>
                 </div>
               </article>
@@ -162,7 +189,7 @@
                       <img src="assets/capability-sistemas.jpg" alt="" loading="lazy" width="1000" height="750" />
                     </div>
                     <h3 data-i18n="territory3Title">Sistemas, automação e IA</h3>
-                    <p data-i18n="territory3Desc">Sistemas internos, dashboards, automações, integrações e IA aplicada — quando a operação pede uma solução própria.</p>
+                    <p data-i18n="territory3Desc">Para organizar o que acontece por trás da venda: pedidos, atendimento, equipe e informação. Sistemas internos, painéis, automações, integrações e IA aplicada, quando fizerem sentido.</p>
                   </div>
                 </div>
               </article>
@@ -174,7 +201,7 @@
                       <img src="assets/capability-aquisicao.jpg" alt="" loading="lazy" width="1000" height="750" />
                     </div>
                     <h3 data-i18n="territory4Title">Aquisição e conversão</h3>
-                    <p data-i18n="territory4Desc">Landing pages, qualificação, CRM, WhatsApp e automações conectadas — a estrutura entre o primeiro interesse e a oportunidade comercial.</p>
+                    <p data-i18n="territory4Desc">Para que o interesse não se perca entre o primeiro contato e a venda. Páginas, qualificação, CRM, WhatsApp e automações conectadas.</p>
                   </div>
                 </div>
               </article>
@@ -188,20 +215,21 @@
       </div>
     </section>
 
-    <!-- ═══ 3. PROJETOS — scrollytelling: o palco fica preso à viewport
-         (position: sticky) enquanto o progresso do scroll dentro da
-         trilha (.proj-scroll__track) controla, de forma contínua, qual
-         dos três projetos está em foco. Sem scroll hijacking: o
-         documento continua rolando normalmente, o JS só lê a posição
-         (ver script.js) — nunca intercepta a rodinha do mouse. Base
-         (sem JS/mobile/reduced-motion): os três itens empilham
-         normalmente, imagem acima da ficha, sem sticky nem trilha alta. ═══ -->
+    <!-- ═══ 4. PROJETOS — evidência, não catálogo de tecnologias. Scrollytelling:
+         o palco fica preso à viewport (position: sticky) enquanto o
+         progresso do scroll dentro da trilha (.proj-scroll__track)
+         controla, de forma contínua, qual dos quatro projetos está em
+         foco. Sem scroll hijacking: o documento continua rolando
+         normalmente, o JS só lê a posição (ver script.js) — nunca
+         intercepta a rodinha do mouse. Base (sem JS/reduced-motion): os
+         itens empilham normalmente, imagem acima da ficha, sem sticky
+         nem trilha alta. Cada ficha leva ao case completo. ═══ -->
     <section class="section proj-scroll chapter-grid" id="projetos">
       <div class="container proj-scroll__head">
         <header class="section__head">
           <span class="tag" data-i18n="projectsShowcaseTag">Projetos</span>
-          <h2 data-i18n="projectsShowcaseHeading">Projetos que mostram como pensamos.</h2>
-          <p data-i18n="projectsShowcaseDesc">De um redesign completo a um produto desenhado do zero — a L A Cabral parte do problema, não do formato da entrega.</p>
+          <h2 data-i18n="projectsShowcaseHeading">Problemas diferentes. Soluções construídas para cada negócio.</h2>
+          <p data-i18n="projectsShowcaseDesc">Conheça projetos em que unimos análise, design e tecnologia para responder a necessidades específicas de empresas e usuários.</p>
         </header>
       </div>
 
@@ -209,8 +237,48 @@
         <div class="proj-scroll__stage">
           <div class="container proj-scroll__stage-inner" aria-label="Projetos — navegação por scroll" data-i18n-attr="aria-label:projScrollAriaLabel">
 
-            <!-- 01 · Sartec Papelaria -->
+            <!-- 01 · Pesca Delivery -->
             <div class="proj-scroll__item" data-project="0">
+              <div class="proj-scroll__visual-wrap">
+                <div class="proj-scroll__frame proj-scroll__frame--phone">
+                  <a
+                    class="phone-preview phone-preview--shot proj-scroll__visual"
+                    href="https://pescadelivery.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-i18n-attr="aria-label:ariaPescaMediaLink"
+                    aria-label="Abrir a loja do Pesca Delivery em nova aba"
+                  >
+                    <img class="phone-preview__img" src="assets/cases/pesca-home.webp" alt="Tela inicial da loja do Pesca Delivery em celular, com os caminhos Do mar e Poke." data-i18n-attr="alt:casePescaShotAlt" loading="lazy" decoding="async" width="780" height="1688" />
+                    <span class="media-link__badge" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="proj-scroll__panel">
+                <div class="proj-scroll__meta">
+                  <span class="proj-scroll__index" aria-hidden="true">01 / 04</span>
+                  <span class="proj-scroll__ruler" aria-hidden="true"><span class="proj-scroll__ruler-fill"></span></span>
+                </div>
+                <h3>Pesca Delivery</h3>
+                <p class="proj-scroll__category" data-i18n="projPescaCategory">Da loja virtual à operação integrada</p>
+                <p class="proj-scroll__desc" data-i18n="projPescaDesc">Uma solução para conectar vendas online, personalização de produtos e processamento de pedidos, reunindo a experiência do cliente e a gestão operacional em uma aplicação própria.</p>
+                <ul class="proj-scroll__tags">
+                  <li class="badge" data-i18n="caseBadgeProductDesign">Product Design</li>
+                  <li class="badge" data-i18n="caseBadgeComercio">Comércio digital</li>
+                  <li class="badge" data-i18n="caseBadgeSistemas">Sistemas</li>
+                </ul>
+                <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatusPesca">Publicado e em operação</span>
+                <div class="proj-scroll__actions">
+                  <a href="case-pesca.html" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
+                  <a href="https://pescadelivery.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="projPescaCtaSite">Visitar a loja →</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 02 · Sartec Papelaria -->
+            <div class="proj-scroll__item" data-project="1">
               <div class="proj-scroll__visual-wrap">
                 <div class="proj-scroll__frame">
                   <a
@@ -228,7 +296,7 @@
                       <span class="browser-chrome__url">sartecpapelaria.com.br</span>
                     </div>
                     <div class="browser-chrome__frame">
-                      <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" decoding="async" width="1600" height="900" />
+                      <img src="assets/case-sartec-desktop.jpg" alt="Página inicial do site da Sartec Papelaria, capturada em desktop." data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" decoding="async" width="1600" height="900" />
                     </div>
                     <span class="media-link__badge" aria-hidden="true">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -238,7 +306,7 @@
               </div>
               <div class="proj-scroll__panel">
                 <div class="proj-scroll__meta">
-                  <span class="proj-scroll__index" aria-hidden="true">01 / 03</span>
+                  <span class="proj-scroll__index" aria-hidden="true">02 / 04</span>
                   <span class="proj-scroll__ruler" aria-hidden="true"><span class="proj-scroll__ruler-fill"></span></span>
                 </div>
                 <h3>Sartec Papelaria</h3>
@@ -248,23 +316,23 @@
                   <li class="badge" data-i18n="caseBadgeRedesign">Redesign</li>
                   <li class="badge" data-i18n="caseBadgeUX">UX/UI</li>
                   <li class="badge" data-i18n="caseBadgeAutomacao">Automação</li>
-                  <li class="badge" data-i18n="caseBadgeIA">IA</li>
+                  <li class="badge" data-i18n="caseBadgeIA">IA aplicada</li>
                 </ul>
                 <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
                 <div class="proj-scroll__actions">
-                  <a href="cases.html#ecossistema-papelaria" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
+                  <a href="case-sartec.html" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
                   <a href="https://www.sartecpapelaria.com.br/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj1CtaSite">Visitar site →</a>
                 </div>
               </div>
             </div>
 
-            <!-- 02 · UniEdu -->
-            <div class="proj-scroll__item" data-project="1">
+            <!-- 03 · UNIEDU -->
+            <div class="proj-scroll__item" data-project="2">
               <div class="proj-scroll__visual-wrap">
                 <div class="proj-scroll__frame proj-scroll__frame--phone">
                   <a
                     class="phone-preview proj-scroll__visual"
-                    href="https://case-app-uniedu.vercel.app/"
+                    href="https://projeto-uniedu.vercel.app/"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-i18n-attr="aria-label:ariaUniEduMediaLink"
@@ -282,27 +350,28 @@
               </div>
               <div class="proj-scroll__panel">
                 <div class="proj-scroll__meta">
-                  <span class="proj-scroll__index" aria-hidden="true">02 / 03</span>
+                  <span class="proj-scroll__index" aria-hidden="true">03 / 04</span>
                   <span class="proj-scroll__ruler" aria-hidden="true"><span class="proj-scroll__ruler-fill"></span></span>
                 </div>
-                <h3>UniEdu</h3>
-                <p class="proj-scroll__category" data-i18n="proj2Category">Produto digital · Protótipo mobile</p>
-                <p class="proj-scroll__desc" data-i18n="proj2Desc">Protótipo navegável de um aplicativo educacional, com identidade própria e experiência mobile desenhada para uso real.</p>
+                <h3>UNIEDU</h3>
+                <p class="proj-scroll__category" data-i18n="proj2Category">Product Design · Pesquisa e protótipo mobile</p>
+                <p class="proj-scroll__desc" data-i18n="proj2Desc">Da investigação com estudantes à concepção de um aplicativo educacional: pesquisa, personas, jornada, UX/UI e um protótipo navegável avaliado em testes de usabilidade.</p>
                 <ul class="proj-scroll__tags">
-                  <li class="badge" data-i18n="caseBadgeProduto">Produto</li>
+                  <li class="badge" data-i18n="caseBadgePesquisaUX">Pesquisa UX</li>
                   <li class="badge" data-i18n="caseBadgeUX">UX/UI</li>
                   <li class="badge" data-i18n="caseBadgePrototipagem">Prototipagem</li>
-                  <li class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</li>
+                  <li class="badge" data-i18n="caseBadgeProductDesign">Product Design</li>
                 </ul>
                 <span class="showcase__eyebrow showcase__eyebrow--prototype" data-i18n="projStatus2">Protótipo de produto</span>
                 <div class="proj-scroll__actions">
-                  <a href="https://case-app-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj2Cta">Ver protótipo →</a>
+                  <a href="case-uniedu.html" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
+                  <a href="https://projeto-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj2Cta">Abrir o protótipo →</a>
                 </div>
               </div>
             </div>
 
-            <!-- 03 · Grupo Almeida -->
-            <div class="proj-scroll__item" data-project="2">
+            <!-- 04 · Grupo Almeida -->
+            <div class="proj-scroll__item" data-project="3">
               <div class="proj-scroll__visual-wrap">
                 <div class="proj-scroll__frame">
                   <a
@@ -311,7 +380,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     data-i18n-attr="aria-label:ariaAlmeidaMediaLink"
-                    aria-label="Abrir o protótipo do Grupo Almeida em nova aba"
+                    aria-label="Abrir o ambiente de homologação do Grupo Almeida em nova aba"
                   >
                     <div class="browser-chrome__bar">
                       <span class="browser-chrome__dot"></span>
@@ -319,7 +388,7 @@
                       <span class="browser-chrome__dot"></span>
                     </div>
                     <div class="browser-chrome__frame">
-                      <img src="assets/case-almeida-desktop.jpg" alt="" data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" decoding="async" width="1600" height="1000" />
+                      <img src="assets/case-almeida-desktop.jpg" alt="Página inicial do site do Grupo Almeida em homologação, capturada em desktop." data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" decoding="async" width="1600" height="1000" />
                     </div>
                     <span class="media-link__badge" aria-hidden="true">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -329,20 +398,21 @@
               </div>
               <div class="proj-scroll__panel">
                 <div class="proj-scroll__meta">
-                  <span class="proj-scroll__index" aria-hidden="true">03 / 03</span>
+                  <span class="proj-scroll__index" aria-hidden="true">04 / 04</span>
                   <span class="proj-scroll__ruler" aria-hidden="true"><span class="proj-scroll__ruler-fill"></span></span>
                 </div>
                 <h3>Grupo Almeida</h3>
-                <p class="proj-scroll__category" data-i18n="proj3Category">Site institucional</p>
-                <p class="proj-scroll__desc" data-i18n="proj3Desc">Novo site institucional para o Grupo Almeida, empresa de gestão de resíduos industriais e operação ambiental desde 1985 — identidade própria e estrutura pensada para apresentar o ecossistema da operação.</p>
+                <p class="proj-scroll__category" data-i18n="proj3Category">Site institucional · Grupo de empresas</p>
+                <p class="proj-scroll__desc" data-i18n="proj3Desc">Um site institucional que reúne as empresas do Grupo Almeida — gestão de resíduos e operação ambiental desde 1985 — em uma só narrativa, com conteúdo organizado para cada público.</p>
                 <ul class="proj-scroll__tags">
-                  <li class="badge" data-i18n="caseBadgeSites">Sites e jornadas digitais</li>
+                  <li class="badge" data-i18n="caseBadgeSiteInstitucional">Site institucional</li>
+                  <li class="badge" data-i18n="caseBadgeArquitetura">Arquitetura da informação</li>
                   <li class="badge" data-i18n="caseBadgeUX">UX/UI</li>
-                  <li class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</li>
                 </ul>
                 <span class="showcase__eyebrow showcase__eyebrow--review" data-i18n="projStatus3">Projeto em homologação</span>
                 <div class="proj-scroll__actions">
-                  <a href="https://almeidaambiental.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj3Cta">Ver protótipo →</a>
+                  <a href="case-almeida.html" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
+                  <a href="https://almeidaambiental.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj3Cta">Ver em homologação →</a>
                 </div>
               </div>
             </div>
@@ -358,59 +428,28 @@
       </div>
     </section>
 
-    <!-- ═══ 4. COMO PENSAMOS — diferencial de diagnóstico, camada mais
-         profunda depois da prova visual (funde o antigo manifesto
-         "nem tudo vira sistema") ═══ -->
+    <!-- ═══ 5. COMO PENSAMOS — filosofia de decisão, sem repetir o discurso
+         da Home inteira ═══ -->
     <section class="section pilot chapter-grid" id="como-pensamos" data-surface="light" data-paper="secondary">
       <div class="container pilot__wrap">
         <div class="pilot__content" data-grid-occlude>
           <span class="tag tag--amber" data-i18n="thinkingTag">Como pensamos</span>
           <h2 data-i18n="thinkingHeading">Não começamos pela ferramenta. Começamos pelo problema.</h2>
-          <p data-i18n="thinkingDesc">Antes de escolher entre um site, um produto ou um sistema, entendemos o que está custando tempo, venda ou clareza. Mapeamos como a empresa funciona, como os clientes chegam e como as informações circulam — e só depois decidimos o formato certo: pode ser um redesign, um produto novo, uma automação ou, quando a operação pede, um sistema próprio.</p>
-          <blockquote class="manifesto__quote" data-i18n="notEverythingQuote">"A tecnologia é consequência do diagnóstico."</blockquote>
+          <p data-i18n="thinkingDesc">Nem todo problema pede um sistema novo. Às vezes basta reorganizar um processo, conectar ferramentas que já existem ou redesenhar uma experiência. Só depois de entender a situação decidimos o formato — e desenvolvemos software próprio quando ele é, de fato, a melhor resposta.</p>
+          <blockquote class="manifesto__quote" data-i18n="notEverythingQuote">A tecnologia é consequência do diagnóstico.</blockquote>
           <img src="assets/la-cabral-symbol-green.png" alt="" class="manifesto__mark" aria-hidden="true" loading="lazy" decoding="async" width="830" height="544" />
         </div>
       </div>
     </section>
 
-    <!-- ═══ 5. QUANDO ENTRAMOS — composição editorial: a fotografia quebra
-         a sequência de grids/cards da Home. Fotografia documental gerada
-         especificamente para esta composição (mesma direção de arte do
-         Hero — não representa cliente ou equipe real). ═══ -->
-    <section class="section fit-split chapter-grid" id="para-quem" data-surface="light">
-      <div class="container fit-split__wrap">
-        <div class="fit-split__media">
-          <img src="assets/home-operacao-madura.jpg" alt="" loading="lazy" width="1680" height="1120" />
-        </div>
-        <div class="fit-split__content">
-          <span class="tag" data-i18n="fitTag">Quando entramos</span>
-          <h2 data-i18n="fitHeading">A L A Cabral entra quando a empresa já funciona, mas a operação começa a pedir mais estrutura.</h2>
-          <ul class="fit-list">
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit0">Site ou produto digital que não representa mais o tamanho da empresa</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit1">Equipe crescendo ou múltiplos responsáveis</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit2">Múltiplas unidades ou pontos de atendimento</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit3">WhatsApp como parte importante da operação</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit4">Planilhas paralelas fazendo o papel de sistema</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit5">Tarefas administrativas repetitivas</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit6">Falta de indicadores para acompanhar a operação</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit7">Ferramentas que não conversam entre si</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit8">Processos que dependem do conhecimento de pessoas específicas</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit9">Contato comercial chegando sem contexto sobre a necessidade do cliente</span></li>
-            <li><span class="check" aria-hidden="true">✓</span><span data-i18n="fit10">Falta de retorno para quem já demonstrou interesse no negócio</span></li>
-          </ul>
-          <p class="fit-note" data-i18n="fitNote">Clínicas, escolas, comércios com múltiplas unidades e escritórios em crescimento são alguns exemplos. O ponto em comum é uma operação ativa que já começou a exigir mais clareza, integração e controle.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ 6. COMO TRABALHAMOS (4 fases) ═══ -->
+    <!-- ═══ 6. COMO TRABALHAMOS (4 etapas) ═══ -->
     <section class="section pilot chapter-grid" id="como-funciona">
       <div class="container">
         <div class="pilot__wrap">
           <div class="pilot__content" data-grid-occlude>
             <span class="tag tag--amber" data-i18n="tagMethod">Método de trabalho</span>
             <h2 data-i18n="howHeading">Como trabalhamos.</h2>
-            <p data-i18n="homeHowSubtitle">Quatro fases, a partir do diagnóstico — não da ferramenta.</p>
+            <p data-i18n="homeHowSubtitle">Quatro etapas, do primeiro entendimento à solução em uso.</p>
           </div>
         </div>
         <div class="pilot__steps">
@@ -435,7 +474,7 @@
           <div class="pilot-step">
             <span class="pilot-step__num" aria-hidden="true">4</span>
             <h3 data-i18n="howStep4">Medimos e evoluímos</h3>
-            <p data-i18n="howStep4Desc">Acompanhamos o uso, corrigimos gargalos e identificamos novas oportunidades.</p>
+            <p data-i18n="howStep4Desc">Quando o projeto pede, acompanhamos o uso, ajustamos o que for preciso e identificamos novas oportunidades.</p>
           </div>
         </div>
         <div class="pilot__cta">
@@ -465,28 +504,19 @@
   <section class="cta-final" id="contato">
     <div class="cta-final__glow" aria-hidden="true"></div>
     <div class="container cta-final__wrap">
-      <span class="tag tag--red" data-i18n="tagCtaFinal">Conversa sem compromisso</span>
-      <h2 data-i18n="ctaFinalHeading">Sua operação está custando mais tempo, vendas ou clareza do que deveria?</h2>
-      <p data-i18n="ctaFinalDesc">
-        Vamos entender como sua empresa funciona hoje e onde tecnologia, automação ou software podem gerar o maior ganho.
-      </p>
+      <span class="tag tag--red" data-i18n="tagCtaFinal">Contato direto</span>
+      <h2 data-i18n="ctaFinalHeading">Já sabe o que sua empresa precisa?</h2>
+      <p data-i18n="ctaFinalDesc">Conte sobre seu projeto diretamente para quem desenvolve as soluções da L A Cabral.</p>
       <a
-        href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral+e+quero+conversar+sobre+minha+opera%C3%A7%C3%A3o."
+        href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral+e+quero+conversar+sobre+um+projeto."
         class="btn btn--primary btn--lg"
         target="_blank"
         rel="noopener noreferrer"
         data-wa-key="waGeneral"
         data-i18n="ctaFinalBtn"
-      >Conversar sobre minha operação</a>
+      >Conversar pelo WhatsApp</a>
       <p class="cta-final__sub">
-        <a
-          href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral+e+quero+conversar+sobre+minha+opera%C3%A7%C3%A3o."
-          target="_blank"
-          rel="noopener noreferrer"
-          class="cta-final__wa-link"
-          data-wa-key="waGeneral"
-          data-i18n="ctaFinalWaLink"
-        >Chamar no WhatsApp →</a>
+        <a href="/diagnostico" class="cta-final__wa-link" data-i18n="ctaFinalDiagLink">Ainda não tem clareza? Faça o diagnóstico →</a>
       </p>
       <p class="cta-final__note" data-i18n="ctaFinalNote">Sem compromisso · Uma conversa inicial para entender onde vale mais a pena organizar primeiro.</p>
     </div>
@@ -498,7 +528,7 @@
         <a href="#" class="footer__brand" aria-label="L A Cabral">
           <img src="assets/la-cabral-signature-white.png" alt="L A Cabral" class="footer__brand-mark" width="955" height="593" loading="lazy" decoding="async" />
         </a>
-        <p class="footer__tagline" data-i18n="footerTagline">Organizamos operações com software, automação e IA — a partir do problema, não da ferramenta.</p>
+        <p class="footer__tagline" data-i18n="footerTagline">Design e tecnologia para transformar necessidades de negócio em soluções que funcionam.</p>
         <p class="footer__authorship" data-i18n="footerAuthorship">Conduzida por Lucas Cabral.</p>
       </div>
       <div class="footer__contact">
@@ -540,6 +570,6 @@
     </svg>
   </a>
 
-  <script src="script.js?v=2.0"></script>
+  <script src="script.js?v=2.1"></script>
 </body>
 </html>

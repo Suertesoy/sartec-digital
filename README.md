@@ -1,20 +1,26 @@
 # L A Cabral
 
-Site institucional da **L A Cabral** — a empresa entra na operação de empresas em crescimento e organiza atendimento, vendas e processos internos com software, automação e IA.
+Site institucional da **L A Cabral** — empresa brasileira de design e tecnologia que desenvolve soluções digitais (sites, produtos, sistemas, automação e IA aplicada) a partir de necessidades específicas de negócio.
 
 ## Posicionamento
 
-Não começamos pela ferramenta, começamos pelo problema. A L A Cabral entende onde uma operação está perdendo tempo, vendas ou clareza e só depois define se a resposta é automação, integração de ferramentas existentes ou um sistema sob medida.
+O site comunica quais problemas de negócio a L A Cabral resolve, como investiga cada situação, como decide qual solução faz sentido e o que efetivamente desenvolve — com projetos como evidência (Pesca Delivery, Sartec Papelaria, UNIEDU, Grupo Almeida). A porta de entrada é o diagnóstico guiado (`/diagnostico`); o WhatsApp é o contato direto. Não se promete que todo projeto precisa de software próprio, nem se afirmam resultados sem evidência.
 
 ## Páginas
 
 | Página | Arquivo | Conteúdo |
 |---|---|---|
-| Home | `index.html` | Hero, reconhecimento do problema, forma de pensar, três formas de atuação, case principal, para quem fazemos sentido, capacidades, método (4 fases), projetos, CTA final |
-| Soluções | `solucoes.html` | As três formas de atuação (automação de atendimento e rotinas · operação conectada · sistemas operacionais sob medida), com FAQ |
-| Projetos | `cases.html` | Case completo da Sartec Papelaria — case de cliente, contexto → resultado — e demais projetos |
-| Como trabalhamos | `como-trabalhamos.html` | Processo em 4 fases, como o processo muda por tipo de problema, formas de contratação |
-| Sobre | `sobre.html` | Origem do método (formado na vivência de Lucas Cabral dentro da Sartec), por que produto/design/software/automação/IA convivem na mesma empresa, e quem conduz (Lucas Cabral) |
+| Home | `index.html` | Hero (CTA principal: diagnóstico guiado em `/diagnostico`), reconhecimento do problema, quatro frentes de atuação, projetos (scrollytelling com 4 fichas), como pensamos, como trabalhamos, WhatsApp |
+| Soluções | `solucoes.html` | As frentes de atuação, com FAQ |
+| Projetos | `cases.html` | Índice dos quatro projetos; cada ficha leva ao case completo. `cases.html#ecossistema-papelaria` redireciona para `case-sartec.html` |
+| Cases | `case-pesca.html`, `case-sartec.html`, `case-uniedu.html`, `case-almeida.html` | Mesma estrutura narrativa — Problema → Análise → Solução → Resultado (Case Story Rail, 4 capítulos) — com blocos de evidência próprios de cada projeto |
+| Como trabalhamos | `como-trabalhamos.html` | Processo em 4 etapas, como o processo muda por tipo de problema, formas de contratação |
+| Sobre | `sobre.html` | Origem do método e quem conduz (Lucas Cabral) |
+| Diagnóstico | `diagnostico.html` (rota `/diagnostico`) | Funnel Core (repositório próprio). Não editar aqui: contratos de API, scoring e persistência vivem no Funnel Core |
+
+### Fonte da copy e do i18n
+
+Todo texto visível é definido em **dois lugares**: o HTML (texto PT de fallback, visível sem JavaScript) e o objeto `I18N` em `script.js` (PT/EN, aplicado em runtime por `applyTranslations`). O `I18N.pt` é a fonte da verdade — ao mudar uma copy, altere o dicionário e mantenha o fallback do HTML idêntico. Um case novo segue o padrão de `case-pesca.html`.
 
 ## Assets de marca
 

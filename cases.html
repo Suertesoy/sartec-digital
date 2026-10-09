@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Projetos de sites, produtos digitais e sistemas — da Sartec Papelaria ao protótipo da UniEdu." data-i18n-attr="content:metaDescCases" />
+  <meta name="description" content="Quatro projetos de design e tecnologia — Pesca Delivery, Sartec Papelaria, UNIEDU e Grupo Almeida — com o problema, a análise, a solução e o resultado de cada um." data-i18n-attr="content:metaDescCases" />
   <meta property="og:title" content="Projetos — L A Cabral" data-i18n-attr="content:metaOgTitleCases" />
-  <meta property="og:description" content="Como pensamos, na prática: ecossistemas conectados, não entregas isoladas." data-i18n-attr="content:metaOgDescCases" />
+  <meta property="og:description" content="Problema, análise, solução e resultado de cada projeto." data-i18n-attr="content:metaOgDescCases" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lacabral.vercel.app/cases.html" />
   <meta property="og:image" content="https://lacabral.vercel.app/assets/og-la-cabral.png?v=5" />
@@ -15,13 +15,16 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Projetos — L A Cabral" data-i18n-attr="content:metaOgTitleCases" />
-  <meta name="twitter:description" content="Como pensamos, na prática: ecossistemas conectados, não entregas isoladas." data-i18n-attr="content:metaOgDescCases" />
+  <meta name="twitter:description" content="Problema, análise, solução e resultado de cada projeto." data-i18n-attr="content:metaOgDescCases" />
   <meta name="twitter:image" content="https://lacabral.vercel.app/assets/og-la-cabral.png?v=5" />
   <link rel="icon" href="/assets/favicon-32.png" type="image/png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <title data-i18n="docTitleCases">Projetos — L A Cabral</title>
+  <!-- Compatibilidade: o case da Sartec saiu desta página para case-sartec.html.
+       Links antigos para cases.html#ecossistema-papelaria seguem funcionando. -->
+  <script>if (location.hash === '#ecossistema-papelaria') location.replace('case-sartec.html');</script>
   <link rel="stylesheet" href="assets/css/tailwind.css?v=1" />
-  <link rel="stylesheet" href="styles.css?v=2.0" />
+  <link rel="stylesheet" href="styles.css?v=2.1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -39,7 +42,7 @@
           <img src="assets/la-cabral-symbol-white.png" alt="" class="brand__logo" width="830" height="544" />
           <span class="brand__label">L A <strong>CABRAL</strong></span>
         </a>
-        <span class="brand__tagline" data-i18n="brandTagline">Tecnologia que organiza operações</span>
+        <span class="brand__tagline" data-i18n="brandTagline">Design e tecnologia para negócios</span>
       </div>
       <nav class="nav" id="nav" aria-label="Navegação principal" data-i18n-attr="aria-label:ariaMainNav">
         <a href="solucoes.html" class="nav__link" data-i18n="navSolutions">Soluções</a>
@@ -63,192 +66,51 @@
   </header>
 
   <main>
-    <!-- ═══ Intro — QA visual: virou DARK+grid+rastro (era off-white
-         chapado, "não participava da assinatura visual" da Home). Mesma
-         identidade do Hero/território escuro em vez de uma página que
-         começa "fora do sistema". ═══ -->
+    <!-- ═══ Intro — dark+grid+rastro, mesma assinatura do Hero ═══ -->
     <section class="section page-intro chapter-grid" id="cases-page">
       <div class="container">
         <header class="section__head" data-grid-occlude>
           <span class="tag" data-i18n="tagProjects">Projetos</span>
-          <h1 data-i18n="casesPageHeading">Projetos que mostram como pensamos.</h1>
-          <p data-i18n="projectsDesc">De uma operação reorganizada de ponta a ponta a um produto digital desenhado do zero, a L A Cabral parte do problema — não do formato da entrega.</p>
+          <h1 data-i18n="casesPageHeading">Quatro projetos, quatro tipos de problema.</h1>
+          <p data-i18n="projectsDesc">Uma loja conectada à operação, um ecossistema de atendimento, uma pesquisa que virou protótipo e um site institucional para um grupo de empresas. Cada projeto tem um case completo.</p>
         </header>
       </div>
     </section>
 
-    <!-- ═══ Case · Sartec Papelaria — verde+grid: o case inteiro é sobre
-         construção de ecossistema (narrativa desafio/solução/resultado
-         + eco-flow, um diagrama de 7 nós) — construção e tecnologia,
-         não editorial solto. ═══ -->
-    <section class="section chapter-grid" id="ecossistema-papelaria">
+    <!-- ═══ Os quatro projetos — cada ficha leva a um case completo
+         (problema → análise → solução → resultado). Papel claro: os
+         mockups ganham protagonismo contra um fundo neutro. ═══ -->
+    <section class="section real-app-section chapter-paper" id="todos-os-projetos">
       <div class="container">
+        <div class="cases-grid">
 
-        <div class="case-hero">
-          <div class="case-hero__text" data-grid-occlude>
-            <span class="tag" data-i18n="ecosystemSectionTag">Case · Sartec Papelaria</span>
-            <div class="case-hero__brand">
-              <span class="case-hero__logo-plate">
-                <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="case-hero__logo" width="1436" height="736" />
-              </span>
-              <span class="case-hero__divider" aria-hidden="true"></span>
-              <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
-            </div>
-            <h2 data-i18n="ecosystemSectionHeading">Como a Sartec Papelaria virou um ecossistema conectado.</h2>
-            <p class="case-hero__desc" data-i18n="ecosystemSectionSubtitle">O site apresenta, a lista escolar direciona, o WhatsApp recebe, a IA faz a triagem e o painel organiza a equipe.</p>
-            <div class="case-hero__actions">
-              <a href="https://www.sartecpapelaria.com.br/" target="_blank" rel="noopener noreferrer" class="btn btn--primary" data-i18n="proj1CtaSite">Visitar site →</a>
-            </div>
-            <dl class="case-hero__facts lucas-facts">
-              <div class="lucas-facts__item">
-                <dt data-i18n="caseFactTypeLabel">Tipo</dt>
-                <dd data-i18n="caseFactTypeValue">Site + ecossistema digital</dd>
-              </div>
-              <div class="lucas-facts__item">
-                <dt data-i18n="caseFactScopeLabel">Escopo</dt>
-                <dd data-i18n="caseFactScopeValue">Site, WhatsApp, IA e painel interno</dd>
-              </div>
-            </dl>
-          </div>
-          <div class="case-hero__visual">
-            <a
-              class="browser-chrome browser-chrome--lg"
-              href="https://www.sartecpapelaria.com.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n-attr="aria-label:ariaSartecMediaLink"
-              aria-label="Abrir o site da Sartec Papelaria em nova aba"
-            >
-              <div class="browser-chrome__bar">
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__dot"></span>
-                <span class="browser-chrome__url">sartecpapelaria.com.br</span>
-              </div>
-              <div class="browser-chrome__frame">
-                <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" decoding="async" width="1600" height="900" />
-              </div>
+          <!-- Pesca Delivery -->
+          <div class="showcase-secondary">
+            <a class="phone-preview phone-preview--shot" href="https://pescadelivery.vercel.app/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:ariaPescaMediaLink" aria-label="Abrir a loja do Pesca Delivery em nova aba">
+              <img class="phone-preview__img" src="assets/cases/pesca-home.webp" alt="Tela inicial da loja do Pesca Delivery em celular, com os caminhos Do mar e Poke." data-i18n-attr="alt:casePescaShotAlt" loading="lazy" decoding="async" width="780" height="1688" />
               <span class="media-link__badge" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
               </span>
             </a>
-          </div>
-        </div>
-
-        <!-- ═══ Case Story Rail (QA visual) — Desafio/Solução/Resultado
-             viram narrativa de scroll no desktop (rail + palco sticky com
-             UMA superfície de leitura sólida, capítulos em crossfade+leve
-             deslocamento — mesma física de stScrollPosition/stEnterRecede
-             já usada em Projetos/Territórios, sem duplicar a matemática).
-             Sem JS, mobile ou reduced-motion: os três capítulos ficam em
-             fluxo normal, cada um seu próprio painel sólido, com reveal
-             progressivo via o mesmo IntersectionObserver de .fade-up já
-             usado no resto do site (nenhum mecanismo novo). Conteúdo
-             idêntico ao anterior — só a apresentação muda. ═══ -->
-        <div class="case-story__track" id="caseStoryTrack">
-          <!-- Sensores invisíveis (1px), observados por IntersectionObserver
-               para trocar o capítulo ativo — nenhum cálculo de progresso de
-               scroll por frame. Ver script.js. -->
-          <div class="case-story__sensors" aria-hidden="true">
-            <span class="case-story__sensor" data-chapter="0"></span>
-            <span class="case-story__sensor" data-chapter="1"></span>
-            <span class="case-story__sensor" data-chapter="2"></span>
-          </div>
-          <div class="case-story__stage">
-            <nav class="case-story__rail" role="tablist" aria-label="Capítulos do case Sartec Papelaria">
-              <button type="button" class="case-story__rail-item is-active" role="tab" data-chapter="0" id="case-story-tab-0" aria-controls="case-story-panel-0" aria-selected="true">01 <em data-i18n="caseChallengeLabel">Desafio</em></button>
-              <button type="button" class="case-story__rail-item" role="tab" data-chapter="1" id="case-story-tab-1" aria-controls="case-story-panel-1" aria-selected="false" tabindex="-1">02 <em data-i18n="caseSolutionLabel">Solução</em></button>
-              <button type="button" class="case-story__rail-item" role="tab" data-chapter="2" id="case-story-tab-2" aria-controls="case-story-panel-2" aria-selected="false" tabindex="-1">03 <em data-i18n="caseResultLabel">Resultado</em></button>
-              <span class="case-story__rail-line"><span class="case-story__rail-fill"></span></span>
-            </nav>
-            <div class="case-story__panels">
-              <article class="case-story__chapter is-active" data-chapter="0" id="case-story-panel-0" role="tabpanel" aria-labelledby="case-story-tab-0">
-                <span class="case-story__num" aria-hidden="true">01</span>
-                <h3 data-i18n="caseChallengeLabel">Desafio</h3>
-                <p data-i18n="caseSartecChallenge">Com mais de 30 anos de operação e uma rotina sazonal pesada — principalmente na época de listas escolares —, a Sartec sempre dependeu de conversas manuais no balcão e no WhatsApp. Nos picos de demanda, pedidos chegavam por canais diferentes, sem organização entre quem perguntava, quem orçava e quem separava o material, e a direção não tinha visibilidade do andamento. O gargalo não era falta de site: era a ausência de um fluxo único entre a entrada do cliente, a triagem da demanda e a organização da equipe.</p>
-              </article>
-              <article class="case-story__chapter" data-chapter="1" id="case-story-panel-1" role="tabpanel" aria-labelledby="case-story-tab-1">
-                <span class="case-story__num" aria-hidden="true">02</span>
-                <h3 data-i18n="caseSolutionLabel">Solução</h3>
-                <p data-i18n="caseSartecSolution">Desenhamos um ecossistema conectado: um site que apresenta a operação e direciona por lista escolar, um canal único de WhatsApp, uma camada de IA para triagem inicial e um painel interno que organiza conversas, pedidos e responsáveis — as sete partes implementadas como um fluxo único, não como entregas separadas.</p>
-              </article>
-              <article class="case-story__chapter" data-chapter="2" id="case-story-panel-2" role="tabpanel" aria-labelledby="case-story-tab-2">
-                <span class="case-story__num" aria-hidden="true">03</span>
-                <h3 data-i18n="caseResultLabel">Resultado</h3>
-                <p data-i18n="caseSartecResult">A equipe passou a atender por um canal único, com a triagem inicial já resolvida antes de chegar a um responsável — e a direção ganhou visão da fila de atendimento, sem precisar perguntar pessoa por pessoa.</p>
-              </article>
+            <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatusPesca">Publicado e em operação</span>
+            <div class="showcase__info">
+              <h2 class="showcase__title">Pesca Delivery</h2>
+              <p class="showcase__type" data-i18n="projPescaCategory">Da loja virtual à operação integrada</p>
+              <p data-i18n="projPescaDesc">Uma solução para conectar vendas online, personalização de produtos e processamento de pedidos, reunindo a experiência do cliente e a gestão operacional em uma aplicação própria.</p>
+            </div>
+            <div class="showcase__badges">
+              <span class="badge" data-i18n="caseBadgeProductDesign">Product Design</span>
+              <span class="badge" data-i18n="caseBadgeComercio">Comércio digital</span>
+              <span class="badge" data-i18n="caseBadgeSistemas">Sistemas</span>
+            </div>
+            <div class="showcase__actions">
+              <a href="case-pesca.html" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
+              <a href="https://pescadelivery.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="projPescaCtaSite">Visitar a loja →</a>
             </div>
           </div>
-        </div>
 
-        <div class="case-capabilities">
-          <strong class="process-questions__label" data-i18n="caseCapabilitiesLabel">Capacidades utilizadas</strong>
-          <p class="case-capabilities__badges">
-            <span class="badge" data-i18n="caseBadgeRedesign">Redesign</span>
-            <span class="badge" data-i18n="caseBadgeUX">UX/UI</span>
-            <span class="badge" data-i18n="caseBadgeArquitetura">Arquitetura da informação</span>
-            <span class="badge" data-i18n="caseBadgeDirecao">Direção visual</span>
-            <span class="badge" data-i18n="caseBadgeResponsividade">Responsividade</span>
-            <span class="badge" data-i18n="caseBadgeIntegracoes">Integrações</span>
-            <span class="badge" data-i18n="caseBadgeAutomacao">Automação</span>
-            <span class="badge" data-i18n="caseBadgeIA">IA aplicada</span>
-          </p>
-        </div>
-
-        <div class="eco-flow">
-          <div class="eco-flow__node">
-            <span class="eco-flow__num" aria-hidden="true">1</span>
-            <h3 data-i18n="ecoFlow1Title">Site e presença visual</h3>
-            <p data-i18n="ecoFlow1Desc">Apresenta a papelaria, os serviços e os produtos com identidade própria.</p>
-          </div>
-          <div class="eco-flow__node">
-            <span class="eco-flow__num" aria-hidden="true">2</span>
-            <h3 data-i18n="ecoFlow2Title">Listas escolares e produtos</h3>
-            <p data-i18n="ecoFlow2Desc">Direciona o cliente certo para o pedido certo, sem perder tempo.</p>
-          </div>
-          <div class="eco-flow__node eco-flow__node--brand">
-            <span class="eco-flow__num" aria-hidden="true">3</span>
-            <h3 data-i18n="ecoFlow3Title">WhatsApp</h3>
-            <p data-i18n="ecoFlow3Desc">Recebe o contato e mantém a conversa em um único canal.</p>
-          </div>
-          <div class="eco-flow__node">
-            <span class="eco-flow__num" aria-hidden="true">4</span>
-            <h3 data-i18n="ecoFlow4Title">IA de triagem</h3>
-            <p data-i18n="ecoFlow4Desc">Identifica o tipo de demanda antes de chegar a um responsável.</p>
-          </div>
-          <div class="eco-flow__node">
-            <span class="eco-flow__num" aria-hidden="true">5</span>
-            <h3 data-i18n="ecoFlow5Title">Painel de atendimento</h3>
-            <p data-i18n="ecoFlow5Desc">Organiza conversas, pedidos e responsáveis em um só lugar.</p>
-          </div>
-          <div class="eco-flow__node">
-            <span class="eco-flow__num" aria-hidden="true">6</span>
-            <h3 data-i18n="ecoFlow6Title">Equipe e setores</h3>
-            <p data-i18n="ecoFlow6Desc">Cada demanda chega para quem realmente deve resolver.</p>
-          </div>
-          <div class="eco-flow__node">
-            <span class="eco-flow__num" aria-hidden="true">7</span>
-            <h3 data-i18n="ecoFlow7Title">Automação e relatórios</h3>
-            <p data-i18n="ecoFlow7Desc">Reduz tarefas repetitivas e dá visão da operação.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ Todos os projetos — off-white: depois do case denso em verde,
-         a galeria respira; os mockups (browser-chrome/phone-preview)
-         ganham protagonismo contra um fundo neutro em vez de competir
-         com outro bloco verde+grid. ═══ -->
-    <section class="section real-app-section chapter-paper" id="todos-os-projetos">
-      <div class="container">
-        <header class="section__head section__head--sm">
-          <span class="tag" data-i18n="allProjectsTag">Todos os projetos</span>
-          <h2 data-i18n="allProjectsHeading">Contextos diferentes, mesmo ponto de partida.</h2>
-        </header>
-        <div class="cases-grid">
-
-          <!-- Case 1: Sartec Papelaria — site/ecossistema, moldura de navegador -->
-          <div class="showcase-primary">
+          <!-- Sartec Papelaria -->
+          <div class="showcase-primary" id="ecossistema-papelaria">
             <a
               class="browser-chrome"
               href="https://www.sartecpapelaria.com.br/"
@@ -264,36 +126,33 @@
                 <span class="browser-chrome__url">sartecpapelaria.com.br</span>
               </div>
               <div class="browser-chrome__frame">
-                <img src="assets/case-sartec-desktop.jpg" alt="" data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" decoding="async" width="1600" height="900" />
+                <img src="assets/case-sartec-desktop.jpg" alt="Página inicial do site da Sartec Papelaria, capturada em desktop." data-i18n-attr="alt:caseSartecShotAlt" loading="lazy" decoding="async" width="1600" height="900" />
               </div>
               <span class="media-link__badge" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
               </span>
             </a>
-            <div class="showcase__head">
-              <img src="assets/sartec-papelaria-logo.png" alt="Sartec Papelaria" class="showcase__logo" loading="lazy" decoding="async" width="1436" height="736" />
-              <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
-            </div>
+            <span class="showcase__eyebrow showcase__eyebrow--delivered" data-i18n="projStatus1">Projeto entregue</span>
             <div class="showcase__info">
-              <h3>Sartec Papelaria</h3>
+              <h2 class="showcase__title">Sartec Papelaria</h2>
+              <p class="showcase__type" data-i18n="proj1Category">Site institucional + ecossistema digital</p>
               <p data-i18n="proj1Desc">Redesenhamos o site, a jornada de listas escolares, o atendimento via WhatsApp, a triagem por IA e o painel interno — uma operação conectada, não páginas isoladas.</p>
             </div>
+            <div class="showcase__badges">
+              <span class="badge" data-i18n="caseBadgeRedesign">Redesign</span>
+              <span class="badge" data-i18n="caseBadgeUX">UX/UI</span>
+              <span class="badge" data-i18n="caseBadgeAutomacao">Automação</span>
+              <span class="badge" data-i18n="caseBadgeIA">IA aplicada</span>
+            </div>
             <div class="showcase__actions">
-              <a href="#ecossistema-papelaria" class="btn btn--ghost" data-i18n="proj1Cta">Ver o case completo →</a>
+              <a href="case-sartec.html" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
               <a href="https://www.sartecpapelaria.com.br/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj1CtaSite">Visitar site →</a>
             </div>
           </div>
 
-          <!-- Case 2: UniEdu — produto/app, moldura de celular -->
+          <!-- UNIEDU -->
           <div class="showcase-secondary">
-            <a
-              class="phone-preview"
-              href="https://case-app-uniedu.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n-attr="aria-label:ariaUniEduMediaLink"
-              aria-label="Abrir o protótipo do UniEdu em nova aba"
-            >
+            <a class="phone-preview" href="https://projeto-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" data-i18n-attr="aria-label:ariaUniEduMediaLink" aria-label="Abrir o protótipo do UniEdu em nova aba">
               <div class="phone-preview__island"></div>
               <video class="phone-preview__video" autoplay muted loop playsinline preload="metadata" poster="assets/case-uniedu-poster.webp">
                 <source src="uniedu-20s.mp4" type="video/mp4">
@@ -304,21 +163,23 @@
             </a>
             <span class="showcase__eyebrow showcase__eyebrow--prototype" data-i18n="projStatus2">Protótipo de produto</span>
             <div class="showcase__info">
-              <h3>UniEdu</h3>
-              <p data-i18n="proj2Desc">Protótipo navegável de um aplicativo educacional, com identidade própria e experiência mobile desenhada para uso real.</p>
+              <h2 class="showcase__title">UNIEDU</h2>
+              <p class="showcase__type" data-i18n="proj2Category">Product Design · Pesquisa e protótipo mobile</p>
+              <p data-i18n="proj2Desc">Da investigação com estudantes à concepção de um aplicativo educacional: pesquisa, personas, jornada, UX/UI e um protótipo navegável avaliado em testes de usabilidade.</p>
             </div>
             <div class="showcase__badges">
-              <span class="badge" data-i18n="caseBadgeProduto">Produto</span>
+              <span class="badge" data-i18n="caseBadgePesquisaUX">Pesquisa UX</span>
               <span class="badge" data-i18n="caseBadgeUX">UX/UI</span>
               <span class="badge" data-i18n="caseBadgePrototipagem">Prototipagem</span>
-              <span class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</span>
+              <span class="badge" data-i18n="caseBadgeProductDesign">Product Design</span>
             </div>
             <div class="showcase__actions">
-              <a href="https://case-app-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj2Cta">Ver protótipo →</a>
+              <a href="case-uniedu.html" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
+              <a href="https://projeto-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj2Cta">Abrir o protótipo →</a>
             </div>
           </div>
 
-          <!-- Case 3: Grupo Almeida — site institucional, em homologação. -->
+          <!-- Grupo Almeida -->
           <div class="showcase-primary">
             <a
               class="browser-chrome"
@@ -326,7 +187,7 @@
               target="_blank"
               rel="noopener noreferrer"
               data-i18n-attr="aria-label:ariaAlmeidaMediaLink"
-              aria-label="Abrir o protótipo do Grupo Almeida em nova aba"
+              aria-label="Abrir o ambiente de homologação do Grupo Almeida em nova aba"
             >
               <div class="browser-chrome__bar">
                 <span class="browser-chrome__dot"></span>
@@ -334,7 +195,7 @@
                 <span class="browser-chrome__dot"></span>
               </div>
               <div class="browser-chrome__frame">
-                <img src="assets/case-almeida-desktop.jpg" alt="" data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" decoding="async" width="1600" height="1000" />
+                <img src="assets/case-almeida-desktop.jpg" alt="Página inicial do site do Grupo Almeida em homologação, capturada em desktop." data-i18n-attr="alt:caseAlmeidaShotAlt" loading="lazy" decoding="async" width="1600" height="1000" />
               </div>
               <span class="media-link__badge" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -342,25 +203,20 @@
             </a>
             <span class="showcase__eyebrow showcase__eyebrow--review" data-i18n="projStatus3">Projeto em homologação</span>
             <div class="showcase__info">
-              <h3>Grupo Almeida</h3>
-              <p data-i18n="proj3Desc">Novo site institucional para o Grupo Almeida, empresa de gestão de resíduos industriais e operação ambiental desde 1985 — identidade própria e estrutura pensada para apresentar o ecossistema da operação.</p>
+              <h2 class="showcase__title">Grupo Almeida</h2>
+              <p class="showcase__type" data-i18n="proj3Category">Site institucional · Grupo de empresas</p>
+              <p data-i18n="proj3Desc">Um site institucional que reúne as empresas do Grupo Almeida — gestão de resíduos e operação ambiental desde 1985 — em uma só narrativa, com conteúdo organizado para cada público.</p>
             </div>
             <div class="showcase__badges">
-              <span class="badge" data-i18n="caseBadgeSites">Sites e jornadas digitais</span>
+              <span class="badge" data-i18n="caseBadgeSiteInstitucional">Site institucional</span>
+              <span class="badge" data-i18n="caseBadgeArquitetura">Arquitetura da informação</span>
               <span class="badge" data-i18n="caseBadgeUX">UX/UI</span>
-              <span class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</span>
             </div>
             <div class="showcase__actions">
-              <a href="https://almeidaambiental.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj3Cta">Ver protótipo →</a>
+              <a href="case-almeida.html" class="btn btn--primary" data-i18n="proj1Cta">Ver o case completo →</a>
+              <a href="https://almeidaambiental.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="proj3Cta">Ver em homologação →</a>
             </div>
           </div>
-
-          <!-- Próximos cases entram aqui, seguindo .showcase-primary (site/web)
-               ou .showcase-secondary (produto/app), conforme a natureza do projeto.
-               Se um próximo projeto ainda não tiver URL/assets confirmados, usar
-               .browser-chrome--placeholder + .browser-chrome__frame--placeholder
-               (ver histórico do git) em vez de inventar captura ou endereço. -->
-
         </div>
       </div>
     </section>
@@ -370,28 +226,19 @@
   <section class="cta-final" id="contato">
     <div class="cta-final__glow" aria-hidden="true"></div>
     <div class="container cta-final__wrap">
-      <span class="tag tag--red" data-i18n="tagCtaFinal">Conversa sem compromisso</span>
-      <h2 data-i18n="ctaFinalHeading">Sua operação está custando mais tempo, vendas ou clareza do que deveria?</h2>
-      <p data-i18n="ctaFinalDesc">
-        Vamos entender como sua empresa funciona hoje e onde tecnologia, automação ou software podem gerar o maior ganho.
-      </p>
+      <span class="tag tag--red" data-i18n="tagCtaFinal">Contato direto</span>
+      <h2 data-i18n="ctaFinalHeading">Já sabe o que sua empresa precisa?</h2>
+      <p data-i18n="ctaFinalDesc">Conte sobre seu projeto diretamente para quem desenvolve as soluções da L A Cabral.</p>
       <a
-        href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral+e+quero+conversar+sobre+minha+opera%C3%A7%C3%A3o."
+        href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral+e+quero+conversar+sobre+um+projeto."
         class="btn btn--primary btn--lg"
         target="_blank"
         rel="noopener noreferrer"
         data-wa-key="waGeneral"
         data-i18n="ctaFinalBtn"
-      >Conversar sobre minha operação</a>
+      >Conversar pelo WhatsApp</a>
       <p class="cta-final__sub">
-        <a
-          href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral+e+quero+conversar+sobre+minha+opera%C3%A7%C3%A3o."
-          target="_blank"
-          rel="noopener noreferrer"
-          class="cta-final__wa-link"
-          data-wa-key="waGeneral"
-          data-i18n="ctaFinalWaLink"
-        >Chamar no WhatsApp →</a>
+        <a href="/diagnostico" class="cta-final__wa-link" data-i18n="ctaFinalDiagLink">Ainda não tem clareza? Faça o diagnóstico →</a>
       </p>
       <p class="cta-final__note" data-i18n="ctaFinalNote">Sem compromisso · Uma conversa inicial para entender onde vale mais a pena organizar primeiro.</p>
     </div>
@@ -403,7 +250,7 @@
         <a href="index.html" class="footer__brand" aria-label="L A Cabral">
           <img src="assets/la-cabral-signature-white.png" alt="L A Cabral" class="footer__brand-mark" width="955" height="593" loading="lazy" decoding="async" />
         </a>
-        <p class="footer__tagline" data-i18n="footerTagline">Organizamos operações com software, automação e IA — a partir do problema, não da ferramenta.</p>
+        <p class="footer__tagline" data-i18n="footerTagline">Design e tecnologia para transformar necessidades de negócio em soluções que funcionam.</p>
         <p class="footer__authorship" data-i18n="footerAuthorship">Conduzida por Lucas Cabral.</p>
       </div>
       <div class="footer__contact">
@@ -445,6 +292,6 @@
     </svg>
   </a>
 
-  <script src="script.js?v=2.0"></script>
+  <script src="script.js?v=2.1"></script>
 </body>
 </html>

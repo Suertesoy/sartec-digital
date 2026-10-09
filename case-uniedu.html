@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Da pesquisa com estudantes ao protótipo navegável de um aplicativo educacional: case de Product Design e prototipação da L A Cabral." data-i18n-attr="content:metaDescUniedu" />
+  <meta property="og:title" content="UNIEDU — case — L A Cabral" data-i18n-attr="content:metaOgTitleUniedu" />
+  <meta property="og:description" content="Da investigação à concepção de um aplicativo educacional." data-i18n-attr="content:metaOgDescUniedu" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lacabral.vercel.app/case-uniedu.html" />
+  <meta property="og:image" content="https://lacabral.vercel.app/assets/og-la-cabral.png?v=5" />
+  <meta property="og:image:secure_url" content="https://lacabral.vercel.app/assets/og-la-cabral.png?v=5" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="UNIEDU — case — L A Cabral" data-i18n-attr="content:metaOgTitleUniedu" />
+  <meta name="twitter:description" content="Da investigação à concepção de um aplicativo educacional." data-i18n-attr="content:metaOgDescUniedu" />
+  <meta name="twitter:image" content="https://lacabral.vercel.app/assets/og-la-cabral.png?v=5" />
+  <link rel="icon" href="/assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <title data-i18n="docTitleUniedu">UNIEDU — L A Cabral</title>
+  <link rel="stylesheet" href="assets/css/tailwind.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=2.1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <canvas class="grid-trails" aria-hidden="true"></canvas>
+  <canvas class="grid-trails-light" aria-hidden="true"></canvas>
+
+  <!-- ═══ HEADER (manter em sincronia com todas as outras páginas) ═══ -->
+  <header class="header" id="header">
+    <div class="container header__wrap">
+      <div class="brand-group">
+        <a href="index.html" class="brand" aria-label="L A Cabral">
+          <img src="assets/la-cabral-symbol-white.png" alt="" class="brand__logo" width="830" height="544" />
+          <span class="brand__label">L A <strong>CABRAL</strong></span>
+        </a>
+        <span class="brand__tagline" data-i18n="brandTagline">Design e tecnologia para negócios</span>
+      </div>
+      <nav class="nav" id="nav" aria-label="Navegação principal" data-i18n-attr="aria-label:ariaMainNav">
+        <a href="solucoes.html" class="nav__link" data-i18n="navSolutions">Soluções</a>
+        <a href="cases.html" class="nav__link" data-i18n="navCases">Projetos</a>
+        <a href="como-trabalhamos.html" class="nav__link" data-i18n="navHowWeWork">Como trabalhamos</a>
+        <a href="sobre.html" class="nav__link" data-i18n="navAbout">Sobre</a>
+        <div class="lang-switch" id="langSwitch" role="group" aria-label="Idioma do site" data-i18n-attr="aria-label:ariaLangGroup">
+          <button type="button" class="lang-switch__btn is-active" id="langBtnPt" data-lang="pt" aria-pressed="true" aria-label="Mudar para português">
+            <span class="lang-switch__flag" aria-hidden="true">🇧🇷</span>
+          </button>
+          <button type="button" class="lang-switch__btn" id="langBtnEn" data-lang="en" aria-pressed="false" aria-label="Switch to English">
+            <span class="lang-switch__flag" aria-hidden="true">🇺🇸</span>
+          </button>
+        </div>
+        <a href="#contato" class="nav__cta" data-i18n="navContact">Contato</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav" data-i18n-attr="aria-label:ariaOpenMenu">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══ Case · UNIEDU — verde+grid: construção e tecnologia. Estrutura
+         comum aos quatro cases (abertura → 01 Problema → 02 Análise →
+         03 Solução → 04 Resultado); cada case mantém a própria
+         personalidade nos blocos de evidência abaixo da narrativa. ═══ -->
+    <section class="section chapter-grid case-page" id="case-uniedu">
+      <div class="container">
+
+        <a class="case-back" href="cases.html" data-i18n="caseBack">← Todos os projetos</a>
+
+        <div class="case-hero">
+          <div class="case-hero__text" data-grid-occlude>
+            <span class="tag" data-i18n="unieduTag">Case · UNIEDU</span>
+            <div class="case-hero__brand">
+              <span class="showcase__eyebrow showcase__eyebrow--prototype" data-i18n="projStatus2">Protótipo de produto</span>
+            </div>
+            <h1 data-i18n="unieduHeading">Da investigação à concepção de um aplicativo educacional.</h1>
+            <p class="case-hero__desc" data-i18n="unieduSubtitle">Como uma necessidade de estudantes de cursos online virou uma proposta de produto — pesquisa, UX/UI e protótipo navegável, sem exigir que o aplicativo estivesse em produção.</p>
+            <div class="case-hero__actions">
+              <a href="https://projeto-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--primary" data-i18n="proj2Cta">Abrir o protótipo →</a>
+              <a href="https://case-app-uniedu.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-i18n="unieduOpenCase">Ler a documentação do case →</a>
+            </div>
+            <dl class="case-hero__facts lucas-facts">
+              <div class="lucas-facts__item">
+                <dt data-i18n="caseFactTypeLabel">Tipo</dt>
+                <dd data-i18n="unieduTypeValue">Product Design e prototipação</dd>
+              </div>
+              <div class="lucas-facts__item">
+                <dt data-i18n="caseFactScopeLabel">Escopo</dt>
+                <dd data-i18n="unieduScopeValue">Pesquisa UX, estratégia de produto, UX/UI e protótipo navegável</dd>
+              </div>
+              <div class="lucas-facts__item">
+                <dt data-i18n="caseFactContextLabel">Contexto</dt>
+                <dd data-i18n="unieduContextValue">Projeto de formação, desenvolvido em dupla com Najme Simon Alé</dd>
+              </div>
+              <div class="lucas-facts__item">
+                <dt data-i18n="caseFactPeriodLabel">Período</dt>
+                <dd data-i18n="unieduPeriodValue">Cerca de 8 meses, da pesquisa à validação</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="case-hero__visual case-hero__visual--phone">
+            <a
+              class="phone-preview"
+              href="https://projeto-uniedu.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n-attr="aria-label:ariaUniEduMediaLink"
+              aria-label="Abrir o protótipo do UniEdu em nova aba"
+            >
+              <div class="phone-preview__island"></div>
+              <video class="phone-preview__video" autoplay muted loop playsinline preload="metadata" poster="assets/case-uniedu-poster.webp">
+                <source src="uniedu-20s.mp4" type="video/mp4">
+              </video>
+              <span class="media-link__badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Case Story Rail — Problema / Análise / Solução / Resultado.
+             Mesmo componente do case Sartec original (sticky + sensores de
+             1px + IntersectionObserver no desktop; painéis sólidos em fluxo
+             normal no mobile, sem JS ou com reduced-motion), agora com
+             quatro capítulos. Ver script.js e .case-story__* em styles.css. -->
+        <div class="case-story__track" id="caseStoryTrack" data-chapters="4">
+          <div class="case-story__sensors" aria-hidden="true">
+            <span class="case-story__sensor" data-chapter="0"></span>
+            <span class="case-story__sensor" data-chapter="1"></span>
+            <span class="case-story__sensor" data-chapter="2"></span>
+            <span class="case-story__sensor" data-chapter="3"></span>
+          </div>
+          <div class="case-story__stage">
+            <nav class="case-story__rail" role="tablist" aria-label="Capítulos do case" data-i18n-attr="aria-label:caseChaptersAria">
+              <button type="button" class="case-story__rail-item is-active" role="tab" data-chapter="0" id="case-story-tab-0" aria-controls="case-story-panel-0" aria-selected="true">01 <em data-i18n="caseProblemLabel">Problema</em></button>
+              <button type="button" class="case-story__rail-item" role="tab" data-chapter="1" id="case-story-tab-1" aria-controls="case-story-panel-1" aria-selected="false" tabindex="-1">02 <em data-i18n="caseAnalysisLabel">Análise</em></button>
+              <button type="button" class="case-story__rail-item" role="tab" data-chapter="2" id="case-story-tab-2" aria-controls="case-story-panel-2" aria-selected="false" tabindex="-1">03 <em data-i18n="caseSolutionLabel">Solução</em></button>
+              <button type="button" class="case-story__rail-item" role="tab" data-chapter="3" id="case-story-tab-3" aria-controls="case-story-panel-3" aria-selected="false" tabindex="-1">04 <em data-i18n="caseResultLabel">Resultado</em></button>
+              <span class="case-story__rail-line"><span class="case-story__rail-fill"></span></span>
+            </nav>
+            <div class="case-story__panels">
+              <article class="case-story__chapter is-active" data-chapter="0" id="case-story-panel-0" role="tabpanel" aria-labelledby="case-story-tab-0">
+                <span class="case-story__num" aria-hidden="true">01</span>
+                <h2 data-i18n="caseProblemLabel">Problema</h2>
+                <p class="case-story__lead" data-i18n="unieduProblemLead">Estudar online exige constância — e a constância se perde.</p>
+                <p data-i18n="unieduProblemText">Cursos a distância enfrentam quatro fricções recorrentes: perda de ritmo semanal, baixa percepção de evolução, sensação de isolamento e recompensas sem valor percebido. O UNIEDU parte delas para propor um aplicativo que ajude o estudante a manter o hábito — não um redesenho visual isolado. A pergunta de oportunidade: como recompensar o esforço real do aluno e transformar constância em hábito?</p>
+              </article>
+              <article class="case-story__chapter" data-chapter="1" id="case-story-panel-1" role="tabpanel" aria-labelledby="case-story-tab-1">
+                <span class="case-story__num" aria-hidden="true">02</span>
+                <h2 data-i18n="caseAnalysisLabel">Análise</h2>
+                <p class="case-story__lead" data-i18n="unieduAnalysisLead">Pesquisa antes de tela.</p>
+                <p data-i18n="unieduAnalysisText">As decisões de produto se apoiaram em várias fontes de evidência:</p>
+                <ul class="case-story__list">
+                  <li data-i18n="unieduAnalysisL1">Pesquisa de apoio sobre evasão e permanência em cursos online</li>
+                  <li data-i18n="unieduAnalysisL2">Benchmark de aplicativos e plataformas como Duolingo, Kahoot e Alura</li>
+                  <li data-i18n="unieduAnalysisL3">Survey e entrevistas individuais com estudantes de cursos online</li>
+                  <li data-i18n="unieduAnalysisL4">Duas personas — Sofia e Marcos — e suas jornadas completas</li>
+                  <li data-i18n="unieduAnalysisL5">Wireframes, protótipo em alta fidelidade e testes de usabilidade monitorados com 5 participantes</li>
+                </ul>
+              </article>
+              <article class="case-story__chapter" data-chapter="2" id="case-story-panel-2" role="tabpanel" aria-labelledby="case-story-tab-2">
+                <span class="case-story__num" aria-hidden="true">03</span>
+                <h2 data-i18n="caseSolutionLabel">Solução</h2>
+                <p class="case-story__lead" data-i18n="unieduSolutionLead">Uma plataforma de aprendizagem contínua, com progresso visível.</p>
+                <p data-i18n="unieduSolutionText">O aplicativo combina progresso visível desde a tela inicial, plano de estudos ajustável, recompensas com valor percebido, comunidade e suporte com IA dentro da própria aula. Decisões como ranking opcional, onboarding temporário e um modo escuro com paleta própria ligam o que a pesquisa mostrou à interface.</p>
+              </article>
+              <article class="case-story__chapter" data-chapter="3" id="case-story-panel-3" role="tabpanel" aria-labelledby="case-story-tab-3">
+                <span class="case-story__num" aria-hidden="true">04</span>
+                <h2 data-i18n="caseResultLabel">Resultado</h2>
+                <p class="case-story__lead" data-i18n="unieduResultLead">Um protótipo navegável, avaliado com usuários.</p>
+                <p data-i18n="unieduResultText">O resultado é um protótipo mobile navegável, com tema claro e escuro. Nos testes, os fluxos de plano de estudos, aula, briefing e loja foram concluídos sem bloqueios; comunidade e resgate de pontos mostraram atritos — em parte pela formulação da tarefa — e viraram oportunidades de refinamento.</p>
+                <p class="case-story__note" data-i18n="unieduResultNote">O UNIEDU é um protótipo, não um aplicativo em operação. Os indicadores de retenção e engajamento propostos ainda não foram medidos.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-capabilities">
+          <strong class="process-questions__label" data-i18n="caseCapabilitiesLabel">Capacidades utilizadas</strong>
+          <p class="case-capabilities__badges">
+            <span class="badge" data-i18n="caseBadgePesquisaUX">Pesquisa UX</span>
+            <span class="badge" data-i18n="caseBadgeUX">UX/UI</span>
+            <span class="badge" data-i18n="caseBadgeArquitetura">Arquitetura da informação</span>
+            <span class="badge" data-i18n="caseBadgePrototipagem">Prototipagem</span>
+            <span class="badge" data-i18n="caseBadgeIdentidade">Identidade visual</span>
+            <span class="badge" data-i18n="caseBadgeProductDesign">Product Design</span>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ Evidências do processo — papel claro ═══ -->
+    <section class="section chapter-grid" id="uniedu-evidencias" data-surface="light">
+      <div class="container">
+        <header class="section__head" data-grid-occlude>
+          <span class="tag" data-i18n="unieduEvidenceTag">Evidências</span>
+          <h2 data-i18n="unieduEvidenceHeading">Do rascunho ao protótipo.</h2>
+          <p data-i18n="unieduEvidenceIntro">O processo deixou artefatos em cada etapa — do papel ao protótipo navegável.</p>
+        </header>
+        <div class="case-evidence">
+          <figure class="case-evidence__item">
+            <img src="assets/cases/uniedu-rascunho.webp" alt="Rascunho à mão de uma trilha sinuosa em uma tela de celular, com um unicórnio no topo." data-i18n-attr="alt:unieduFig1Alt" loading="lazy" decoding="async" width="340" height="698" />
+            <figcaption data-i18n="unieduFig1">Rascunho em papel da trilha de aprendizagem</figcaption>
+          </figure>
+          <figure class="case-evidence__item">
+            <img src="assets/cases/uniedu-wireframe.webp" alt="Wireframe em tons de cinza da tela inicial, com progresso, trilha de aprendizagem, aula atual, cases e plano de estudos." data-i18n-attr="alt:unieduFig2Alt" loading="lazy" decoding="async" width="227" height="864" />
+            <figcaption data-i18n="unieduFig2">Wireframe da tela inicial</figcaption>
+          </figure>
+          <figure class="case-evidence__item">
+            <img src="assets/case-uniedu-poster.webp" alt="Tela de entrada do protótipo UNIEDU em modo escuro, com um unicórnio de vidro rosa." data-i18n-attr="alt:unieduFig3Alt" loading="lazy" decoding="async" width="1080" height="1934" />
+            <figcaption data-i18n="unieduFig3">Protótipo navegável — tela de entrada</figcaption>
+          </figure>
+        </div>
+        <figure class="case-journey">
+          <img src="assets/cases/uniedu-jornada.webp" alt="Quadro de post-its com o mapa da jornada: etapas na vertical e, na horizontal, contexto, ações, pensamentos, sentimentos, dores e oportunidades." data-i18n-attr="alt:unieduJourneyAlt" loading="lazy" decoding="async" width="1322" height="837" />
+          <figcaption data-i18n="unieduJourneyCaption">Mapa da jornada: da descoberta à fidelização, com dores e oportunidades de produto.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ═══ Diferencial comercial — pesquisa e prototipação antes de desenvolver ═══ -->
+    <section class="section chapter-grid" id="uniedu-porque">
+      <div class="container case-why">
+        <header class="section__head" data-grid-occlude>
+          <span class="tag" data-i18n="unieduWhyTag">Quando faz sentido</span>
+          <h2 data-i18n="unieduWhyHeading">Pesquisar e prototipar antes de desenvolver.</h2>
+          <p data-i18n="unieduWhyText">O UNIEDU mostra que uma empresa pode contratar investigação, design e prototipação antes de decidir por um desenvolvimento completo: a ideia é estudada, testada com pessoas reais e comunicada de forma navegável, e a decisão de investir é tomada com mais informação.</p>
+          <p class="case-why__cta"><a href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral+e+quero+conversar+sobre+um+produto+digital+ou+aplicativo." class="btn btn--primary" target="_blank" rel="noopener noreferrer" data-wa-key="waConectada" data-i18n="unieduWhyCta">Conversar sobre um produto digital</a></p>
+        </header>
+      </div>
+    </section>
+
+    <!-- ═══ Próximo projeto ═══ -->
+    <section class="case-next">
+      <div class="container case-next__wrap">
+        <a class="case-next__link" href="case-almeida.html">
+          <span class="case-next__label" data-i18n="caseNextLabel">Próximo projeto</span>
+          <span class="case-next__name">Grupo Almeida</span>
+          <span class="case-next__cat" data-i18n="proj3Category">Site institucional · Grupo de empresas</span>
+          <span class="case-next__arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="case-next__all" href="cases.html" data-i18n="projectsSeeAllCta">Ver todos os projetos →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ CTA FINAL + FOOTER (manter em sincronia com todas as outras páginas) ═══ -->
+  <section class="cta-final" id="contato">
+    <div class="cta-final__glow" aria-hidden="true"></div>
+    <div class="container cta-final__wrap">
+      <span class="tag tag--red" data-i18n="tagCtaFinal">Contato direto</span>
+      <h2 data-i18n="ctaFinalHeading">Já sabe o que sua empresa precisa?</h2>
+      <p data-i18n="ctaFinalDesc">Conte sobre seu projeto diretamente para quem desenvolve as soluções da L A Cabral.</p>
+      <a
+        href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral+e+quero+conversar+sobre+um+projeto."
+        class="btn btn--primary btn--lg"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-wa-key="waGeneral"
+        data-i18n="ctaFinalBtn"
+      >Conversar pelo WhatsApp</a>
+      <p class="cta-final__sub">
+        <a href="/diagnostico" class="cta-final__wa-link" data-i18n="ctaFinalDiagLink">Ainda não tem clareza? Faça o diagnóstico →</a>
+      </p>
+      <p class="cta-final__note" data-i18n="ctaFinalNote">Sem compromisso · Uma conversa inicial para entender onde vale mais a pena organizar primeiro.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__wrap">
+      <div class="footer__left">
+        <a href="index.html" class="footer__brand" aria-label="L A Cabral">
+          <img src="assets/la-cabral-signature-white.png" alt="L A Cabral" class="footer__brand-mark" width="955" height="593" loading="lazy" decoding="async" />
+        </a>
+        <p class="footer__tagline" data-i18n="footerTagline">Design e tecnologia para transformar necessidades de negócio em soluções que funcionam.</p>
+        <p class="footer__authorship" data-i18n="footerAuthorship">Conduzida por Lucas Cabral.</p>
+      </div>
+      <div class="footer__contact">
+        <p><strong>L A CABRAL LTDA</strong></p>
+        <p>CNPJ: 68.528.047/0001-66</p>
+        <p>Florianópolis / SC</p>
+        <p>
+          <a href="tel:+5512997863832">(12) 99786-3832</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:lac.lucascabral@gmail.com">lac.lucascabral@gmail.com</a>
+        </p>
+      </div>
+      <nav class="footer__nav" aria-label="Links rápidos" data-i18n-attr="aria-label:ariaFooterNav">
+        <a href="solucoes.html" data-i18n="navSolutions">Soluções</a>
+        <a href="cases.html" data-i18n="navCases">Projetos</a>
+        <a href="como-trabalhamos.html" data-i18n="navHowWeWork">Como trabalhamos</a>
+        <a href="sobre.html" data-i18n="navAbout">Sobre</a>
+        <a href="#contato" data-i18n="navContact">Contato</a>
+      </nav>
+    </div>
+    <div class="container footer__legal">
+      <p class="footer__disclaimer" data-i18n="footerDisclaimer">Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.</p>
+      <p class="footer__bottom" data-i18n-html="footerBottom">© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a
+    class="wa-float"
+    href="https://wa.me/5512997863832?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Falar pelo WhatsApp"
+    data-wa-key="waFloatGeneral"
+    data-i18n-attr="aria-label:ariaWaFloat"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script src="script.js?v=2.1"></script>
+</body>
+</html>

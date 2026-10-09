@@ -72,7 +72,7 @@
       resultWaBtn: 'Conversar sobre isso no WhatsApp',
       resultHomeBtn: 'Voltar para a Home',
 
-      footerText: 'L A CABRAL LTDA · Diagnóstico gratuito, sem compromisso.',
+      footerText: 'L A CABRAL LTDA · Diagnóstico guiado.',
     },
     en: {
       docTitle: 'Diagnostic — L A Cabral',
@@ -133,7 +133,7 @@
       resultWaBtn: 'Talk about this on WhatsApp',
       resultHomeBtn: 'Back to Home',
 
-      footerText: 'L A CABRAL LTDA · Free diagnostic, no commitment.',
+      footerText: 'L A CABRAL LTDA · Guided diagnostic.',
     },
   };
 

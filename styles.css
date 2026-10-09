@@ -1322,14 +1322,14 @@ section.chapter-solid {
   .proj-scroll__track.is-enhanced .proj-scroll__ruler { display: none; }
 }
 
-/* ── CASES.HTML — grade dos três projetos ──────────────────────
+/* ── CASES.HTML — grade dos quatro projetos ──────────────────────
    Reaproveita .showcase-primary/.showcase-secondary (mesmo cartão,
-   mesma moldura browser-chrome/phone-preview) em três colunas iguais.
-   Sartec já ganhou destaque no case completo acima — aqui os três
-   projetos entram no mesmo nível, sem repetir a hierarquia. */
+   mesma moldura browser-chrome/phone-preview) em duas colunas iguais.
+   Os quatro projetos entram no mesmo nível; cada ficha leva ao próprio
+   case completo (case-*.html). */
 .cases-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   align-items: stretch;
   max-width: 1180px;
@@ -2624,9 +2624,7 @@ main h1:not(.hero__title) {
   max-width: 640px;
 }
 
-/* Checklist — "Para quem fazemos mais sentido" (Home). Coluna única no
-   mobile; 2 colunas com régua nativa do CSS multi-column no desktop (ver
-   media query abaixo) — nenhuma grade nova, só a lista mais escaneável. */
+/* Checklist de reconhecimento (Home, #para-quem) — coluna única. */
 .fit-list {
   display: flex;
   flex-direction: column;
@@ -2644,25 +2642,6 @@ main h1:not(.hero__title) {
 .fit-note {
   font-size: 13px;
   color: var(--text-3);
-}
-
-/* Em desktop amplo a coluna de texto (com 11 itens) fica bem mais alta
-   que a foto ao lado — 2 colunas equilibram a leitura sem cortar
-   nenhum item da lista. column-rule é a "régua vertical extremamente
-   discreta" pedida — nativa do layout multi-coluna, não uma segunda
-   estrutura de linhas por cima. Escopado a #para-quem: é a única seção
-   que usa .fit-list hoje. */
-@media (min-width: 900px) {
-  #para-quem .fit-list {
-    display: block;
-    column-count: 2;
-    column-gap: 32px;
-    column-rule: 1px solid var(--paper-line-2);
-  }
-  #para-quem .fit-list li {
-    break-inside: avoid;
-    margin-bottom: 12px;
-  }
 }
 
 /* ── QUANDO ENTRAMOS (Home) — QA visual: virou fotografia + UMA
@@ -3355,4 +3334,379 @@ main h1:not(.hero__title) {
       animation: none !important;
     }
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RODADA EDITORIAL — Home (4 projetos) + cases individuais
+   (Pesca Delivery, Sartec, UNIEDU, Grupo Almeida). Tudo aqui reaproveita
+   os materiais/tokens existentes (chapter-grid, chapter-paper, --plate,
+   --surface-2…) — nenhum token novo, nenhuma linguagem visual nova.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Home · trilha de Projetos com 4 fichas: um pouco mais alta que a de 3
+   (300vh), para manter o ritmo de ~45vh de repouso por projeto sem
+   transformar a seção numa "sala vazia" (ver HOLD/TRANS em script.js). */
+#projScrollTrack { --proj-track-h: 340vh; }
+
+/* Home · reconhecimento — parágrafo de apoio antes da lista */
+.fit-split__content .fit-desc {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* Mockup de celular com captura real da aplicação (sem "ilha" por cima
+   do conteúdo — a captura já começa na barra da própria aplicação). */
+.phone-preview__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+  object-position: top center;
+  background: #161513;
+}
+@media (max-width: 680px) {
+  .phone-preview__img { border-radius: 27px; }
+}
+
+/* ── Índice de projetos (cases.html) ───────────────────────────── */
+.showcase__title { font-size: 21px; margin-bottom: 4px; }
+.showcase-primary > .showcase__eyebrow { align-self: flex-start; }
+.showcase__info .showcase__type {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+
+/* ── Página de case ────────────────────────────────────────────── */
+.case-page { padding-top: 120px; }
+.case-back {
+  display: block;
+  width: fit-content;
+  margin: 0 0 24px max(0px, calc((100% - 1140px) / 2));
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+  transition: color var(--t) var(--ease);
+}
+.case-back:hover, .case-back:focus-visible { color: var(--green-light); }
+
+.case-hero__text h1 {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 46px);
+}
+
+/* Pesca: duas capturas de celular, a segunda levemente deslocada */
+.case-hero__visual--duo {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+.case-hero__visual--duo .phone-preview { width: min(230px, 42vw); }
+.case-hero__visual--duo .phone-preview:nth-child(2) { margin-top: 56px; }
+/* UNIEDU: um celular só, centralizado */
+.case-hero__visual--phone { display: flex; justify-content: center; }
+.case-hero__visual--phone .phone-preview { width: min(280px, 62vw); }
+
+/* Case Story Rail — quatro capítulos (Problema/Análise/Solução/Resultado) */
+.case-story__chapter .case-story__lead {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.case-story__list {
+  list-style: none;
+  margin: 14px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.case-story__list li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14.5px;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+.case-story__list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green-light);
+  font-weight: 700;
+}
+.case-story__chapter .case-story__note {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  font-size: 13.5px;
+  color: var(--text-3);
+  line-height: 1.6;
+}
+@media (min-width: 1025px) {
+  /* 180vh para 4 capítulos (150vh para 3): mesmo ritmo de rolagem por capítulo. */
+  .case-story__track[data-chapters="4"].is-enhanced { height: 180vh; }
+  .case-story__track[data-chapters="4"].is-enhanced .case-story__sensor[data-chapter="0"] { top: 6%; }
+  .case-story__track[data-chapters="4"].is-enhanced .case-story__sensor[data-chapter="1"] { top: 32%; }
+  .case-story__track[data-chapters="4"].is-enhanced .case-story__sensor[data-chapter="2"] { top: 58%; }
+  .case-story__track[data-chapters="4"].is-enhanced .case-story__sensor[data-chapter="3"] { top: 84%; }
+}
+
+.eco-flow__heading {
+  font-size: clamp(22px, 2.4vw, 30px);
+  margin: 8px 0 28px;
+  text-align: center;
+}
+
+/* Cartões de conteúdo dos cases (superfícies, decisões de UX) */
+.case-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border-light);
+  border-radius: var(--r-lg);
+  padding: 28px 28px 26px;
+}
+section.chapter-grid[data-surface="light"] .case-card {
+  background: var(--plate);
+  border-color: var(--paper-line-2);
+}
+.case-card h3 { font-size: 19px; margin-bottom: 14px; }
+.case-card p { font-size: 15px; color: var(--text-2); line-height: 1.7; }
+.case-card__num {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--green);
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.case-card .case-card__note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--text-3);
+  line-height: 1.6;
+}
+.case-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.case-list li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+.case-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+.case-surfaces {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto 72px;
+}
+.case-subhead { margin-top: 8px; }
+.case-stories {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* Galeria de capturas reais (Pesca) */
+.case-gallery__title {
+  font-size: 20px;
+  text-align: center;
+  margin: 8px 0 28px;
+}
+.case-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.case-gallery__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.case-gallery .phone-preview { width: 100%; max-width: 220px; }
+.case-gallery figcaption {
+  font-size: 13px;
+  color: var(--text-2);
+  text-align: center;
+  line-height: 1.4;
+}
+.case-gallery__note {
+  margin: 28px auto 0;
+  max-width: 640px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-3);
+  line-height: 1.6;
+}
+
+/* Evidências do processo (UNIEDU) */
+.case-evidence {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin: 0 auto 56px;
+}
+.case-evidence__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.case-evidence__item img {
+  display: block;
+  height: 380px;
+  width: auto;
+  max-width: 100%;
+  border-radius: var(--r-md);
+  border: 1px solid var(--paper-line);
+  background: #fff;
+  box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.35);
+}
+.case-evidence figcaption,
+.case-journey figcaption {
+  font-size: 13px;
+  color: var(--text-2);
+  text-align: center;
+  line-height: 1.45;
+  max-width: 260px;
+}
+.case-journey {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.case-journey img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-md);
+  border: 1px solid var(--paper-line);
+  background: #fff;
+}
+.case-journey figcaption { max-width: 560px; }
+.case-why { max-width: 760px; }
+.case-why__cta { margin-top: 24px; }
+
+/* Arquitetura do site (Grupo Almeida) */
+.case-sitemap {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 900px;
+}
+.case-sitemap li {
+  padding: 10px 18px;
+  border: 1px solid var(--paper-line);
+  background: var(--plate);
+  border-radius: var(--r-pill);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Próximo projeto */
+section.case-next {
+  padding: 56px 0;
+  background: linear-gradient(180deg, #0F2119 0%, #0B1912 100%);
+}
+.case-next__wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.case-next__link {
+  flex: 1 1 420px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 24px;
+  row-gap: 2px;
+  align-items: center;
+  padding: 24px 28px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  transition: border-color var(--t) var(--ease), background var(--t) var(--ease);
+}
+.case-next__link:hover,
+.case-next__link:focus-visible { border-color: var(--green-border); background: var(--surface-2); }
+.case-next__label {
+  grid-column: 1;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green-light);
+}
+.case-next__name {
+  grid-column: 1;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+.case-next__cat { grid-column: 1; font-size: 14px; color: var(--text-2); }
+.case-next__arrow {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  font-size: 28px;
+  color: var(--green-light);
+}
+.case-next__all {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-light);
+  transition: color var(--t) var(--ease);
+}
+.case-next__all:hover, .case-next__all:focus-visible { color: var(--text); }
+
+@media (max-width: 1024px) {
+  .case-surfaces { grid-template-columns: 1fr; max-width: 640px; margin-bottom: 56px; }
+  .case-stories { grid-template-columns: 1fr; max-width: 640px; }
+  .case-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+  .case-hero__visual--duo .phone-preview:nth-child(2) { margin-top: 36px; }
+}
+@media (max-width: 680px) {
+  .case-page { padding-top: 96px; }
+  .case-back { margin-left: 0; }
+  .case-hero__visual--duo { gap: 14px; }
+  .case-hero__visual--duo .phone-preview { width: 44vw; }
+  .case-hero__visual--duo .phone-preview:nth-child(2) { margin-top: 28px; }
+  .case-card { padding: 22px 20px 20px; }
+  .case-evidence { gap: 24px; margin-bottom: 40px; }
+  .case-evidence__item img { height: 260px; }
+  .case-gallery { gap: 18px 14px; }
+  .case-next__link { padding: 20px 20px; }
+  section.case-next { padding: 40px 0; }
 }
