@@ -2,18 +2,6 @@
    L A CABRAL — Site institucional
    ═══════════════════════════════════════════════ */
 
-/* Registro de tipo para a luz de contorno dos cards de projeto (ver
-   .proj-scroll__item::after) — sem @property, um custom property animado
-   não interpola (o navegador não sabe que é um ângulo), a "volta" pulava
-   em vez de girar suavemente. Sem suporte (navegador antigo): o círculo
-   fica parado no ângulo inicial, que já é a borda estática pedida para
-   prefers-reduced-motion — degradação aceitável, não um efeito quebrado. */
-@property --border-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
-
 /* ── TOKENS ───────────────────────────────────── */
 :root {
   --bg:            #0D1B16;
@@ -1174,37 +1162,60 @@ section.chapter-solid {
 }
 
 /* Luz percorrendo o contorno — assinatura extremamente sutil,
-   compartilhada pelos três projetos e pelos dois modos (um ::after só,
-   aqui, não duplicado por card). conic-gradient + mask-composite:exclude
-   formam um anel fino (~1.5px) que acompanha o border-radius com
-   perfeição via border-radius:inherit. 78% do anel fica quase invisível
-   (alpha 0.07) — só um trecho pequeno, mais claro, percorre o perímetro
-   devagar (18s, linear, sem pulsar, sem iluminar o interior). É
-   acabamento do objeto, não glow — por isso muito mais localizado que o
-   grid ambiente da seção (ver .grid-trails), que continua sendo a única
-   fonte de "energia" maior. pointer-events:none: nunca captura clique. */
-.proj-scroll__track.is-enhanced .proj-scroll__item::after {
-  content: "";
+   compartilhada pelos quatro projetos e pelos dois modos. Anel fino
+   (~1.5px) que acompanha o border-radius: .proj-scroll__ring é a
+   moldura estática (máscara mask-composite:exclude recorta só o
+   contorno) e .proj-scroll__ring-glow, dentro dela, é um quadrado com o
+   conic-gradient PARADO que apenas gira via transform. 78% do anel fica
+   quase invisível (alpha 0.07) — só um trecho pequeno, mais claro,
+   percorre o perímetro devagar (18s, linear, sem pulsar, sem iluminar o
+   interior). Por que não animar o ângulo do gradiente (versão anterior,
+   @property --border-angle): isso reexecutava paint+raster do card
+   inteiro a cada frame (milhares de RasterTasks parado na seção) e
+   deixava tiles sem raster — faixas brancas nas bordas da viewport em
+   scroll rápido. Girar uma camada pronta é trabalho só do compositor.
+   O quadrado tem lado hypot(largura, altura) do card (cq units; a soma
+   é o fallback) para cobrir o retângulo em qualquer ângulo; a rotação em
+   torno do centro gera o mesmo varrido angular do conic-gradient
+   original. É acabamento do objeto, não glow — por isso muito mais
+   localizado que o grid ambiente da seção (ver .grid-trails).
+   pointer-events:none: nunca captura clique. */
+.proj-scroll__ring { display: none; }
+.proj-scroll__track.is-enhanced .proj-scroll__ring {
+  display: block;
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: 1.5px;
+  overflow: hidden;
+  container-type: size;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.proj-scroll__ring-glow {
+  position: absolute;
+  width: calc(100cqw + 100cqh);
+  width: hypot(100cqw, 100cqh);
+  aspect-ratio: 1;
+  left: calc(50% - 0.5 * (100cqw + 100cqh));
+  left: calc(50% - 0.5 * hypot(100cqw, 100cqh));
+  top: calc(50% - 0.5 * (100cqw + 100cqh));
+  top: calc(50% - 0.5 * hypot(100cqw, 100cqh));
   background: conic-gradient(
-    from var(--border-angle, 0deg),
     rgba(34, 197, 94, 0.07) 0%,
     rgba(34, 197, 94, 0.07) 78%,
     rgba(134, 239, 172, 0.95) 88%,
     rgba(34, 197, 94, 0.07) 100%
   );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
   animation: proj-card-glow 18s linear infinite;
+  will-change: transform;
 }
 
 @keyframes proj-card-glow {
-  to { --border-angle: 360deg; }
+  to { transform: rotate(360deg); }
+}
 }
 
 .proj-scroll__track.is-enhanced .proj-scroll__panel {
@@ -1315,7 +1326,7 @@ section.chapter-solid {
   .proj-scroll__track.is-enhanced .proj-scroll__stage { position: static; height: auto; }
   .proj-scroll__track.is-enhanced .proj-scroll__stage-inner { position: static; height: auto; display: flex; flex-direction: column; gap: 72px; }
   .proj-scroll__track.is-enhanced .proj-scroll__item { position: static; display: flex; flex-direction: column; gap: 28px; opacity: 1 !important; transform: none !important; border-radius: 20px; }
-  .proj-scroll__track.is-enhanced .proj-scroll__item::after { animation: none; }
+  .proj-scroll__track.is-enhanced .proj-scroll__ring-glow { animation: none; }
   .proj-scroll__track.is-enhanced .proj-scroll__panel,
   .proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual { opacity: 1 !important; transform: none !important; }
   .proj-scroll__track.is-enhanced .proj-scroll__frame .proj-scroll__visual { position: relative; top: auto; left: auto; }
