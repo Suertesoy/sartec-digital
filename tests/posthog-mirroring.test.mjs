@@ -25,8 +25,11 @@ const ALLOWED = {
   identity_viewed: ['language'],
   diagnostic_completed: ['language', 'recommendation_path', 'outcome_mode', 'answer_count'],
   result_viewed: ['language', 'recommendation_path', 'outcome_mode'],
-  whatsapp_clicked: ['language', 'recommendation_path', 'outcome_mode'],
+  // whatsapp_clicked é legado do Core; no PostHog o clique é contact_clicked (sem contagem dupla).
+  contact_clicked: ['language', 'page', 'position', 'channel', 'cta_key'],
+  lead_submitted: ['language', 'recommendation_path', 'outcome_mode'],
 };
+for (const k of Object.keys(ALLOWED)) ALLOWED[k].push('event_layer');
 
 let server, base, localBase, browser;
 
@@ -147,8 +150,13 @@ test('A/B/E/F: Core intacto + PostHog recebe os mesmos eventos, só com propried
   assert.equal(n('identity_viewed'), 1);
   assert.equal(n('diagnostic_completed'), 1);
   assert.equal(n('result_viewed'), 1);
-  assert.equal(n('whatsapp_clicked'), 1);
-  assert.equal(names.length, 1 + 1 + 11 + 11 + 1 + 1 + 1 + 1);
+  assert.equal(n('whatsapp_clicked'), 0, 'legado do Core: não duplica o clique no PostHog');
+  assert.equal(n('contact_clicked'), 1);
+  assert.equal(n('lead_submitted'), 1, 'conversão só após o Core confirmar');
+  assert.equal(names.length, 1 + 1 + 11 + 11 + 1 + 1 + 1 + 1 + 1);
+  const cc = ph.captures.find((c) => c.name === 'contact_clicked').props;
+  assert.deepEqual({ ch: cc.channel, pos: cc.position, page: cc.page, layer: cc.event_layer }, { ch: 'whatsapp', pos: 'diagnostic_result', page: 'diagnostico', layer: 'contact_intent' });
+  assert.equal(ph.captures.find((c) => c.name === 'lead_submitted').props.event_layer, 'conversion');
   for (const c of ph.captures) {
     assert.ok(ALLOWED[c.name], `evento fora da lista: ${c.name}`);
     for (const k of Object.keys(c.props)) assert.ok(ALLOWED[c.name].includes(k), `${c.name}: propriedade fora da allowlist: ${k}`);

@@ -7,7 +7,7 @@
     "build:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.css --watch",
     "build": "npm run build:css",
-    "test": "node --test --test-concurrency=1 tests/session-readiness.test.mjs tests/posthog-mirroring.test.mjs tests/contact-number.test.mjs tests/contact-config.test.mjs tests/consent.test.mjs tests/posthog-consent.test.mjs tests/attribution.test.mjs"
+    "test": "node --test --test-concurrency=1 tests/session-readiness.test.mjs tests/posthog-mirroring.test.mjs tests/contact-number.test.mjs tests/contact-config.test.mjs tests/consent.test.mjs tests/posthog-consent.test.mjs tests/attribution.test.mjs tests/tracking.test.mjs tests/google-tag.test.mjs"
   },
   "devDependencies": {
     "autoprefixer": "^10.5.2",

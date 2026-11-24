@@ -451,35 +451,14 @@
   }
 
   // ── PostHog (best-effort, só comportamento) ──────────────────────
-  // Allowlist explícita por evento. Nada além disto sai para o PostHog: sem
-  // nome/e-mail/telefone, sem IDs do Core (eventId, submissionId, sessão),
-  // sem metadata, score, tier ou qualification.
-  const PH_ALLOWED_PROPS = {
-    diagnostic_viewed: ['language'],
-    diagnostic_started: ['language'],
-    question_viewed: ['language', 'question_id', 'question_order', 'question_count'],
-    question_answered: ['language', 'question_id', 'question_order', 'question_count'],
-    identity_viewed: ['language'],
-    diagnostic_completed: ['language', 'recommendation_path', 'outcome_mode', 'answer_count'],
-    result_viewed: ['language', 'recommendation_path', 'outcome_mode'],
-    whatsapp_clicked: ['language', 'recommendation_path', 'outcome_mode'],
-  };
-  // Valores aceitos: números ou identificadores curtos (a-z, 0-9, _ . -).
-  const PH_SAFE_STRING = /^[A-Za-z0-9_.-]{1,64}$/;
-
+  // A allowlist de eventos/propriedades e a taxonomia vivem em tracking.js
+  // (LAC_TRACK); o envio respeita o consentimento (LAC_ANALYTICS). Nada de
+  // nome/e-mail/telefone, IDs do Core, metadata, score, tier ou qualification.
+  // whatsapp_clicked é legado do Core: no PostHog o clique é o contact_clicked
+  // que tracking.js emite por delegação (evita contar o mesmo clique duas vezes).
   function capturePostHogEvent(name, props) {
     try {
-      // Só captura com consentimento de análise vigente (LAC_ANALYTICS.capture checa).
-      const analytics = window.LAC_ANALYTICS;
-      const allowed = PH_ALLOWED_PROPS[name];
-      if (!analytics || !allowed) return;
-      const safe = {};
-      allowed.forEach((key) => {
-        const v = props && props[key];
-        if (typeof v === 'number' && isFinite(v)) safe[key] = v;
-        else if (typeof v === 'string' && PH_SAFE_STRING.test(v)) safe[key] = v;
-      });
-      analytics.capture(name, safe);
+      if (window.LAC_TRACK) window.LAC_TRACK.emit(name, props);
     } catch (_) { /* PostHog nunca interrompe a experiência */ }
   }
 
@@ -907,6 +886,16 @@
         outcome_mode: outcomeMode,
         answer_count: lastSubmitPayload ? Object.keys(lastSubmitPayload.answers).length : undefined,
       });
+      // Conversão efetiva: o Core respondeu com sucesso (só responde 2xx depois de
+      // persistir). Idempotente por submissionId — reenvio/reload não recontam.
+      if (result.json && typeof recommendationPath === 'string' && window.LAC_TRACK) {
+        try {
+          window.LAC_TRACK.leadSubmitted(
+            { language: lang, recommendation_path: recommendationPath, outcome_mode: outcomeMode },
+            lastSubmitPayload && lastSubmitPayload.submissionId,
+          );
+        } catch (_) { /* nunca interrompe a experiência */ }
+      }
       renderResult(recommendationPath, outcomeMode);
       return;
     }
