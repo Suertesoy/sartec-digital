@@ -469,16 +469,17 @@
 
   function capturePostHogEvent(name, props) {
     try {
-      const ph = window.posthog;
+      // Só captura com consentimento de análise vigente (LAC_ANALYTICS.capture checa).
+      const analytics = window.LAC_ANALYTICS;
       const allowed = PH_ALLOWED_PROPS[name];
-      if (!ph || typeof ph.capture !== 'function' || !allowed) return;
+      if (!analytics || !allowed) return;
       const safe = {};
       allowed.forEach((key) => {
         const v = props && props[key];
         if (typeof v === 'number' && isFinite(v)) safe[key] = v;
         else if (typeof v === 'string' && PH_SAFE_STRING.test(v)) safe[key] = v;
       });
-      ph.capture(name, safe);
+      analytics.capture(name, safe);
     } catch (_) { /* PostHog nunca interrompe a experiência */ }
   }
 

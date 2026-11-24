@@ -58,7 +58,7 @@ after(async () => {
 // ph: 'stub' | 'throwing' | 'none' | 'real'
 async function openDiagnostic({ ph }) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
-  await ctx.addInitScript(() => { try { localStorage.setItem('lac_consent_v1', JSON.stringify({ v: 1, analytics: true, advertising: false, ts: Date.now() })); } catch (_) {} });
+  await ctx.addInitScript(() => { try { localStorage.setItem('lac_consent_v1', JSON.stringify({ v: 1, analytics: true, advertising: false, ts: Date.now() })); } catch (_) {} window.__LAC_ALLOW_AUTOMATION__ = true; });
   const page = await ctx.newPage();
   const core = [];
   const pageErrors = [];
@@ -188,7 +188,7 @@ test('D: nenhuma PII, ID interno, score/tier ou metadata chega ao PostHog', asyn
   await ctx.close();
 });
 
-test('D: campos de identidade levam ph-no-capture e a config mascara inputs', async () => {
+test('D: campos de identidade levam ph-no-capture e a config desliga o replay', async () => {
   const { ctx, page } = await openDiagnostic({ ph: 'stub' });
   await page.waitForSelector('#diagStartBtn');
   for (const id of ['diagName', 'diagEmail', 'diagWhatsapp', 'diagCompany']) {
@@ -199,7 +199,8 @@ test('D: campos de identidade levam ph-no-capture e a config mascara inputs', as
   assert.equal(init.cfg.api_host, 'https://us.i.posthog.com');
   assert.equal(init.cfg.defaults, '2026-05-30');
   assert.equal(init.cfg.person_profiles, 'identified_only');
-  assert.equal(init.cfg.session_recording.maskAllInputs, true);
+  assert.equal(init.cfg.disable_session_recording, true, 'replay desligado nesta versão');
+  assert.equal(init.cfg.persistence, 'localStorage');
   await ctx.close();
 });
 
@@ -233,22 +234,26 @@ test('snippet real: analytics.js inicializa com token/host/config corretos e a r
   const init = await page.evaluate(() => window.posthog._i.map((a) => ({ token: a[0], cfg: a[1] })));
   assert.equal(init.length, 1);
   assert.equal(init[0].token, TOKEN);
-  assert.deepEqual(init[0].cfg, { api_host: 'https://us.i.posthog.com', defaults: '2026-05-30', person_profiles: 'identified_only', session_recording: { maskAllInputs: true } });
+  const c = init[0].cfg;
+  assert.equal(c.api_host, 'https://us.i.posthog.com');
+  assert.equal(c.person_profiles, 'identified_only');
+  assert.equal(c.persistence, 'localStorage');
+  assert.equal(c.disable_session_recording, true, 'replay desligado');
+  assert.equal(await page.evaluate(() => typeof window.posthog._i[0][1].before_send), 'function');
   assert.deepEqual(pageErrors, []);
   await ctx.close();
 });
 
-test('todas as páginas públicas carregam analytics.js no <head>, antes dos demais scripts externos', () => {
+test('todas as páginas públicas carregam consent.js e depois analytics.js (adiados) no <head>', () => {
   const htmls = fs.readdirSync(ROOT).filter((f) => f.endsWith('.html'));
   assert.ok(htmls.length >= 10, `esperava >=10 páginas, achei ${htmls.length}`);
-  const tag = '<script src="analytics.js?v=1"></script>';
+  const tag = '<script src="analytics.js?v=2" defer></script>';
   for (const f of htmls) {
     const html = fs.readFileSync(path.join(ROOT, f), 'utf8');
     const head = html.slice(0, html.indexOf('</head>'));
     assert.equal(html.split(tag).length - 1, 1, `${f}: analytics.js deve aparecer 1 vez`);
     assert.ok(head.includes(tag), `${f}: fora do <head>`);
-    const firstScript = html.indexOf('<script src=');
-    assert.equal(html.indexOf(tag), firstScript, `${f}: analytics.js não é o primeiro script externo`);
+    assert.ok(html.indexOf('consent.js?v=1') < html.indexOf(tag), `${f}: consent.js deve vir antes do analytics.js`);
   }
   // Ignora comentários: a regra "nunca chamar identify()" está documentada neles.
   const js = fs.readFileSync(path.join(ROOT, 'analytics.js'), 'utf8')
@@ -260,6 +265,7 @@ test('todas as páginas públicas carregam analytics.js no <head>, antes dos dem
 test('ambiente local (127.0.0.1, localhost) e file: não inicializam o PostHog; hostname real inicializa', async () => {
   const ctx = await browser.newContext();
   await ctx.route(/posthog\.com/, (r) => r.abort('failed'));
+  await ctx.addInitScript(() => { try { localStorage.setItem('lac_consent_v1', JSON.stringify({ v: 1, analytics: true, advertising: false, ts: Date.now() })); } catch (_) {} window.__LAC_ALLOW_AUTOMATION__ = true; });
   const probe = async (url) => {
     const page = await ctx.newPage();
     const errors = [];
