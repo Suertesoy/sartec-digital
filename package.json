@@ -1,13 +1,13 @@
-{
+﻿{
   "name": "la-cabral",
   "private": true,
   "version": "1.0.0",
-  "description": "Site institucional da L A Cabral (HTML/CSS/JS estático + Tailwind CSS para tokens, layout e componentes novos)",
+  "description": "Site institucional da L A Cabral (HTML/CSS/JS estÃ¡tico + Tailwind CSS para tokens, layout e componentes novos)",
   "scripts": {
     "build:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./src/tailwind-input.css -o ./assets/css/tailwind.css --watch",
     "build": "npm run build:css",
-    "test": "node --test tests/session-readiness.test.mjs"
+    "test": "node --test tests/session-readiness.test.mjs tests/contact-number.test.mjs"
   },
   "devDependencies": {
     "autoprefixer": "^10.5.2",
