@@ -58,6 +58,7 @@ after(async () => {
 // ph: 'stub' | 'throwing' | 'none' | 'real'
 async function openDiagnostic({ ph }) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await ctx.addInitScript(() => { try { localStorage.setItem('lac_consent_v1', JSON.stringify({ v: 1, analytics: true, advertising: false, ts: Date.now() })); } catch (_) {} });
   const page = await ctx.newPage();
   const core = [];
   const pageErrors = [];

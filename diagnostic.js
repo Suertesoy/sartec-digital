@@ -376,6 +376,8 @@
       btnPt.setAttribute('aria-pressed', String(!isEn));
       btnEn.setAttribute('aria-pressed', String(isEn));
     }
+    // Avisa quem acompanha o idioma (ex.: componente de consentimento).
+    window.dispatchEvent(new Event('la:languagechange'));
   }
 
   function setLang(newLang) {

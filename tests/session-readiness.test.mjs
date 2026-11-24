@@ -43,6 +43,7 @@ after(async () => {
 // mode: 'ok' | 'http500' | 'abort'. `log` guarda a ordem real das chamadas.
 async function openPage({ sessionMode = 'ok', sessionDelay = 0, draft = null } = {}) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await ctx.addInitScript(() => { try { localStorage.setItem('lac_consent_v1', JSON.stringify({ v: 1, analytics: true, advertising: false, ts: Date.now() })); } catch (_) {} });
   const page = await ctx.newPage();
   const log = [];
   const pageErrors = [];
