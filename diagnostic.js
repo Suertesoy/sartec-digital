@@ -1041,10 +1041,14 @@
     }
 
     // Sessão de visitante (best-effort, não bloqueia a experiência caso falhe).
+    // Atribuição original (first-touch) vinda de attribution.js, já filtrada pelo
+    // consentimento. Sem o módulo, vai só o path (nunca a query string completa).
+    const attribution = (window.LAC_ATTRIBUTION && window.LAC_ATTRIBUTION.getSessionPayload())
+      || { landingUrl: window.location.pathname || '/', referrer: null };
     sessionReady = apiPost('/session', {
       contractVersion: registry.contractVersion,
-      landingUrl: window.location.href,
-      referrer: document.referrer || null,
+      landingUrl: attribution.landingUrl,
+      referrer: attribution.referrer,
     }).then(() => {}, () => {});
 
     const stored = loadDraftFromStorage();
