@@ -951,13 +951,8 @@
     $('diagResultNext').hidden = !copy;
 
     const waBtn = $('diagResultWaBtn');
-    const waMessageStandard = lang === 'en'
-      ? "Hi, I just completed L A Cabral's diagnostic and would like to talk about my results."
-      : 'Olá, acabei de fazer o diagnóstico da L A Cabral e quero conversar sobre o resultado.';
-    const waMessageGuarded = lang === 'en'
-      ? "Hi, I completed L A Cabral's diagnostic and would like to understand my results better before deciding anything."
-      : 'Olá, fiz o diagnóstico da L A Cabral e quero entender melhor o resultado antes de decidir qualquer coisa.';
-    waBtn.href = `https://wa.me/5548991830112?text=${encodeURIComponent(guarded ? waMessageGuarded : waMessageStandard)}`;
+    // Número e mensagens: contact-config.js (fonte única).
+    waBtn.href = window.LAC_CONTACT.diagnosticWaHref(lang, guarded);
     waBtn.classList.toggle('btn--primary', !guarded);
     waBtn.classList.toggle('btn--ghost', guarded);
     waBtn.onclick = () => sendEvent('whatsapp_clicked');

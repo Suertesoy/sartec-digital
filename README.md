@@ -70,7 +70,7 @@ Deploy automático a cada push para `main`. Build command: `npm run build:css` (
 
 ## Personalização rápida
 
-- **Número do WhatsApp**: `WA_NUMBER` em `script.js`, usado para montar todos os links `wa.me`
+- **Contatos (WhatsApp, telefone, e-mail, mensagens)**: `contact-config.js` (`window.LAC_CONTACT`) é a fonte única; os fallbacks estáticos dos HTMLs são validados por `tests/contact-config.test.mjs`
 - **Textos PT/EN**: objeto `I18N` em `script.js` (chaves espelhadas em `data-i18n` no HTML)
 - **Cores e tokens**: `:root` em `styles.css`
 
