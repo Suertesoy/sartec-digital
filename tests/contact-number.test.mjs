@@ -15,11 +15,13 @@ const SELF = path.relative(ROOT, fileURLToPath(import.meta.url)).replace(/\\/g, 
 
 const NEW_E164 = '5548991830112';
 const NEW_DISPLAY = '(48) 99183-0112';
-// Padrões do número antigo, montados por partes para este arquivo não se acusar.
+const NEW_EMAIL = 'contato.lacabral@gmail.com';
+// Padrões dos contatos antigos (número e e-mail), montados por partes para este arquivo não se acusar.
 const OLD_PATTERNS = [
   new RegExp(['5512', '997863832'].join('')),
   new RegExp(['99786', '[-. ]?', '3832'].join('')),
   new RegExp(['\\+?55\\s?12\\s?9\\s?9786'].join('')),
+  new RegExp(['lac\\.lucas', 'cabral@gmail\\.com'].join(''), 'i'),
 ];
 
 const TRACKED = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' })
@@ -39,6 +41,7 @@ test('nenhum arquivo versionado contém o número antigo', () => {
 test('fallbacks HTML estáticos (sem JS): todo wa.me e tel: usa o número oficial', () => {
   let waCount = 0;
   let telCount = 0;
+  let mailCount = 0;
   for (const page of PAGES) {
     const html = fs.readFileSync(path.join(ROOT, page), 'utf8');
     for (const m of html.matchAll(/href="(https?:\/\/(?:wa\.me|api\.whatsapp\.com)[^"]*)"/g)) {
@@ -49,12 +52,18 @@ test('fallbacks HTML estáticos (sem JS): todo wa.me e tel: usa o número oficia
       telCount++;
       assert.equal(m[1], `+${NEW_E164}`, `${page}: tel:${m[1]}`);
     }
+    for (const m of html.matchAll(/href="mailto:([^"?]*)[^"]*"[^>]*>([^<]*)</g)) {
+      mailCount++;
+      assert.equal(m[1], NEW_EMAIL, `${page}: mailto`);
+      assert.equal(m[2], NEW_EMAIL, `${page}: e-mail exibido`);
+    }
     for (const m of html.matchAll(/>\(\d{2}\) \d{5}-\d{4}</g)) {
       assert.equal(m[0], `>${NEW_DISPLAY}<`, `${page}: telefone exibido`);
     }
   }
   assert.ok(waCount >= 20, `esperava vários links wa.me, achei ${waCount}`);
   assert.ok(telCount >= 9, `esperava tel: nas páginas, achei ${telCount}`);
+  assert.ok(mailCount >= 9, `esperava mailto nas páginas, achei ${mailCount}`);
 });
 
 // ── navegador real: JS desativado e JS ativo ─────────────────────────
@@ -79,7 +88,7 @@ before(async () => {
 after(async () => { await browser?.close(); server?.close(); });
 
 async function collectLinks(page) {
-  return page.$$eval('a[href]', (as) => as.map((a) => a.getAttribute('href')).filter((h) => /wa\.me|whatsapp|^tel:/.test(h)));
+  return page.$$eval('a[href]', (as) => as.map((a) => a.getAttribute('href')).filter((h) => /wa\.me|whatsapp|^tel:|^mailto:/.test(h)));
 }
 
 for (const javaScriptEnabled of [false, true]) {
@@ -94,7 +103,8 @@ for (const javaScriptEnabled of [false, true]) {
         const links = await collectLinks(page);
         for (const href of links) {
           assert.ok(!OLD_PATTERNS.some((re) => re.test(href)), `${p}: número antigo em ${href}`);
-          assert.ok(href.includes(NEW_E164), `${p}: link sem o número oficial: ${href}`);
+          if (href.startsWith('mailto:')) assert.equal(href, `mailto:${NEW_EMAIL}`, `${p}: e-mail`);
+          else assert.ok(href.includes(NEW_E164), `${p}: link sem o número oficial: ${href}`);
         }
       }
       await ctx.close();

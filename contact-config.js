@@ -14,7 +14,7 @@
   var CONFIG = {
     whatsapp: { e164: '5548991830112' }, // formato wa.me
     phone: { href: '+5548991830112', display: '(48) 99183-0112' },
-    email: { address: 'lac.lucascabral@gmail.com' },
+    email: { address: 'contato.lacabral@gmail.com' },
 
     // Mensagens pré-preenchidas por CTA (chave = data-wa-key no HTML).
     messages: {
