@@ -75,7 +75,7 @@ test('todo CTA de contato, diagnóstico e demo gera exatamente 1 evento correto 
       else if (/^tel:/.test(raw)) kind = 'phone';
       else if (/^mailto:/.test(raw)) kind = 'email';
       else if (/(^|\/)diagnostico(\.html)?$/.test(raw)) kind = 'diagnostic';
-      else if (/^https:\/\/(pescadelivery\.vercel\.app|www\.sartecpapelaria\.com\.br|projeto-uniedu\.vercel\.app|case-app-uniedu\.vercel\.app|almeidaambiental\.vercel\.app)/.test(raw)) kind = 'demo';
+      else if (/^https:\/\/(pescadelivery\.vercel\.app|pescadelivery-env-demo-suertesoys-projects\.vercel\.app|www\.sartecpapelaria\.com\.br|projeto-uniedu\.vercel\.app|case-app-uniedu\.vercel\.app|almeidaambiental\.vercel\.app)/.test(raw)) kind = 'demo';
       return kind ? { i, kind, key: a.dataset.waKey || null } : null;
     }).filter(Boolean));
     for (const l of links) {

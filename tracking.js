@@ -62,6 +62,7 @@
 
   var DEMO_HOSTS = {
     'pescadelivery.vercel.app': 'pesca',
+    'pescadelivery-env-demo-suertesoys-projects.vercel.app': 'pesca',
     'www.sartecpapelaria.com.br': 'sartec',
     'projeto-uniedu.vercel.app': 'uniedu',
     'case-app-uniedu.vercel.app': 'uniedu',
