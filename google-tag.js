@@ -1,38 +1,42 @@
-/* Google Tag (gtag.js) para Google Ads — PREPARADO, INERTE ATÉ HAVER IDs REAIS.
+/* Google Tag (gtag.js) direto para Google Ads (sem GTM e sem GA4).
  *
- * Enquanto CONFIG.tagId for null este módulo não carrega nenhum script do
- * Google, não cria dataLayer e não faz nenhuma requisição.
+ * Configurado com os identificadores oficiais da conta. Se CONFIG.tagId for
+ * null o módulo volta a ser inerte: não carrega script do Google, não cria
+ * dataLayer e não faz nenhuma requisição.
  *
- * Quando configurado:
+ * Funcionamento:
  *  - só carrega após consentimento de "publicidade" (Consent Mode v2, modo
  *    BÁSICO: nada do Google é carregado antes do aceite). Ao carregar,
  *    declara o consent default = denied e em seguida o update = granted
  *    (ad_storage, ad_user_data, ad_personalization). analytics_storage
  *    permanece negado: não há GA4;
  *  - revogar volta tudo para denied, remove cookies _gcl_* e desativa conversões;
- *  - não roda em localhost/file: nem em navegador automatizado
- *    (liberável com window.__LAC_ALLOW_AUTOMATION__ nos testes);
+ *  - só roda no domínio de produção (site-env.js): nunca em Preview, localhost,
+ *    file: nem em navegador automatizado — testes não viram conversões comerciais;
+ *  - a falha ou o bloqueio da tag nunca impede a abertura dos canais de contato
+ *    (nenhum preventDefault; tudo em try/catch);
  *  - enhanced conversions DESLIGADAS (allow_enhanced_conversions:false) e nenhum
  *    dado pessoal, ID do Core, valor ou moeda é enviado;
  *  - sem GA4 e sem GTM.
  *
- * Conversões previstas (a tracking.js as aciona, uma vez por interação):
- *   contact          SECUNDÁRIA — clique em WhatsApp/telefone/e-mail (intenção)
- *   diagnostic_lead  PRINCIPAL  — lead do diagnóstico com persistência confirmada pelo Core
- *
- * PARA ATIVAR (depois de criar as ações de conversão no Google Ads):
- *   tagId:  'AW-<número do Google Ads>'
- *   conversions.contact.label / conversions.diagnostic_lead.label: rótulos de cada ação
- * Não inventar valores: se um rótulo ficar null, aquela conversão não é enviada.
+ * Conversões (a tracking.js as aciona, uma vez por interação; sem valor monetário;
+ * a contagem "Uma" é configurada na conta do Google Ads):
+ *   contact          SECUNDÁRIA — evento interno contact_clicked: clique válido em
+ *                    WhatsApp/telefone/e-mail (intenção, não lead)
+ *   diagnostic_lead  PRINCIPAL  — evento interno lead_submitted: só após o Funnel Core
+ *                    confirmar a persistência do diagnóstico
+ * Se um rótulo ficar null, aquela conversão não é enviada (nada é inventado).
+ * Codificação automática (auto-tagging) ativada na conta: o gclid vem na URL do anúncio.
  */
 (function () {
   'use strict';
 
+  // Identificadores oficiais (Google Ads) — preservar maiúsculas/minúsculas.
   var CONFIG = {
-    tagId: null, // ex.: 'AW-1234567890' — PENDENTE (painel do Google Ads)
+    tagId: 'AW-18584503044',
     conversions: {
-      contact: { label: null },         // PENDENTE
-      diagnostic_lead: { label: null }, // PENDENTE
+      contact: { label: 'jZ3ACOLxxbsdEISG5J1F' },         // send_to: AW-18584503044/jZ3ACOLxxbsdEISG5J1F
+      diagnostic_lead: { label: 'XR_qCOqbp78dEISG5J1F' }, // send_to: AW-18584503044/XR_qCOqbp78dEISG5J1F
     },
   };
 
@@ -44,11 +48,9 @@
   var loaded = false;  // gtag.js carregado nesta página
   var enabled = false; // conversões permitidas agora (consentimento vigente)
 
+  // Falha fechada: sem site-env.js a tag não roda.
   function blockedEnvironment() {
-    var host = location.hostname;
-    if (location.protocol === 'file:' || host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1') return true;
-    if (navigator.webdriver === true && !window.__LAC_ALLOW_AUTOMATION__) return true;
-    return false;
+    return !(window.LAC_ENV && window.LAC_ENV.measurementAllowed());
   }
 
   function configured() { return TAG_RE.test(CONFIG.tagId || ''); }

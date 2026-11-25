@@ -11,9 +11,10 @@
  *  - NÃO carrega nem inicializa nada até haver consentimento de "análise
  *    comportamental" (window.LAC_CONSENT). Revogar para a captura e apaga os
  *    dados locais do PostHog;
- *  - não inicializa em localhost/127.0.0.1/::1/file: nem em navegador
- *    automatizado (navigator.webdriver) — os testes liberam com
- *    window.__LAC_ALLOW_AUTOMATION__;
+ *  - só mede no domínio de PRODUÇÃO (site-env.js): não inicializa em Preview,
+ *    localhost, file: nem em navegador automatizado — assim deploys de Preview e
+ *    testes não contaminam o projeto real. Os testes liberam a lógica com
+ *    window.__LAC_ALLOW_AUTOMATION__ e interceptam a rede;
  *  - Session Replay desligado nesta versão;
  *  - persistência em localStorage (compatível com navegação entre documentos
  *    HTML e atrelada ao consentimento; sem cookies);
@@ -36,11 +37,10 @@
   var active = false;  // captura permitida agora (consentimento vigente)
 
   // ── ambiente ───────────────────────────────────────────────────────
+  // Só o domínio de produção mede (site-env.js). Preview, localhost, file: e navegador
+  // automatizado ficam de fora. Falha fechada se site-env.js não carregar.
   function blockedEnvironment() {
-    var host = location.hostname;
-    if (location.protocol === 'file:' || host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1') return true;
-    if (navigator.webdriver === true && !window.__LAC_ALLOW_AUTOMATION__) return true;
-    return false;
+    return !(window.LAC_ENV && window.LAC_ENV.measurementAllowed());
   }
 
   // ── sanitização (autocapture e propriedades automáticas) ───────────

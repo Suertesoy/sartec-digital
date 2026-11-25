@@ -30,7 +30,7 @@ export async function startSite() {
   const browser = await chromium.launch({
     channel: process.env.PW_CHANNEL || 'chrome',
     headless: true,
-    args: ['--host-resolver-rules=MAP lacabral.test 127.0.0.1'],
+    args: ['--host-resolver-rules=MAP lacabral.test 127.0.0.1, MAP lacabral.vercel.app 127.0.0.1, MAP preview-lacabral.test 127.0.0.1'],
   });
   return {
     port,
