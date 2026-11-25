@@ -1,8 +1,16 @@
 /* Google Tag (gtag.js) direto para Google Ads (sem GTM e sem GA4).
  *
- * Configurado com os identificadores oficiais da conta. Se CONFIG.tagId for
- * null o módulo volta a ser inerte: não carrega script do Google, não cria
- * dataLayer e não faz nenhuma requisição.
+ * ESTADO: DESATIVADA (ACTIVE = false). Os identificadores oficiais estão
+ * preservados abaixo, mas, enquanto ACTIVE for false, este módulo não carrega
+ * script do Google, não cria dataLayer, não cria cookies e não faz nenhuma
+ * requisição — mesmo com consentimento de publicidade.
+ * Motivo: o mecanismo de transferência internacional de dados para o Google
+ * ainda não está estabelecido (a documentação do Google informa que os termos da
+ * LGPD foram incorporados aos termos de proteção de dados existentes, sem aceite
+ * do anunciante, mas NÃO informa como as transferências de dados de brasileiros
+ * são cobertas; não há confirmação contratual específica). Para ativar: avaliar
+ * com assessoria jurídica, atualizar política e consentimento e então trocar
+ * ACTIVE para true (uma linha).
  *
  * Funcionamento:
  *  - só carrega após consentimento de "publicidade" (Consent Mode v2, modo
@@ -31,6 +39,9 @@
 (function () {
   'use strict';
 
+  // Chave geral: DESATIVADA até haver mecanismo de transferência estabelecido (ver topo).
+  var ACTIVE = false;
+
   // Identificadores oficiais (Google Ads) — preservar maiúsculas/minúsculas.
   var CONFIG = {
     tagId: 'AW-18584503044',
@@ -53,7 +64,7 @@
     return !(window.LAC_ENV && window.LAC_ENV.measurementAllowed());
   }
 
-  function configured() { return TAG_RE.test(CONFIG.tagId || ''); }
+  function configured() { return ACTIVE && TAG_RE.test(CONFIG.tagId || ''); }
 
   function gtag() { window.dataLayer.push(arguments); }
 
@@ -109,6 +120,8 @@
   // Aplica uma configuração (usado ao receber os IDs reais e pelos testes).
   function configure(cfg) {
     if (!cfg) return false;
+    // Só os testes automatizados (rede interceptada) podem ligar a chave; em produção ela é fixa no código.
+    if (cfg.activate === true && window.__LAC_ALLOW_AUTOMATION__) ACTIVE = true;
     if (TAG_RE.test(cfg.tagId || '')) CONFIG.tagId = cfg.tagId;
     Object.keys(CONFIG.conversions).forEach(function (k) {
       var l = cfg.conversions && cfg.conversions[k] && cfg.conversions[k].label;

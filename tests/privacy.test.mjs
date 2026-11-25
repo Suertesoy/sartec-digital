@@ -167,7 +167,7 @@ test('bases legais conforme diretrizes (consentimento para PostHog/Google; legí
   const pt = ptText();
   assert.match(pt, /art\. 7º, V/); assert.match(pt, /art\. 7º, IX/); assert.match(pt, /art\. 7º, I\)/); assert.match(pt, /art\. 7º, II/);
   assert.match(pt, /Qualificação comercial[\s\S]{0,200}Legítimo interesse[\s\S]{0,200}pode se opor/);
-  assert.match(pt, /PostHog, Google Ads e origem da visita[\s\S]{0,120}Consentimento/);
+  assert.match(pt, /PostHog e origem da visita[\s\S]{0,120}Consentimento/);
 });
 
 test('retenção: prazos propostos, eliminação manual e nenhuma rotina automática declarada', () => {
@@ -232,4 +232,23 @@ test('pendências jurídicas ficam fora do site e do repositório público', () 
   const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' });
   assert.ok(!/pend[eê]ncias?|juridic|jurídic|legal-review/i.test(tracked), 'documento interno não pode estar versionado (repositório público)');
   assert.ok(!/pendências jurídicas|internal legal/i.test(policy));
+});
+
+test('Google Ads desativado: política e consentimento dizem a verdade (nada é enviado ao Google hoje)', async () => {
+  const pt = ptText(); const en = enText();
+  assert.match(pt, /Tag do Google \(Google Ads\)\s+está preparada, mas\s+desativada no momento/);
+  assert.match(pt, /não carrega nenhum script do Google, não envia dados ao Google e não cria cookies do Google/);
+  assert.match(en, /Google tag \(Google Ads\)\s+is prepared but\s+turned off for now/);
+  assert.match(pt, /Google\s+\(Google Ads\):\s+desativado no momento/); assert.match(en, /Google\s+\(Google Ads\):\s+turned off for now/);
+  assert.ok(!/Usamos a Tag do Google|We use the Google tag/.test(pt + en), 'não pode dizer que usa a Tag do Google');
+  for (const [lang, off] of [['pt', /desativada no momento/], ['en', /turned off for now/]]) {
+    const ctx = await newContext(site, { lang });
+    const page = await ctx.newPage();
+    await page.goto(`${site.base}/index.html`, { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('#lacConsentBanner:not([hidden])');
+    await page.click('#lacConsentBanner [data-act="customize"]');
+    const rows = await page.$$eval('#lacConsentModal .consent-row__desc', (ps) => ps.map((p) => p.textContent));
+    assert.match(rows[2], off, 'categoria de publicidade informa que o Google Ads está desativado');
+    await ctx.close();
+  }
 });

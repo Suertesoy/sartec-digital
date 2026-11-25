@@ -261,7 +261,7 @@ test('todas as páginas públicas carregam consent.js e depois analytics.js (adi
     const head = html.slice(0, html.indexOf('</head>'));
     assert.equal(html.split(tag).length - 1, 1, `${f}: analytics.js deve aparecer 1 vez`);
     assert.ok(head.includes(tag), `${f}: fora do <head>`);
-    assert.ok(html.indexOf('site-env.js?v=1') < html.indexOf('consent.js?v=3') && html.indexOf('consent.js?v=3') < html.indexOf(tag), `${f}: consent.js deve vir antes do analytics.js`);
+    assert.ok(html.indexOf('site-env.js?v=1') < html.indexOf('consent.js?v=4') && html.indexOf('consent.js?v=4') < html.indexOf(tag), `${f}: consent.js deve vir antes do analytics.js`);
   }
   // Ignora comentários: a regra "nunca chamar identify()" está documentada neles.
   const js = fs.readFileSync(path.join(ROOT, 'analytics.js'), 'utf8')

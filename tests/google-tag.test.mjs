@@ -12,7 +12,7 @@ let site;
 before(async () => { site = await startSite(); });
 after(async () => { await site?.close(); });
 
-const FAKE = { tagId: 'AW-18584503044', conversions: { contact: { label: 'jZ3ACOLxxbsdEISG5J1F' }, diagnostic_lead: { label: 'XR_qCOqbp78dEISG5J1F' } } };
+const FAKE = { activate: true, tagId: 'AW-18584503044', conversions: { contact: { label: 'jZ3ACOLxxbsdEISG5J1F' }, diagnostic_lead: { label: 'XR_qCOqbp78dEISG5J1F' } } };
 const GOOGLE_URL = /googletagmanager\.com|google-analytics\.com|doubleclick\.net|googleadservices\.com/;
 
 async function open(consent, { path: p = '/index.html', configure = false } = {}) {
@@ -33,6 +33,7 @@ const clickWa = (page) => page.evaluate(() => { window.__t += 5000; document.que
 test('identificadores oficiais: tag, rótulos e send_to exatos (maiúsculas/minúsculas preservadas); sem GA4/GTM', () => {
   const src = fs.readFileSync(path.join(ROOT, 'google-tag.js'), 'utf8');
   const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+  assert.match(code, /var ACTIVE = false;/, 'tag desativada por padrão em produção');
   assert.ok(code.includes("tagId: 'AW-18584503044'"));
   assert.ok(code.includes("contact: { label: 'jZ3ACOLxxbsdEISG5J1F' }"));
   assert.ok(code.includes("diagnostic_lead: { label: 'XR_qCOqbp78dEISG5J1F' }"));
@@ -68,19 +69,27 @@ test('Preview e hosts não-produção não carregam a tag nem medem (mesmo com c
   await ctx.close();
 });
 
-test('domínio de produção (humano, sem automação) carrega a tag após o aceite — rede interceptada', async () => {
+test('produção (humano, sem automação) com consentimento de publicidade: a Tag do Google NÃO carrega (desativada)', async () => {
   const ctx = await site.browser.newContext();
   await ctx.addInitScript((key) => {
-    localStorage.setItem(key, JSON.stringify({ v: 1, analytics: false, advertising: true, ts: Date.now() }));
+    localStorage.setItem(key, JSON.stringify({ v: 1, analytics: true, advertising: true, ts: Date.now() }));
     Object.defineProperty(navigator, 'webdriver', { get: () => false });
   }, 'lac_consent_v1');
-  const requests = [];
-  await ctx.route(/googletagmanager\.com|posthog\.com|google-analytics|doubleclick/, (r) => { requests.push(r.request().url()); return r.fulfill({ status: 200, contentType: 'text/javascript', body: '' }); });
+  const google = [];
+  await ctx.route(/googletagmanager.com|google-analytics|doubleclick|googleadservices/, (r) => { google.push(r.request().url()); return r.abort('failed'); });
+  await ctx.route(/posthog.com/, (r) => r.abort('failed'));
   const page = await ctx.newPage();
   await page.goto(`http://lacabral.vercel.app:${site.port}/index.html`, { waitUntil: 'domcontentloaded' });
-  await page.waitForTimeout(300);
-  assert.equal(await page.evaluate(() => window.LAC_ENV.measurementAllowed()), true);
-  assert.ok(requests.some((u) => u.startsWith('https://www.googletagmanager.com/gtag/js?id=AW-18584503044')));
+  await page.waitForTimeout(400);
+  assert.equal(await page.evaluate(() => window.LAC_ENV.measurementAllowed()), true, 'host de produção');
+  assert.equal(await page.evaluate(() => window.LAC_GOOGLE.isEnabled()), false);
+  assert.equal(await page.evaluate(() => typeof window.dataLayer), 'undefined');
+  assert.equal(await page.evaluate(() => window.LAC_GOOGLE.conversion('contact')), false);
+  assert.equal(await page.evaluate(() => document.cookie.includes('_gcl_')), false);
+  assert.equal(google.length, 0, 'nenhuma requisição ao Google');
+  // A chave não pode ser ligada fora dos testes (sem a flag de automação).
+  assert.equal(await page.evaluate(() => window.LAC_GOOGLE.configure({ activate: true, tagId: 'AW-18584503044' })), false);
+  assert.equal(await page.evaluate(() => window.LAC_GOOGLE.isEnabled()), false);
   await ctx.close();
 });
 
@@ -166,7 +175,7 @@ test('Lead do diagnóstico (principal): 1 conversão só após o Core confirmar;
 
 test('rótulo inválido é ignorado: nenhuma conversão com rótulo malformado', async () => {
   const { ctx, page } = await open({ analytics: true, advertising: true });
-  assert.equal(await page.evaluate(() => window.LAC_GOOGLE.configure({ tagId: 'AW-18584503044', conversions: { contact: { label: '<script>' } } })), true);
+  assert.equal(await page.evaluate(() => window.LAC_GOOGLE.configure({ activate: true, tagId: 'AW-18584503044', conversions: { contact: { label: '<script>' } } })), true);
   await clickWa(page);
   assert.deepEqual(conv(await dl(page)).map((e) => e[2].send_to), ['AW-18584503044/jZ3ACOLxxbsdEISG5J1F'], 'rótulo oficial mantido');
   await ctx.close();
@@ -227,6 +236,7 @@ test('falha/bloqueio da Google Tag não impede a abertura de WhatsApp, telefone 
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto(`${site.base}/index.html`, { waitUntil: 'domcontentloaded' });
+  await page.evaluate((c) => window.LAC_GOOGLE.configure(c), FAKE); // liga a tag (dataLayer quebrado)
   // WhatsApp realmente abre.
   const [popup] = await Promise.all([ctx.waitForEvent('page'), page.click('.wa-float')]);
   assert.match(popup.url(), /^https:\/\/wa\.me\/5548991830112/);
@@ -259,6 +269,7 @@ test('GCLID: a tag recebe a URL de entrada com gclid e a atribuição o preserva
   const page = await ctx.newPage();
   const core = await mockCore(page);
   await page.goto(`${site.base}/solucoes.html?gclid=TESTGCLID_Ab-1&utm_source=google&utm_medium=cpc`, { waitUntil: 'domcontentloaded', referer: 'https://www.google.com/' });
+  await page.evaluate((c) => window.LAC_GOOGLE.configure(c), FAKE); // liga a tag (rede interceptada)
   await page.waitForTimeout(200);
   assert.match(await page.evaluate(() => window.__cfgSearch), /gclid=TESTGCLID_Ab-1/, 'a tag carrega enquanto o gclid ainda está na URL');
   // navegação interna por clique e chegada ao diagnóstico

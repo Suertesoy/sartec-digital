@@ -9,10 +9,10 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <title data-i18n="docTitlePrivacidade">Política de Privacidade — L A Cabral</title>
   <script src="site-env.js?v=1" defer></script>
-  <script src="consent.js?v=3" defer></script>
+  <script src="consent.js?v=4" defer></script>
   <script src="attribution.js?v=1" defer></script>
   <script src="analytics.js?v=3" defer></script>
-  <script src="google-tag.js?v=2" defer></script>
+  <script src="google-tag.js?v=3" defer></script>
   <script src="tracking.js?v=2" defer></script>
   <link rel="stylesheet" href="assets/css/tailwind.css?v=1" />
   <link rel="stylesheet" href="styles.css?v=2.1" />
@@ -94,8 +94,8 @@
           <p>Usamos o <strong>PostHog</strong>, <strong>com servidores nos Estados Unidos</strong>, para medir páginas visitadas, cliques e eventos do diagnóstico, e assim melhorar o site. Não enviamos nome, e-mail, telefone, respostas do diagnóstico nem a classificação; não gravamos sessões nem a tela; removemos identificadores de clique de anúncios das informações enviadas; e não compartilhamos identificadores entre o PostHog e o sistema do diagnóstico. O PostHog guarda um identificador anônimo no armazenamento local do navegador, sem cookies.</p>
           <p><strong>Uso do endereço IP pelo PostHog:</strong> o PostHog recebe o seu endereço IP junto com cada evento, porque ele faz parte da comunicação pela internet. Com o descarte de IP ativado, o IP é usado temporariamente para estimar o país e a cidade, e essas duas informações ficam registradas nos eventos; em seguida o IP é descartado e não é gravado. Os eventos ficam guardados por 12 meses.</p>
 
-          <h3>2.6 Publicidade e mensuração de campanhas (somente com consentimento)</h3>
-          <p>Usamos a <strong>Tag do Google (Google Ads)</strong> para medir o resultado das campanhas, registrando dois tipos de conversão: um clique em canal de contato (WhatsApp, telefone ou e-mail) e um diagnóstico concluído e confirmado pelo sistema. Não enviamos ao Google nome, e-mail, telefone, respostas nem valores. O Google define seus próprios cookies (como <code>_gcl_*</code>) e <strong>pode tratar dados nos Estados Unidos e em outros países</strong>. A tag só é carregada <strong>depois</strong> do seu consentimento.</p>
+          <h3>2.6 Publicidade: origem das campanhas e Google Ads (somente com consentimento)</h3>
+          <p>A categoria de <em>publicidade</em> guarda a origem da visita (seção 2.4). A mensuração de conversões com a <strong>Tag do Google (Google Ads)</strong> está preparada, mas <strong>desativada no momento</strong>: este site não carrega nenhum script do Google, não envia dados ao Google e não cria cookies do Google. Só vamos ativá-la depois de estabelecer o mecanismo aplicável às transferências de dados para o Google (seção 5), e esta política será atualizada antes disso. Mesmo depois de ativada, ela só seria carregada <strong>depois</strong> do seu consentimento.</p>
 
           <h3>2.7 Segurança e prevenção de abusos</h3>
           <p>Para evitar uso abusivo do diagnóstico (por exemplo, envios em massa), o sistema usa o seu endereço IP (ou, na falta dele, o identificador da sessão) apenas para limitar o número de requisições. O valor não é guardado em claro: ele é transformado por uma função criptográfica com chave secreta (HMAC-SHA256) e esse resultado é mantido em contadores de janela curta, que são apagados depois de expirados. <strong>Tratamos esse identificador como dado pessoal (pseudonimizado), e não como dado anônimo.</strong></p>
@@ -111,7 +111,7 @@
                 <tr><td>Diagnóstico e atendimento que você solicitou</td><td>Procedimentos preliminares relacionados a contrato do qual você seja parte, a seu pedido (art. 7º, V), quando aplicável</td><td>Aplicamos esta base quando o pedido leva a uma possível contratação</td></tr>
                 <tr><td>Qualificação comercial (seção 2.2)</td><td>Legítimo interesse (art. 7º, IX)</td><td>Você pode se opor a esse tratamento pelo e-mail de privacidade</td></tr>
                 <tr><td>Segurança e prevenção de abusos (seção 2.7)</td><td>Legítimo interesse (art. 7º, IX)</td><td>Você pode se opor pelo e-mail de privacidade</td></tr>
-                <tr><td>PostHog, Google Ads e origem da visita (seções 2.4 a 2.6)</td><td>Consentimento (art. 7º, I)</td><td>Inclui o tratamento nos Estados Unidos informado no momento da escolha. Você pode revogar (seção 9)</td></tr>
+                <tr><td>PostHog e origem da visita (seções 2.4 e 2.5)</td><td>Consentimento (art. 7º, I)</td><td>Inclui o tratamento nos Estados Unidos informado no momento da escolha. Você pode revogar (seção 9)</td></tr>
                 <tr><td>Obrigações legais e regulatórias</td><td>Cumprimento de obrigação legal ou regulatória (art. 7º, II)</td><td>Quando aplicável, por exemplo para clientes contratados</td></tr>
               </tbody>
             </table>
@@ -129,7 +129,7 @@
                 <tr><td><code>lac_attribution_v1</code></td><td>Armazenamento de sessão</td><td>Origem da visita (seção 2.4)</td><td>Análise ou publicidade</td><td>Até fechar a aba</td></tr>
                 <tr><td><code>lac_lead_sent</code></td><td>Armazenamento de sessão</td><td>Evitar contar o mesmo envio do diagnóstico duas vezes (não é transmitido)</td><td>Análise ou publicidade</td><td>Até fechar a aba</td></tr>
                 <tr><td><code>ph_*</code></td><td>Armazenamento local (PostHog)</td><td>Identificador anônimo e preferências da medição</td><td>Análise</td><td>Até você limpar os dados do site ou revogar o consentimento (o site não define outro prazo)</td></tr>
-                <tr><td><code>_gcl_*</code> e similares</td><td>Cookies (Google)</td><td>Associar conversões ao anúncio</td><td>Publicidade</td><td>Definida pelo Google</td></tr>
+                <tr><td><code>_gcl_*</code> e similares</td><td>Cookies (Google)</td><td>Associar conversões ao anúncio (só se a Tag do Google for ativada)</td><td>Publicidade</td><td>Hoje não é criado: a Tag do Google está desativada</td></tr>
               </tbody>
             </table>
           </div>
@@ -139,7 +139,7 @@
             <li><strong>Vercel</strong> (hospedagem do site e processamento do sistema do diagnóstico): <strong>Washington, D.C., Estados Unidos</strong>. Os dados do diagnóstico passam por esses servidores antes de serem gravados.</li>
             <li><strong>Supabase</strong> (banco de dados do diagnóstico): <strong>São Paulo, Brasil</strong>. O contrato de tratamento de dados está incorporado aos termos de serviço do prestador e o compartilhamento com fornecedores de inteligência artificial está desativado.</li>
             <li><strong>PostHog</strong> (análise, somente com consentimento): <strong>Estados Unidos</strong> (nuvem dos EUA). Contrato de tratamento de dados assinado em 25/11/2026. Uso do IP descrito na seção 2.5.</li>
-            <li><strong>Google</strong> (Google Ads, somente com consentimento): <strong>Estados Unidos e outros países</strong>.</li>
+            <li><strong>Google</strong> (Google Ads): <strong>desativado no momento</strong>, sem envio de dados. Se for ativado, o Google pode tratar dados nos Estados Unidos e em outros países.</li>
             <li><strong>WhatsApp Business (Meta), Gmail (Google) e sua operadora</strong>: canais de contato que você escolhe usar.</li>
           </ul>
           <p>Enviar ou tratar dados fora do Brasil é uma transferência internacional de dados (LGPD, art. 33). Informamos acima onde cada tratamento acontece; o enquadramento de cada transferência no art. 33 da LGPD e na Resolução CD/ANPD nº 19/2024 é objeto de avaliação contínua pela L A Cabral, e esta política não afirma que cada contrato já atenda integralmente a esses requisitos. Ao permitir a análise ou a publicidade, você consente com o tratamento desses dados nos Estados Unidos, conforme informado no aviso de consentimento.</p>
@@ -169,7 +169,7 @@
           <p>Adotamos medidas técnicas e administrativas proporcionais ao risco: a comunicação com o site e com o sistema do diagnóstico usa HTTPS; as tecnologias opcionais só são carregadas depois do consentimento; enviamos aos serviços de medição apenas os dados mínimos descritos acima; e o uso do endereço IP para prevenção de abusos segue a seção 2.7.</p>
 
           <h2>9. Suas escolhas de consentimento</h2>
-          <p>Na primeira visita perguntamos se você permite a <em>análise comportamental</em> e a <em>publicidade e mensuração de campanhas</em>; ambas começam desligadas e, para cada uma, informamos que os dados são tratados nos Estados Unidos. Recusar não tira nenhuma função do site, inclusive o diagnóstico e os canais de contato. Você pode rever ou revogar a escolha a qualquer momento em <strong>“Preferências de privacidade”</strong>, no rodapé de todas as páginas. Ao revogar, a captura do PostHog é interrompida e seus dados locais são apagados, a Tag do Google é desativada e os registros de origem da visita que dependem da categoria são removidos do navegador. Dados que já foram recebidos pelos prestadores continuam sujeitos às regras deles e ao procedimento da seção 7.</p>
+          <p>Na primeira visita perguntamos se você permite a <em>análise comportamental</em> e a <em>publicidade e mensuração de campanhas</em>; ambas começam desligadas e, para cada uma, informamos que os dados são tratados nos Estados Unidos. Recusar não tira nenhuma função do site, inclusive o diagnóstico e os canais de contato. Você pode rever ou revogar a escolha a qualquer momento em <strong>“Preferências de privacidade”</strong>, no rodapé de todas as páginas. Ao revogar, a captura do PostHog é interrompida e seus dados locais são apagados, a Tag do Google (se estiver ativa) é desativada e os registros de origem da visita que dependem da categoria são removidos do navegador. Dados que já foram recebidos pelos prestadores continuam sujeitos às regras deles e ao procedimento da seção 7.</p>
 
           <h2>10. Mudanças nesta política</h2>
           <p>Quando houver alterações relevantes, esta página será atualizada com a nova data de vigência.</p>
@@ -207,8 +207,8 @@
           <p>We use <strong>PostHog</strong>, <strong>with servers in the United States</strong>, to measure pages visited, clicks and diagnostic events, so we can improve the site. We do not send your name, e-mail, phone, diagnostic answers or the classification; we do not record sessions or the screen; we strip ad click identifiers from what is sent; and we do not share identifiers between PostHog and the diagnostic system. PostHog keeps an anonymous identifier in the browser's local storage, without cookies.</p>
           <p><strong>Use of the IP address by PostHog:</strong> PostHog receives your IP address with every event, because it is part of how internet communication works. With IP discarding turned on, the IP is used temporarily to estimate the country and city, and those two pieces of information are recorded in the events; the IP is then discarded and not stored. Events are kept for 12 months.</p>
 
-          <h3>2.6 Advertising and campaign measurement (consent only)</h3>
-          <p>We use the <strong>Google tag (Google Ads)</strong> to measure campaign results, recording two kinds of conversion: a click on a contact channel (WhatsApp, phone or e-mail) and a completed diagnostic confirmed by our system. We do not send Google your name, e-mail, phone, answers or monetary values. Google sets its own cookies (such as <code>_gcl_*</code>) and <strong>may process data in the United States and other countries</strong>. The tag is loaded only <strong>after</strong> you consent.</p>
+          <h3>2.6 Advertising: campaign origin and Google Ads (consent only)</h3>
+          <p>The <em>advertising</em> category keeps where your visit came from (section 2.4). Conversion measurement with the <strong>Google tag (Google Ads)</strong> is prepared but <strong>turned off for now</strong>: this site loads no Google script, sends no data to Google and sets no Google cookies. We will only turn it on after establishing the mechanism that applies to data transfers to Google (section 5), and this policy will be updated before that. Even once on, it would load only <strong>after</strong> you consent.</p>
 
           <h3>2.7 Security and abuse prevention</h3>
           <p>To prevent abusive use of the diagnostic (for example, mass submissions), the system uses your IP address (or, if unavailable, the session identifier) only to limit the number of requests. The value is not stored in clear: it is transformed by a cryptographic function with a secret key (HMAC-SHA256) and the result is kept in short-window counters, which are deleted once they expire. <strong>We treat this identifier as personal data (pseudonymized), not as anonymous data.</strong></p>
@@ -224,7 +224,7 @@
                 <tr><td>Diagnostic and the support you requested</td><td>Preliminary procedures related to a contract to which you are a party, at your request (art. 7, V), where applicable</td><td>We apply this basis when the request leads to a possible engagement</td></tr>
                 <tr><td>Commercial qualification (section 2.2)</td><td>Legitimate interest (art. 7, IX)</td><td>You may object to this processing through the privacy e-mail</td></tr>
                 <tr><td>Security and abuse prevention (section 2.7)</td><td>Legitimate interest (art. 7, IX)</td><td>You may object through the privacy e-mail</td></tr>
-                <tr><td>PostHog, Google Ads and visit origin (sections 2.4 to 2.6)</td><td>Consent (art. 7, I)</td><td>Includes processing in the United States, informed when you choose. You may withdraw it (section 9)</td></tr>
+                <tr><td>PostHog and visit origin (sections 2.4 and 2.5)</td><td>Consent (art. 7, I)</td><td>Includes processing in the United States, informed when you choose. You may withdraw it (section 9)</td></tr>
                 <tr><td>Legal and regulatory obligations</td><td>Compliance with a legal or regulatory obligation (art. 7, II)</td><td>Where applicable, for example for contracted clients</td></tr>
               </tbody>
             </table>
@@ -242,7 +242,7 @@
                 <tr><td><code>lac_attribution_v1</code></td><td>Session storage</td><td>Where your visit came from (section 2.4)</td><td>Analytics or advertising</td><td>Until the tab is closed</td></tr>
                 <tr><td><code>lac_lead_sent</code></td><td>Session storage</td><td>Avoid counting the same diagnostic submission twice (not transmitted)</td><td>Analytics or advertising</td><td>Until the tab is closed</td></tr>
                 <tr><td><code>ph_*</code></td><td>Local storage (PostHog)</td><td>Anonymous identifier and measurement preferences</td><td>Analytics</td><td>Until you clear the site data or withdraw consent (the site sets no other period)</td></tr>
-                <tr><td><code>_gcl_*</code> and similar</td><td>Cookies (Google)</td><td>Link conversions to the ad</td><td>Advertising</td><td>Set by Google</td></tr>
+                <tr><td><code>_gcl_*</code> and similar</td><td>Cookies (Google)</td><td>Link conversions to the ad (only if the Google tag is turned on)</td><td>Advertising</td><td>Not created today: the Google tag is turned off</td></tr>
               </tbody>
             </table>
           </div>
@@ -252,7 +252,7 @@
             <li><strong>Vercel</strong> (site hosting and processing by the diagnostic system): <strong>Washington, D.C., United States</strong>. Diagnostic data passes through these servers before being stored.</li>
             <li><strong>Supabase</strong> (diagnostic database): <strong>São Paulo, Brazil</strong>. The data processing agreement is incorporated into the provider's terms of service and sharing with artificial intelligence providers is turned off.</li>
             <li><strong>PostHog</strong> (analytics, consent only): <strong>United States</strong> (US cloud). Data processing agreement signed on 25/11/2026. Use of the IP is described in section 2.5.</li>
-            <li><strong>Google</strong> (Google Ads, consent only): <strong>United States and other countries</strong>.</li>
+            <li><strong>Google</strong> (Google Ads): <strong>turned off for now</strong>, no data sent. If turned on, Google may process data in the United States and other countries.</li>
             <li><strong>WhatsApp Business (Meta), Gmail (Google) and your carrier</strong>: contact channels you choose to use.</li>
           </ul>
           <p>Sending or processing data outside Brazil is an international data transfer (LGPD, art. 33). We state above where each processing takes place; how each transfer fits within art. 33 of the LGPD and ANPD Resolution CD/ANPD No. 19/2024 is under ongoing assessment by L A Cabral, and this policy does not claim that every contract already fully meets those requirements. By allowing analytics or advertising, you consent to this data being processed in the United States, as stated in the consent notice.</p>
@@ -282,7 +282,7 @@
           <p>We adopt technical and administrative measures proportionate to the risk: communication with the site and the diagnostic system uses HTTPS; optional technologies are loaded only after consent; we send measurement services only the minimum data described above; and the use of the IP address for abuse prevention follows section 2.7.</p>
 
           <h2>9. Your consent choices</h2>
-          <p>On your first visit we ask whether you allow <em>behavior analytics</em> and <em>advertising and campaign measurement</em>; both start off and, for each one, we state that the data is processed in the United States. Declining removes no feature from the site, including the diagnostic and the contact channels. You can review or withdraw your choice at any time under <strong>“Privacy preferences”</strong> in the footer of every page. When you withdraw, PostHog capture stops and its local data is deleted, the Google tag is turned off, and the visit-origin records that depend on the category are removed from the browser. Data already received by providers remains subject to their rules and to the procedure in section 7.</p>
+          <p>On your first visit we ask whether you allow <em>behavior analytics</em> and <em>advertising and campaign measurement</em>; both start off and, for each one, we state that the data is processed in the United States. Declining removes no feature from the site, including the diagnostic and the contact channels. You can review or withdraw your choice at any time under <strong>“Privacy preferences”</strong> in the footer of every page. When you withdraw, PostHog capture stops and its local data is deleted, the Google tag (if active) is turned off, and the visit-origin records that depend on the category are removed from the browser. Data already received by providers remains subject to their rules and to the procedure in section 7.</p>
 
           <h2>10. Changes to this policy</h2>
           <p>When relevant changes are made, this page will be updated with the new effective date.</p>
