@@ -1,6 +1,6 @@
 // ── i18n ─────────────────────────────────────────────────────
-const WA_NUMBER = '5548991830112';
-
+// Número, telefone, e-mail e mensagens de WhatsApp (waGeneral, waFloatGeneral…)
+// vivem em contact-config.js (window.LAC_CONTACT) — fonte única.
 const I18N = {
   pt: {
     docTitle: `L A Cabral — Design e tecnologia para negócios`,
@@ -22,13 +22,6 @@ const I18N = {
     tagFaq: `Dúvidas`,
     ctaSaibaMais: `Saiba mais →`,
 
-    waGeneral: `Olá, vim pelo site da L A Cabral e quero conversar sobre um projeto.`,
-    waFloatGeneral: `Olá, vim pelo site da L A Cabral.`,
-    waAutomacao: `Olá, vim pelo site da L A Cabral e quero conversar sobre um site ou uma experiência web.`,
-    waConectada: `Olá, vim pelo site da L A Cabral e quero conversar sobre um produto digital ou aplicativo.`,
-    waSistemas: `Olá, vim pelo site da L A Cabral e quero entender se minha operação precisa de um sistema, automação ou integração.`,
-    waAquisicao: `Olá, vim pelo site da L A Cabral e quero entender como organizar a jornada entre o primeiro contato e o comercial.`,
-
     tagCtaFinal: `Contato direto`,
     ctaFinalHeading: `Já sabe o que sua empresa precisa?`,
     ctaFinalDesc: `Conte sobre seu projeto diretamente para quem desenvolve as soluções da L A Cabral.`,
@@ -39,6 +32,9 @@ const I18N = {
     footerAuthorship: `Conduzida por Lucas Cabral.`,
     footerDisclaimer: `Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.`,
     footerBottom: `© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados`,
+    footerPrivacyPolicy: `Política de Privacidade`,
+    docTitlePrivacidade: `Política de Privacidade — L A Cabral`,
+    metaDescPrivacidade: `Como a L A Cabral trata dados pessoais, cookies e armazenamento local neste site.`,
 
     // ── HOME · Hero ──────────────────────────────────────────
     heroTag: `Design e tecnologia para empresas`,
@@ -569,13 +565,6 @@ const I18N = {
     tagFaq: `FAQ`,
     ctaSaibaMais: `Learn more →`,
 
-    waGeneral: `Hi, I found you through the L A Cabral website and I'd like to talk about a project.`,
-    waFloatGeneral: `Hi, I found you through the L A Cabral website.`,
-    waAutomacao: `Hi, I found you through the L A Cabral website and I'd like to talk about a website or a web experience.`,
-    waConectada: `Hi, I found you through the L A Cabral website and I'd like to talk about a digital product or app.`,
-    waSistemas: `Hi, I found you through the L A Cabral website and I'd like to understand if my operation needs a system, automation or integration.`,
-    waAquisicao: `Hi, I found you through the L A Cabral website and I'd like to understand how to organize the journey between the first contact and the sales team.`,
-
     tagCtaFinal: `Direct contact`,
     ctaFinalHeading: `Already know what your company needs?`,
     ctaFinalDesc: `Tell us about your project directly — you'll be talking to the person who builds L A Cabral's solutions.`,
@@ -586,6 +575,9 @@ const I18N = {
     footerAuthorship: `Led by Lucas Cabral.`,
     footerDisclaimer: `Every project starts with a review of the operation. Scope is defined after that diagnosis, not before.`,
     footerBottom: `© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · All rights reserved`,
+    footerPrivacyPolicy: `Privacy Policy`,
+    docTitlePrivacidade: `Privacy Policy — L A Cabral`,
+    metaDescPrivacidade: `How L A Cabral handles personal data, cookies and local storage on this site.`,
 
     // ── HOME · Hero ──────────────────────────────────────────
     heroTag: `Design and technology for companies`,
@@ -1093,6 +1085,11 @@ const I18N = {
   },
 };
 
+// Mensagens de WhatsApp vêm da configuração central de contatos.
+if (window.LAC_CONTACT) {
+  Object.keys(window.LAC_CONTACT.config.messages).forEach(l => Object.assign(I18N[l] || {}, window.LAC_CONTACT.config.messages[l]));
+}
+
 function applyTranslations(lang) {
   const dict = I18N[lang] || I18N.pt;
   document.documentElement.setAttribute('lang', lang === 'en' ? 'en-US' : 'pt-BR');
@@ -1116,8 +1113,8 @@ function applyTranslations(lang) {
 
   document.querySelectorAll('[data-wa-key]').forEach(el => {
     const key = el.getAttribute('data-wa-key');
-    if (dict[key] !== undefined) {
-      el.setAttribute('href', `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(dict[key])}`);
+    if (window.LAC_CONTACT && dict[key] !== undefined) {
+      el.setAttribute('href', window.LAC_CONTACT.waHref(key, lang));
     }
   });
 

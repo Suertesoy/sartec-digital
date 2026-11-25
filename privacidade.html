@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Como a L A Cabral trata dados pessoais, cookies e armazenamento local neste site." data-i18n-attr="content:metaDescPrivacidade" />
+  <link rel="canonical" href="https://lacabral.vercel.app/privacidade.html" />
+  <link rel="icon" href="/assets/favicon-32.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <title data-i18n="docTitlePrivacidade">Política de Privacidade — L A Cabral</title>
+  <script src="site-env.js?v=1" defer></script>
+  <script src="consent.js?v=4" defer></script>
+  <script src="attribution.js?v=1" defer></script>
+  <script src="analytics.js?v=3" defer></script>
+  <script src="google-tag.js?v=3" defer></script>
+  <script src="tracking.js?v=2" defer></script>
+  <link rel="stylesheet" href="assets/css/tailwind.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=2.1" />
+  <link rel="stylesheet" href="consent.css?v=2" />
+  <link rel="stylesheet" href="privacy.css?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <canvas class="grid-trails" aria-hidden="true"></canvas>
+  <canvas class="grid-trails-light" aria-hidden="true"></canvas>
+
+  <!-- ═══ HEADER (manter em sincronia com todas as outras páginas) ═══ -->
+  <header class="header" id="header">
+    <div class="container header__wrap">
+      <div class="brand-group">
+        <a href="index.html" class="brand" aria-label="L A Cabral">
+          <img src="assets/la-cabral-symbol-white.png" alt="" class="brand__logo" width="830" height="544" />
+          <span class="brand__label">L A <strong>CABRAL</strong></span>
+        </a>
+        <span class="brand__tagline" data-i18n="brandTagline">Design e tecnologia para negócios</span>
+      </div>
+      <nav class="nav" id="nav" aria-label="Navegação principal" data-i18n-attr="aria-label:ariaMainNav">
+        <a href="solucoes.html" class="nav__link" data-i18n="navSolutions">Soluções</a>
+        <a href="cases.html" class="nav__link" data-i18n="navCases">Projetos</a>
+        <a href="como-trabalhamos.html" class="nav__link" data-i18n="navHowWeWork">Como trabalhamos</a>
+        <a href="sobre.html" class="nav__link" data-i18n="navAbout">Sobre</a>
+        <div class="lang-switch" id="langSwitch" role="group" aria-label="Idioma do site" data-i18n-attr="aria-label:ariaLangGroup">
+          <button type="button" class="lang-switch__btn is-active" id="langBtnPt" data-lang="pt" aria-pressed="true" aria-label="Mudar para português">
+            <span class="lang-switch__flag" aria-hidden="true">🇧🇷</span>
+          </button>
+          <button type="button" class="lang-switch__btn" id="langBtnEn" data-lang="en" aria-pressed="false" aria-label="Switch to English">
+            <span class="lang-switch__flag" aria-hidden="true">🇺🇸</span>
+          </button>
+        </div>
+        <a href="index.html#contato" class="nav__cta" data-i18n="navContact">Contato</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav" data-i18n-attr="aria-label:ariaOpenMenu">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section policy" id="politica">
+      <div class="container policy__wrap">
+
+        <!-- ══════════════ PORTUGUÊS ══════════════ -->
+        <div data-policy-lang="pt" lang="pt-BR">
+          <span class="tag">Privacidade</span>
+          <h1>Política de Privacidade</h1>
+          <p class="policy__meta">Em vigor desde 25/11/2026</p>
+
+          <p>Esta política explica quais dados pessoais este site coleta, para quê, com qual base legal, com quem são compartilhados, onde são tratados, por quanto tempo são guardados e como você controla suas escolhas. Ela vale para o site <strong>lacabral.vercel.app</strong>, incluindo o diagnóstico guiado (<em>/diagnostico</em>).</p>
+
+          <h2>1. Quem somos e como falar com a gente</h2>
+          <p>A <strong>L A CABRAL LTDA</strong>, CNPJ 68.528.047/0001-66, Florianópolis/SC, é a controladora dos dados pessoais tratados por este site. A responsabilidade administrativa pelo tratamento é da administração da empresa. Canal de privacidade (dúvidas, solicitações dos titulares e contato da ANPD): <a href="mailto:contato.lacabral@gmail.com" data-contact="email">contato.lacabral@gmail.com</a>.</p>
+          <p>A L A CABRAL não indicou encarregado pelo tratamento de dados pessoais; o canal acima faz a comunicação com os titulares e com a ANPD.</p>
+
+          <h2>2. Quais dados tratamos e para quê</h2>
+
+          <h3>2.1 Diagnóstico guiado</h3>
+          <p>Ao usar o diagnóstico você informa <strong>nome, e-mail, WhatsApp, empresa (opcional)</strong> e as <strong>respostas às 11 perguntas</strong>. Também registramos eventos de uso do diagnóstico (por exemplo, início, perguntas respondidas e visualização do resultado) e o resultado gerado (uma recomendação de caminho e o modo do resultado). Para ligar esses eventos à sua visita, o sistema usa um cookie técnico (<code>lac_funnel_session</code>), válido por 30 minutos, necessário ao funcionamento do diagnóstico. <strong>Esses dados são recebidos e processados pelo sistema do diagnóstico em servidores nos Estados Unidos e depois gravados em banco de dados no Brasil (seção 5).</strong></p>
+          <p><strong>Finalidades:</strong> gerar a orientação inicial, atender o contato que você pediu e continuar a conversa comercial, se você quiser.</p>
+
+          <h3>2.2 Recomendação e priorização automatizadas</h3>
+          <p>O resultado do diagnóstico é calculado por regras fixas e determinísticas, definidas previamente pela L A Cabral. Não há inteligência artificial nesse cálculo. Em termos gerais, o sistema: (a) atribui pontuações a áreas do negócio, como captação de clientes, atendimento, conversão e operação, a partir das suas respostas; (b) identifica o principal gargalo e escolhe uma recomendação entre um conjunto fixo de caminhos; e (c) estima a prioridade comercial do contato combinando a intensidade do problema, a urgência para agir, o seu papel na decisão e o volume de contatos do negócio, classificando-o em níveis de prioridade (alta, média ou de nutrição).</p>
+          <p><strong>Finalidade:</strong> mostrar uma recomendação inicial e priorizar a ordem de retorno da equipe. O sistema apenas grava a classificação; ela não nega atendimento nem serviço. Não divulgamos as fórmulas internas. <strong>Você pode pedir esclarecimentos sobre esses critérios e solicitar a revisão da classificação</strong> pelo e-mail de privacidade; o pedido será analisado pela administração.</p>
+
+          <h3>2.3 Contato direto</h3>
+          <p>Ao clicar em WhatsApp, telefone ou e-mail você sai do site e passa a usar serviços de terceiros: o WhatsApp Business (Meta), a sua operadora de telefonia e o seu provedor de e-mail, além do Gmail (Google), conta dedicada ao contato da L A Cabral. Eles seguem as políticas próprias. A mensagem pré-preenchida do WhatsApp não contém dados pessoais seus. Um clique apenas indica interesse em conversar; ele não é tratado como cadastro nem como lead confirmado.</p>
+
+          <h3>2.4 Origem da visita (somente com consentimento)</h3>
+          <p>Se você permitir as categorias de <em>análise</em> ou <em>publicidade</em>, guardamos, enquanto a aba estiver aberta, a página de entrada, o site de origem (sem parâmetros) e parâmetros de campanha (<em>utm_source, utm_medium, utm_campaign, utm_term, utm_content</em>). Com a categoria de <em>publicidade</em>, guardamos também identificadores de clique de anúncios (<em>gclid, gbraid, wbraid, fbclid</em>). Quando você abre o diagnóstico, essas informações são enviadas ao sistema do diagnóstico para sabermos de qual campanha veio o contato. <strong>Se você recusar, enviamos apenas o endereço da página, sem parâmetros nem origem.</strong> Não guardamos a URL completa, só os parâmetros listados.</p>
+
+          <h3>2.5 Análise comportamental (somente com consentimento)</h3>
+          <p>Usamos o <strong>PostHog</strong>, <strong>com servidores nos Estados Unidos</strong>, para medir páginas visitadas, cliques e eventos do diagnóstico, e assim melhorar o site. Não enviamos nome, e-mail, telefone, respostas do diagnóstico nem a classificação; não gravamos sessões nem a tela; removemos identificadores de clique de anúncios das informações enviadas; e não compartilhamos identificadores entre o PostHog e o sistema do diagnóstico. O PostHog guarda um identificador anônimo no armazenamento local do navegador, sem cookies.</p>
+          <p><strong>Uso do endereço IP pelo PostHog:</strong> o PostHog recebe o seu endereço IP junto com cada evento, porque ele faz parte da comunicação pela internet. Com o descarte de IP ativado, o IP é usado temporariamente para estimar o país e a cidade, e essas duas informações ficam registradas nos eventos; em seguida o IP é descartado e não é gravado. Os eventos ficam guardados por 12 meses.</p>
+
+          <h3>2.6 Publicidade: origem das campanhas e Google Ads (somente com consentimento)</h3>
+          <p>A categoria de <em>publicidade</em> guarda a origem da visita (seção 2.4). A mensuração de conversões com a <strong>Tag do Google (Google Ads)</strong> está preparada, mas <strong>desativada no momento</strong>: este site não carrega nenhum script do Google, não envia dados ao Google e não cria cookies do Google. Só vamos ativá-la depois de estabelecer o mecanismo aplicável às transferências de dados para o Google (seção 5), e esta política será atualizada antes disso. Mesmo depois de ativada, ela só seria carregada <strong>depois</strong> do seu consentimento.</p>
+
+          <h3>2.7 Segurança e prevenção de abusos</h3>
+          <p>Para evitar uso abusivo do diagnóstico (por exemplo, envios em massa), o sistema usa o seu endereço IP (ou, na falta dele, o identificador da sessão) apenas para limitar o número de requisições. O valor não é guardado em claro: ele é transformado por uma função criptográfica com chave secreta (HMAC-SHA256) e esse resultado é mantido em contadores de janela curta, que são apagados depois de expirados. <strong>Tratamos esse identificador como dado pessoal (pseudonimizado), e não como dado anônimo.</strong></p>
+
+          <h3>2.8 Hospedagem e registros técnicos</h3>
+          <p>O site e o sistema do diagnóstico são hospedados na Vercel, e os dados do diagnóstico ficam em banco de dados do Supabase. Esses prestadores podem registrar dados técnicos de acesso (como endereço IP) por prazos próprios, curtos.</p>
+
+          <h2>3. Bases legais</h2>
+          <div class="policy__tablewrap" role="region" aria-label="Bases legais" tabindex="0">
+            <table class="policy__table">
+              <thead><tr><th>Finalidade</th><th>Base legal (LGPD)</th><th>Observação</th></tr></thead>
+              <tbody>
+                <tr><td>Diagnóstico e atendimento que você solicitou</td><td>Procedimentos preliminares relacionados a contrato do qual você seja parte, a seu pedido (art. 7º, V), quando aplicável</td><td>Aplicamos esta base quando o pedido leva a uma possível contratação</td></tr>
+                <tr><td>Qualificação comercial (seção 2.2)</td><td>Legítimo interesse (art. 7º, IX)</td><td>Você pode se opor a esse tratamento pelo e-mail de privacidade</td></tr>
+                <tr><td>Segurança e prevenção de abusos (seção 2.7)</td><td>Legítimo interesse (art. 7º, IX)</td><td>Você pode se opor pelo e-mail de privacidade</td></tr>
+                <tr><td>PostHog e origem da visita (seções 2.4 e 2.5)</td><td>Consentimento (art. 7º, I)</td><td>Inclui o tratamento nos Estados Unidos informado no momento da escolha. Você pode revogar (seção 9)</td></tr>
+                <tr><td>Obrigações legais e regulatórias</td><td>Cumprimento de obrigação legal ou regulatória (art. 7º, II)</td><td>Quando aplicável, por exemplo para clientes contratados</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>4. Armazenamento no seu navegador</h2>
+          <div class="policy__tablewrap" role="region" aria-label="Armazenamento no navegador" tabindex="0">
+            <table class="policy__table">
+              <thead><tr><th>Nome</th><th>Tipo</th><th>Para quê</th><th>Categoria</th><th>Duração</th></tr></thead>
+              <tbody>
+                <tr><td><code>sartec_lang</code></td><td>Armazenamento local</td><td>Lembrar o idioma</td><td>Essencial</td><td>Até você limpar os dados do site</td></tr>
+                <tr><td><code>lac_consent_v1</code></td><td>Armazenamento local</td><td>Guardar suas escolhas de consentimento</td><td>Essencial</td><td>12 meses (depois perguntamos de novo)</td></tr>
+                <tr><td><code>lac_diag_draft</code></td><td>Armazenamento de sessão</td><td>Rascunho das respostas do diagnóstico</td><td>Essencial</td><td>Até enviar ou fechar a aba</td></tr>
+                <tr><td><code>lac_funnel_session</code></td><td>Cookie</td><td>Sessão técnica do diagnóstico</td><td>Essencial</td><td>30 minutos</td></tr>
+                <tr><td><code>lac_attribution_v1</code></td><td>Armazenamento de sessão</td><td>Origem da visita (seção 2.4)</td><td>Análise ou publicidade</td><td>Até fechar a aba</td></tr>
+                <tr><td><code>lac_lead_sent</code></td><td>Armazenamento de sessão</td><td>Evitar contar o mesmo envio do diagnóstico duas vezes (não é transmitido)</td><td>Análise ou publicidade</td><td>Até fechar a aba</td></tr>
+                <tr><td><code>ph_*</code></td><td>Armazenamento local (PostHog)</td><td>Identificador anônimo e preferências da medição</td><td>Análise</td><td>Até você limpar os dados do site ou revogar o consentimento (o site não define outro prazo)</td></tr>
+                <tr><td><code>_gcl_*</code> e similares</td><td>Cookies (Google)</td><td>Associar conversões ao anúncio (só se a Tag do Google for ativada)</td><td>Publicidade</td><td>Hoje não é criado: a Tag do Google está desativada</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>5. Onde os dados são tratados: processamento internacional</h2>
+          <ul>
+            <li><strong>Vercel</strong> (hospedagem do site e processamento do sistema do diagnóstico): <strong>Washington, D.C., Estados Unidos</strong>. Os dados do diagnóstico passam por esses servidores antes de serem gravados.</li>
+            <li><strong>Supabase</strong> (banco de dados do diagnóstico): <strong>São Paulo, Brasil</strong>. O contrato de tratamento de dados está incorporado aos termos de serviço do prestador e o compartilhamento com fornecedores de inteligência artificial está desativado.</li>
+            <li><strong>PostHog</strong> (análise, somente com consentimento): <strong>Estados Unidos</strong> (nuvem dos EUA). Contrato de tratamento de dados assinado em 25/11/2026. Uso do IP descrito na seção 2.5.</li>
+            <li><strong>Google</strong> (Google Ads): <strong>desativado no momento</strong>, sem envio de dados. Se for ativado, o Google pode tratar dados nos Estados Unidos e em outros países.</li>
+            <li><strong>WhatsApp Business (Meta), Gmail (Google) e sua operadora</strong>: canais de contato que você escolhe usar.</li>
+          </ul>
+          <p>Enviar ou tratar dados fora do Brasil é uma transferência internacional de dados (LGPD, art. 33). Informamos acima onde cada tratamento acontece; o enquadramento de cada transferência no art. 33 da LGPD e na Resolução CD/ANPD nº 19/2024 é objeto de avaliação contínua pela L A Cabral, e esta política não afirma que cada contrato já atenda integralmente a esses requisitos. Ao permitir a análise ou a publicidade, você consente com o tratamento desses dados nos Estados Unidos, conforme informado no aviso de consentimento.</p>
+
+          <h2>6. Por quanto tempo guardamos</h2>
+          <div class="policy__tablewrap" role="region" aria-label="Prazos de retenção" tabindex="0">
+            <table class="policy__table">
+              <thead><tr><th>Dado</th><th>Prazo</th></tr></thead>
+              <tbody>
+                <tr><td>Preferências de consentimento (no navegador)</td><td>12 meses</td></tr>
+                <tr><td>Eventos comportamentais</td><td>12 meses</td></tr>
+                <tr><td>Sessões sem identificação</td><td>90 dias</td></tr>
+                <tr><td>Diagnósticos e contatos (leads) inativos</td><td>12 meses após a última interação</td></tr>
+                <tr><td>Registros de contato comercial</td><td>12 meses após a última interação, salvo necessidade justificada</td></tr>
+                <tr><td>Clientes contratados</td><td>Conforme as obrigações legais e contratuais</td></tr>
+                <tr><td>Contadores de prevenção de abusos (seção 2.7)</td><td>Apagados depois de expirar a janela de contagem</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>A administração revisa esses prazos mensalmente e elimina manualmente os dados que os ultrapassaram; <strong>não há rotina automática de exclusão</strong> dos dados do diagnóstico. Eventuais cópias de segurança mantidas pelos prestadores seguem os prazos deles. Os prazos do navegador estão na tabela da seção 4.</p>
+
+          <h2>7. Seus direitos e como exercê-los</h2>
+          <p>Nos termos da Lei Geral de Proteção de Dados (Lei 13.709/2018), você pode pedir: confirmação de que tratamos seus dados; acesso; correção; anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade; portabilidade; informação sobre com quem compartilhamos; informação sobre a possibilidade de não consentir e suas consequências; revogação do consentimento; oposição a tratamentos baseados em legítimo interesse; e revisão de decisões tomadas apenas com base em tratamento automatizado (seção 2.2).</p>
+          <p>Escreva para <a href="mailto:contato.lacabral@gmail.com" data-contact="email">contato.lacabral@gmail.com</a>. Atendemos os pedidos pelo e-mail comercial, respeitando os prazos legais aplicáveis; nossa meta administrativa é responder em até 15 dias, sem prejuízo dos prazos específicos previstos na legislação. Para proteger você, podemos pedir informações para confirmar sua identidade, na medida do necessário para o pedido. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+
+          <h2>8. Segurança</h2>
+          <p>Adotamos medidas técnicas e administrativas proporcionais ao risco: a comunicação com o site e com o sistema do diagnóstico usa HTTPS; as tecnologias opcionais só são carregadas depois do consentimento; enviamos aos serviços de medição apenas os dados mínimos descritos acima; e o uso do endereço IP para prevenção de abusos segue a seção 2.7.</p>
+
+          <h2>9. Suas escolhas de consentimento</h2>
+          <p>Na primeira visita perguntamos se você permite a <em>análise comportamental</em> e a <em>publicidade e mensuração de campanhas</em>; ambas começam desligadas e, para cada uma, informamos que os dados são tratados nos Estados Unidos. Recusar não tira nenhuma função do site, inclusive o diagnóstico e os canais de contato. Você pode rever ou revogar a escolha a qualquer momento em <strong>“Preferências de privacidade”</strong>, no rodapé de todas as páginas. Ao revogar, a captura do PostHog é interrompida e seus dados locais são apagados, a Tag do Google (se estiver ativa) é desativada e os registros de origem da visita que dependem da categoria são removidos do navegador. Dados que já foram recebidos pelos prestadores continuam sujeitos às regras deles e ao procedimento da seção 7.</p>
+
+          <h2>10. Mudanças nesta política</h2>
+          <p>Quando houver alterações relevantes, esta página será atualizada com a nova data de vigência.</p>
+        </div>
+
+        <!-- ══════════════ ENGLISH ══════════════ -->
+        <div data-policy-lang="en" lang="en-US">
+          <span class="tag">Privacy</span>
+          <h1>Privacy Policy</h1>
+          <p class="policy__meta">In effect since 25/11/2026</p>
+
+          <p>This policy explains which personal data this site collects, why, on what legal basis, with whom it is shared, where it is processed, how long it is kept and how you control your choices. It applies to <strong>lacabral.vercel.app</strong>, including the guided diagnostic (<em>/diagnostico</em>).</p>
+
+          <h2>1. Who we are and how to reach us</h2>
+          <p><strong>L A CABRAL LTDA</strong>, tax ID (CNPJ) 68.528.047/0001-66, Florianópolis/SC, Brazil, is the controller of the personal data processed through this site. Administrative responsibility for the processing lies with the company's management. Privacy channel (questions, data subject requests and contact from the ANPD): <a href="mailto:contato.lacabral@gmail.com" data-contact="email">contato.lacabral@gmail.com</a>.</p>
+          <p>L A CABRAL has not appointed a data protection officer; the channel above handles communication with data subjects and with the ANPD.</p>
+
+          <h2>2. What data we process and why</h2>
+
+          <h3>2.1 Guided diagnostic</h3>
+          <p>When you use the diagnostic you provide your <strong>name, e-mail, WhatsApp number, company (optional)</strong> and your <strong>answers to the 11 questions</strong>. We also record diagnostic usage events (for example, start, questions answered and result viewed) and the result generated (a recommended path and the result mode). To link those events to your visit, the system uses a technical cookie (<code>lac_funnel_session</code>), valid for 30 minutes, which is necessary for the diagnostic to work. <strong>This data is received and processed by the diagnostic system on servers in the United States and then stored in a database in Brazil (section 5).</strong></p>
+          <p><strong>Purposes:</strong> to generate the initial guidance, to handle the contact you asked for and to continue the commercial conversation, if you wish.</p>
+
+          <h3>2.2 Automated recommendation and prioritization</h3>
+          <p>The diagnostic result is calculated by fixed, deterministic rules defined in advance by L A Cabral. No artificial intelligence is involved in this calculation. In general terms, the system: (a) assigns scores to areas of the business, such as customer acquisition, customer service, conversion and operations, based on your answers; (b) identifies the main bottleneck and chooses a recommendation from a fixed set of paths; and (c) estimates the commercial priority of the contact by combining how intense the problem is, how urgent it is to act, your role in the decision and the volume of contacts in the business, classifying it into priority levels (high, medium or nurture).</p>
+          <p><strong>Purpose:</strong> to show an initial recommendation and to prioritize the order in which the team follows up. The system only stores the classification; it does not deny service or support. We do not disclose the internal formulas. <strong>You may ask for clarification about these criteria and request a review of the classification</strong> through the privacy e-mail; the request will be assessed by the company's management.</p>
+
+          <h3>2.3 Direct contact</h3>
+          <p>When you click WhatsApp, phone or e-mail you leave the site and use third-party services: WhatsApp Business (Meta), your phone carrier and your e-mail provider, as well as Gmail (Google), an account dedicated to L A Cabral's contact. They follow their own policies. The pre-filled WhatsApp message contains no personal data about you. A click only signals interest in talking; it is not treated as a registration or as a confirmed lead.</p>
+
+          <h3>2.4 Where your visit came from (consent only)</h3>
+          <p>If you allow the <em>analytics</em> or <em>advertising</em> categories, we keep, while the tab stays open, the entry page, the referring site (without parameters) and campaign parameters (<em>utm_source, utm_medium, utm_campaign, utm_term, utm_content</em>). With the <em>advertising</em> category we also keep ad click identifiers (<em>gclid, gbraid, wbraid, fbclid</em>). When you open the diagnostic, this information is sent to the diagnostic system so we know which campaign the contact came from. <strong>If you decline, we send only the page address, with no parameters and no referrer.</strong> We do not store the full URL, only the parameters listed.</p>
+
+          <h3>2.5 Behavior analytics (consent only)</h3>
+          <p>We use <strong>PostHog</strong>, <strong>with servers in the United States</strong>, to measure pages visited, clicks and diagnostic events, so we can improve the site. We do not send your name, e-mail, phone, diagnostic answers or the classification; we do not record sessions or the screen; we strip ad click identifiers from what is sent; and we do not share identifiers between PostHog and the diagnostic system. PostHog keeps an anonymous identifier in the browser's local storage, without cookies.</p>
+          <p><strong>Use of the IP address by PostHog:</strong> PostHog receives your IP address with every event, because it is part of how internet communication works. With IP discarding turned on, the IP is used temporarily to estimate the country and city, and those two pieces of information are recorded in the events; the IP is then discarded and not stored. Events are kept for 12 months.</p>
+
+          <h3>2.6 Advertising: campaign origin and Google Ads (consent only)</h3>
+          <p>The <em>advertising</em> category keeps where your visit came from (section 2.4). Conversion measurement with the <strong>Google tag (Google Ads)</strong> is prepared but <strong>turned off for now</strong>: this site loads no Google script, sends no data to Google and sets no Google cookies. We will only turn it on after establishing the mechanism that applies to data transfers to Google (section 5), and this policy will be updated before that. Even once on, it would load only <strong>after</strong> you consent.</p>
+
+          <h3>2.7 Security and abuse prevention</h3>
+          <p>To prevent abusive use of the diagnostic (for example, mass submissions), the system uses your IP address (or, if unavailable, the session identifier) only to limit the number of requests. The value is not stored in clear: it is transformed by a cryptographic function with a secret key (HMAC-SHA256) and the result is kept in short-window counters, which are deleted once they expire. <strong>We treat this identifier as personal data (pseudonymized), not as anonymous data.</strong></p>
+
+          <h3>2.8 Hosting and technical records</h3>
+          <p>The site and the diagnostic system are hosted on Vercel, and the diagnostic data is stored in a Supabase database. These providers may log technical access data (such as the IP address) for their own short periods.</p>
+
+          <h2>3. Legal bases</h2>
+          <div class="policy__tablewrap" role="region" aria-label="Legal bases" tabindex="0">
+            <table class="policy__table">
+              <thead><tr><th>Purpose</th><th>Legal basis (LGPD)</th><th>Note</th></tr></thead>
+              <tbody>
+                <tr><td>Diagnostic and the support you requested</td><td>Preliminary procedures related to a contract to which you are a party, at your request (art. 7, V), where applicable</td><td>We apply this basis when the request leads to a possible engagement</td></tr>
+                <tr><td>Commercial qualification (section 2.2)</td><td>Legitimate interest (art. 7, IX)</td><td>You may object to this processing through the privacy e-mail</td></tr>
+                <tr><td>Security and abuse prevention (section 2.7)</td><td>Legitimate interest (art. 7, IX)</td><td>You may object through the privacy e-mail</td></tr>
+                <tr><td>PostHog and visit origin (sections 2.4 and 2.5)</td><td>Consent (art. 7, I)</td><td>Includes processing in the United States, informed when you choose. You may withdraw it (section 9)</td></tr>
+                <tr><td>Legal and regulatory obligations</td><td>Compliance with a legal or regulatory obligation (art. 7, II)</td><td>Where applicable, for example for contracted clients</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>4. Storage in your browser</h2>
+          <div class="policy__tablewrap" role="region" aria-label="Browser storage" tabindex="0">
+            <table class="policy__table">
+              <thead><tr><th>Name</th><th>Type</th><th>Purpose</th><th>Category</th><th>Duration</th></tr></thead>
+              <tbody>
+                <tr><td><code>sartec_lang</code></td><td>Local storage</td><td>Remember the language</td><td>Essential</td><td>Until you clear the site data</td></tr>
+                <tr><td><code>lac_consent_v1</code></td><td>Local storage</td><td>Store your consent choices</td><td>Essential</td><td>12 months (then we ask again)</td></tr>
+                <tr><td><code>lac_diag_draft</code></td><td>Session storage</td><td>Draft of your diagnostic answers</td><td>Essential</td><td>Until submitted or the tab is closed</td></tr>
+                <tr><td><code>lac_funnel_session</code></td><td>Cookie</td><td>Technical diagnostic session</td><td>Essential</td><td>30 minutes</td></tr>
+                <tr><td><code>lac_attribution_v1</code></td><td>Session storage</td><td>Where your visit came from (section 2.4)</td><td>Analytics or advertising</td><td>Until the tab is closed</td></tr>
+                <tr><td><code>lac_lead_sent</code></td><td>Session storage</td><td>Avoid counting the same diagnostic submission twice (not transmitted)</td><td>Analytics or advertising</td><td>Until the tab is closed</td></tr>
+                <tr><td><code>ph_*</code></td><td>Local storage (PostHog)</td><td>Anonymous identifier and measurement preferences</td><td>Analytics</td><td>Until you clear the site data or withdraw consent (the site sets no other period)</td></tr>
+                <tr><td><code>_gcl_*</code> and similar</td><td>Cookies (Google)</td><td>Link conversions to the ad (only if the Google tag is turned on)</td><td>Advertising</td><td>Not created today: the Google tag is turned off</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>5. Where data is processed: international processing</h2>
+          <ul>
+            <li><strong>Vercel</strong> (site hosting and processing by the diagnostic system): <strong>Washington, D.C., United States</strong>. Diagnostic data passes through these servers before being stored.</li>
+            <li><strong>Supabase</strong> (diagnostic database): <strong>São Paulo, Brazil</strong>. The data processing agreement is incorporated into the provider's terms of service and sharing with artificial intelligence providers is turned off.</li>
+            <li><strong>PostHog</strong> (analytics, consent only): <strong>United States</strong> (US cloud). Data processing agreement signed on 25/11/2026. Use of the IP is described in section 2.5.</li>
+            <li><strong>Google</strong> (Google Ads): <strong>turned off for now</strong>, no data sent. If turned on, Google may process data in the United States and other countries.</li>
+            <li><strong>WhatsApp Business (Meta), Gmail (Google) and your carrier</strong>: contact channels you choose to use.</li>
+          </ul>
+          <p>Sending or processing data outside Brazil is an international data transfer (LGPD, art. 33). We state above where each processing takes place; how each transfer fits within art. 33 of the LGPD and ANPD Resolution CD/ANPD No. 19/2024 is under ongoing assessment by L A Cabral, and this policy does not claim that every contract already fully meets those requirements. By allowing analytics or advertising, you consent to this data being processed in the United States, as stated in the consent notice.</p>
+
+          <h2>6. How long we keep data</h2>
+          <div class="policy__tablewrap" role="region" aria-label="Retention periods" tabindex="0">
+            <table class="policy__table">
+              <thead><tr><th>Data</th><th>Period</th></tr></thead>
+              <tbody>
+                <tr><td>Consent preferences (in the browser)</td><td>12 months</td></tr>
+                <tr><td>Behavioral events</td><td>12 months</td></tr>
+                <tr><td>Unidentified sessions</td><td>90 days</td></tr>
+                <tr><td>Inactive diagnostics and contacts (leads)</td><td>12 months after the last interaction</td></tr>
+                <tr><td>Commercial contact records</td><td>12 months after the last interaction, unless justified otherwise</td></tr>
+                <tr><td>Contracted clients</td><td>As required by legal and contractual obligations</td></tr>
+                <tr><td>Abuse-prevention counters (section 2.7)</td><td>Deleted once the counting window expires</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The company's management reviews these periods monthly and manually deletes data that has exceeded them; <strong>there is no automatic deletion routine</strong> for diagnostic data. Any backups kept by providers follow their own periods. Browser-side periods are in the table in section 4.</p>
+
+          <h2>7. Your rights and how to exercise them</h2>
+          <p>Under the Brazilian General Data Protection Law (Law 13,709/2018), you may request: confirmation that we process your data; access; correction; anonymization, blocking or deletion of unnecessary data or data processed unlawfully; portability; information about who we share data with; information about the possibility of withholding consent and its consequences; withdrawal of consent; objection to processing based on legitimate interest; and review of decisions made solely through automated processing (section 2.2).</p>
+          <p>Write to <a href="mailto:contato.lacabral@gmail.com" data-contact="email">contato.lacabral@gmail.com</a>. We handle requests through the business e-mail, respecting the applicable legal deadlines; our administrative target is to answer within 15 days, without prejudice to the specific deadlines set by law. To protect you, we may ask for information to confirm your identity, to the extent necessary for the request. You may also complain to the Brazilian data protection authority (ANPD).</p>
+
+          <h2>8. Security</h2>
+          <p>We adopt technical and administrative measures proportionate to the risk: communication with the site and the diagnostic system uses HTTPS; optional technologies are loaded only after consent; we send measurement services only the minimum data described above; and the use of the IP address for abuse prevention follows section 2.7.</p>
+
+          <h2>9. Your consent choices</h2>
+          <p>On your first visit we ask whether you allow <em>behavior analytics</em> and <em>advertising and campaign measurement</em>; both start off and, for each one, we state that the data is processed in the United States. Declining removes no feature from the site, including the diagnostic and the contact channels. You can review or withdraw your choice at any time under <strong>“Privacy preferences”</strong> in the footer of every page. When you withdraw, PostHog capture stops and its local data is deleted, the Google tag (if active) is turned off, and the visit-origin records that depend on the category are removed from the browser. Data already received by providers remains subject to their rules and to the procedure in section 7.</p>
+
+          <h2>10. Changes to this policy</h2>
+          <p>When relevant changes are made, this page will be updated with the new effective date.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__wrap">
+      <div class="footer__left">
+        <a href="index.html" class="footer__brand" aria-label="L A Cabral">
+          <img src="assets/la-cabral-signature-white.png" alt="L A Cabral" class="footer__brand-mark" width="955" height="593" loading="lazy" decoding="async" />
+        </a>
+        <p class="footer__tagline" data-i18n="footerTagline">Design e tecnologia para transformar necessidades de negócio em soluções que funcionam.</p>
+        <p class="footer__authorship" data-i18n="footerAuthorship">Conduzida por Lucas Cabral.</p>
+      </div>
+      <div class="footer__contact">
+        <p><strong>L A CABRAL LTDA</strong></p>
+        <p>CNPJ: 68.528.047/0001-66</p>
+        <p>Florianópolis / SC</p>
+        <p>
+          <a href="tel:+5548991830112" data-contact="phone">(48) 99183-0112</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:contato.lacabral@gmail.com" data-contact="email">contato.lacabral@gmail.com</a>
+        </p>
+      </div>
+      <nav class="footer__nav" aria-label="Links rápidos" data-i18n-attr="aria-label:ariaFooterNav">
+        <a href="solucoes.html" data-i18n="navSolutions">Soluções</a>
+        <a href="cases.html" data-i18n="navCases">Projetos</a>
+        <a href="como-trabalhamos.html" data-i18n="navHowWeWork">Como trabalhamos</a>
+        <a href="sobre.html" data-i18n="navAbout">Sobre</a>
+        <a href="index.html#contato" data-i18n="navContact">Contato</a>
+      </nav>
+    </div>
+    <div class="container footer__legal">
+      <p class="footer__disclaimer" data-i18n="footerDisclaimer">Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.</p>
+      <p class="footer__policy"><a href="privacidade.html" class="footer__privacy" data-i18n="footerPrivacyPolicy">Política de Privacidade</a></p>
+      <p class="footer__bottom" data-i18n-html="footerBottom">© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a
+    class="wa-float"
+    href="https://wa.me/5548991830112?text=Ol%C3%A1%2C+vim+pelo+site+da+L+A+Cabral."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Falar pelo WhatsApp"
+    data-wa-key="waFloatGeneral"
+    data-i18n-attr="aria-label:ariaWaFloat"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script src="contact-config.js?v=1"></script>
+  <script src="script.js?v=2.4"></script>
+</body>
+</html>

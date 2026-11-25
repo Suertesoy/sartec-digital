@@ -122,7 +122,8 @@ test('botão do resultado do diagnóstico e fallback de erro usam o número ofic
   const fallback = await page.getAttribute('#diagFatalError a[href*="wa.me"]', 'href');
   assert.ok(fallback.includes(NEW_E164), fallback);
   // O botão do resultado é montado por JS: o código-fonte também não pode ter o antigo.
-  const src = fs.readFileSync(path.join(ROOT, 'diagnostic.js'), 'utf8');
-  assert.ok(src.includes(`wa.me/${NEW_E164}?text=`));
+  // (o número vive em contact-config.js e o diagnóstico o consome de lá)
+  assert.ok(fs.readFileSync(path.join(ROOT, 'contact-config.js'), 'utf8').includes(NEW_E164));
+  assert.ok(fs.readFileSync(path.join(ROOT, 'diagnostic.js'), 'utf8').includes('LAC_CONTACT.diagnosticWaHref'));
   await ctx.close();
 });

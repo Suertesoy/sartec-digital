@@ -73,6 +73,7 @@
       resultHomeBtn: 'Voltar para a Home',
 
       footerText: 'L A CABRAL LTDA · Diagnóstico guiado.',
+      footerPrivacyPolicy: 'Política de Privacidade',
     },
     en: {
       docTitle: 'Diagnostic — L A Cabral',
@@ -134,6 +135,7 @@
       resultHomeBtn: 'Back to Home',
 
       footerText: 'L A CABRAL LTDA · Guided diagnostic.',
+      footerPrivacyPolicy: 'Privacy Policy',
     },
   };
 
@@ -376,6 +378,8 @@
       btnPt.setAttribute('aria-pressed', String(!isEn));
       btnEn.setAttribute('aria-pressed', String(isEn));
     }
+    // Avisa quem acompanha o idioma (ex.: componente de consentimento).
+    window.dispatchEvent(new Event('la:languagechange'));
   }
 
   function setLang(newLang) {
@@ -448,9 +452,38 @@
     return { ok: res.ok, status: res.status, json };
   }
 
+  // ── PostHog (best-effort, só comportamento) ──────────────────────
+  // A allowlist de eventos/propriedades e a taxonomia vivem em tracking.js
+  // (LAC_TRACK); o envio respeita o consentimento (LAC_ANALYTICS). Nada de
+  // nome/e-mail/telefone, IDs do Core, metadata, score, tier ou qualification.
+  // whatsapp_clicked é legado do Core: no PostHog o clique é o contact_clicked
+  // que tracking.js emite por delegação (evita contar o mesmo clique duas vezes).
+  function capturePostHogEvent(name, props) {
+    try {
+      if (window.LAC_TRACK) window.LAC_TRACK.emit(name, props);
+    } catch (_) { /* PostHog nunca interrompe a experiência */ }
+  }
+
+  function postHogProps(eventType, extra) {
+    const props = { language: lang };
+    try {
+      if (extra && extra.questionId) {
+        props.question_id = extra.questionId;
+        props.question_order = registry.questions.findIndex((q) => q.id === extra.questionId) + 1;
+        props.question_count = registry.questions.length;
+      }
+      if (lastResult && (eventType === 'result_viewed' || eventType === 'whatsapp_clicked')) {
+        props.recommendation_path = lastResult.recommendationPath;
+        props.outcome_mode = lastResult.outcomeMode;
+      }
+    } catch (_) { /* props opcionais */ }
+    return props;
+  }
+
   function sendEvent(eventType, extra) {
     // Best-effort: nunca bloqueia nem interrompe a experiência.
     if (!draft) return;
+    capturePostHogEvent(eventType, postHogProps(eventType, extra));
     // Payload fixado agora (eventId/submissionId do momento do evento); só o
     // envio espera a sessão. sessionReady nunca rejeita (ver init).
     const body = JSON.stringify(Object.assign({ eventType, eventId: uuid(), submissionId: draft.submissionId }, extra || {}));
@@ -848,6 +881,23 @@
       // Limpa o draft de respostas — o submissionId segue só em memória,
       // pelo tempo necessário para os eventos da tela de resultado.
       clearDraftStorage();
+      // Espelho PostHog do desfecho do submit (o Core emite o seu por conta própria).
+      capturePostHogEvent('diagnostic_completed', {
+        language: lang,
+        recommendation_path: recommendationPath,
+        outcome_mode: outcomeMode,
+        answer_count: lastSubmitPayload ? Object.keys(lastSubmitPayload.answers).length : undefined,
+      });
+      // Conversão efetiva: o Core respondeu com sucesso (só responde 2xx depois de
+      // persistir). Idempotente por submissionId — reenvio/reload não recontam.
+      if (result.json && typeof recommendationPath === 'string' && window.LAC_TRACK) {
+        try {
+          window.LAC_TRACK.leadSubmitted(
+            { language: lang, recommendation_path: recommendationPath, outcome_mode: outcomeMode },
+            lastSubmitPayload && lastSubmitPayload.submissionId,
+          );
+        } catch (_) { /* nunca interrompe a experiência */ }
+      }
       renderResult(recommendationPath, outcomeMode);
       return;
     }
@@ -895,13 +945,8 @@
     $('diagResultNext').hidden = !copy;
 
     const waBtn = $('diagResultWaBtn');
-    const waMessageStandard = lang === 'en'
-      ? "Hi, I just completed L A Cabral's diagnostic and would like to talk about my results."
-      : 'Olá, acabei de fazer o diagnóstico da L A Cabral e quero conversar sobre o resultado.';
-    const waMessageGuarded = lang === 'en'
-      ? "Hi, I completed L A Cabral's diagnostic and would like to understand my results better before deciding anything."
-      : 'Olá, fiz o diagnóstico da L A Cabral e quero entender melhor o resultado antes de decidir qualquer coisa.';
-    waBtn.href = `https://wa.me/5548991830112?text=${encodeURIComponent(guarded ? waMessageGuarded : waMessageStandard)}`;
+    // Número e mensagens: contact-config.js (fonte única).
+    waBtn.href = window.LAC_CONTACT.diagnosticWaHref(lang, guarded);
     waBtn.classList.toggle('btn--primary', !guarded);
     waBtn.classList.toggle('btn--ghost', guarded);
     waBtn.onclick = () => sendEvent('whatsapp_clicked');
@@ -987,10 +1032,14 @@
     }
 
     // Sessão de visitante (best-effort, não bloqueia a experiência caso falhe).
+    // Atribuição original (first-touch) vinda de attribution.js, já filtrada pelo
+    // consentimento. Sem o módulo, vai só o path (nunca a query string completa).
+    const attribution = (window.LAC_ATTRIBUTION && window.LAC_ATTRIBUTION.getSessionPayload())
+      || { landingUrl: window.location.pathname || '/', referrer: null };
     sessionReady = apiPost('/session', {
       contractVersion: registry.contractVersion,
-      landingUrl: window.location.href,
-      referrer: document.referrer || null,
+      landingUrl: attribution.landingUrl,
+      referrer: attribution.referrer,
     }).then(() => {}, () => {});
 
     const stored = loadDraftFromStorage();

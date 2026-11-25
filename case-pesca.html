@@ -20,8 +20,15 @@
   <link rel="icon" href="/assets/favicon-32.png" type="image/png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <title data-i18n="docTitlePesca">Pesca Delivery — L A Cabral</title>
+  <script src="site-env.js?v=1" defer></script>
+  <script src="consent.js?v=4" defer></script>
+  <script src="attribution.js?v=1" defer></script>
+  <script src="analytics.js?v=3" defer></script>
+  <script src="google-tag.js?v=3" defer></script>
+  <script src="tracking.js?v=2" defer></script>
   <link rel="stylesheet" href="assets/css/tailwind.css?v=1" />
   <link rel="stylesheet" href="styles.css?v=2.1" />
+  <link rel="stylesheet" href="consent.css?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -337,9 +344,9 @@
         <p>CNPJ: 68.528.047/0001-66</p>
         <p>Florianópolis / SC</p>
         <p>
-          <a href="tel:+5548991830112">(48) 99183-0112</a>
+          <a href="tel:+5548991830112" data-contact="phone">(48) 99183-0112</a>
           &nbsp;·&nbsp;
-          <a href="mailto:contato.lacabral@gmail.com">contato.lacabral@gmail.com</a>
+          <a href="mailto:contato.lacabral@gmail.com" data-contact="email">contato.lacabral@gmail.com</a>
         </p>
       </div>
       <nav class="footer__nav" aria-label="Links rápidos" data-i18n-attr="aria-label:ariaFooterNav">
@@ -352,6 +359,7 @@
     </div>
     <div class="container footer__legal">
       <p class="footer__disclaimer" data-i18n="footerDisclaimer">Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.</p>
+      <p class="footer__policy"><a href="privacidade.html" class="footer__privacy" data-i18n="footerPrivacyPolicy">Política de Privacidade</a></p>
       <p class="footer__bottom" data-i18n-html="footerBottom">© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados</p>
     </div>
   </footer>
@@ -371,6 +379,7 @@
     </svg>
   </a>
 
-  <script src="script.js?v=2.2"></script>
+  <script src="contact-config.js?v=1"></script>
+  <script src="script.js?v=2.4"></script>
 </body>
 </html>
