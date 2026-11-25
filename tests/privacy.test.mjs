@@ -5,6 +5,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { startSite, newContext, mockCore, runDiagnostic, ROOT, PAGES } from './helpers.mjs';
 
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -15,16 +16,13 @@ let site;
 before(async () => { site = await startSite(); });
 after(async () => { await site?.close(); });
 
-test('rascunho: noindex, aviso de revisão e pontos a confirmar marcados (PT e EN em paridade)', () => {
-  assert.match(policy, /<meta name="robots" content="noindex/);
+test('versão final: sem aviso de rascunho, sem marcadores, indexável e PT/EN em paridade', () => {
+  assert.ok(!/noindex/i.test(policy), 'a política final deve ser indexável');
+  assert.ok(!/policy__draft|Rascunho para revisão|Draft for review/.test(policy), 'aviso de rascunho removido');
+  assert.ok(!/\[A CONFIRMAR|\[TO CONFIRM/.test(policy), 'sem marcadores de pendência na página pública');
+  assert.match(policy, /Em vigor desde 25\/11\/2026/); assert.match(policy, /In effect since 25\/11\/2026/);
   const pt = policy.split('data-policy-lang="pt"')[1].split('data-policy-lang="en"')[0];
   const en = policy.split('data-policy-lang="en"')[1].split('</main>')[0];
-  assert.match(pt, /Rascunho para revisão/);
-  assert.match(en, /Draft for review/);
-  const todoPt = (pt.match(/\[A CONFIRMAR/g) || []).length;
-  const todoEn = (en.match(/\[TO CONFIRM/g) || []).length;
-  assert.ok(todoPt >= 8, `pontos a confirmar (PT): ${todoPt}`);
-  assert.equal(todoPt, todoEn, 'mesmos pontos a confirmar nos dois idiomas');
   for (const tag of ['<h2', '<h3', '<tr>', '<li>', '<table']) assert.equal((pt.match(new RegExp(tag, 'g')) || []).length, (en.match(new RegExp(tag, 'g')) || []).length, `estrutura PT/EN diverge em ${tag}`);
 });
 
@@ -146,15 +144,17 @@ test('identificação: controladora, canal e administração; sem encarregado in
   assert.match(pt, /L A CABRAL LTDA[\s\S]{0,40}CNPJ 68\.528\.047\/0001-66[\s\S]{0,80}controladora/);
   assert.match(pt, /administração da empresa/);
   assert.match(pt, /não indicou encarregado/);
-  assert.match(pt, /Resolução CD\/ANPD nº 2\/2022/);
   assert.match(enText(), /has not appointed a data protection officer/);
 });
 
 test('não descreve IA nem gestão de oportunidades como tratamentos realizados', () => {
   const pt = ptText(); const en = enText();
   assert.ok(!/oportunidade/i.test(pt) && !/opportunit/i.test(en), 'gestão de oportunidades ainda não opera');
-  for (const m of pt.matchAll(/intelig[eê]ncia artificial/gi)) assert.match(pt.slice(Math.max(0, m.index - 12), m.index), /Não há /, 'IA só aparece negada');
-  for (const m of en.matchAll(/artificial intelligence/gi)) assert.match(en.slice(Math.max(0, m.index - 12), m.index), /No /, 'IA só aparece negada');
+  // IA só aparece negada ("Não há IA") ou como compartilhamento com fornecedores de IA DESATIVADO.
+  for (const m of pt.matchAll(/intelig[eê]ncia artificial/gi)) assert.match(pt.slice(Math.max(0, m.index - 40), m.index + 80), /Não há inteligência|está desativado/, "IA só aparece negada/desativada");
+  for (const m of en.matchAll(/artificial intelligence/gi)) assert.match(en.slice(Math.max(0, m.index - 40), m.index + 80), /No artificial intelligence|is turned off/, "AI only negated/disabled");
+  assert.match(pt, /fornecedores de inteligência artificial está desativado/);
+  assert.match(en, /artificial intelligence providers is turned off/);
 });
 
 test('qualificação automatizada: critérios gerais, finalidade, esclarecimento/revisão e sem fórmulas', () => {
@@ -166,14 +166,14 @@ test('qualificação automatizada: critérios gerais, finalidade, esclarecimento
 test('bases legais conforme diretrizes (consentimento para PostHog/Google; legítimo interesse sujeito a avaliação)', () => {
   const pt = ptText();
   assert.match(pt, /art\. 7º, V/); assert.match(pt, /art\. 7º, IX/); assert.match(pt, /art\. 7º, I\)/); assert.match(pt, /art\. 7º, II/);
-  assert.match(pt, /Qualificação comercial[\s\S]{0,200}Legítimo interesse[\s\S]{0,200}necessidade, proporcionalidade e impacto/);
+  assert.match(pt, /Qualificação comercial[\s\S]{0,200}Legítimo interesse[\s\S]{0,200}pode se opor/);
   assert.match(pt, /PostHog, Google Ads e origem da visita[\s\S]{0,120}Consentimento/);
 });
 
 test('retenção: prazos propostos, eliminação manual e nenhuma rotina automática declarada', () => {
   const pt = ptText();
   for (const re of [/Preferências de consentimento[\s\S]{0,60}12 meses/, /Eventos comportamentais[\s\S]{0,40}12 meses/, /Sessões sem identificação[\s\S]{0,40}90 dias/, /leads\) inativos[\s\S]{0,60}12 meses após a última interação/, /Registros de contato comercial[\s\S]{0,40}12 meses após a última interação, salvo necessidade justificada/, /Clientes contratados[\s\S]{0,60}obrigações legais e contratuais/]) assert.match(pt, re);
-  assert.match(pt, /procedimento manual/); assert.match(pt, /não há rotina automática de exclusão/);
+  assert.match(pt, /revisa esses prazos mensalmente e elimina manualmente/); assert.match(pt, /não há rotina automática de exclusão/);
   assert.ok(!/(exclu|elimin|apag)\w*\s+automaticamente/i.test(pt.replace(/não há rotina automática de exclusão/i, '')), 'não pode declarar exclusão automática');
   // 12 meses do consentimento == o que o código implementa
   assert.match(read('consent.js'), /MAX_AGE_MS = 365 \* 24 \* 60 \* 60 \* 1000/);
@@ -192,11 +192,44 @@ test('titulares: e-mail oficial, verificação proporcional e meta de 15 dias se
   assert.match(enText(), /target is to answer within 15 days, without prejudice to the specific deadlines set by law/);
 });
 
-test('fornecedores e transferências: Vercel, Supabase, PostHog, Google e canais; mecanismo ainda marcado a confirmar', () => {
-  const pt = ptText();
-  for (const t of ['Vercel', 'Supabase', 'PostHog', 'Google', 'WhatsApp (Meta)']) assert.ok(pt.includes(t), t);
+test('processamento internacional e fornecedores: locais, contratos confirmados e nenhuma conformidade afirmada', () => {
+  const pt = ptText(); const en = enText();
+  for (const t of ['Vercel', 'Supabase', 'PostHog', 'Google', 'WhatsApp Business (Meta)', 'Gmail (Google)']) assert.ok(pt.includes(t), t);
+  assert.match(pt, /Washington, D\.C\., Estados Unidos/); assert.match(pt, /São Paulo, Brasil/);
+  assert.match(pt, /assinado em 25\/11\/2026/);
+  assert.match(pt, /incorporado aos termos de serviço/); assert.match(pt, /fornecedores de inteligência artificial está desativado/);
+  assert.match(pt, /recebidos e processados pelo sistema do diagnóstico em servidores nos Estados Unidos e depois gravados em banco de dados no Brasil/);
   assert.match(pt, /art\. 33/); assert.match(pt, /Resolução CD\/ANPD nº 19\/2024/);
-  assert.match(pt, /\[A CONFIRMAR: mecanismo adotado para cada fornecedor/);
-  // O texto público não afirma adequação nem cláusulas ANPD que não foram confirmadas.
-  assert.ok(!/cláusulas-padrão contratuais aprovadas pela ANPD (já )?(foram|estão) (assinadas|adotadas)/i.test(pt));
+  assert.match(pt, /esta política não afirma que cada contrato já atenda integralmente/);
+  assert.match(en, /Washington, D\.C\., United States/); assert.match(en, /does not claim that every contract already fully meets/);
+  // Não declara conformidade integral nem mecanismos contratuais não comprovados.
+  for (const re of [/em plena conformidade/i, /totalmente (em )?conforme/i, /cláusulas-padrão contratuais aprovadas pela ANPD/i, /adequad[ao] pela ANPD/i]) assert.ok(!re.test(pt), `afirmação indevida: ${re}`);
+  for (const re of [/fully compliant/i, /ANPD-approved standard contractual clauses/i]) assert.ok(!re.test(en), `improper claim: ${re}`);
+});
+
+test('uso do IP pelo PostHog antes do descarte é informado (PT/EN)', () => {
+  const pt = ptText(); const en = enText();
+  for (const re of [/PostHog recebe o seu endereço IP junto com cada evento/, /usado temporariamente para estimar o país e a cidade/, /essas duas informações ficam registradas nos eventos/, /o IP é descartado e não é gravado/, /Os eventos ficam guardados por 12 meses/]) assert.match(pt, re);
+  for (const re of [/PostHog receives your IP address with every event/, /used temporarily to estimate the country and city/, /discarded and not stored/, /kept for 12 months/]) assert.match(en, re);
+});
+
+test('consentimento informa o tratamento nos EUA para PostHog e Google, no banner e em cada categoria (PT/EN)', async () => {
+  for (const [lang, us] of [['pt', 'Estados Unidos'], ['en', 'United States']]) {
+    const ctx = await newContext(site, { lang });
+    const page = await ctx.newPage();
+    await page.goto(`${site.base}/index.html`, { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('#lacConsentBanner:not([hidden])');
+    assert.match(await page.textContent('#lacConsentBanner .consent__body'), new RegExp(us));
+    await page.click('#lacConsentBanner [data-act="customize"]');
+    const rows = await page.$$eval('#lacConsentModal .consent-row__desc', (ps) => ps.map((p) => p.textContent));
+    assert.match(rows[1], new RegExp(us), 'categoria de análise');
+    assert.match(rows[2], new RegExp(us), 'categoria de publicidade');
+    await ctx.close();
+  }
+});
+
+test('pendências jurídicas ficam fora do site e do repositório público', () => {
+  const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' });
+  assert.ok(!/pend[eê]ncias?|juridic|jurídic|legal-review/i.test(tracked), 'documento interno não pode estar versionado (repositório público)');
+  assert.ok(!/pendências jurídicas|internal legal/i.test(policy));
 });
