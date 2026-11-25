@@ -27,7 +27,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const OFFICIAL = { e164: '5548991830112', display: '(48) 99183-0112', email: 'contato.lacabral@gmail.com' };
 // Contatos antigos (montados por partes para este arquivo não carregar o e-mail por extenso).
 const OLD = [
-  new RegExp(['5512', '997863832'].join('')),
+  new RegExp(['5512', '99786', '3832'].join('')),
   new RegExp(['99786', '[-. ]?', '3832'].join('')),
   new RegExp(['lac\\.lucas', 'cabral@gmail\\.com'].join(''), 'i'),
 ];

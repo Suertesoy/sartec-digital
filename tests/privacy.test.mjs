@@ -30,9 +30,9 @@ test('rascunho: noindex, aviso de revisão e pontos a confirmar marcados (PT e E
 
 test('nada inventado: sem prazos de retenção, sem encarregado nem base legal afirmados', () => {
   const text = policy.replace(/<[^>]+>/g, ' ');
-  // Únicos números de duração permitidos são os técnicos que o código define (12 meses, 30 minutos).
+  // Durações permitidas: as que o código define (12 meses, 30 minutos) e as diretrizes aprovadas (90 dias, 15 dias de meta, até 30 dias de backup).
   const durations = [...text.matchAll(/\b(\d+)\s*(dias|meses|anos|days|months|years|minutos|minutes|horas|hours)\b/gi)].map((m) => `${m[1]} ${m[2].toLowerCase()}`);
-  for (const d of durations) assert.ok(['12 meses', '12 months', '30 minutos', '30 minutes'].includes(d), `duração não verificável: ${d}`);
+  for (const d of durations) assert.ok(['12 meses', '12 months', '30 minutos', '30 minutes', '90 dias', '90 days', '15 dias', '15 days', '30 dias', '30 days'].includes(d), `duração não verificável: ${d}`);
   assert.ok(!/\bDPO\s*:\s*[A-Z][a-z]+ /.test(text), 'nome de encarregado inventado');
   assert.ok(!/prazo de (retenção|guarda)\s+de\s+\d/i.test(text));
 });
@@ -135,4 +135,68 @@ test('sem consentimento nada do envio do diagnóstico é gravado no navegador pe
   await runDiagnostic(p2);
   assert.ok(await p2.evaluate(() => sessionStorage.getItem('lac_lead_sent')), 'com consentimento o guard persiste');
   await ctx2.close();
+});
+
+// ── Revisão de 25/11/2026: o texto reflete as diretrizes aprovadas e só o que existe hoje ──
+const ptText = () => policy.split('data-policy-lang="pt"')[1].split('data-policy-lang="en"')[0].replace(/<[^>]+>/g, ' ');
+const enText = () => policy.split('data-policy-lang="en"')[1].split('</main>')[0].replace(/<[^>]+>/g, ' ');
+
+test('identificação: controladora, canal e administração; sem encarregado inventado', () => {
+  const pt = ptText();
+  assert.match(pt, /L A CABRAL LTDA[\s\S]{0,40}CNPJ 68\.528\.047\/0001-66[\s\S]{0,80}controladora/);
+  assert.match(pt, /administração da empresa/);
+  assert.match(pt, /não indicou encarregado/);
+  assert.match(pt, /Resolução CD\/ANPD nº 2\/2022/);
+  assert.match(enText(), /has not appointed a data protection officer/);
+});
+
+test('não descreve IA nem gestão de oportunidades como tratamentos realizados', () => {
+  const pt = ptText(); const en = enText();
+  assert.ok(!/oportunidade/i.test(pt) && !/opportunit/i.test(en), 'gestão de oportunidades ainda não opera');
+  for (const m of pt.matchAll(/intelig[eê]ncia artificial/gi)) assert.match(pt.slice(Math.max(0, m.index - 12), m.index), /Não há /, 'IA só aparece negada');
+  for (const m of en.matchAll(/artificial intelligence/gi)) assert.match(en.slice(Math.max(0, m.index - 12), m.index), /No /, 'IA só aparece negada');
+});
+
+test('qualificação automatizada: critérios gerais, finalidade, esclarecimento/revisão e sem fórmulas', () => {
+  const pt = ptText();
+  for (const re of [/regras fixas e determinísticas/, /intensidade do problema/, /urgência/, /papel na decisão/, /volume de contatos/, /priorizar a ordem de retorno/, /pedir esclarecimentos[\s\S]{0,80}revisão/, /Não divulgamos as fórmulas/]) assert.match(pt, re);
+  assert.ok(!/\b(70|50|35)\b/.test(pt.split('2.2')[1].split('2.3')[0]), 'sem limiares internos');
+});
+
+test('bases legais conforme diretrizes (consentimento para PostHog/Google; legítimo interesse sujeito a avaliação)', () => {
+  const pt = ptText();
+  assert.match(pt, /art\. 7º, V/); assert.match(pt, /art\. 7º, IX/); assert.match(pt, /art\. 7º, I\)/); assert.match(pt, /art\. 7º, II/);
+  assert.match(pt, /Qualificação comercial[\s\S]{0,200}Legítimo interesse[\s\S]{0,200}necessidade, proporcionalidade e impacto/);
+  assert.match(pt, /PostHog, Google Ads e origem da visita[\s\S]{0,120}Consentimento/);
+});
+
+test('retenção: prazos propostos, eliminação manual e nenhuma rotina automática declarada', () => {
+  const pt = ptText();
+  for (const re of [/Preferências de consentimento[\s\S]{0,60}12 meses/, /Eventos comportamentais[\s\S]{0,40}12 meses/, /Sessões sem identificação[\s\S]{0,40}90 dias/, /leads\) inativos[\s\S]{0,60}12 meses após a última interação/, /Registros de contato comercial[\s\S]{0,40}12 meses após a última interação, salvo necessidade justificada/, /Clientes contratados[\s\S]{0,60}obrigações legais e contratuais/]) assert.match(pt, re);
+  assert.match(pt, /procedimento manual/); assert.match(pt, /não há rotina automática de exclusão/);
+  assert.ok(!/(exclu|elimin|apag)\w*\s+automaticamente/i.test(pt.replace(/não há rotina automática de exclusão/i, '')), 'não pode declarar exclusão automática');
+  // 12 meses do consentimento == o que o código implementa
+  assert.match(read('consent.js'), /MAX_AGE_MS = 365 \* 24 \* 60 \* 60 \* 1000/);
+});
+
+test('segurança: IP para prevenção de abusos, HMAC e não tratado como dado anônimo', () => {
+  const pt = ptText(); const en = enText();
+  for (const re of [/endereço IP/, /HMAC-SHA256/, /pseudonimizado/, /não como dado anônimo/, /prevenção de abusos/]) assert.match(pt, re);
+  assert.match(en, /pseudonymized/); assert.match(en, /not as anonymous data/);
+});
+
+test('titulares: e-mail oficial, verificação proporcional e meta de 15 dias sem prejuízo dos prazos legais', () => {
+  const pt = ptText();
+  assert.match(pt, /confirmar sua identidade, na medida do necessário/);
+  assert.match(pt, /meta administrativa é responder em até 15 dias, sem prejuízo dos prazos específicos previstos na legislação/);
+  assert.match(enText(), /target is to answer within 15 days, without prejudice to the specific deadlines set by law/);
+});
+
+test('fornecedores e transferências: Vercel, Supabase, PostHog, Google e canais; mecanismo ainda marcado a confirmar', () => {
+  const pt = ptText();
+  for (const t of ['Vercel', 'Supabase', 'PostHog', 'Google', 'WhatsApp (Meta)']) assert.ok(pt.includes(t), t);
+  assert.match(pt, /art\. 33/); assert.match(pt, /Resolução CD\/ANPD nº 19\/2024/);
+  assert.match(pt, /\[A CONFIRMAR: mecanismo adotado para cada fornecedor/);
+  // O texto público não afirma adequação nem cláusulas ANPD que não foram confirmadas.
+  assert.ok(!/cláusulas-padrão contratuais aprovadas pela ANPD (já )?(foram|estão) (assinadas|adotadas)/i.test(pt));
 });
