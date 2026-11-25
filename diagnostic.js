@@ -73,6 +73,7 @@
       resultHomeBtn: 'Voltar para a Home',
 
       footerText: 'L A CABRAL LTDA · Diagnóstico guiado.',
+      footerPrivacyPolicy: 'Política de Privacidade',
     },
     en: {
       docTitle: 'Diagnostic — L A Cabral',
@@ -134,6 +135,7 @@
       resultHomeBtn: 'Back to Home',
 
       footerText: 'L A CABRAL LTDA · Guided diagnostic.',
+      footerPrivacyPolicy: 'Privacy Policy',
     },
   };
 

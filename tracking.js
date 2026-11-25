@@ -55,6 +55,7 @@
     ['.showcase__actions, .showcase-primary, .showcase-secondary', 'case_list'],
     ['.case-why__cta', 'case_body'],
     ['.mid-page-cta', 'mid_page'],
+    ['.policy', 'policy_body'],
     ['.cta-final', 'final_cta'],
     ['.footer, .diag-footer', 'footer'],
   ];
@@ -194,6 +195,10 @@
   }
   function markLeadCounted(id) {
     try {
+      // Só persiste no navegador com consentimento de análise ou publicidade;
+      // sem ele a deduplicação vale apenas em memória (nada é gravado).
+      var c = window.LAC_CONSENT ? window.LAC_CONSENT.get() : null;
+      if (!c || !(c.analytics || c.advertising)) return;
       var list = JSON.parse(sessionStorage.getItem(LEAD_KEY)) || [];
       list.push(id);
       sessionStorage.setItem(LEAD_KEY, JSON.stringify(list.slice(-20)));

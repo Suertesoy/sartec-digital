@@ -75,6 +75,7 @@
       acceptAll: 'Aceitar todas',
       close: 'Fechar',
       footerLink: 'Preferências de privacidade',
+      policy: 'Política de Privacidade',
     },
     en: {
       bannerLabel: 'Privacy notice',
@@ -97,6 +98,7 @@
       acceptAll: 'Accept all',
       close: 'Close',
       footerLink: 'Privacy preferences',
+      policy: 'Privacy Policy',
     },
   };
 
@@ -139,6 +141,7 @@
         el('div', { class: 'consent__text' }, [
           el('h2', { class: 'consent__title', id: 'lacConsentTitle', 'data-k': 'title' }),
           el('p', { class: 'consent__body', 'data-k': 'body' }),
+          el('a', { class: 'consent__link', href: 'privacidade.html', 'data-k': 'policy' }),
         ]),
         el('div', { class: 'consent__actions' }, [
           el('button', { type: 'button', class: 'consent__btn', 'data-act': 'reject', 'data-k': 'reject' }),
@@ -164,6 +167,7 @@
         el('button', { type: 'button', class: 'consent-modal__close', 'data-act': 'close', 'data-k': 'close', 'aria-label': 'Fechar' }),
       ]),
       el('p', { class: 'consent-modal__intro', 'data-k': 'modalIntro' }),
+      el('a', { class: 'consent__link', href: 'privacidade.html', 'data-k': 'policy' }),
       essential, analytics.row, advertising.row,
       el('div', { class: 'consent__actions consent-modal__actions' }, [
         el('button', { type: 'button', class: 'consent__btn', 'data-act': 'rejectAll', 'data-k': 'rejectAll' }),
@@ -250,7 +254,7 @@
 
   // Link permanente no rodapé (revisar/revogar).
   function injectFooterLink() {
-    var host = document.querySelector('.footer__legal') || document.querySelector('.diag-footer .container');
+    var host = document.querySelector('.footer__policy') || document.querySelector('.footer__legal') || document.querySelector('.diag-footer .container');
     if (!host || host.querySelector('.consent-footer-link')) return;
     var btn = el('button', { type: 'button', class: 'consent-footer-link' });
     btn.addEventListener('click', function () { openPreferences(btn); });

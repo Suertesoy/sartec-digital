@@ -32,6 +32,9 @@ const I18N = {
     footerAuthorship: `Conduzida por Lucas Cabral.`,
     footerDisclaimer: `Cada projeto começa com uma análise da operação. O escopo é definido depois desse diagnóstico, não antes.`,
     footerBottom: `© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · Todos os direitos reservados`,
+    footerPrivacyPolicy: `Política de Privacidade`,
+    docTitlePrivacidade: `Política de Privacidade — L A Cabral`,
+    metaDescPrivacidade: `Como a L A Cabral trata dados pessoais, cookies e armazenamento local neste site.`,
 
     // ── HOME · Hero ──────────────────────────────────────────
     heroTag: `Design e tecnologia para empresas`,
@@ -572,6 +575,9 @@ const I18N = {
     footerAuthorship: `Led by Lucas Cabral.`,
     footerDisclaimer: `Every project starts with a review of the operation. Scope is defined after that diagnosis, not before.`,
     footerBottom: `© 2025 L A CABRAL LTDA · CNPJ 68.528.047/0001-66 · All rights reserved`,
+    footerPrivacyPolicy: `Privacy Policy`,
+    docTitlePrivacidade: `Privacy Policy — L A Cabral`,
+    metaDescPrivacidade: `How L A Cabral handles personal data, cookies and local storage on this site.`,
 
     // ── HOME · Hero ──────────────────────────────────────────
     heroTag: `Design and technology for companies`,

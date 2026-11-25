@@ -131,3 +131,21 @@
 @media (prefers-reduced-motion: reduce) {
   .consent__btn, .consent-switch__track, .consent-switch__track::after { transition: none; }
 }
+
+/* Links da política de privacidade (banner, modal e rodapé) */
+.consent__link {
+  display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 600;
+  color: var(--green-light, #4ADE80); text-decoration: underline; text-underline-offset: 3px;
+}
+.consent__link:hover { color: var(--text, #F3F5F4); }
+.consent__link:focus-visible { outline: 2px solid var(--green-light, #4ADE80); outline-offset: 2px; border-radius: 4px; }
+.consent-modal__intro + .consent__link { margin: -6px 0 12px; }
+
+.footer__policy { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; margin: 6px 0 4px; }
+.footer__privacy {
+  font-size: 12px; color: var(--text-2, #B7C4BD);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.footer__privacy:hover { color: var(--text, #F3F5F4); }
+.footer__privacy:focus-visible { outline: 2px solid var(--green-light, #4ADE80); outline-offset: 2px; border-radius: 4px; }
+.footer__policy .consent-footer-link { margin-top: 0; }

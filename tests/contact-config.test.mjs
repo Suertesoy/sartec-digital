@@ -121,7 +121,7 @@ for (const lang of ['pt', 'en']) {
     for (const f of PAGES.filter((p) => p !== 'diagnostico.html')) {
       await page.goto(`${base}/${f}`, { waitUntil: 'domcontentloaded' });
       const rows = await page.$$eval('a[data-wa-key]', (as) => as.map((a) => ({ key: a.dataset.waKey, href: a.getAttribute('href'), target: a.target, rel: a.rel, aria: a.getAttribute('aria-label') })));
-      assert.ok(rows.length >= 2, `${f}: CTAs de WhatsApp`);
+      assert.ok(rows.length >= (f === 'privacidade.html' ? 1 : 2), `${f}: CTAs de WhatsApp`);
       for (const r of rows) {
         assert.equal(r.href, C.waHref(r.key, lang), `${f} ${r.key} (${lang})`);
         assert.equal(r.target, '_blank');
