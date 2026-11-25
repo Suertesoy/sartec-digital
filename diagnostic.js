@@ -901,7 +901,7 @@
     const waMessageGuarded = lang === 'en'
       ? "Hi, I completed L A Cabral's diagnostic and would like to understand my results better before deciding anything."
       : 'Olá, fiz o diagnóstico da L A Cabral e quero entender melhor o resultado antes de decidir qualquer coisa.';
-    waBtn.href = `https://wa.me/5512997863832?text=${encodeURIComponent(guarded ? waMessageGuarded : waMessageStandard)}`;
+    waBtn.href = `https://wa.me/5548991830112?text=${encodeURIComponent(guarded ? waMessageGuarded : waMessageStandard)}`;
     waBtn.classList.toggle('btn--primary', !guarded);
     waBtn.classList.toggle('btn--ghost', guarded);
     waBtn.onclick = () => sendEvent('whatsapp_clicked');
